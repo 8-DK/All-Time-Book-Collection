@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html id="ie8" lang="en">
+<![endif]-->
+<!--[if !(IE 8) ]><!-->
+<html lang="en"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/beacon.js" async="" type="text/javascript"></script><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/quant.js" async="" type="text/javascript"></script><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/a" async="" type="text/javascript"></script><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/luminate.js" async="" type="text/javascript"></script><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/fql" async=""></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Serial Peripheral Interface – SPI Basics | maxEmbedded</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="http://maxembedded.com/xmlrpc.php">
+<!--[if lt IE 9]>
+<script src="http://s2.wp.com/wp-content/themes/pub/oxygen/js/html5.js?m=1335201688g" type="text/javascript"></script>
+<![endif]-->
+
+		<script async="" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/cbgapi.loaded_1"></script><script async="" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/cbgapi.loaded_0"></script><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/a_002" async="" type="text/javascript"></script><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/find" id="gv_script_6606458813880372831447928"></script><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/remote-login.php" type="text/javascript"></script>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+			if ( 'function' === typeof WPRemoteLogin ) {
+				document.cookie = "wordpress_test_cookie=test; path=/";
+				if ( document.cookie.match( /(;|^)\s*wordpress_test_cookie\=/ ) ) {
+					WPRemoteLogin();
+				}
+			}
+		/* ]]> */
+		</script>
+		<link rel="alternate" type="application/rss+xml" title="maxEmbedded » Feed" href="http://maxembedded.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="maxEmbedded » Comments Feed" href="http://maxembedded.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="maxEmbedded » Serial Peripheral Interface – SPI Basics Comments Feed" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/feed/">
+<script type="text/javascript">
+/* <![CDATA[ */
+function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!='function'){window.onload=func;}else{window.onload=function(){oldonload();func();}}}
+/* ]]> */
+</script>
+<link rel="stylesheet" id="all-css-0" href="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/a.css" type="text/css" media="all">
+<link rel="stylesheet" id="screen-css-0" href="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/style_003.css" type="text/css" media="screen">
+<link rel="stylesheet" id="font-abel-css" href="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/css.css" type="text/css" media="all">
+<link rel="stylesheet" id="all-css-2" href="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/a_002.css" type="text/css" media="all">
+<link rel="stylesheet" id="print-css-2" href="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/global-print.css" type="text/css" media="print">
+<script type="text/javascript">
+/* <![CDATA[ */
+var LoggedOutFollow = {"invalid_email":"Your subscription did not succeed, please try again with a valid email address."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/a_002.js"></script>
+<link rel="stylesheet" id="all-css-0" href="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/style_002.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='http://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563g&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://maxembedded.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://maxembedded.wordpress.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="MSP at a Glance" href="http://maxembedded.com/2013/10/03/msp-at-a-glance/">
+<link rel="next" title="The SPI of the AVR" href="http://maxembedded.com/2013/11/26/the-spi-of-the-avr/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/">
+<link rel="shortlink" href="http://wp.me/p1BEbT-sy">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&amp;url=http%3A%2F%2Fmaxembedded.com%2F2013%2F11%2F10%2Fserial-peripheral-interface-spi-basics%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&amp;url=http%3A%2F%2Fmaxembedded.com%2F2013%2F11%2F10%2Fserial-peripheral-interface-spi-basics%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Serial Peripheral Interface - SPI Basics">
+<meta property="og:url" content="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/">
+<meta property="og:description" content="Hey all! It's time to continue with our tutorials on serial communication. Till now, we have covered the following: An introduction to serial communication Basics of RS232 communication The UART/US...">
+<meta property="article:published_time" content="2013-11-11T02:58:16+00:00">
+<meta property="article:modified_time" content="2013-11-26T08:12:58+00:00">
+<meta property="article:author" content="http://maxembedded.com/author/maxmiaggi/">
+<meta property="og:site_name" content="maxEmbedded">
+<meta property="og:image" content="http://maxembedded.files.wordpress.com/2013/11/spi-bus-single-master-single-slave.png">
+<meta name="twitter:site" content="@maxnmiaggi">
+<meta name="twitter:image:src" content="http://maxembedded.files.wordpress.com/2013/11/spi-bus-single-master-single-slave.png?w=640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@maxnmiaggi">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="http://1.gravatar.com/blavatar/f4b910b279ce623dfd6029b4e91dda6e?s=16" sizes="16x16">
+<link rel="icon" type="image/x-icon" href="http://1.gravatar.com/blavatar/f4b910b279ce623dfd6029b4e91dda6e?s=16" sizes="16x16">
+<link rel="apple-touch-icon-precomposed" href="http://1.gravatar.com/blavatar/56af56aca9c802c8cab7dcd308e5b8bb?s=114">
+<link rel="openid.server" href="http://maxembedded.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="http://maxembedded.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="http://maxembedded.com/osd.xml" title="maxEmbedded">
+<link rel="search" type="application/opensearchdescription+xml" href="http://wordpress.com/opensearch.xml" title="WordPress.com">
+	<style type="text/css">
+		#page {
+			background-color: #ffffff		}
+	</style>
+	<style>
+		html {
+			font-size: 17px;
+		}
+		h1, h2, h3, h4, h5, h6, dl dt, blockquote, blockquote blockquote blockquote, .site-title, .main-navigation a, .widget_calendar caption {
+			font-family: 'Abel', sans-serif;
+		}
+		.error, .entry-title a, .entry-content a, entry-summary a, .main-navigation > div > ul > li > a, .widget a, .post-navigation a, #image-navigation a, .pingback a, .logged-in-as a, .more-articles .entry-title a:hover, .widget_flickr #flickr_badge_uber_wrapper a {
+			color: #0da4d3;
+		}
+		a:hover, .comment-meta a, .comment-meta a:visited {
+			border-color: #0da4d3;
+		}
+		a.read-more, a.read-more:visited, .pagination a:hover, .comment-navigation a:hover, button, html input[type="button"], input[type="reset"], input[type="submit"], #infinite-handle span {
+			background-color: #0da4d3;
+		}
+	</style>
+<style type="text/css">
+.widget_twitter li {
+	word-wrap: break-word;
+}
+</style>
+<link rel="author" href="https://plus.google.com/+MayankPrasad" title="Mayank Prasad on Google+"> 
+
+<meta name="geo.position" content="33.421160;-111.921163">
+<meta name="ICBM" content="33.421160, -111.921163">
+<meta name="application-name" content="maxEmbedded"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="a guide to robotics, embedded electronics and computer vision"><meta name="msapplication-task" content="name=Subscribe;action-uri=http://maxembedded.com/feed/;icon-uri=http://1.gravatar.com/blavatar/f4b910b279ce623dfd6029b4e91dda6e?s=16"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="title" content="Serial Peripheral Interface – SPI Basics | maxEmbedded on WordPress.com">
+<meta name="description" content="Hey all! It's time to continue with our tutorials on serial communication. Till now, we have covered the following: An introduction to serial communication Basics of RS232 communication The UART/USART of the AVR Apart from this, there are few other serial transfer protocols like SPI, I2C, etc. In this post, we will discuss about SPI…">
+	<style type="text/css">
+			.site-title,
+		.site-description {
+			position: absolute !important;
+			clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+			clip: rect(1px, 1px, 1px, 1px);
+		}
+		</style>
+	
+<script type="text/javascript">
+var wpcom_ads = { bid: 23748969, pt: 'permalink', wa: 1, colorscheme: 'light', domain: 'maxembedded.com', url: 'http://maxembedded.com', gid: '', };
+</script>
+
+		<script type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/google_service.js"></script>
+		<script type="text/javascript">
+			GS_googleAddAdSenseService("ca-pub-3443918307802676");
+			GS_googleEnableAllServices();
+		</script><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/google_ads.js"></script>
+		<script type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/amzn_ads.js"></script>
+		<script type="text/javascript">
+			try {
+				amznads.getAds("3033");
+			} catch(e) { /* ignore */ }
+		</script><script type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/bid"></script>
+		<script type="text/javascript">
+		var amznKeys = amznads.getKeys();
+		if (typeof amznKeys != "undefined" && amznKeys != "") { for (var i =0; i < amznKeys.length; i++) { var key = amznKeys[i]; GA_googleAddAttr("amzn", key);} }
+		document.close();
+		</script>
+		<script type="text/javascript">
+		GA_googleAddAttr( 'WordAds', '1' );
+GA_googleAddAttr( 'BlogId', '23748969' );
+GA_googleAddAttr( 'Domain', 'maxembedded.com' );
+GA_googleAddAttr( 'PageURL', 'http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/' );
+GA_googleAddAttr( 'WordAds-MI', '1' );
+GA_googleAddAttr( 'AdSafe', '1' );
+GA_googleAddAttr( 'NoNetFill', '0' );
+GA_googleAddAttr( 'Partner', 'AOL' );
+GA_googleAddAttr( 'LangId', '1' );
+GA_googleAddAttr( 'MarkupVer', '2' );
+GA_googleAddAttr( 'Autotag', 'technology' );
+GA_googleAddAttr( 'Tag', 'atmel-avr' )
+GA_googleAddAttr( 'Tag', 'avr-spi' )
+GA_googleAddAttr( 'Tag', 'introduction' )
+GA_googleAddAttr( 'Tag', 'microcontrollers-2' )
+GA_googleAddAttr( 'Tag', 'avr-tutorial' )
+GA_googleAddAttr( 'Tag', 'avrisp' )
+GA_googleAddAttr( 'Tag', 'clock-phase' )
+GA_googleAddAttr( 'Tag', 'clock-polarity' )
+GA_googleAddAttr( 'Tag', 'cpha' )
+GA_googleAddAttr( 'Tag', 'cpol' )
+GA_googleAddAttr( 'Tag', 'master' )
+GA_googleAddAttr( 'Tag', 'miso' )
+GA_googleAddAttr( 'Tag', 'mosi' )
+GA_googleAddAttr( 'Tag', 'sck' )
+GA_googleAddAttr( 'Tag', 'sclk' )
+GA_googleAddAttr( 'Tag', 'serial-communication' )
+GA_googleAddAttr( 'Tag', 'serial-peripheral-interface' )
+GA_googleAddAttr( 'Tag', 'slave' )
+GA_googleAddAttr( 'Tag', 'slave-select' )
+GA_googleAddAttr( 'Tag', 'spi' )
+GA_googleAddAttr( 'Tag', 'spi-bus-interface' )
+GA_googleAddAttr( 'Tag', 'spi-bus-transaction' )
+GA_googleAddAttr( 'Tag', 'ss' )
+GA_googleAddAttr( 'theme_bg', 'ffffff' );
+GA_googleAddAttr( 'theme_border', 'bbbbbb' );
+GA_googleAddAttr( 'theme_text', '444444' );
+GA_googleAddAttr( 'theme_link', '0da4d3' );
+GA_googleAddAttr( 'theme_url', '0da4d3' );
+
+		</script>
+		<script type="text/javascript">
+			GA_googleAddSlot('ca-pub-3443918307802676', 'Wordads_MIS_Mrec_Below_adsafe');
+
+		</script>
+		<script type="text/javascript">
+			GA_googleFetchAds();
+		</script>
+		<script type="text/javascript">
+		jQuery( window ).load( function() {
+			jQuery( "a.wpadvert-about" ).text( "About these ads" );
+		} );
+		</script>
+		<script type="text/javascript">
+		var wpcom_adclk_hovering = false;
+		var wpcom_adclk_recorded = false;
+		var wpcom_adclk_theme = "Oxygen";
+		var wpcom_adclk_slot = "belowpost";
+		var wpcom_adclk_network = ( typeof wpcom_adclk_network === "undefined" ) ? "" : wpcom_adclk_network ;
+
+		jQuery(document).ready( function() {
+			function wpcom_adclk_hover_yes() { wpcom_adclk_hovering = true; }
+			function wpcom_adclk_hover_no() { wpcom_adclk_hovering = false; }
+			jQuery(".wpa").click(wpcom_adclk_click);
+			jQuery(".wpa iframe").hover( wpcom_adclk_hover_yes, wpcom_adclk_hover_no );
+			jQuery(".wpa object").hover( wpcom_adclk_hover_yes, wpcom_adclk_hover_no );
+
+			jQuery(window).blur( function() {
+				if ( wpcom_adclk_hovering ) { wpcom_adclk_click(); }
+			});
+		});
+
+		function wpcom_adclk_impression() {
+			var stat_gif = document.location.protocol + "//stats.wordpress.com/g.gif?v=wpcom-no-pv";
+			stat_gif += "&x_ads_imp_theme=" + wpcom_adclk_theme;
+			stat_gif += "&x_ads_imp_placement="+wpcom_adclk_slot;
+			stat_gif += "&x_ads_imp_network=" + wpcom_adclk_network;
+			stat_gif += "&x_ads_imp_theme_network="+wpcom_adclk_theme+"_"+wpcom_adclk_network;
+			new Image().src = stat_gif + "&baba=" + Math.random();
+			return true;
+		}
+
+		function wpcom_adclk_click() {
+			if (wpcom_adclk_recorded) { return true; } // no double counting
+			var stat_gif = document.location.protocol + "//stats.wordpress.com/g.gif?v=wpcom-no-pv";
+			stat_gif += "&x_ads_click_theme=" + wpcom_adclk_theme;
+			stat_gif += "&x_ads_click_placement="+wpcom_adclk_slot;
+			stat_gif += "&x_ads_click_network=" + wpcom_adclk_network;
+			stat_gif += "&x_ads_click_theme_network="+wpcom_adclk_theme+"_"+wpcom_adclk_network;
+
+			new Image().src = stat_gif + "&baba=" + Math.random();
+			wpcom_adclk_recorded = true;
+			var now=new Date(); var end=now.getTime()+250;
+			while(true){now=new Date();if(now.getTime()>end){break;}}
+			return true;
+		}
+		</script><style type="text/css" id="syntaxhighlighteranchor"></style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'none']);
+	_gaq.push(['_setAllowLinker', true]);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/ga.js" async="" type="text/javascript"></script>
+<script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/osd.js" type="text/javascript"></script><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/rate.php" charset="utf-8"></script><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/services.css"><style id="pd_popup_holder_style_4675792_post_1770" type="text/css">#pd_popup_holder_4675792_post_1770 { position:absolute; display:none; width:350px; height:auto; top:0px; left:0px; z-index:10000; border:solid 1px #CCC; background-color:white; padding:0px 15px;font-family:Arial,Sans;box-shadow: -10px 10px 20px rgba(0, 0, 0, .5);-webkit-box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);-moz-box-shadow: 0px 0px 6px rgba(0, 0, 0, .25); }</style><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/a_002.htm" async="" type="text/javascript"></script></head>
+
+<body data-twttr-rendered="true" class="single single-post postid-1770 single-format-standard custom-background mp6 group-blog highlander-enabled highlander-light">
+<div id="page" class="hfeed site">
+		<header id="masthead" class="site-header" role="banner">
+		<hgroup>
+			<h1 class="site-title"><a sl-processed="1" href="http://maxembedded.com/" title="maxEmbedded" rel="home">maxEmbedded</a></h1>
+			<h2 class="site-description">a guide to robotics, embedded electronics and computer vision</h2>
+		</hgroup>
+
+		
+		
+			<a sl-processed="1" href="http://maxembedded.com/" title="maxEmbedded" rel="home">
+				<img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/cropped-maxembedded-header.png" alt="" class="custom-header" height="343" width="1500">
+			</a>
+
+		
+		<nav role="navigation" class="site-navigation main-navigation clear-fix">
+			<h1 class="assistive-text">Main Menu</h1>
+			<div class="assistive-text skip-link"><a sl-processed="1" href="#content" title="Skip to content">Skip to content</a></div>
+
+			<div class="menu-top-menu-container"><ul id="menu-top-menu" class="menu"><li id="menu-item-1112" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1112"><a sl-processed="1" href="http://maxembedded.com/">Home</a></li>
+<li id="menu-item-553" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-553"><a sl-processed="1" href="http://maxembedded.com/index/">maxEmbedded Index</a></li>
+<li id="menu-item-546" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-546"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/">Atmel AVR</a>
+<ul class="sub-menu">
+	<li id="menu-item-548" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-548"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/avr-basics/">AVR Basics</a></li>
+	<li id="menu-item-547" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-547"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/avr-adc/">AVR ADC</a></li>
+	<li id="menu-item-549" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-549"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/avr-timers-atmel-avr/">AVR Timers</a></li>
+	<li id="menu-item-1596" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1596"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/avr-usart/">AVR USART</a></li>
+	<li id="menu-item-1803" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1803"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/avr-spi/">AVR SPI</a></li>
+</ul>
+</li>
+<li id="menu-item-1757" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1757"><a sl-processed="1" href="http://maxembedded.com/category/msp430/">MSP430</a></li>
+<li id="menu-item-1758" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1758"><a sl-processed="1" href="http://maxembedded.com/category/e-linux/">e-Linux</a></li>
+<li id="menu-item-976" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-976"><a sl-processed="1" href="http://maxembedded.com/code-gallery/">Code Gallery</a></li>
+<li id="menu-item-911" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-911"><a sl-processed="1" href="http://maxembedded.com/contact/">Contact</a></li>
+</ul></div>		</nav>
+	</header><!-- #masthead .site-header -->
+
+	<div id="main" class="clear-fix">
+		<div id="primary" class="site-content">
+			<div id="content" role="main">
+
+			
+				
+<article id="post-1770" class="post-1770 post type-post status-publish format-standard has-post-thumbnail hentry category-atmel-avr category-avr-spi category-introduction category-microcontrollers-2 tag-avr-tutorial tag-avrisp tag-clock-phase tag-clock-polarity tag-cpha tag-cpol tag-master tag-miso tag-mosi tag-sck tag-sclk tag-serial-communication tag-serial-peripheral-interface tag-slave tag-slave-select tag-spi tag-spi-bus-interface tag-spi-bus-transaction tag-ss clear-fix">
+	<header class="entry-header">
+		<h1 class="entry-title">Serial Peripheral Interface – SPI Basics</h1>
+
+		<div class="entry-meta">
+			<span class="entry-date"><a sl-processed="1" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/" title="7:58 pm" rel="bookmark"><time class="entry-date" datetime="2013-11-10T19:58:16+00:00" pubdate="">November 10, 2013</time></a></span>			<span class="sep">·</span>
+			<span class="byline">by <span class="author vcard"><a sl-processed="1" class="url fn n" href="http://maxembedded.com/author/maxmiaggi/" title="View all posts by Mayank Prasad" rel="author">Mayank Prasad</a></span></span>			<span class="sep">·</span>
+			in <a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/" title="View all posts in Atmel AVR" rel="category tag">Atmel AVR</a>, <a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/avr-spi/" title="View all posts in AVR SPI" rel="category tag">AVR SPI</a>, <a sl-processed="1" href="http://maxembedded.com/category/introduction/" title="View all posts in Introduction" rel="category tag">Introduction</a>, <a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/" title="View all posts in Microcontrollers" rel="category tag">Microcontrollers</a>.			<span class="sep">·</span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+	<div class="entry-content clear-fix">
+		<div style="display: inline-block;" class="pd-rating" id="pd_rating_holder_4675792_post_1770"><div class="rating-icons" id="pd_rate_4675792_post_1770" style="float:left;"><div class="rating-star-icon" onmouseout="PDRTJS_4675792_post_1770.rebuild();" onclick="PDRTJS_4675792_post_1770.rate(1);" onmouseover="PDRTJS_4675792_post_1770.hover(1);" id="PDRTJS_4675792_post_1770_stars_1" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(http://i0.poll.fm/images/ratings/star-yellow-sml.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_4675792_post_1770.rebuild();" onclick="PDRTJS_4675792_post_1770.rate(2);" onmouseover="PDRTJS_4675792_post_1770.hover(2);" id="PDRTJS_4675792_post_1770_stars_2" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(http://i0.poll.fm/images/ratings/star-yellow-sml.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_4675792_post_1770.rebuild();" onclick="PDRTJS_4675792_post_1770.rate(3);" onmouseover="PDRTJS_4675792_post_1770.hover(3);" id="PDRTJS_4675792_post_1770_stars_3" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(http://i0.poll.fm/images/ratings/star-yellow-sml.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_4675792_post_1770.rebuild();" onclick="PDRTJS_4675792_post_1770.rate(4);" onmouseover="PDRTJS_4675792_post_1770.hover(4);" id="PDRTJS_4675792_post_1770_stars_4" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(http://i0.poll.fm/images/ratings/star-yellow-sml.png) top left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div><div class="rating-star-icon" onmouseout="PDRTJS_4675792_post_1770.rebuild();" onclick="PDRTJS_4675792_post_1770.rate(5);" onmouseover="PDRTJS_4675792_post_1770.hover(5);" id="PDRTJS_4675792_post_1770_stars_5" style="background-size: 32px 48px !important; cursor: pointer; width: 16px; height: 16px; line-height: 16px; background: url(http://i0.poll.fm/images/ratings/star-yellow-sml.png) center left; float: left; padding: 0px; margin: 0px; margin-right: 1px;">&nbsp;</div></div><span style="float:left;">&nbsp;</span><div id="rating_info_4675792_post_1770" style="display:block;float:left;background:url(http://i0.poll.fm/images/ratings/info.png) no-repeat 3px 2px;width:16px;height:16px;cursor:pointer; null " onclick="javascript:PDRTJS_4675792_post_1770.togglePopup();return false;"><span style="display:none;">i</span></div><div class="pd_popup_holder" id="pd_popup_holder_4675792_post_1770">&nbsp;</div><div class="rating-msg" id="PDRTJS_4675792_post_1770_msg" style="float:left; padding-left: 5px; text-align: left; font:normal normal /16px ; color: #000000;">10 Votes</div><p style="padding: 0px; margin: 0px; clear: both;"></p></div><br><p style="text-align:justify;">Hey all! It’s time to continue with our tutorials on serial communication. Till now, we have covered the following:</p>
+<ul style="text-align:justify;">
+<li><a sl-processed="1" title="Serial Communication – Introduction" href="http://maxembedded.com/2013/09/03/serial-communication-introduction/" target="_blank">An introduction to serial communication</a></li>
+<li><a sl-processed="1" title="Serial Communication – RS232 Basics" href="http://maxembedded.com/2013/09/21/serial-communication-rs232-basics/" target="_blank">Basics of RS232 communication</a></li>
+<li><a sl-processed="1" title="The USART of the AVR" href="http://maxembedded.com/2013/09/30/the-usart-of-the-avr/" target="_blank">The UART/USART of the AVR</a></li>
+</ul>
+<p style="text-align:justify;">Apart from this, there are few other 
+serial transfer protocols like SPI, I2C, etc. In this post, we will 
+discuss about SPI and its bus transactions – no programming, just the 
+concepts. Programming the SPI of (AVR) microcontrollers will be 
+discussed in upcoming post.</p>
+<h1 style="text-align:justify;">Contents</h1>
+<ul>
+<li><a sl-processed="1" href="#SPI">Serial Peripheral Interface (SPI)</a></li>
+<li><a sl-processed="1" href="#BusTransaction">SPI Bus Transaction</a>
+<ul>
+<li><a sl-processed="1" href="#HwSetup">Hardware Setup</a></li>
+<li><a sl-processed="1" href="#DataXfer">Data Transfer Operation</a>
+<ul>
+<li><a sl-processed="1" href="#DataXferSummary">Short Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a sl-processed="1" href="#BusInterface">SPI Bus Interface</a>
+<ul>
+<li><a sl-processed="1" href="#SS">Multiple Slaves – Slave Select Signal</a></li>
+</ul>
+</li>
+<li><a sl-processed="1" href="#CPOL_CPHA">Clock Polarity and Phase</a></li>
+<li><a sl-processed="1" href="#AVRISP">AVR In-System Programming</a></li>
+<li><a sl-processed="1" href="#Reads">Interesting Reads</a></li>
+<li><a sl-processed="1" href="#Summary">Summary</a></li>
+</ul>
+<p><a name="SPI"></a></p>
+<h1 style="text-align:left;">Serial Peripheral Interface (SPI)</h1>
+<p style="text-align:justify;">Serial Peripheral Interface, often shortened as SPI (pronounced as <em>spy</em>, or <em>ess-pee-eye</em>),
+ is a synchronous serial data transfer protocol named by Motorola. Here 
+two or more serial devices are connected to each other in <a sl-processed="1" href="http://maxembedded.com/2013/09/03/serial-communication-introduction/#terms" target="_blank">full-duplex mode</a>. The devices connected to each other are either <em>Master</em> or <em>Slave</em>.
+ In a SPI link there could as many Masters and Slaves as required, but 
+it’s very rare to find more than one Master in a SPI link.</p>
+<p style="text-align:justify;">The <em>Master</em> device is the one which initiates the connection and controls it. Once the connection is initiated, then the <em>Master</em> and one or more <em>Slave(s)</em> can transmit and/or receive data. As mentioned earlier, this is a full-duplex connection, which means that <em>Master</em> can send data to <em>Slave(s)</em> and the <em>Slave(s)</em> can also send the data to the <em>Master</em> at the same time.</p>
+<p><a name="BusTransaction"></a></p>
+<h1 style="text-align:left;">SPI Bus Transaction</h1>
+<p style="text-align:justify;">Now that we have a basic knowledge of 
+what SPI is, let’s look into the operation of SPI Bus. The SPI operation
+ is based upon shift registers. Every device, whether <em>Master</em> or <em>Slave</em>
+ has an 8-bit shift register inside it. The size of the shift register 
+could be more than 8-bit as well (like 10-bit, 12-bit, etc), but it 
+should be the same for both <em>Master</em> and <em>Slave</em>, and the protocol should support it.</p>
+<p><a name="HwSetup"></a></p>
+<h2 style="text-align:left;">Hardware Setup</h2>
+<p style="text-align:justify;">The <em>Master</em> and <em>Slave</em> 
+are connected in such a way that the two shift registers form an 
+inter-device circular buffer. The following diagram should explains the 
+hardware setup. Please click on the images to enlarge it and view it in 
+high resolution.</p>
+<div id="attachment_1772" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/clock-pulse-0-spi-bus-transaction-showing-master-slave-shift-registers.png"><img class="size-full wp-image-1772" alt="Hardware Setup of Master-Slave Device and Shift Registers" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/clock-pulse-0-spi-bus-transaction-showing-master-slave-shift.png" height="174" width="470"></a><p class="wp-caption-text">Hardware Setup of Master-Slave Device and Shift Registers (Click to Enlarge)</p></div>
+<p style="text-align:justify;">As you can see, there is an 8-bit shift register inside each of&nbsp;the <em>Master</em> and <em>Slave</em> devices. These shift registers operate in <a sl-processed="1" title="SISO Shift Register" href="http://www.allaboutcircuits.com/vol_4/chpt_12/2.html" target="_blank">Serial-In/Serial-Out (SISO)</a> fashion. The output of the <em>Master’s</em> shift register is connected to the input of the <em>Slave’s</em> shift register; and the output of the <em>Slave’s</em> shift register is connected to the input of <em>Master’s</em>
+ shift register. This makes the connection operate like a circular/ring 
+buffer. Don’t bother about the names MISO, MOSI and SCK now. We will 
+discuss about them a little later in this post.</p>
+<p style="text-align:justify;">As mentioned earlier, SPI is a 
+synchronous serial data transfer protocol, which means that there must 
+be a clock to synchronize the data transfer. It has also been stated 
+that the <em>Master</em> is responsible for initiating and controlling the connection. Thus, we use the clock source of the <em>Master</em> device to synchronize the data transfer. That’s why you see the clock source inside the <em>Master</em>, which controls the operation of <em>both</em> the shift registers.</p>
+<p><a name="DataXfer"></a></p>
+<h2 style="text-align:left;">Data Transfer Operation</h2>
+<p style="text-align:justify;">Alright, now let’s see how SPI bus transfers data among <em>Master</em> and <em>Slave</em>. Let’s refer to the diagram shown in the above section. Let’s say that the data in the <em>Master’s</em> shift register is A7 through A0 (MSB through LSB) whereas the data in the <em>Slave’s</em> shift register is B7 through B0 (MSB through LSB). This is the initial state before any clock pulse arrives.</p>
+<p style="text-align:justify;">Now as soon as a clock pulse arrives, the
+ shift registers come into operation and the data in the registers in 
+shifted by one bit towards the right. This evicts bit A0 from <em>Master</em> and bit B0 from <em>Slave</em>. Since the <em>Master</em> and <em>Slave</em>
+ are connected to form a ring/circular buffer, the evicted bit occupies 
+the MSB position of the other device. Which means, bit A0 gets evicted 
+from <em>Master</em> and occupies MSB position in <em>Slave’s</em> shift register; whereas bit B0 gets evicted from <em>Slave</em> and occupies MSB position in <em>Master’s</em>
+ shift register. This can be seen in the following image. Bits are color
+ coded for better viewing. Please click on the image to enlarge it.</p>
+<div id="attachment_1777" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/clock-pulse-1-spi-bus-transaction-showing-master-slave-shift-registers.png"><img class="size-full wp-image-1777" alt="Clock Pulse 1 - SPI Bus Transaction showing Master Slave Shift Registers" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/clock-pulse-1-spi-bus-transaction-showing-master-slave-shift.png" height="174" width="470"></a><p class="wp-caption-text">Clock Pulse 1 – SPI Bus Transaction showing Master Slave Shift Registers (Click to Enlarge)</p></div>
+<p style="text-align:justify;">Now once again, when the clock generates 
+another pulse, the data in the registers are shifted by another bit 
+towards right, which evicts bits A1 and B1 from <em>Master</em> and <em>Slave</em> respectively. The evicted bits A1 and B1 occupy the MSB position of <em>Slave’s</em> and <em>Master’s</em> shift registers respectively. This can be seen in the following image. Please click on the image to enlarge it.</p>
+<div id="attachment_1778" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/clock-pulse-2-spi-bus-transaction-showing-master-slave-shift-registers.png"><img class="size-full wp-image-1778" alt="Clock Pulse 2 - SPI Bus Transaction showing Master Slave Shift Registers" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/clock-pulse-2-spi-bus-transaction-showing-master-slave-shift.png" height="174" width="470"></a><p class="wp-caption-text">Clock Pulse 2 – SPI Bus Transaction showing Master Slave Shift Registers (Click to Enlarge)</p></div>
+<p style="text-align:justify;">This continues for six more clock pulses.
+ The following images depict the data transfer operation. Please click 
+on the images to enlarge them for better viewing.</p>
+<div id="attachment_1779" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/clock-pulse-3-spi-bus-transaction-showing-master-slave-shift-registers.png"><img class="size-full wp-image-1779" alt="Clock Pulse 3 - SPI Bus Transaction showing Master Slave Shift Registers" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/clock-pulse-3-spi-bus-transaction-showing-master-slave-shift.png" height="174" width="470"></a><p class="wp-caption-text">Clock Pulse 3 – SPI Bus Transaction showing Master Slave Shift Registers (Click to Enlarge)</p></div>
+<div id="attachment_1780" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/clock-pulse-4-spi-bus-transaction-showing-master-slave-shift-registers.png"><img class="size-full wp-image-1780" alt="Clock Pulse 4 - SPI Bus Transaction showing Master Slave Shift Registers" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/clock-pulse-4-spi-bus-transaction-showing-master-slave-shift.png" height="174" width="470"></a><p class="wp-caption-text">Clock Pulse 4 – SPI Bus Transaction showing Master Slave Shift Registers (Click to Enlarge)</p></div>
+<div id="attachment_1781" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/clock-pulse-5-spi-bus-transaction-showing-master-slave-shift-registers.png"><img class="size-full wp-image-1781" alt="Clock Pulse 5 - SPI Bus Transaction showing Master Slave Shift Registers" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/clock-pulse-5-spi-bus-transaction-showing-master-slave-shift.png" height="174" width="470"></a><p class="wp-caption-text">Clock Pulse 5 – SPI Bus Transaction showing Master Slave Shift Registers (Click to Enlarge)</p></div>
+<div id="attachment_1782" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/clock-pulse-6-spi-bus-transaction-showing-master-slave-shift-registers.png"><img class="size-full wp-image-1782" alt="Clock Pulse 6 - SPI Bus Transaction showing Master Slave Shift Registers" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/clock-pulse-6-spi-bus-transaction-showing-master-slave-shift.png" height="174" width="470"></a><p class="wp-caption-text">Clock Pulse 6 – SPI Bus Transaction showing Master Slave Shift Registers (Click to Enlarge)</p></div>
+<div id="attachment_1783" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/clock-pulse-7-spi-bus-transaction-showing-master-slave-shift-registers.png"><img class="size-full wp-image-1783" alt="Clock Pulse 7 - SPI Bus Transaction showing Master Slave Shift Registers" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/clock-pulse-7-spi-bus-transaction-showing-master-slave-shift.png" height="174" width="470"></a><p class="wp-caption-text">Clock Pulse 7 – SPI Bus Transaction showing Master Slave Shift Registers (Click to Enlarge)</p></div>
+<p style="text-align:justify;">And finally,</p>
+<div id="attachment_1784" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/clock-pulse-8-spi-bus-transaction-showing-master-slave-shift-registers.png"><img class="size-full wp-image-1784" alt="Clock Pulse 8 - SPI Bus Transaction showing Master Slave Shift Registers" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/clock-pulse-8-spi-bus-transaction-showing-master-slave-shift.png" height="174" width="470"></a><p class="wp-caption-text">Clock Pulse 8 – SPI Bus Transaction showing Master Slave Shift Registers (Click to Enlarge)</p></div>
+<p><a name="DataXferSummary"></a></p>
+<h3 style="text-align:left;">Short Summary</h3>
+<p style="text-align:justify;">To sum up,</p>
+<ul style="text-align:justify;">
+<li>Both, <em>Master</em> and <em>Slave</em> place the data (byte) they wish to transfer in their respective shift registers before the communication starts.</li>
+<li><em>Master</em> generates 8 clock pulses. After each clock pulse, one bit of information is transfer from <em>Master</em> to <em>Slave</em> and vice-versa.</li>
+<li>After 8 clock pulses, <em>Master</em> would have received <em>Slave’s</em> data, whereas <em>Slave</em> would have <em>Master’s</em> data. And that’s why this is a full-duplex communication.</li>
+</ul>
+<p><a name="BusInterface"></a></p>
+<h1 style="text-align:left;">SPI Bus Interface</h1>
+<p style="text-align:justify;">Now that we are conceptually clear how 
+the data transfer takes place, let’s look into the SBI bus description 
+and the interface between <em>Master</em> and <em>Slave</em>.</p>
+<p style="text-align:justify;">The <em>Master</em> and <em>Slave</em> 
+are connected by means of four wires. Each of these wires carries a 
+particular signal defined by the SPI bus protocol. These four 
+signals/wires are–</p>
+<ol style="text-align:justify;">
+<li><strong>MOSI – Master Out Slave In:</strong> This is the wire/signal which goes from the output of <em>Master’s</em>&nbsp;shift register to the input of the <em>Slave’s&nbsp;</em>shift register.</li>
+<li><strong>MISO – Master In Slave Out:&nbsp;</strong>This is the wire/signal which goes from the output of&nbsp;<em>Slave’s</em>&nbsp;shift register to the input of the&nbsp;<em>Master’s&nbsp;</em>shift register.</li>
+<li><strong>SCK/SCLK – Serial Clock:</strong> This is the output of the clock generator for <em>Master</em> and clock input for <em>Slave</em>.</li>
+<li><strong>SS’ – Slave Select:</strong> This is discussed in the next section of this post.</li>
+</ol>
+<p style="text-align:justify;">The MOSI, SCK and SS’ signals are directed from <em>Master</em> to <em>Slave</em> whereas the MISO signal is directed from <em>Slave</em> to <em>Master</em>. The following diagram represents this interface having single <em>Master</em> and single <em>Slave</em>.</p>
+<div id="attachment_1789" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/spi-bus-single-master-single-slave.png"><img pxz:uid="1230f6ea66e-1" class="size-full wp-image-1789" alt="SPI Bus - Single Master Single Slave" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/spi-bus-single-master-single-slave.png" height="223" width="470"></a><p class="wp-caption-text">SPI Bus – Single Master Single Slave (Click to Enlarge)</p></div>
+<p style="text-align:justify;">Thus, it should be noted again that during each SPI clock cycle, a full duplex transmission occurs as follows–</p>
+<ul style="text-align:justify;">
+<li><em>Master</em> sends a bit to the MOSI line; <em>Slave</em> reads it from the same line.</li>
+<li><em>Slave</em> sends a bit to the MISO line; <em>Master</em> reads it from the same line.</li>
+</ul>
+<p><a name="SS"></a></p>
+<h2 style="text-align:left;">Multiple Slaves – Slave Select (SS’) Signal</h2>
+<p style="text-align:justify;">As mentioned earlier, SPI can be used to connect one <em>Master</em> to multiple <em>Slaves</em> as well. Having multiple <em>Masters</em>
+ is also possible, but it does nothing but increase the complexity due 
+to clock synchronization issues, and is very very rare. Having multiple <em>Slaves</em> is where the Slave Select (SS’) signal comes into effect.</p>
+<p style="text-align:justify;">SS’ (which means SS complemented) signal is in active low configuration i.e. to select a particular <em>Slave</em>, we need to provide a LOW signal level to SS’ of the <em>Slave</em>. The SPI bus interface is pretty simple for this one, and is shown in the diagram shown below.</p>
+<div id="attachment_1774" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/spi-bus-single-master-multiple-slaves.png"><img pxz:uid="1230f6ea66c-2" class="size-full wp-image-1774" alt="SPI Bus - Single Master Multiple Slaves" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/spi-bus-single-master-multiple-slaves.png" height="546" width="470"></a><p class="wp-caption-text">SPI Bus – Single Master Multiple Slaves (Click to Enlarge)</p></div>
+<p style="text-align:justify;">All the <em>Slaves</em> share the same MOSI, MISO and SCK signals. The SS’ signal is responsible for choosing a particular <em>Slave</em>. The <em>Slave</em> gets enabled only when its input SS’ signal goes LOW.</p>
+<p style="text-align:justify;">In the above case, each of the <em>Slaves</em> is independent since they are separately selected via independent SS’ signals from the <em>Master</em>. However, there is another way to link the Slaves together – by using <a sl-processed="1" href="http://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus#Daisy_chain_SPI_configuration" target="_blank">Daisy chain configuration</a>. In this configuration, all the Slaves are selected at a time, and the output of one <em>Slave</em> goes to the input of another <em>Slave</em>,
+ and so on. However we will not be discussing this here (and in upcoming
+ posts as well) since most of the applications don’t require this type 
+of configuration.</p>
+<p><a name="CPOL_CPHA"></a></p>
+<h1 style="text-align:left;">Clock Polarity and Phase</h1>
+<p style="text-align:justify;">Keeping synchronization in mind, <em>Master’s</em>
+ role doesn’t end with simply generating clock pulses at a particular 
+frequency (usually within the range of 10 kHz to 100 MHz). In fact, <em>Master</em> and <em>Slave</em>
+ should agree on a particular synchronization protocol as well, or else 
+everything will go wrong and data will get lost. This is where the 
+concept of clock polarity (CPOL) and clock phase (CPHA) comes in.</p>
+<ul style="text-align:justify;">
+<li><strong>CPOL – Clock Polarity:</strong> This determines the base value of the clock i.e. the value of the clock when SPI bus is idle.
+<ul>
+<li>When CPOL = 0, base value of clock is zero i.e. SCK is LOW when idle.</li>
+<li>When CPOL = 1, base value of clock is one i.e. SCK is HIGH when idle.</li>
+</ul>
+</li>
+<li><strong>CPHA – Clock Phase:</strong> This determines the clock transition at which data will be sampled/captured.
+<ul>
+<li>When CPHA = 0, data is sampled at clock’s rising/leading edge.</li>
+<li>When CPHA = 1, data is sampled at clock’s falling/trailing edge.</li>
+</ul>
+</li>
+</ul>
+<p style="text-align:justify;">This results in four SPI modes, shown in the table below taken from the <a sl-processed="1" href="http://www.atmel.com/Images/doc2503.pdf" target="_blank">ATmega32 datasheet</a>
+ page 139. We will discuss more about these modes and how to choose them
+ in our next post where we will learn how to program the SPI of the AVR.</p>
+<div id="attachment_1791" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/cpol-and-cpha-functionality.png"><img class="size-full wp-image-1791" alt="CPOL and CPHA Functionality" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/cpol-and-cpha-functionality.png" height="126" width="470"></a><p class="wp-caption-text">CPOL and CPHA Functionality</p></div>
+<p style="text-align:justify;">We can also look into the timing diagrams
+ provided in the same page of the datasheet. By now I guess you should 
+be able to decode the timing diagrams yourself. Don’t worry about the 
+DORD setting at the bottom, we will discuss about it in the next post. 
+Just focus on what effect CPOL and CPHA has in these figures.</p>
+<div id="attachment_1792" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/spi-transfer-format-with-cpha-0.png"><img pxz:uid="1230f6ea66d-3" class="size-full wp-image-1792" alt="SPI Transfer Format with CPHA = 0" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/spi-transfer-format-with-cpha-0.png" height="250" width="470"></a><p class="wp-caption-text">SPI Transfer Format with CPHA = 0 (Click to Enlarge)</p></div>
+<div id="attachment_1793" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/spi-transfer-format-with-cpha-1.png"><img pxz:uid="1230f72d31f-4" class="size-full wp-image-1793" alt="SPI Transfer Format with CPHA = 1" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/spi-transfer-format-with-cpha-1.png" height="252" width="470"></a><p class="wp-caption-text">SPI Transfer Format with CPHA = 1 (Click to Enlarge)</p></div>
+<p><a name="AVRISP"></a></p>
+<h1 style="text-align:left;">AVR In-System Programming</h1>
+<p style="text-align:justify;">The In-System Programming (ISP) exploits 
+the technique of SPI to transfer the hex code from the PC to the target 
+AVR microcontroller. We won’t go into the details of how it happens. 
+Since we are discussing about SPI, I thought to bring up this small 
+point as well. The following figure taken from <a sl-processed="1" href="http://www.atmel.com/Images/doc0943.pdf" target="_blank">AVR Application Note 910</a> page 2 shows the simplified hardware connections.</p>
+<div id="attachment_1794" style="width: 480px" class="wp-caption aligncenter"><a sl-processed="1" href="http://maxembedded.files.wordpress.com/2013/11/connections-between-isp-and-avr-mcu.png"><img class="size-full wp-image-1794" alt="Connections between ISP and AVR MCU" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/connections-between-isp-and-avr-mcu.png" height="148" width="470"></a><p class="wp-caption-text">Connections between ISP and AVR MCU (Click to Enlarge)</p></div>
+<p style="text-align:justify;">This means that if you have connected 
+some SPI device to your AVR microcontroller, and at the same time you 
+are trying to program your microcontroller, there could be some issues 
+(like driver contention). We will discuss about this issue and other 
+hardware considerations in our next post.</p>
+<p><a name="Reads"></a></p>
+<h1 style="text-align:left;">Interesting Reads</h1>
+<p style="text-align:justify;">You might be interested in reading the following documents–</p>
+<ul style="text-align:justify;">
+<li><a sl-processed="1" href="http://www.ee.nmt.edu/%7Eteare/ee308l/datasheets/S12SPIV3.pdf" target="_blank">Motorola’s SPI Block Guide v03.06</a></li>
+<li><a sl-processed="1" href="http://www.atmel.com/Images/doc0943.pdf" target="_blank">AVR910: In-System Programming</a></li>
+</ul>
+<p><a name="Summary"></a></p>
+<h1 style="text-align:left;">Summary</h1>
+<p style="text-align:justify;">Let’s look at what we have learnt in this post.</p>
+<ul>
+<li>SPI is a full-duplex synchronous serial data transfer protocol.</li>
+<li>Data transfer takes place in between <em>Master</em> and <em>Slave</em> devices.</li>
+<li>Each <em>Master/Slave</em> device has an internal 8 bit shift register, which is connected to other devices so as to form a circular/ring buffer.</li>
+<li>At each clock pulse, data gets right shifted in the circular/ring buffer.</li>
+<li>After 8 clock pulses, data is completely exchanged in between devices.</li>
+<li>SPI bus consists of four wires/signals – MOSI, MISO, SCK and SS’.</li>
+<li>When we connect more than one <em>Slave</em> devices, then we choose them using the SS’ signal.</li>
+<li>CPOL and CPHA must be set so that <em>Master</em> and <em>Slave</em> devices sync properly.</li>
+<li>AVR ISP uses SPI to program the microcontroller.</li>
+</ul>
+<p style="text-align:justify;">So this was all about the basics of SPI. If you want to know about the pros and cons of SPI, I would suggest you to read <a sl-processed="1" title="Pros and Cons of SPI - Wiki" href="http://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus#Pros_and_cons_of_SPI" target="_blank">this</a> Wikipedia section. <strong>In the next post, we will learn how to implement SPI in an AVR microcontroller. <span style="color:#0000ff;">So subscribe to stay updated! And don’t forget to write your views about this post below.</span></strong></p>
+<p style="text-align:justify;">Cheers! And it’s about to be Thanksgiving time in two weeks, so Happy “early” Thanksgiving! <span class="wp-smiley emoji emoji-smile" title=":)">:)</span></p>
+<h3 style="text-align:justify;">References</h3>
+<ul>
+<li><a sl-processed="1" href="http://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus" target="_blank">http://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus</a></li>
+<li><a sl-processed="1" href="http://avrbeginners.net/architecture/spi/spi.html" target="_blank">http://avrbeginners.net/architecture/spi/spi.html</a></li>
+</ul>
+<p><strong><em>Written By–</em></strong></p>
+<p><em>Mayank Prasad (aka Max)</em><br>
+<em> Arizona State University</em><br>
+<em> max@<span class="skimlinks-unlinked">maxEmbedded.com</span></em></p>
+		<div id="geo-post-1770" class="geo geo-post" style="display: none">
+			<span class="latitude">33.421160</span>
+			<span class="longitude">-111.921163</span>
+		</div>		<div class="wpcnt">
+		<div class="wpa">
+
+			<a sl-processed="1" class="wpa-about" href="http://en.wordpress.com/about-these-ads/" rel="nofollow">About these ads</a>
+
+			<div class="u"><script type="text/javascript">
+			GA_googleFillSlot("Wordads_MIS_Mrec_Below_adsafe");
+
+			</script><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/ads"></script><div id="google_ads_div_Wordads_MIS_Mrec_Below_adsafe_ad_wrapper">
+<div id="google_ads_div_Wordads_MIS_Mrec_Below_adsafe_ad_container" style="display:inline-block;"><script>
+var wpcom_adclk_network = "aol_viral";
+if (typeof wpcom_adclk_impression == "function") { wpcom_adclk_impression(); }
+</script>
+<div class="gv-placement-sp" id="gv_target_6606458813880372831447928"><iframe src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/custom.htm" style="border: 0px none; margin: 0px; padding: 0px; visibility: visible;" id="gv-iframe" frameborder="0" height="267" scrolling="no" width="400"></iframe></div>
+<script>!function(d, s, id) {
+    var js, pjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = ("https:" == document.location.protocol ? "http://player-services.goviral-content.com".replace(/^http\:/, "https:") : "http://player-services.goviral-content.com") + "/embed-code/index/find?placementVersionId=6606458813880372831447928";
+    pjs.parentNode.insertBefore(js, pjs);
+}(document, "script", "gv_script_6606458813880372831447928");</script>
+
+</div>
+</div>
+</div>
+
+		</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-rating-enabled sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Liked it? Share it!</h3><div class="sd-content"><ul><li class="share-facebook"><a sl-processed="1" rel="nofollow" class="share-facebook sd-button share-icon" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/?share=facebook&amp;nb=1" target="_blank" title="Share on Facebook" id="sharing-facebook-1770"><span>Facebook</span></a></li><li class="share-twitter"><a sl-processed="1" rel="nofollow" class="share-twitter sd-button share-icon" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter" id="sharing-twitter-1770"><span>Twitter<span class="share-count">4</span></span></a></li><li class="share-google-plus-1"><a sl-processed="1" rel="nofollow" class="share-google-plus-1 sd-button share-icon" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/?share=google-plus-1&amp;nb=1" target="_blank" title="Click to share on Google+" id="sharing-google-1770"><span>Google</span></a></li><li><a sl-processed="1" href="#" class="sharing-anchor sd-button share-more"><span>More</span></a></li><li class="share-end"></li></ul><div class="sharing-hidden"><div class="inner" style="display: none;"><ul><li class="share-email share-service-visible"><a sl-processed="1" rel="nofollow" class="share-email sd-button share-icon" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/?share=email&amp;nb=1" target="_blank" title="Click to email this to a friend"><span>Email</span></a></li><li class="share-print"><a sl-processed="1" rel="nofollow" class="share-print sd-button share-icon" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/#print" target="_blank" title="Click to print"><span>Print</span></a></li><li class="share-end"></li><li class="share-linkedin"><a sl-processed="1" rel="nofollow" class="share-linkedin sd-button share-icon" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/?share=linkedin&amp;nb=1" target="_blank" title="Click to share on LinkedIn" id="sharing-linkedin-1770"><span>LinkedIn<span class="share-count">2</span></span></a></li><li class="share-tumblr"><a sl-processed="1" rel="nofollow" class="share-tumblr sd-button share-icon" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/?share=tumblr&amp;nb=1" target="_blank" title="Click to share on Tumblr"><span>Tumblr</span></a></li><li class="share-end"></li><li class="share-reddit"><a sl-processed="1" rel="nofollow" class="share-reddit sd-button share-icon" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/?share=reddit&amp;nb=1" target="_blank" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-pinterest"><a sl-processed="1" rel="nofollow" class="share-pinterest sd-button share-icon" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/?share=pinterest&amp;nb=1" target="_blank" title="Click to share on Pinterest"><span>Pinterest</span></a></li><li class="share-end"></li><li class="share-end"></li></ul></div></div></div></div></div><div class="sharedaddy sd-block sd-social sd-gplus"><h3 class="sd-title">Google+</h3><div class="sd-content"><a sl-processed="1" href="https://plus.google.com/+MayankPrasad"><img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/photo.jpg" alt="Mayank Prasad" align="absmiddle" height="20" width="20"> </a><a sl-processed="1" rel="author" href="https://plus.google.com/+MayankPrasad" class="gplus-profile">Mayank Prasad</a><span class="g-follow-wrapper"><div id="___follow_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 97px; height: 15px;"><iframe data-gapiattached="true" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/follow.htm" name="I0_1398061063445" id="I0_1398061063445" vspace="0" tabindex="0" style="position: static; top: 0px; width: 97px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 15px;" marginwidth="0" marginheight="0" hspace="0" frameborder="0" scrolling="no" width="100%"></iframe></div></span></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-loaded" id="like-post-wrapper-23748969-1770-5354b7b6a10d4" data-src="//widgets.wp.com/likes/#blog_id=23748969&amp;post_id=1770&amp;origin=maxembedded.wordpress.com&amp;obj_id=23748969-1770-5354b7b6a10d4" data-name="like-post-frame-23748969-1770-5354b7b6a10d4"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px; display: none;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><iframe class="post-likes-widget jetpack-likes-widget" name="like-post-frame-23748969-1770-5354b7b6a10d4" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/a.htm" frameborder="0" height="55px" width="100%"></iframe><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div style="display: block;" id="jp-relatedposts" class="jp-relatedposts">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-visual"><div class="jp-relatedposts-post jp-relatedposts-post0 jp-relatedposts-post-thumbs" data-post-id="1835" data-post-format="false"><a sl-processed="1" data-position="0" data-origin="1770" rel="nofollow" title="The SPI of the AVR
+
+Continuing with the series of tutorials on Serial Communication, here is another one, and much awaited, the Serial Peripheral Interface (SPI) of AVR! Before proceeding ahead, I would suggest you&amp;hellip;" href="http://maxembedded.com/2013/11/26/the-spi-of-the-avr/" class="jp-relatedposts-post-a"><img class="jp-relatedposts-post-img" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/final-setup.jpg" alt="The SPI of the AVR" width="350"></a><h4 class="jp-relatedposts-post-title"><a sl-processed="1" data-position="0" data-origin="1770" rel="nofollow" title="The SPI of the AVR
+
+Continuing with the series of tutorials on Serial Communication, here is another one, and much awaited, the Serial Peripheral Interface (SPI) of AVR! Before proceeding ahead, I would suggest you&amp;hellip;" href="http://maxembedded.com/2013/11/26/the-spi-of-the-avr/" class="jp-relatedposts-post-a">The SPI of the AVR</a></h4><p class="jp-relatedposts-post-excerpt">Continuing
+ with the series of tutorials on Serial Communication, here is another 
+one, and much awaited, the Serial Peripheral Interface (SPI) of AVR! 
+Before proceeding ahead, I would suggest you…</p><p class="jp-relatedposts-post-context">In "Atmel AVR"</p></div><div class="jp-relatedposts-post jp-relatedposts-post1 jp-relatedposts-post-thumbs" data-post-id="2972" data-post-format="false"><a sl-processed="1" data-position="1" data-origin="1770" rel="nofollow" title="Inter-Integrated Circuits - I2C Basics
+
+Hello folks, it's time for I2C! Currently, related to&nbsp;Serial Communication, maxEmbedded features RS232 and SPI communication. It's time to move beyond! In this post, we will discuss all the theoretical&amp;hellip;" href="http://maxembedded.com/2014/02/09/inter-integrated-circuits-i2c-basics/" class="jp-relatedposts-post-a"><img class="jp-relatedposts-post-img" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/i2c-basics-featured.png" alt="Inter-Integrated Circuits - I2C Basics" width="350"></a><h4 class="jp-relatedposts-post-title"><a sl-processed="1" data-position="1" data-origin="1770" rel="nofollow" title="Inter-Integrated Circuits - I2C Basics
+
+Hello folks, it's time for I2C! Currently, related to&nbsp;Serial Communication, maxEmbedded features RS232 and SPI communication. It's time to move beyond! In this post, we will discuss all the theoretical&amp;hellip;" href="http://maxembedded.com/2014/02/09/inter-integrated-circuits-i2c-basics/" class="jp-relatedposts-post-a">Inter-Integrated Circuits - I2C Basics</a></h4><p class="jp-relatedposts-post-excerpt">Hello
+ folks, it's time for I2C! Currently, related to&nbsp;Serial 
+Communication, maxEmbedded features RS232 and SPI communication. It's 
+time to move beyond! In this post, we will discuss all the theoretical…</p><p class="jp-relatedposts-post-context">In "Atmel AVR"</p></div><div class="jp-relatedposts-post jp-relatedposts-post2 jp-relatedposts-post-thumbs" data-post-id="75" data-post-format="false"><a sl-processed="1" data-position="2" data-origin="1770" rel="nofollow" title="AVR Basics
+
+Hello everyone! From now on, we will be working with AVR microcontrollers. I hope you have an AVR MCU development board and an ISP with you. And I also assume&amp;hellip;" href="http://maxembedded.com/2011/06/09/avr-basics/" class="jp-relatedposts-post-a"><img class="jp-relatedposts-post-img" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/avr1.png" alt="AVR Basics" width="350"></a><h4 class="jp-relatedposts-post-title"><a sl-processed="1" data-position="2" data-origin="1770" rel="nofollow" title="AVR Basics
+
+Hello everyone! From now on, we will be working with AVR microcontrollers. I hope you have an AVR MCU development board and an ISP with you. And I also assume&amp;hellip;" href="http://maxembedded.com/2011/06/09/avr-basics/" class="jp-relatedposts-post-a">AVR Basics</a></h4><p class="jp-relatedposts-post-excerpt">Hello
+ everyone! From now on, we will be working with AVR microcontrollers. I 
+hope you have an AVR MCU development board and an ISP with you. And I 
+also assume…</p><p class="jp-relatedposts-post-context">In "Atmel AVR"</p></div></div></div></div>			</div><!-- .entry-content -->
+
+			<footer class="entry-meta">
+			Tags: <a sl-processed="1" href="http://maxembedded.com/tag/avr-tutorial/" rel="tag">avr tutorial</a>, <a sl-processed="1" href="http://maxembedded.com/tag/avrisp/" rel="tag">avrisp</a>, <a sl-processed="1" href="http://maxembedded.com/tag/clock-phase/" rel="tag">clock phase</a>, <a sl-processed="1" href="http://maxembedded.com/tag/clock-polarity/" rel="tag">clock polarity</a>, <a sl-processed="1" href="http://maxembedded.com/tag/cpha/" rel="tag">cpha</a>, <a sl-processed="1" href="http://maxembedded.com/tag/cpol/" rel="tag">cpol</a>, <a sl-processed="1" href="http://maxembedded.com/tag/master/" rel="tag">master</a>, <a sl-processed="1" href="http://maxembedded.com/tag/miso/" rel="tag">miso</a>, <a sl-processed="1" href="http://maxembedded.com/tag/mosi/" rel="tag">mosi</a>, <a sl-processed="1" href="http://maxembedded.com/tag/sck/" rel="tag">sck</a>, <a sl-processed="1" href="http://maxembedded.com/tag/sclk/" rel="tag">sclk</a>, <a sl-processed="1" href="http://maxembedded.com/tag/serial-communication/" rel="tag">serial communication</a>, <a sl-processed="1" href="http://maxembedded.com/tag/serial-peripheral-interface/" rel="tag">serial peripheral interface</a>, <a sl-processed="1" href="http://maxembedded.com/tag/slave/" rel="tag">slave</a>, <a sl-processed="1" href="http://maxembedded.com/tag/slave-select/" rel="tag">slave select</a>, <a sl-processed="1" href="http://maxembedded.com/tag/spi/" rel="tag">spi</a>, <a sl-processed="1" href="http://maxembedded.com/tag/spi-bus-interface/" rel="tag">spi bus interface</a>, <a sl-processed="1" href="http://maxembedded.com/tag/spi-bus-transaction/" rel="tag">spi bus transaction</a>, <a sl-processed="1" href="http://maxembedded.com/tag/ss/" rel="tag">ss</a>		</footer><!-- .entry-meta -->
+	</article><!-- #post-1770 -->
+
+				
+	<div id="sidebar-after-singular" class="widget-area" role="complementary">
+
+		<aside id="blog_subscription-4" class="widget widget_blog_subscription"><h1 class="widgettitle"><label for="subscribe-field">Follow maxEmbedded via Email</label></h1>
+			<form action="https://subscribe.wordpress.com" method="post" accept-charset="utf-8" id="subscribe-blog">
+									<p>Enter your email address to follow this website and receive notifications of new posts by email.</p>
+<p>Join 2,368 other followers</p>
+					<p><input name="email" style="width: 95%; padding: 1px 2px" id="subscribe-field" type="text"></p>
+				
+				<p>
+					<input name="action" value="subscribe" type="hidden">
+					<input name="blog_id" value="23748969" type="hidden">
+					<input name="source" value="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/" type="hidden">
+					<input name="sub-type" value="widget" type="hidden">
+					<input name="redirect_fragment" value="blog_subscription-4" type="hidden">
+					<input id="_wpnonce" name="_wpnonce" value="2c76d43c8e" type="hidden">					<input value="Follow maxEmbedded" type="submit">
+				</p>
+			</form>
+			
+</aside>
+	</div><!-- #sidebar-after-singular -->
+
+
+					<nav role="navigation" id="nav-below" class="site-navigation post-navigation clear-fix">
+		<h1 class="assistive-text">Post navigation</h1>
+
+	
+		<div class="nav-previous"><a sl-processed="1" href="http://maxembedded.com/2013/10/03/msp-at-a-glance/" rel="prev"><span class="meta-nav">←</span> MSP at a Glance</a></div>		<div class="nav-next"><a sl-processed="1" href="http://maxembedded.com/2013/11/26/the-spi-of-the-avr/" rel="next">The SPI of the AVR <span class="meta-nav">→</span></a></div>
+	
+	</nav><!-- #nav-below -->
+	
+				
+	
+	<div id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			6 responses to “<span>Serial Peripheral Interface – SPI Basics</span>”		</h2>
+
+		<ol class="commentlist">
+				<li class="post pingback">
+		<p>Pingback: <a sl-processed="1" href="http://maxembedded.com/2013/11/26/the-spi-of-the-avr/" rel="external nofollow" class="url">The SPI of the AVR | maxEmbedded</a><span class="sep">·</span></p>
+	</li><!-- #comment-## -->
+	<li class="post pingback">
+		<p>Pingback: <a sl-processed="1" href="http://maxembedded.com/2014/02/09/inter-integrated-circuit-i2c-basics/" rel="external nofollow" class="url">Inter-Integrated Circuit – I2C Basics | maxEmbedded</a><span class="sep">·</span></p>
+	</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1 highlander-comment" id="li-comment-9019">
+		<article id="comment-9019" class="comment">
+			<footer>
+				<div class="comment-meta commentmetadata">
+					<img id="grav-16264f3323b480182d3379c29c2787e9-0" alt="" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/16264f3323b480182d3379c29c2787e9.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">
+					<span class="comment-author vcard">
+						<cite class="fn">sarvesh</cite>					</span>
+
+					<a sl-processed="1" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/comment-page-1/#comment-9019" class="comment-date"><time pubdate="" datetime="2014-02-10T23:08:19+00:00">February 10, 2014 at 11:08 pm</time></a>
+					<span class="sep">·</span>
+										<span class="sep">·</span>
+					<a sl-processed="1" class="comment-reply-link" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/?replytocom=9019#respond" onclick='return addComment.moveForm("comment-9019", "9019", "respond", "1770")'>Reply</a> →				</div><!-- .comment-meta .commentmetadata -->
+							</footer>
+			<div class="comment-content"><p>g88888</p>
+</div>
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-maxmiaggi bypostauthor odd alt depth-2 highlander-comment" id="li-comment-9022">
+		<article id="comment-9022" class="comment">
+			<footer>
+				<div class="comment-meta commentmetadata">
+					<img id="grav-861cb6ee77e733ee31a32ffa329ed89f-0" alt="" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/861cb6ee77e733ee31a32ffa329ed89f.jpg" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">
+					<span class="comment-author vcard">
+						<cite class="fn"><a sl-processed="1" href="http://maxembedded.com/" rel="external nofollow" class="url">Mayank (Max)</a></cite>					</span>
+
+					<a sl-processed="1" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/comment-page-1/#comment-9022" class="comment-date"><time pubdate="" datetime="2014-02-11T03:41:54+00:00">February 11, 2014 at 3:41 am</time></a>
+					<span class="sep">·</span>
+										<span class="sep">·</span>
+					<a sl-processed="1" class="comment-reply-link" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/?replytocom=9022#respond" onclick='return addComment.moveForm("comment-9022", "9022", "respond", "1770")'>Reply</a> →				</div><!-- .comment-meta .commentmetadata -->
+							</footer>
+			<div class="comment-content"><p> <span class="wp-smiley emoji emoji-smile" title=":)">:)</span></p>
+</div>
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1 highlander-comment" id="li-comment-9748">
+		<article id="comment-9748" class="comment">
+			<footer>
+				<div class="comment-meta commentmetadata">
+					<img id="grav-af5b28a01146ec369ec88a2e9b8bfca9-0" alt="" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/af5b28a01146ec369ec88a2e9b8bfca9.png" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">
+					<span class="comment-author vcard">
+						<cite class="fn">G. M. Shahadat Hossain</cite>					</span>
+
+					<a sl-processed="1" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/comment-page-1/#comment-9748" class="comment-date"><time pubdate="" datetime="2014-04-05T20:42:58+00:00">April 5, 2014 at 8:42 pm</time></a>
+					<span class="sep">·</span>
+										<span class="sep">·</span>
+					<a sl-processed="1" class="comment-reply-link" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/?replytocom=9748#respond" onclick='return addComment.moveForm("comment-9748", "9748", "respond", "1770")'>Reply</a> →				</div><!-- .comment-meta .commentmetadata -->
+							</footer>
+			<div class="comment-content"><p>I want to setting menu so that i can set the temperature . How is it possible?</p>
+</div>
+		</article><!-- #comment-## -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-maxmiaggi bypostauthor odd alt depth-2 highlander-comment" id="li-comment-9755">
+		<article id="comment-9755" class="comment">
+			<footer>
+				<div class="comment-meta commentmetadata">
+					<img id="grav-861cb6ee77e733ee31a32ffa329ed89f-1" alt="" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/861cb6ee77e733ee31a32ffa329ed89f.jpg" class="avatar avatar-40 grav-hashed grav-hijack" height="40" width="40">
+					<span class="comment-author vcard">
+						<cite class="fn"><a sl-processed="1" href="http://maxembedded.com/" rel="external nofollow" class="url">Max</a></cite>					</span>
+
+					<a sl-processed="1" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/comment-page-1/#comment-9755" class="comment-date"><time pubdate="" datetime="2014-04-06T09:57:08+00:00">April 6, 2014 at 9:57 am</time></a>
+					<span class="sep">·</span>
+										<span class="sep">·</span>
+					<a sl-processed="1" class="comment-reply-link" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/?replytocom=9755#respond" onclick='return addComment.moveForm("comment-9755", "9755", "respond", "1770")'>Reply</a> →				</div><!-- .comment-meta .commentmetadata -->
+							</footer>
+			<div class="comment-content"><p>I don’t know what you’re talking about. Please elaborate. Thanks.</p>
+</div>
+		</article><!-- #comment-## -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		</ol>
+
+		
+	
+	
+									<div id="respond" class="comment-respond js">
+				<h3 id="reply-title" class="comment-reply-title">We'd love to hear from you! <small><a sl-processed="1" rel="nofollow" id="cancel-comment-reply-link" href="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://maxembedded.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																										
+
+
+												<input id="highlander_comment_nonce" name="highlander_comment_nonce" value="fbc7d38c19" type="hidden"><input name="_wp_http_referer" value="/2013/11/10/serial-peripheral-interface-spi-basics/" type="hidden">
+<input name="hc_post_as" id="hc_post_as" value="guest" type="hidden">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea class="autosizejs " tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px none; padding: 0px; -moz-box-sizing: content-box; word-wrap: break-word; height: 0px ! important; min-height: 0px ! important; overflow: hidden; transition: none 0s ease 0s ; font-family: Arial,Helvetica,Tahoma,Verdana,sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none; word-spacing: 0px; text-indent: 0px; line-height: 24.5px; width: 448px;">Enter your comment here...</textarea><textarea style="height: 45px; overflow: hidden; word-wrap: break-word; resize: none;" placeholder="Enter your comment here..." id="comment" name="comment" title="Enter your comment here..."></textarea></div>
+</div>
+
+<div style="display: none;" id="comment-form-identity">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a sl-processed="1" href="#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a sl-processed="1" href="#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a sl-processed="1" href="#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a sl-processed="1" href="#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+		</li></ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a sl-processed="1" href="https://gravatar.com/site/signup/" target="_blank">				<img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Gravatar" class="no-grav" width="25">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email"></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text"></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="text"></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/wplogo.png" alt="WordPress.com Logo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" type="hidden">
+				<input name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" type="hidden">
+				<input name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" type="hidden">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your <span class="skimlinks-unlinked">WordPress.com</span> account. <span class="comment-form-log-out">(&nbsp;<a sl-processed="1" href="javascript:HighlanderComments.doExternalLogout(%20'wordpress'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a sl-processed="1" href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Twitter picture" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" type="hidden">
+				<input name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" type="hidden">
+				<input name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" type="hidden">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a sl-processed="1" href="javascript:HighlanderComments.doExternalLogout(%20'twitter'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a sl-processed="1" href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Facebook photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" type="hidden">
+				<input name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" type="hidden">
+				<input name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" type="hidden">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a sl-processed="1" href="javascript:HighlanderComments.doExternalLogout(%20'facebook'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a sl-processed="1" href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Google+ photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="" type="hidden">
+				<input name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="" type="hidden">
+				<input name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="" type="hidden">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a sl-processed="1" href="javascript:HighlanderComments.doExternalLogout(%20'googleplus'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a sl-processed="1" href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a sl-processed="1" href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+	
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div style="display: none;" id="comment-form-subscribe">
+	<p class="comment-subscription-form"><input name="subscribe" id="subscribe" value="subscribe" style="width: auto;" tabindex="6" type="checkbox"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of follow-up comments via email.</label></p><p class="post-subscription-form"><input name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto;" tabindex="7" type="checkbox"> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog" style="display: inline;">Notify me of new posts via email.</label></p></div>
+
+												<p style="display: none;" class="form-submit">
+							<input name="submit" id="comment-submit" value="Post Comment" type="submit">
+							<input name="comment_post_ID" value="1770" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+						</p>
+						<p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="0555893c39" type="hidden"></p>
+<input name="genseq" value="1398060982" type="hidden">
+<script type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/form.js"></script>
+<p style="display: none;"></p>					<input id="ak_js" name="ak_js" value="1398061063601" type="hidden"></form>
+							</div><!-- #respond -->
+			<div style="clear: both"></div>
+</div><!-- #comments .comments-area -->
+			
+			</div><!-- #content -->
+		</div><!-- #primary .site-content -->
+
+<div id="secondary" class="clear-fix" role="complementary">
+
+
+	<nav role="navigation" class="site-navigation menu-secondary">
+		<div class="menu-side-menu-container"><ul id="menu-side-menu" class="menu"><li id="menu-item-898" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-898"><a sl-processed="1" href="http://maxembedded.com/category/introduction/">Introduction</a></li>
+<li id="menu-item-899" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-899"><a sl-processed="1" href="http://maxembedded.com/category/robotics-2/">Robotics</a></li>
+<li id="menu-item-900" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-900"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/">Microcontrollers</a></li>
+<li id="menu-item-901" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-901"><a sl-processed="1" href="http://maxembedded.com/category/electronics/">Electronics</a></li>
+<li id="menu-item-902" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-902"><a sl-processed="1" href="http://maxembedded.com/category/computer-vision/">Computer Vision</a></li>
+<li id="menu-item-1759" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1759"><a sl-processed="1" href="http://maxembedded.com/category/single-board-computers/">Single Board Computers</a></li>
+<li id="menu-item-906" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-906"><a sl-processed="1" href="http://maxembedded.com/blogroll/">Blogroll</a></li>
+<li id="menu-item-3081" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3081"><a sl-processed="1" href="http://maxembedded.com/tools/">Tools</a></li>
+</ul></div>	</nav><!-- .menu-secondary -->
+
+
+	<div class="widget-area" role="complementary">
+
+	
+	<aside id="categories-3" class="widget widget_categories"><h1 class="widgettitle">Categories</h1>		<ul>
+	<li class="cat-item cat-item-76379"><a sl-processed="1" href="http://maxembedded.com/category/computer-vision/" title="View all posts filed under Computer Vision">Computer Vision</a>
+</li>
+	<li class="cat-item cat-item-18805513"><a sl-processed="1" href="http://maxembedded.com/category/e-linux/" title="View all posts filed under e-Linux">e-Linux</a>
+</li>
+	<li class="cat-item cat-item-7334"><a sl-processed="1" href="http://maxembedded.com/category/electronics/" title="View all posts filed under Electronics">Electronics</a>
+</li>
+	<li class="cat-item cat-item-885"><a sl-processed="1" href="http://maxembedded.com/category/introduction/" title="View all posts filed under Introduction">Introduction</a>
+</li>
+	<li class="cat-item cat-item-35834538"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/" title="View all posts filed under Microcontrollers">Microcontrollers</a>
+<ul class="children">
+	<li class="cat-item cat-item-6706146"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/" title="View all posts filed under Atmel AVR">Atmel AVR</a>
+	<ul class="children">
+	<li class="cat-item cat-item-62305016"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/avr-adc/" title="View all posts filed under AVR ADC">AVR ADC</a>
+</li>
+	<li class="cat-item cat-item-62304990"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/avr-basics/" title="View all posts filed under AVR Basics">AVR Basics</a>
+</li>
+	<li class="cat-item cat-item-213017164"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/avr-i2c/" title="View all posts filed under AVR I2C">AVR I2C</a>
+</li>
+	<li class="cat-item cat-item-200477366"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/avr-spi/" title="View all posts filed under AVR SPI">AVR SPI</a>
+</li>
+	<li class="cat-item cat-item-62305048"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/avr-timers-atmel-avr/" title="View all posts filed under AVR Timers">AVR Timers</a>
+</li>
+	<li class="cat-item cat-item-74188089"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/atmel-avr/avr-usart/" title="View all posts filed under AVR USART">AVR USART</a>
+</li>
+	</ul>
+</li>
+	<li class="cat-item cat-item-58414931"><a sl-processed="1" href="http://maxembedded.com/category/microcontrollers-2/getting-started-with-microcontrollers/" title="View all posts filed under Getting Started with Microcontrollers">Getting Started with Microcontrollers</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-303432"><a sl-processed="1" href="http://maxembedded.com/category/msp430/" title="View all posts filed under MSP430">MSP430</a>
+</li>
+	<li class="cat-item cat-item-9659"><a sl-processed="1" href="http://maxembedded.com/category/offbeat/" title="View all posts filed under Offbeat">Offbeat</a>
+</li>
+	<li class="cat-item cat-item-34971367"><a sl-processed="1" href="http://maxembedded.com/category/robotics-2/" title="View all posts filed under Robotics">Robotics</a>
+</li>
+	<li class="cat-item cat-item-3245763"><a sl-processed="1" href="http://maxembedded.com/category/single-board-computers/" title="View all posts filed under Single Board Computers">Single Board Computers</a>
+<ul class="children">
+	<li class="cat-item cat-item-163936668"><a sl-processed="1" href="http://maxembedded.com/category/single-board-computers/beaglebone-black/" title="View all posts filed under BeagleBone Black">BeagleBone Black</a>
+</li>
+	<li class="cat-item cat-item-49695267"><a sl-processed="1" href="http://maxembedded.com/category/single-board-computers/raspberry-pi/" title="View all posts filed under Raspberry Pi">Raspberry Pi</a>
+</li>
+</ul>
+</li>
+		</ul>
+</aside><aside id="archives-3" class="widget widget_archive"><h1 class="widgettitle">Archives</h1>		<ul>
+	<li><a sl-processed="1" href="http://maxembedded.com/2014/02/">February 2014</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2013/12/">December 2013</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2013/11/">November 2013</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2013/10/">October 2013</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2013/09/">September 2013</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2013/08/">August 2013</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2013/07/">July 2013</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2013/06/">June 2013</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2013/02/">February 2013</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2013/01/">January 2013</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2012/12/">December 2012</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2012/06/">June 2012</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2012/01/">January 2012</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2011/09/">September 2011</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2011/08/">August 2011</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2011/07/">July 2011</a></li>
+	<li><a sl-processed="1" href="http://maxembedded.com/2011/06/">June 2011</a></li>
+		</ul>
+</aside><aside id="wp_tag_cloud-2" class="widget wp_widget_tag_cloud"><h1 class="widgettitle">Tags</h1><div style="overflow:hidden"><a sl-processed="1" href="http://maxembedded.com/tag/adc/" class="tag-link-19484" title="3 topics" style="font-size: 9.8666666666667pt;">adc</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/applications/" class="tag-link-357" title="3 topics" style="font-size: 9.8666666666667pt;">applications</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/atmega16/" class="tag-link-18799979" title="7 topics" style="font-size: 14.533333333333pt;">atmega16</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/atmega32/" class="tag-link-10152876" title="9 topics" style="font-size: 16.088888888889pt;">atmega32</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/atmel/" class="tag-link-294049" title="5 topics" style="font-size: 12.666666666667pt;">atmel</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/avr-2/" class="tag-link-38819914" title="20 topics" style="font-size: 21.066666666667pt;">avr</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/avrdude/" class="tag-link-13320458" title="3 topics" style="font-size: 9.8666666666667pt;">avrdude</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/avr-studio/" class="tag-link-9013336" title="2 topics" style="font-size: 8pt;">avr studio</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/avr-studio-5/" class="tag-link-52966065" title="3 topics" style="font-size: 9.8666666666667pt;">avr studio 5</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/avr-timers/" class="tag-link-59402674" title="4 topics" style="font-size: 11.422222222222pt;">avr timers</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/avr-tutorial/" class="tag-link-2563805" title="23 topics" style="font-size: 22pt;">avr tutorial</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/computer-vision-2/" class="tag-link-36435491" title="3 topics" style="font-size: 9.8666666666667pt;">computer vision</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/db9/" class="tag-link-434744" title="2 topics" style="font-size: 8pt;">db9</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/db25/" class="tag-link-14495769" title="2 topics" style="font-size: 8pt;">db25</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/freeisp/" class="tag-link-58575255" title="3 topics" style="font-size: 9.8666666666667pt;">freeISP</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/global-interrupts/" class="tag-link-59552124" title="3 topics" style="font-size: 9.8666666666667pt;">global interrupts</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/interrupt/" class="tag-link-461221" title="5 topics" style="font-size: 12.666666666667pt;">interrupt</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/interrupt-service-routine/" class="tag-link-2869521" title="3 topics" style="font-size: 9.8666666666667pt;">interrupt service routine</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/isp/" class="tag-link-11168" title="2 topics" style="font-size: 8pt;">ISP</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/isr/" class="tag-link-98902" title="4 topics" style="font-size: 11.422222222222pt;">ISR</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/linux/" class="tag-link-610" title="2 topics" style="font-size: 8pt;">linux</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/master/" class="tag-link-81438" title="3 topics" style="font-size: 9.8666666666667pt;">master</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/mcu/" class="tag-link-577780" title="5 topics" style="font-size: 12.666666666667pt;">mcu</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/microchip/" class="tag-link-468834" title="2 topics" style="font-size: 8pt;">microchip</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/microcontroller/" class="tag-link-320213" title="4 topics" style="font-size: 11.422222222222pt;">microcontroller</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/microcontrollers/" class="tag-link-139916" title="3 topics" style="font-size: 9.8666666666667pt;">microcontrollers</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/parallel/" class="tag-link-327612" title="2 topics" style="font-size: 8pt;">parallel</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/pc/" class="tag-link-2607" title="3 topics" style="font-size: 9.8666666666667pt;">pc</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/pin/" class="tag-link-264723" title="2 topics" style="font-size: 8pt;">pin</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/port/" class="tag-link-39250" title="2 topics" style="font-size: 8pt;">port</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/prescaler/" class="tag-link-25654527" title="5 topics" style="font-size: 12.666666666667pt;">prescaler</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/pwm/" class="tag-link-679596" title="3 topics" style="font-size: 9.8666666666667pt;">pwm</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/registers/" class="tag-link-1727050" title="5 topics" style="font-size: 12.666666666667pt;">registers</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/robot/" class="tag-link-90436" title="2 topics" style="font-size: 8pt;">robot</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/robotics/" class="tag-link-13426" title="4 topics" style="font-size: 11.422222222222pt;">robotics</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/sensors/" class="tag-link-53308" title="3 topics" style="font-size: 9.8666666666667pt;">sensors</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/serial/" class="tag-link-41899" title="5 topics" style="font-size: 12.666666666667pt;">Serial</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/serial-communication/" class="tag-link-5259391" title="6 topics" style="font-size: 13.755555555556pt;">serial communication</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/slave/" class="tag-link-18940" title="3 topics" style="font-size: 9.8666666666667pt;">slave</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/spi/" class="tag-link-402202" title="4 topics" style="font-size: 11.422222222222pt;">spi</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/tifr/" class="tag-link-2460633" title="3 topics" style="font-size: 9.8666666666667pt;">tifr</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/timer0/" class="tag-link-21606992" title="5 topics" style="font-size: 12.666666666667pt;">timer0</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/timer1/" class="tag-link-2452221" title="4 topics" style="font-size: 11.422222222222pt;">timer1</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/timer2/" class="tag-link-21606993" title="4 topics" style="font-size: 11.422222222222pt;">timer2</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/timers/" class="tag-link-1035109" title="5 topics" style="font-size: 12.666666666667pt;">timers</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/timsk/" class="tag-link-59745734" title="3 topics" style="font-size: 9.8666666666667pt;">timsk</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/twi/" class="tag-link-92249" title="2 topics" style="font-size: 8pt;">twi</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/uart/" class="tag-link-4497883" title="4 topics" style="font-size: 11.422222222222pt;">uart</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/usart/" class="tag-link-6426602" title="4 topics" style="font-size: 11.422222222222pt;">usart</a>
+<a sl-processed="1" href="http://maxembedded.com/tag/usb/" class="tag-link-57231" title="4 topics" style="font-size: 11.422222222222pt;">USB</a></div></aside><aside id="twitter-3" class="widget widget_twitter"><h1 class="widgettitle"><a sl-processed="1" href="http://twitter.com/maxEmbedded">Twitter Updates</a></h1><ul class="tweets">
+			<li>
+				I/O Port Operations in&nbsp;MSP430 <a sl-processed="1" href="http://wp.me/p1BEbT-zK"> wp.me/p1BEbT-zK</a> 				<a sl-processed="1" href="http://twitter.com/maxEmbedded/statuses/444955668751974400" class="timesince">1&nbsp;month&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				maxEmbedded gets featured as "Site of the Day" on <a sl-processed="1" href="http://www.insidetechknow.com/"> insidetechknow.com</a> View the directory listing here: <a sl-processed="1" href="http://www.insidetechknow.com/maxembedded/"> insidetechknow.com/maxembedded/</a> 				<a sl-processed="1" href="http://twitter.com/maxEmbedded/statuses/433036283292561408" class="timesince">2&nbsp;months&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				Inter-Integrated Circuit - I2C Basics <a sl-processed="1" href="http://wp.me/p1BEbT-LW"> wp.me/p1BEbT-LW</a> 				<a sl-processed="1" href="http://twitter.com/maxEmbedded/statuses/432408968451727362" class="timesince">2&nbsp;months&nbsp;ago</a>
+			</li>
+
+			</ul><iframe style="width: 156px; height: 20px;" data-twttr-rendered="true" title="Twitter Follow Button" class="twitter-follow-button twitter-follow-button" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/follow_button.htm" allowtransparency="true" id="twitter-widget-0" frameborder="0" scrolling="no"></iframe></aside><aside id="blog-stats-2" class="widget widget_blog-stats"><h1 class="widgettitle">Site Stats</h1>		<ul>
+			<li>727,727 hits</li>
+		</ul>
+		</aside>
+	</div><!-- .widget-area -->
+
+</div><!-- #secondary --><div id="tertiary" class="widget-area" role="complementary">
+
+	
+	<aside id="search-3" class="widget widget_search">	<form method="get" id="searchform" action="http://maxembedded.com/" role="search">
+		<label for="s" class="assistive-text">Search</label>
+		<input class="field" name="s" id="s" placeholder="Search …" type="text">
+		<input class="submit" name="submit" id="searchsubmit" value="Search" type="submit">
+	</form></aside><style type="text/css">
+#am_thumbnail a {
+text-decoration: none;
+border: none;
+}
+#am_thumbnail img {
+text-decoration: none;
+border: 1px solid #999;
+max-width: 99%;
+}
+#am_name {
+margin-top: 5px;
+margin-bottom: 3px;
+}
+#am_headline {
+margin-bottom: 5px;
+}
+#am_bio {
+margin-bottom: 15px;
+}
+#am_bio p {
+margin-bottom: 5px;
+}
+#am_bio p:last-child {
+margin-bottom: 0px;
+}
+#am_services {
+margin-right: -5px;
+}
+#am_services a.am_service_icon {
+margin-right: 4px;
+text-decoration: none;
+border: none;
+}
+#am_services a.am_service_icon:hover {
+text-decoration: none;
+border: none;
+}
+#am_services a.am_service_icon img {
+border: none;
+margin-bottom: 4px;
+}
+</style>
+<aside id="aboutme_widget-2" class="widget aboutme_widget"><h1 class="widgettitle">About Me</h1><div id="am_thumbnail"><a sl-processed="1" href="http://about.me/mayankprasad" target="_blank" rel="me"><img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/mayankprasad_1355654043_73.jpg" alt="Mayank (Max) Prasad"></a></div><h2 id="am_name"><a sl-processed="1" href="http://about.me/mayankprasad" style="font-size:large;" target="_blank" rel="me">Mayank (Max) Prasad</a></h2><h3 id="am_headline">Creator of maxEmbedded</h3><div id="am_bio"><p>Mayank
+ (aka Max) is the founder of maxEmbedded, an open source platform to 
+share knowledge in the domains of embedded systems, robotics and 
+computer vision. He describes himself as an 'embedded electronics freak'
+ and an Apple/Linux fan. He likes to experiment, learn and share new 
+things in this field.</p><p>His interest lies in the fields of real-time
+ embedded systems, computer architecture, computer vision, digital 
+systems and VLSI. He likes to write stuffs on his website for techie 
+newbies and loves to teach others. In his spare time, you will find him 
+with his iPod.</p></div><div id="am_services"><a sl-processed="1" href="http://maxembedded.com/" target="_blank" class="am_service_icon" rel="me"><img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/32x32_003.png"></a><a sl-processed="1" href="http://www.linkedin.com/pub/mayank-prasad/38/690/9a5" target="_blank" class="am_service_icon" rel="me"><img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/32x32.png"></a><a sl-processed="1" href="http://www.twitter.com/maxnmiaggi" target="_blank" class="am_service_icon" rel="me"><img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/32x32_004.png"></a><a sl-processed="1" href="http://www.facebook.com/maxnmiaggi" target="_blank" class="am_service_icon" rel="me"><img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/32x32_005.png"></a><a sl-processed="1" href="https://www.facebook.com/maxEmbedded" target="_blank" class="am_service_icon" rel="me"><img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/32x32_002.png"></a></div></aside><aside id="text-7" class="widget widget_text">			<div class="textwidget"><a sl-processed="1" href="http://www.linkedin.com/in/prasadmayank">
+      
+          <img src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/btn_myprofile_160x33.png" alt="View Mayank Prasad's profile on LinkedIn" border="0" height="33" width="160">
+        
+    </a></div>
+		</aside><aside id="facebook-likebox-3" class="widget widget_facebook_likebox"><iframe src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/likebox.xht" style="border: none; overflow: hidden; width: 300px;  height: 416px; background: #fff" frameborder="0" scrolling="no"></iframe></aside><aside id="blog_subscription-3" class="widget widget_blog_subscription"><h1 class="widgettitle"><label for="subscribe-field-2">Email Subscription</label></h1>
+			<form action="https://subscribe.wordpress.com" method="post" accept-charset="utf-8" id="subscribe-blog-2">
+									<p>Enter your email address to subscribe to maxEmbedded and receive notifications of new posts by email.</p>
+<p>Join 2,368 other followers</p>
+					<p><input name="email" style="width: 95%; padding: 1px 2px" id="subscribe-field-2" type="text"></p>
+				
+				<p>
+					<input name="action" value="subscribe" type="hidden">
+					<input name="blog_id" value="23748969" type="hidden">
+					<input name="source" value="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/" type="hidden">
+					<input name="sub-type" value="widget" type="hidden">
+					<input name="redirect_fragment" value="blog_subscription-3" type="hidden">
+					<input id="_wpnonce" name="_wpnonce" value="2c76d43c8e" type="hidden">					<input value="Subscribe Me!" type="submit">
+				</p>
+			</form>
+			
+</aside><aside id="rss_links-4" class="widget widget_rss_links"><h1 class="widgettitle">RSS</h1><ul><li><a sl-processed="1" href="http://maxembedded.com/feed/" title="Subscribe to Posts">RSS - Posts</a></li><li><a sl-processed="1" href="http://maxembedded.com/comments/feed/" title="Subscribe to Comments">RSS - Comments</a></li></ul>
+</aside><aside id="nav_menu-3" class="widget widget_nav_menu"><h1 class="widgettitle">Login</h1><div class="menu-login-container"><ul id="menu-login" class="menu"><li id="menu-item-1164" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1164"><a sl-processed="1" href="http://maxembedded.com/wp-admin">Site Login</a></li>
+<li id="menu-item-1165" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1165"><a sl-processed="1" href="https://mail.zoho.com/portal/maxembedded">Email Login</a></li>
+</ul></div></aside><aside id="text-6" class="widget widget_text"><h1 class="widgettitle">24×7 Contact Info</h1>			<div class="textwidget"><p>support@maxEmbedded.com<br>
++91-978-978-0342 (India)<br>
++1-480-878-9227 (US)</p>
+</div>
+		</aside>
+</div><!-- #secondary .widget-area -->
+	</div><!-- #main -->
+
+	<div id="supplementary" class="clear-fix three">
+		<div id="footer-sidebar-one" class="widget-area" role="complementary">
+		<aside id="text-4" class="widget widget_text"><h1 class="widgettitle">Copyright</h1>			<div class="textwidget"><p><a sl-processed="1" rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0;" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/88x31.png"></a><br><span>maxEmbedded</span> by <a sl-processed="1" href="http://maxembedded.com/" rel="cc:attributionURL">Mayank Prasad</a> is licensed under a <a sl-processed="1" rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License</a>.</p>
+<p>The round mE logo is a copyright of maxEmbedded and has been designed by Qiudi Zhang of <a sl-processed="1" href="http://qzeeprints.tumblr.com/">qzee.prints</a>.</p>
+<p>© Copyright maxEmbedded 2011-2014</p>
+</div>
+		</aside>	</div><!-- #first .widget-area -->
+	
+		<div id="footer-sidebar-two" class="widget-area" role="complementary">
+		<aside id="top-posts-3" class="widget widget_top-posts"><h1 class="widgettitle">Top Posts &amp; Pages</h1><ul><li><a sl-processed="1" href="http://maxembedded.com/2011/06/20/the-adc-of-the-avr/" class="bump-view" data-bump-view="tp">The ADC of the AVR</a></li>
+<li><a sl-processed="1" href="http://maxembedded.com/2013/08/04/how-to-build-an-ir-sensor/" class="bump-view" data-bump-view="tp">How to build an IR Sensor</a></li>
+<li><a sl-processed="1" href="http://maxembedded.com/2011/06/24/avr-timers-timer0-2/" class="bump-view" data-bump-view="tp">AVR Timers - TIMER0</a></li>
+<li><a sl-processed="1" href="http://maxembedded.com/2011/06/10/port-operations-in-avr/" class="bump-view" data-bump-view="tp">I/O Port Operations in AVR</a></li>
+<li><a sl-processed="1" href="http://maxembedded.com/2013/11/26/the-spi-of-the-avr/" class="bump-view" data-bump-view="tp">The SPI of the AVR</a></li>
+<li><a sl-processed="1" href="http://maxembedded.com/2013/09/30/the-usart-of-the-avr/" class="bump-view" data-bump-view="tp">The USART of the AVR</a></li>
+<li><a sl-processed="1" href="http://maxembedded.com/2012/06/25/using-atmel-studio-6/" class="bump-view" data-bump-view="tp">Using Atmel Studio 6</a></li>
+<li><a sl-processed="1" href="http://maxembedded.com/2012/01/07/avr-timers-pwm-mode-part-ii/" class="bump-view" data-bump-view="tp">AVR Timers - PWM Mode - Part II</a></li>
+</ul></aside>	</div><!-- #second .widget-area -->
+	
+		<div id="footer-sidebar-three" class="widget-area" role="complementary">
+		<aside id="text-5" class="widget widget_text"><h1 class="widgettitle">About</h1>			<div class="textwidget"><p>maxEmbedded
+ is an Open Source platform to share knowledge and learn about the 
+concepts of robotics, embedded electronics and computer vision. It is an
+ initiative by me to write about cool stuffs in these areas. If you have
+ any interesting topic to share with the world, do write to us!</p>
+<p>Mayank Prasad<br>
+Arizona State University<br>
+max@maxEmbedded.com</p>
+</div>
+		</aside>	</div><!-- #third .widget-area -->
+	
+	</div><!-- #supplementary -->
+	<footer id="colophon" class="site-footer clear-fix" role="contentinfo">
+		<div class="site-info">
+						<a sl-processed="1" href="http://wordpress.com/?ref=footer">Blog at WordPress.com</a>.
+			<span class="sep"> | </span>
+			<a sl-processed="1" href="http://theme.wordpress.com/themes/oxygen/" title="Learn more about this theme">The Oxygen Theme</a>.		</div><!-- .site-info -->
+					<nav class="menu-tertiary">
+				<div class="menu-bottom-menu-container"><ul id="menu-bottom-menu" class="menu"><li id="menu-item-996" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-996"><a sl-processed="1" href="http://maxembedded.com/index/">Home</a></li>
+<li id="menu-item-1004" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1004"><a sl-processed="1" href="http://maxembedded.com/copyright/">Copyright</a></li>
+<li id="menu-item-994" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-994"><a sl-processed="1" href="http://maxembedded.com/privacy-policy/">Privacy Policy</a></li>
+<li id="menu-item-1007" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1007"><a sl-processed="1" href="http://maxembedded.com/careers/">Careers</a></li>
+<li id="menu-item-995" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-995"><a sl-processed="1" href="http://maxembedded.com/contact/">Contact</a></li>
+</ul></div>			</nav><!-- #menu-subsidiary .menu-container -->
+			</footer><!-- .site-footer .site-footer -->
+</div><!-- #page .hfeed .site -->
+
+<script type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-16264f3323b480182d3379c29c2787e9">
+	</div>
+	<div class="grofile-hash-map-861cb6ee77e733ee31a32ffa329ed89f">
+	</div>
+	<div class="grofile-hash-map-af5b28a01146ec369ec88a2e9b8bfca9">
+	</div>
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"http:\/\/maxembedded.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"http:\/\/maxembedded.wordpress.com\/wp-login.php?action=logout&_wpnonce=91b2f01e09","homeURL":"http:\/\/maxembedded.com\/","postID":"1770","gravDefault":"wavatar","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"0"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/a_003.js"></script>
+
+	<div style="bottom: -272px;" id="bit" class="loggedout-follow-normal">
+		<a sl-processed="1" class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow</span></a>
+		<div id="bitsubscribe">
+
+					<h3><label for="loggedout-follow-field">Follow “maxEmbedded”</label></h3>
+
+			<form action="https://subscribe.wordpress.com" method="post" accept-charset="utf-8" id="loggedout-follow">
+			<p>Get every new post delivered to your Inbox.</p>
+
+			<p id="loggedout-follow-error" style="display: none;"></p>
+
+						<p class="bit-follow-count">Join 2,368 other followers</p>
+			<p><input name="email" value="Enter your email address" onfocus='this.value=(this.value=="Enter your email address") ? "" : this.value;' onblur='this.value=(this.value=="") ? "Enter email address" : this.value;' id="loggedout-follow-field" type="email"></p>
+
+			<input name="action" value="subscribe" type="hidden">
+			<input name="blog_id" value="23748969" type="hidden">
+			<input name="source" value="http://maxembedded.com/2013/11/10/serial-peripheral-interface-spi-basics/" type="hidden">
+			<input name="sub-type" value="loggedout-follow" type="hidden">
+
+			<input id="_wpnonce" name="_wpnonce" value="2c76d43c8e" type="hidden"><input name="_wp_http_referer" value="/2013/11/10/serial-peripheral-interface-spi-basics/" type="hidden">
+			<p id="bsub-subscribe-button"><input value="Sign me up" type="submit"></p>
+			</form>
+					<div id="bsub-credit"><a sl-processed="1" href="http://wordpress.com/signup/?ref=lof">Powered by WordPress.com</a></div>
+		</div><!-- #bitsubscribe -->
+	</div><!-- #bit -->
+	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "maxembedded.wordpress.com";
+	</script>
+	<script type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/725X1342.js"></script>		<script type="text/javascript">
+		(function() {
+			var a, s = document.getElementsByTagName("script")[0];
+			a = document.createElement("script");
+			a.type = "text/javascript";
+			a.async = true;
+			a.src = "http://www.luminate.com/widget/syndicated/137fe395802/";
+			s.parentNode.insertBefore(a, s);
+		})();
+		</script><script type="text/javascript" charset="UTF-8" id="polldaddyRatings"><!--//--><![CDATA[//><!--
+PDRTJS_settings_4675792_post_1770={"id":4675792,"unique_id":"wp-post-1770","title":"Serial%20Peripheral%20Interface%20%26%238211%3B%20SPI%20Basics","permalink":"http:\/\/maxembedded.com\/2013\/11\/10\/serial-peripheral-interface-spi-basics\/","item_id":"_post_1770"}; if ( typeof PDRTJS_RATING !== 'undefined' ){if ( typeof PDRTJS_4675792_post_1770 == 'undefined' ){PDRTJS_4675792_post_1770 = new PDRTJS_RATING( PDRTJS_settings_4675792_post_1770 );}}
+//--><!]]></script><script type="text/javascript" charset="UTF-8" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/rating.js"></script>
+	<script type="text/javascript">
+		WPCOM_sharing_counts = {"http:\/\/maxembedded.com\/2013\/11\/10\/serial-peripheral-interface-spi-basics\/":1770}	</script>
+		<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+		});
+		</script>
+			<div id="sharing_email" style="display: none;">
+		<form action="/2013/11/10/serial-peripheral-interface-spi-basics/" method="post">
+			<label for="target_email">Send to Email Address</label>
+			<input name="target_email" id="target_email" type="email">
+
+			
+				<label for="source_name">Your Name</label>
+				<input name="source_name" id="source_name" type="text">
+
+				<label for="source_email">Your Email Address</label>
+				<input name="source_email" id="source_email" type="email">
+
+			
+			<div class="recaptcha" id="sharing_recaptcha"></div><input name="recaptcha_public_key" id="recaptcha_public_key" value="6LcYW8MSAAAAADBAuEH9yaPcF7lWh11Iq62ZKtoo" type="hidden">
+			<img style="float: right; display: none" class="loading" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/loading.gif" alt="loading" height="16" width="16">
+			<input value="Send Email" class="sharing_send" type="submit">
+			<a sl-processed="1" href="#cancel" class="sharing_cancel">Cancel</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post was not sent - check your email addresses!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Email check failed, please try again			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Sorry, your blog cannot share posts by email.			</div>
+		</form>
+	</div>
+		<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-linkedin' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-tumblr' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+		});
+		</script>
+							<script type="text/javascript">
+			jQuery(document).on('ready', function(){
+				jQuery('body').on('click', 'a.share-pinterest', function(e){
+					e.preventDefault();
+
+					// Load Pinterest Bookmarklet code
+					var s = document.createElement("script");
+					s.type = "text/javascript";
+					s.src = window.location.protocol + "//assets.pinterest.com/js/pinmarklet.js?r=" + ( Math.random() * 99999999 );
+					var x = document.getElementsByTagName("script")[0];
+					x.parentNode.insertBefore(s, x);
+
+					// Trigger Stats
+					var s = document.createElement("script");
+					s.type = "text/javascript";
+					s.src = this + ( this.toString().indexOf( '?' ) ? '&' : '?' ) + 'js_only=1';
+					var x = document.getElementsByTagName("script")[0];
+					x.parentNode.insertBefore(s, x);
+				});
+			});
+			</script>
+				<iframe src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/master.htm" id="likes-master" name="likes-master" style="display:none;" scrolling="no"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+		<script type="text/javascript">
+		//<![CDATA[
+			var jetpackLikesWidgetQueue = [];
+			var jetpackLikesWidgetBatch = [];
+			var jetpackLikesMasterReady = false;
+
+			function JetpackLikespostMessage( message, target ) {
+				if ( "string" === typeof message ){
+					try{
+						message = JSON.parse( message );
+					}
+					catch(e) {
+						return;
+					}
+				}
+
+				pm( {
+					target: target,
+					type: 'likesMessage',
+					data: message,
+					origin: '*'
+				} );
+			}
+
+			function JetpackLikesBatchHandler() {
+				var requests = [];
+				jQuery( 'div.jetpack-likes-widget-unloaded' ).each( function( i ) {
+					if ( jetpackLikesWidgetBatch.indexOf( this.id ) > -1 )
+						return;
+					jetpackLikesWidgetBatch.push( this.id );
+					var regex = /like-(post|comment)-wrapper-(\d+)-(\d+)-(\w+)/;
+					var match = regex.exec( this.id );
+					if ( ! match || match.length != 5 )
+						return;
+
+					var info = {
+						blog_id: match[2],
+						width:   this.width
+					};
+
+					if ( 'post' == match[1] ) {
+						info.post_id = match[3];
+					} else if ( 'comment' == match[1] ) {
+						info.comment_id = match[3];
+					}
+
+					info.obj_id = match[4];
+
+					requests.push( info );
+				});
+
+				if ( requests.length > 0 ) {
+					JetpackLikespostMessage( { event: 'initialBatch', requests: requests }, window.frames['likes-master'] );
+				}
+			}
+
+			function JetpackLikesMessageListener( event ) {
+				if ( "undefined" == typeof event.event )
+					return;
+
+				if ( 'masterReady' == event.event ) {
+					jQuery( document ).ready( function() {
+						jetpackLikesMasterReady = true;
+
+						var stylesData = {
+								event: 'injectStyles'
+						};
+
+						if ( jQuery( 'iframe.admin-bar-likes-widget' ).length > 0 ) {
+							JetpackLikespostMessage( { event: 'adminBarEnabled' }, window.frames[ 'likes-master' ] );
+
+							stylesData.adminBarStyles = {
+								background: jQuery( '#wpadminbar .quicklinks li#wp-admin-bar-wpl-like > a' ).css( 'background' ),
+								isRtl: ( 'rtl' == jQuery( '#wpadminbar' ).css( 'direction' ) )
+							};
+						}
+
+						if ( !window.addEventListener )
+							jQuery( '#wp-admin-bar-admin-bar-likes-widget' ).hide();
+
+						stylesData.textStyles = {
+							color: jQuery( '.sd-text-color').css( 'color' ),
+							fontFamily: jQuery( '.sd-text-color' ).css( 'font-family' ),
+							fontSize: jQuery( '.sd-text-color' ).css( 'font-size' ),
+							direction: jQuery( '.sd-text-color' ).css( 'direction' ),
+							fontWeight: jQuery( '.sd-text-color' ).css( 'font-weight' ),
+							fontStyle: jQuery( '.sd-text-color' ).css( 'font-style' ),
+							textDecoration: jQuery( '.sd-text-color' ).css('text-decoration')
+						};
+
+						stylesData.linkStyles = {
+							color: jQuery( '.sd-link-color' ).css('color'),
+							fontFamily: jQuery( '.sd-link-color' ).css('font-family'),
+							fontSize: jQuery( '.sd-link-color' ).css('font-size'),
+							textDecoration: jQuery( '.sd-link-color' ).css('text-decoration'),
+							fontWeight: jQuery( '.sd-link-color' ).css( 'font-weight' ),
+							fontStyle: jQuery( '.sd-link-color' ).css( 'font-style' )
+						};
+
+						JetpackLikespostMessage( stylesData, window.frames[ 'likes-master' ] );
+
+						JetpackLikesBatchHandler();
+
+						jQuery( document ).on( 'inview', 'div.jetpack-likes-widget-unloaded', function() {
+							jetpackLikesWidgetQueue.push( this.id );
+						});
+					});
+				}
+
+				if ( 'showLikeWidget' == event.event ) {
+					jQuery( '#' + event.id + ' .post-likes-widget-placeholder'  ).fadeOut( 'fast', function() {
+						jQuery( '#' + event.id + ' .post-likes-widget' ).fadeIn( 'fast', function() {
+							JetpackLikespostMessage( { event: 'likeWidgetDisplayed', blog_id: event.blog_id, post_id: event.post_id, obj_id: event.obj_id }, window.frames['likes-master'] );
+						});
+					});
+				}
+
+				if ( 'clickReblogFlair' == event.event ) {
+					wpcom_reblog.toggle_reblog_box_flair( event.obj_id );
+				}
+
+				if ( 'showOtherGravatars' == event.event ) {
+					var $container = jQuery( '#likes-other-gravatars' );
+					var $list = $container.find( 'ul' );
+
+					$container.hide();
+					$list.html( '' );
+
+					$container.find( '.likes-text span' ).text( event.total );
+
+					jQuery.each( event.likers, function( i, liker ) {
+						$list.append( '<li class="' + liker.css_class + '"><a href="' + liker.profile_URL + '" class="wpl-liker" rel="nofollow" target="_parent"><img src="' + liker.avatar_URL + '" alt="' + liker.name + '" width="30" height="30" style="padding-right: 3px;" /></a></li>');
+					} );
+
+					var offset = jQuery( "[name='" + event.parent + "']" ).offset();
+
+					$container.css( 'left', offset.left + event.position.left - 10 + 'px' );
+					$container.css( 'top', offset.top + event.position.top - 33 + 'px' );
+
+					var rowLength = Math.floor( event.width / 37 );
+					var height = ( Math.ceil( event.likers.length / rowLength ) * 37 ) + 13;
+					if ( height > 204 ) {
+						height = 204;
+					}
+
+					$container.css( 'height', height + 'px' );
+					$container.css( 'width', rowLength * 37 - 7 + 'px' );
+
+					$list.css( 'width', rowLength * 37 + 'px' );
+
+					$container.fadeIn( 'slow' );
+
+					var scrollbarWidth = $list[0].offsetWidth - $list[0].clientWidth;
+					if ( scrollbarWidth > 0 ) {
+						$container.width( $container.width() + scrollbarWidth );
+						$list.width( $list.width() + scrollbarWidth );
+					}
+				}
+			}
+
+			pm.bind( 'likesMessage', function(e) { JetpackLikesMessageListener(e); } );
+
+			jQuery( document ).click( function( e ) {
+				var $container = jQuery( '#likes-other-gravatars' );
+
+				if ( $container.has( e.target ).length === 0 ) {
+					$container.fadeOut( 'slow' );
+				}
+			});
+
+			function JetpackLikesWidgetQueueHandler() {
+				var wrapperID;
+				if ( ! jetpackLikesMasterReady ) {
+					setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+					return;
+				}
+
+				if ( jetpackLikesWidgetQueue.length > 0 ) {
+					// We may have a widget that needs creating now
+					var found = false;
+					while( jetpackLikesWidgetQueue.length > 0 ) {
+						// Grab the first member of the queue that isn't already loading.
+						wrapperID = jetpackLikesWidgetQueue.splice( 0, 1 )[0];
+						if ( jQuery( '#' + wrapperID ).hasClass( 'jetpack-likes-widget-unloaded' ) ) {
+							found = true;
+							break;
+						}
+					}
+					if ( ! found ) {
+						setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+						return;
+					}
+				} else if ( jQuery( 'div.jetpack-likes-widget-unloaded' ).length > 0 ) {
+					// Grab any unloaded widgets for a batch request
+					JetpackLikesBatchHandler();
+
+					// Get the next unloaded widget
+					wrapperID = jQuery( 'div.jetpack-likes-widget-unloaded' ).first()[0].id;
+					if ( ! wrapperID ) {
+						// Everything is currently loaded
+						setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+						return;
+					}
+				}
+
+				if ( 'undefined' === typeof wrapperID ) {
+					setTimeout( JetpackLikesWidgetQueueHandler, 500 );
+					return;
+				}
+
+				var $wrapper = jQuery( '#' + wrapperID );
+				$wrapper.find( 'iframe' ).remove();
+
+				if ( $wrapper.hasClass( 'slim-likes-widget' ) ) {
+					$wrapper.find( '.post-likes-widget-placeholder' ).after( "<iframe class='post-likes-widget jetpack-likes-widget' name='" + $wrapper.data( 'name' ) + "' height='22px' width='68px' frameBorder='0' scrolling='no' src='" + $wrapper.data( 'src' ) + "'></iframe>" );
+				} else {
+					$wrapper.find( '.post-likes-widget-placeholder' ).after( "<iframe class='post-likes-widget jetpack-likes-widget' name='" + $wrapper.data( 'name' ) + "' height='55px' width='100%' frameBorder='0' src='" + $wrapper.data( 'src' ) + "'></iframe>" );
+				}
+
+				$wrapper.removeClass( 'jetpack-likes-widget-unloaded' ).addClass( 'jetpack-likes-widget-loading' );
+
+				$wrapper.find( 'iframe' ).load( function( e ) {
+					var $iframe = jQuery( e.target );
+					$wrapper.removeClass( 'jetpack-likes-widget-loading' ).addClass( 'jetpack-likes-widget-loaded' );
+
+					JetpackLikespostMessage( { event: 'loadLikeWidget', name: $iframe.attr( 'name' ), width: $iframe.width() }, window.frames[ 'likes-master' ] );
+
+					if ( $wrapper.hasClass( 'slim-likes-widget' ) ) {
+						$wrapper.find( 'iframe' ).Jetpack( 'resizeable' );
+					}
+				});
+				setTimeout( JetpackLikesWidgetQueueHandler, 250 );
+			}
+			JetpackLikesWidgetQueueHandler();
+		//]]>
+		</script>
+<script type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/widgets.js"></script>
+<link rel="stylesheet" id="all-css-0" href="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/style.css" type="text/css" media="all">
+<script type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/a.js"></script>
+<script gapi_processed="true" type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/plusone.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var recaptcha_options = {"lang":"en"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/sharing.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script><iframe tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/postmessageRelay.htm" id="oauth2relay762302366" name="oauth2relay762302366"></iframe><script src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/w.js" type="text/javascript"></script>
+<script type="text/javascript">
+st_go({'blog':'23748969','v':'wpcom','tz':'-7','user_id':'0','post':'1770','subd':'maxembedded'});
+ex_go({'crypt':'UE5tW3cvZGRMfjhNR252YXY/M0pRd2J6NG1lWiVMRnVHcFU5d3NGc0w/aHhOMlJWZVBHV2JkL3V6eVpEJi1JdEg4MyY2UV02M3duXT9PTTgmWH5DZ11QQTJZZHRRfiZwNGg3S3ZUZmhiUDZvPUVVU2ktJSZYZHIrPSslemhHVWxsR3MtMHl4WE89dXNHcXRUME9dfDVGWjJtQS1sOV9RTiZfcFhsWlMzKzB3bnlHeVY1bHZGTDlffFQ5RnYxcVE2Ty9yeH5abGtTZXx2XUkvUHJzRUk2Wl9aPzV5aWpjU2tON04xMmc0OCZDYV94VU9mWHRDdWh1aHBdZXZPSXF1TW5HT1pzfHguSjgwSGtncXNvW1JuTVYvTmMwPzYyLQ=='});
+addLoadEvent(function(){linktracker_init('23748969',1770);});
+	</script><img id="wpstats" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/g_002.gif" alt=""><img id="wpstats2" src="Serial%20Peripheral%20Interface%20%E2%80%93%20SPI%20Basics%20_%20maxEmbedded_files/g.gif" alt="" style="display:none">
+<noscript><img src="http://stats.wordpress.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//stats.wordpress.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+<style type="text/css" id="pxzstyle">#pxzcont{position:absolute;top:0px;left:0px;width:0px;height:0px;overflow:visible}#pxzcont *{font-family:Arial,Helvetica,sans-serif;font-weight:normal;background:transparent}#pxzcont * b{font-weight:bold}#pxzcont * i{font-style:italic}#pxzcont * u{font-decoration:underline}#pxzcont div,#pxzcont span,#pxzcont img,#pxzcont td,#pxzcont p{border:0px none;margin:0px;padding:0px;line-height:normal;text-align:left;font-size:1em}#pxzcont input,#pxzcont textarea{box-sizing:content-box;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;-o-box-sizing:content-box}#pxzcont div,#pxzcont img{display:block;box-sizing:content-box;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;-o-box-sizing:content-box;margin:0;padding:0;width:auto;height:auto;top:auto;bottom:auto;right:auto;left:auto}#pxzcont span{display:inline}#pxzcont div{text-align:left;position:relative;overflow:visible;z-index:1}#pxzcont img{position:static}#pxzcont a,#pxzcont a:link,#pxzcont a:hover,#pxzcont a:visited,#pxzcont a:active{font-weight:normal;background:none;font-size:12px;line-height:normal}#pxzcont .pxz-clear{clear:both}#pxzcont .pxz-noselect{-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none}#pxzcont .pxz-anchor{overflow:visible;width:0px;height:0px;position:absolute}#pxzcont .pxz-app-anchor{z-index:1}#pxzcont .pxz-state-open{z-index:2}#pxzcont .pxz-state-closed .pxz-app-anchor{display:none}#pxzcont .pxz-app-anchor-mask{position:absolute;z-index:2}#pxzcont .pxz-app-anchor.pxz-active{z-index:3}#pxzcont .pxz-app-anchor-mask{background-color:#FFF}#pxzcont .pxz-clear{clear:both}#pxzcont .pxz-colorize-background{background-color:#F37521}#pxzcont .pxz-button,#pxzcont a.pxz-button,#pxzcont a.pxz-button:visited{color:#F37521;background-color:#F1F1F1;font-size:12px;font-weight:normal;width:100px;border-radius:5px;display:block;line-height:20px;text-align:center;-webkit-transition:all 0.3s;-moz-transition:all 0.3s;-o-transition:all 0.3s;transition:all 0.3s}#pxzcont .pxz-button:hover,#pxzcont a.pxz-button:hover,#pxzcont a.pxz-button:active{color:#333;background-color:#F37521;text-decoration:none;-webkit-transition:all 0.3s;-moz-transition:all 0.3s;-o-transition:all 0.3s;transition:all 0.3s;cursor:pointer}#pxzcont .pxz-colorize-text{color:#F37521!important}#pxzcont a,#pxzcont a:link,#pxzcont a:visited{color:#F37521;text-decoration:none;border:none;outline:none;-webkit-transition:color 0.3s;-moz-transition:color 0.3s;-o-transition:color 0.3s;transition:color 0.3s}#pxzcont a:hover{color:#F37521;text-decoration:underline;-webkit-transition:color 0.3s;-moz-transition:color 0.3s;-o-transition:color 0.3s;transition:color 0.3s}#pxzcont .pxz-closebox{position:absolute;display:block;cursor:pointer}#pxzcont .pxz-closebox-icon{}#pxzcont .pxz-taskbar-anchor{z-index:4 !important}#pxzcont .pxz-state-closed .pxz-taskbar-anchor{display:block !important}#pxzcont .pxz-taskbar{width:0px;height:0px;overflow:visible;position:absolute;left:0;top:0;z-index:2;display:none}#pxzcont .pxz-taskbar .pxz-tooltip{top:10px;left:40px;display:none}#pxzcont.pxz-ie7 .pxz-taskbar .pxz-tooltip,#pxzcont .pxz-taskbar .pxz-large .pxz-tooltip{top:14px;left:45px}#pxzcont .pxz-taskbar .pxz-small .pxz-tooltip{top:5px}#pxzcont.pxz-home-right .pxz-taskbar .pxz-tooltip{left:auto;right:40px}#pxzcont.pxz-home-right .pxz-taskbar .pxz-large .pxz-tooltip{right:45px}#pxzcont .pxz-taskbar-horizontal .pxz-taskbar-icon .pxz-tooltip{left:22px;top:45px}#pxzcont.pxz-home-bottom .pxz-taskbar-horizontal .pxz-taskbar-icon .pxz-tooltip{top:-22px;left:22px}#pxzcont .pxz-target-icon{position:absolute}#pxzcont .pxz-target-icon .pxz-tooltip{display:none}#pxzcont .pxz-state-closed .pxz-target-icon{display:none}#pxzcont .pxz-state-minimized .pxz-taskbar-icon-taskbar .pxz-icon-svg,#pxzcont .pxz-state-closed .pxz-taskbar-icon-taskbar .pxz-icon-svg{position:static;opacity:0.5;-o-transition:opacity 0.3s;-moz-transition:opacity 0.3s;-webkit-transition:opacity 0.3s;transition:opacity 0.3s}#pxzcont .pxz-state-open .pxz-taskbar-icon-taskbar .pxz-icon-svg,#pxzcont .pxz-state-closed .pxz-taskbar-icon-taskbar .pxz-icon-svg:hover,#pxzcont .pxz-state-closed .pxz-taskbar-icon-taskbar .pxz-icon-png:hover{opacity:1.0;-o-transition:opacity 0.3s;-moz-transition:opacity 0.3s;-webkit-transition:opacity 0.3s;transition:opacity 0.3s}#pxzcont .pxz-state-closed .pxz-taskbar-icon-taskbar .pxz-icon-png img{position:static;opacity:0.5}#pxzcont .pxz-state-closed .pxz-taskbar-icon-taskbar .pxz-icon-png .pxz-icon-alt-highlight-off img{opacity:0.05}#pxzcont .pxz-state-closed .pxz-taskbar-icon-taskbar .pxz-icon-png:hover img{position:static;opacity:1}#pxzcont .pxz-slider{margin:30px auto 10px;text-align:center;height:20px;width:160px}#pxzcont .pxz-slider-label{font-size:14px;font-weight:bold;line-height:20px;float:left;width:50px;text-align:center;cursor:pointer;color:#999}#pxzcont .pxz-slider-label.label-on,#pxzcont.luminate-off .pxz-slider-label.label-off{-webkit-transition:color .5s;-moz-transition:color .5s;-o-transition:color .5s;transition:color .5s}#pxzcont .pxz-slider-label.label-off,#pxzcont.luminate-off .pxz-slider-label.label-on{-webkit-transition:color .5s;-moz-transition:color .5s;-o-transition:color .5s;transition:color .5s}#pxzcont .pxz-slider-slide{width:60px;background-color:#ccc;border-radius:10px;height:20px;position:absolute;top:0;left:50px}#pxzcont .pxz-slider-slider{width:40px;height:20px;margin-right:20px;float:left}#pxzcont .pxz-slider-handle,#pxzcont a.ui-slider-handle{width:18px;height:18px;border:1px solid #ccc;background:#fff;position:absolute;top:0;left:0;border-radius:10px;background-image:-ms-linear-gradient(top left,#FFFFFF 0%,#DDDDDD 100%);background-image:-moz-linear-gradient(top left,#FFFFFF 0%,#DDDDDD 100%);background-image:-o-linear-gradient(top left,#FFFFFF 0%,#DDDDDD 100%);background-image:-webkit-gradient(linear,left top,right bottom,color-stop(0,#FFFFFF),color-stop(1,#DDDDDD));background-image:-webkit-linear-gradient(top left,#FFFFFF 0%,#DDDDDD 100%);background-image:linear-gradient(to bottom right,#FFFFFF 0%,#DDDDDD 100%)}#pxzcont.luminate-off .pxz-slider-handle,#pxzcont.luminate-off a.ui-slider-handle{background-image:-ms-linear-gradient(top left,#DDDDDD 0%,#FFFFFF 100%);background-image:-moz-linear-gradient(top left,#DDDDDD 0%,#FFFFFF 100%);background-image:-o-linear-gradient(top left,#DDDDDD 0%,#FFFFFF 100%);background-image:-webkit-gradient(linear,left top,right bottom,color-stop(0,#DDDDDD),color-stop(1,#FFFFFF));background-image:-webkit-linear-gradient(top left,#DDDDDD 0%,#FFFFFF 100%);background-image:linear-gradient(to bottom right,#DDDDDD 0%,#FFFFFF 100%)}#pxzcont .pxz-window .pxz-controlpanel-content{width:340px;height:160px}#pxzcont .pxz-controlpanel-links a{color:#999;font-size:10px}#pxzcont .pxz-controlpanel-links{color:#999;text-align:center}#pxzcont .pxz-taskbar-anchor .pxz-controlpanel-mask{background-color:#BBB;position:relative;top:0;left:0;text-align:center;z-index:2;display:none}#pxzcont .pxz-taskbar-anchor .pxz-window{z-index:6}#pxzcont .pxz-controlpanel-content p{margin:0px auto 10px;border:0px none;padding:0px;line-height:normal;font-size:1em;position:relative;color:#999;text-align:center;font-weight:bold;font-size:12px}#pxzcont .pxz-controlpanel-content .pxz-taskbar-logo{display:block;text-align:center}#pxzcont .pxz-controlpanel-content .pxz-taskbar-logo .pxz-taskbar-logo-text,#pxzcont .pxz-controlpanel-content .pxz-taskbar-logo .pxz-taskbar-logo-icon{display:inline-block}#pxzcont.pxz-ie7 .pxz-controlpanel-content .pxz-taskbar-logo .pxz-taskbar-logo-text,#pxzcont.pxz-ie7 .pxz-controlpanel-content .pxz-taskbar-logo .pxz-taskbar-logo-icon{display:inline}#pxzcont .pxz-taskbar-logo .pxz-graphic-icon{cursor:default}#pxzcont .pxz-controlpanel-content .pxz-taskbar-instructions{margin:10px auto}#pxzcont .pxz-icon-icon{cursor:pointer}#pxzcont .pxz-icon-icon.pxz-small,#pxzcont .pxz-icon-icon.pxz-small .pxz-icon-svg svg,#pxzcont .pxz-icon-icon.pxz-small .pxz-icon-png img{width:32px;height:32px}#pxzcont .pxz-icon-icon.pxz-medium,#pxzcont .pxz-icon-icon.pxz-medium .pxz-icon-svg svg,#pxzcont .pxz-icon-icon.pxz-medium .pxz-icon-png img{width:40px;height:40px}#pxzcont .pxz-icon-icon.pxz-large,#pxzcont .pxz-icon-icon.pxz-large .pxz-icon-svg svg,#pxzcont .pxz-icon-icon.pxz-large .pxz-icon-png img{width:48px;height:48px}#pxzcont.pxz-ie7 .pxz-icon-icon.pxz-small,#pxzcont.pxz-ie7 .pxz-icon-icon.pxz-small .pxz-icon-svg svg,#pxzcont.pxz-ie7 .pxz-icon-icon.pxz-small .pxz-icon-png img,#pxzcont.pxz-ie7 .pxz-icon-icon.pxz-medium,#pxzcont.pxz-ie7 .pxz-icon-icon.pxz-medium .pxz-icon-svg svg,#pxzcont.pxz-ie7 .pxz-icon-icon.pxz-medium .pxz-icon-png img,#pxzcont.pxz-ie7 .pxz-icon-icon.pxz-large,#pxzcont.pxz-ie7 .pxz-icon-icon.pxz-large .pxz-icon-svg svg,#pxzcont.pxz-ie7 .pxz-icon-icon.pxz-large .pxz-icon-png img{width:48px;height:48px}#pxzcont .pxz-icon-svg{width:auto;height:auto;padding:0;position:absolute}#pxzcont .pxz-icon-svg svg .highlight-fill{-o-transition:all 0.3s;-moz-transition:all 0.3s;-webkit-transition:all 0.3s;transition:all 0.3s}#pxzcont .pxz-icon-alt-image,#pxzcont .pxz-icon-alt-highlight,#pxzcont .pxz-icon-alt-highlight img{position:absolute}#pxzcont .pxz-icon-png .pxz-icon-alt-highlight-on{display:none}#pxzcont .pxz-tooltip{display:none;background-color:#ffffff;opacity:0.9;color:#404040;min-width:60px;height:20px;border-radius:10px;position:absolute;font-family:Arial,sans-serif;font-size:12px;font-weight:normal;line-height:20px;text-align:center;padding:0 10px;white-space:nowrap;box-shadow:2px 2px 2px rgba(0,0,0,0.48)}#pxzcont .pxz-ad-body{margin:0px;background:none;padding:0;font-size:12px;line-height:15px}#pxzcont .pxz-impression-image{position:absolute;bottom:0;left:0}#pxzcont .pxz-ad-credits{height:10px;line-height:10px;overflow:hidden;position:absolute;bottom:2px;right:0px;color:#999;font-size:9px;font-family:Arial,sans-serif;text-align:right;white-space:nowrap}#pxzcont .pxz-ad-credits-anchor,#pxzcont .pxz-ad-credits-anchor:link,#pxzcont .pxz-ad-credits-anchor:visited,#pxzcont .pxz-ad-credits-anchor:active{color:#999 !important;text-decoration:none;font-size:9px}#pxzcont a.pxz-ad-credits-anchor:hover{text-decoration:underline}#pxzcont .pxz-ad-credits-divider{display:none}#pxzcont .pxz-rtl div{text-align:right}#pxzcont .pxz-rtl .pxz-ad-credits{left:auto;right:0}#pxzcont .pxz-slidedrawer{}#pxzcont .pxz-adtype-text .pxz-window,#pxzcont .pxz-adtype-rich-media .pxz-window,#pxzcont .pxz-adtype-product .pxz-window{background-color:transparent;padding:0;color:#3c3c3c;border:none;box-shadow:none;border-radius:0}#pxzcont .pxz-window.pxz-bottom-stretch .pxz-closebox{top:auto;bottom:0;right:0;background-image:url(http://assets.luminate.com/4.0/icon/png/closeboxes_ads.v2.png);background-position:-0px -50px;padding:0 2px 5px 0;width:25px;height:25px;opacity:0.5;-webkit-transition:opacity 0.2s ease;-moz-transition:opacity 0.2s ease;-otransition:opacity 0.2s ease;transition:opacity 0.2s ease}#pxzcont .pxz-window.pxz-bottom-stretch .pxz-closebox .pxz-icon-icon{display:none}#pxzcont .pxz-window.pxz-bottom-stretch .pxz-closebox:hover,#pxzcont .pxz-window.pxz-bottom-stretch .pxz-closebox:active{background-position:-25px -50px;opacity:1;-webkit-transition:opacity 0.2s ease;-moz-transition:opacity 0.2s ease;-otransition:opacity 0.2s ease;transition:opacity 0.2s ease}#pxzcont .pxz-ad-headline{font-size:12px;line-height:15px}#pxzcont a.pxz-ad-headline-anchor{font-size:12px;line-height:15px;font-weight:bold;word-wrap:break-word;color:#F37521!important}#pxzcont .pxz-ad-text{font-size:12px;line-height:15px;min-height:30px;margin:3px 0 2px 0}#pxzcont .pxz-ad-text-truncate{font-size:12px;line-height:15px}#pxzcont a.pxz-ad-text-anchor{font-size:12px;line-height:15px;text-decoration:none !important;color:#333 !important}#pxzcont a.pxz-ad-text-inline-cta{font-size:12px;line-height:15px;color:#F37521!important;text-decoration:underline !important;display:none;padding-left:5px}#pxzcont a.pxz-ad-text-inline-cta:hover{text-decoration:underline !important;cursor:pointer}#pxzcont .pxz-adtype-text a.pxz-ad-text-inline-cta{display:none !important}#pxzcont .pxz-ad-url{font-size:12px;line-height:15px;width:75%;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;color:#999}#pxzcont a.pxz-ad-url-anchor,#pxzcont a.pxz-ad-url-anchor:link,#pxzcont a.pxz-ad-url-anchor:visited,#pxzcont a.pxz-ad-url-anchor:active{font-size:12px;line-height:15px;color:#F37521!important}#pxzcont .pxz-ad-logo-present .pxz-ad-content,#pxzcont .pxz-ad-thumbnail-present .pxz-ad-content{overflow:hidden;min-height:80px}#pxzcont .pxz-ad-logo-present .pxz-ad-text,#pxzcont .pxz-ad-thumbnail-present .pxz-ad-text{margin:3px 0 17px 0}#pxzcont .pxz-ad-thumbnail{float:left;height:80px;max-width:100px;margin-right:10px;padding:0;text-align:center;display:none}#pxzcont a.pxz-ad-thumbnail-anchor{display:table-cell;vertical-align:middle;height:80px;max-width:100px}#pxzcont .pxz-ad-thumbnail-image{cursor:pointer;max-height:80px;max-width:100px;margin:0;padding:0}#pxzcont .pxz-ad-thumbnail-present .pxz-ad-thumbnail{display:table}#pxzcont.pxz-ie8 .pxz-ad-thumbnail-present .pxz-ad-thumbnail{display:block}#pxzcont.pxz-ie8 a.pxz-ad-thumbnail-anchor{display:inline-block;height:100%}#pxzcont .pxz-ad-thumbnail-present .pxz-ad-url,#pxzcont .pxz-ad-logo-present .pxz-ad-url{position:absolute;bottom:0;width:65%}#pxzcont .pxz-ad-logo{float:right;height:60px;max-width:100px;margin-left:10px;padding:0;text-align:center;display:none;-webkit-transform:scale(0);-webkit-animation-name:grow;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1;-webkit-animation-delay:0.5s;-webkit-animation-fill-mode:forwards;-moz-transform:scale(0);-moz-animation-name:grow;-moz-animation-duration:1s;-moz-animation-iteration-count:1;-moz-animation-delay:0.5s;-moz-animation-fill-mode:forwards;-o-transform:scale(0);-o-animation-name:grow;-o-animation-duration:1s;-o-animation-iteration-count:1;-o-animation-delay:0.5s;-o-animation-fill-mode:forwards;transform:scale(0);animation-name:grow;animation-duration:1s;animation-iteration-count:1;animation-delay:0.5s;animation-fill-mode:forwards}#pxzcont a.pxz-ad-logo-anchor{display:table-cell;vertical-align:middle;height:60px;max-width:100px}#pxzcont .pxz-ad-logo-image{cursor:pointer;max-height:60px;max-width:100px;margin:0;padding:0}#pxzcont .pxz-ad-logo-present .pxz-ad-logo{display:table}#pxzcont.pxz-ie .pxz-ad-logo-present .pxz-ad-logo{display:block}#pxzcont .pxz-ad-logo-dark{display:none}#pxzcont .pxz-adsize-small .pxz-ad-headline,#pxzcont .pxz-adsize-small a.pxz-ad-headline-anchor{font-size:12px;line-height:14px}#pxzcont .pxz-adsize-tiny .pxz-ad-headline,#pxzcont .pxz-adsize-tiny a.pxz-ad-headline-anchor{font-size:11px;line-height:12px}#pxzcont .pxz-adsize-small .pxz-ad-text,#pxzcont .pxz-adsize-tiny .pxz-ad-text{font-size:10px;line-height:12px;min-height:24px}#pxzcont .pxz-adsize-tiny .pxz-ad-text{min-height:12px}#pxzcont .pxz-adsize-small .pxz-ad-text .pxz-ad-text-truncate,#pxzcont .pxz-adsize-tiny .pxz-ad-text .pxz-ad-text-truncate{font-size:10px;line-height:12px}#pxzcont .pxz-adsize-small a.pxz-ad-text-anchor,#pxzcont .pxz-adsize-small a.pxz-ad-text-inline-cta,#pxzcont .pxz-adsize-tiny a.pxz-ad-text-anchor,#pxzcont .pxz-adsize-tiny a.pxz-ad-text-inline-cta{line-height:12px;font-size:10px}#pxzcont .pxz-adsize-small .pxz-ad-url,#pxzcont .pxz-adsize-tiny .pxz-ad-url{font-size:10px;line-height:12px;width:65%}#pxzcont .pxz-adsize-small a.pxz-ad-url-anchor,#pxzcont .pxz-adsize-tiny a.pxz-ad-url-anchor{font-size:10px;line-height:12px}#pxzcont .pxz-adsize-tiny .pxz-ad-thumbnail-present .pxz-ad-thumbnail{display:none}#pxzcont .pxz-adsize-small .pxz-ad-thumbnail{height:50px;max-width:50px;margin-right:5px}#pxzcont .pxz-adsize-small .pxz-ad-thumbnail-anchor{height:50px;max-width:50px}#pxzcont .pxz-adsize-small .pxz-ad-thumbnail-image{max-height:50px;max-width:50px}#pxzcont .pxz-adsize-tiny .pxz-ad-logo-present .pxz-ad-content,#pxzcont .pxz-adsize-tiny .pxz-ad-thumbnail-present .pxz-ad-content{min-height:0px}#pxzcont .pxz-adsize-small .pxz-ad-logo-present .pxz-ad-content,#pxzcont .pxz-adsize-small .pxz-ad-thumbnail-present .pxz-ad-content{min-height:50px}#pxzcont .pxz-adsize-small .pxz-ad-thumbnail-present .pxz-ad-url{width:55%}#pxzcont .pxz-adsize-small .pxz-ad-logo,#pxzcont .pxz-adsize-tiny .pxz-ad-logo{display:none}#pxzcont .pxz-adsize-large .pxz-ad-headline{font-size:18px;line-height:22px}#pxzcont .pxz-adsize-large a.pxz-ad-headline-anchor{font-size:18px;line-height:22px}#pxzcont .pxz-adsize-large .pxz-ad-text{font-size:14px;line-height:16px;min-height:32px;margin:4px 0 4px 0}#pxzcont .pxz-adsize-large .pxz-ad-text .pxz-ad-text-truncate{font-size:14px;line-height:16px}#pxzcont .pxz-adsize-large a.pxz-ad-text-anchor,#pxzcont .pxz-adsize-large a.pxz-ad-text-inline-cta{font-size:14px;line-height:16px}#pxzcont .pxz-adsize-large .pxz-ad-url{font-size:14px;line-height:16px;width:85%}#pxzcont .pxz-adsize-large a.pxz-ad-url-anchor{font-size:14px;line-height:16px}#pxzcont .pxz-adsize-large .pxz-ad-logo-present .pxz-ad-content,#pxzcont .pxz-adsize-large .pxz-ad-thumbnail-present .pxz-ad-content{min-height:100px}#pxzcont .pxz-adsize-large .pxz-ad-logo-present .pxz-ad-text,#pxzcont .pxz-adsize-large .pxz-ad-thumbnail-present .pxz-ad-text{margin:4px 0 20px 0}#pxzcont .pxz-adsize-large .pxz-ad-thumbnail-present .pxz-ad-url{width:80%}#pxzcont .pxz-adsize-large .pxz-ad-thumbnail{height:100px;max-width:130px;margin-right:20px}#pxzcont .pxz-adsize-large .pxz-ad-thumbnail-anchor{height:100px;max-width:130px}#pxzcont .pxz-adsize-large .pxz-ad-thumbnail-image{max-height:100px;max-width:130px}#pxzcont .pxz-adsize-large .pxz-ad-logo{height:80px;max-width:130px;margin-left:20px}#pxzcont .pxz-adsize-large .pxz-ad-logo-anchor{height:80px;max-width:130px}#pxzcont .pxz-adsize-large .pxz-ad-logo-image{max-height:80px;max-width:130px}#pxzcont .pxz-window.pxz-bottom-stretch .pxz-ad-body,#pxzcont .pxz-slidedrawer .pxz-ad-body{width:100%}#pxzcont .pxz-bottom-stretch .pxz-ad-targetarea,#pxzcont .pxz-slidedrawer .pxz-ad-targetarea{padding:10px}#pxzcont .pxz-bottom-stretch .pxz-ad-credits,#pxzcont .pxz-slidedrawer .pxz-ad-credits{right:26px;bottom:0px;height:25px}#pxzcont .pxz-bottom-stretch a.pxz-ad-credits-anchor,#pxzcont .pxz-slidedrawer a.pxz-ad-credits-anchor{padding:2px 10px 13px 10px;margin:0;display:block}#pxzcont .pxz-bottom-stretch .pxz-ad-credits-divider,#pxzcont .pxz-slidedrawer .pxz-ad-credits-divider{display:inline;padding:2px 0 13px 0;color:#999;color:rgba(255,255,255,0.4);text-decoration:none;position:absolute;top:0;right:0}#pxzcont .pxz-adsize-small .pxz-bottom-stretch .pxz-ad-targetarea,#pxzcont .pxz-adsize-small .pxz-slidedrawer .pxz-ad-targetarea,#pxzcont .pxz-adsize-tiny .pxz-bottom-stretch .pxz-ad-targetarea,#pxzcont .pxz-adsize-tiny .pxz-slidedrawer .pxz-ad-targetarea{padding:5px}#pxzcont .pxz-adsize-small .pxz-bottom-stretch .pxz-ad-credits,#pxzcont .pxz-adsize-small .pxz-slidedrawer .pxz-ad-credits,#pxzcont .pxz-adsize-tiny .pxz-bottom-stretch .pxz-ad-credits,#pxzcont .pxz-adsize-tiny .pxz-slidedrawer .pxz-ad-credits{height:16px;right:20px;overflow:visible;bottom:0}#pxzcont .pxz-adsize-small .pxz-bottom-stretch a.pxz-ad-credits-anchor,#pxzcont .pxz-adsize-small .pxz-slidedrawer a.pxz-ad-credits-anchor,#pxzcont .pxz-adsize-tiny .pxz-bottom-stretch a.pxz-ad-credits-anchor,#pxzcont .pxz-adsize-tiny .pxz-slidedrawer a.pxz-ad-credits-anchor{padding:0 5px 6px 5px}#pxzcont .pxz-adsize-small .pxz-bottom-stretch .pxz-ad-credits-divider,#pxzcont .pxz-adsize-small .pxz-slidedrawer .pxz-ad-credits-divider,#pxzcont .pxz-adsize-tiny .pxz-bottom-stretch .pxz-ad-credits-divider,#pxzcont .pxz-adsize-tiny .pxz-slidedrawer .pxz-ad-credits-divider{padding:0;right:-2px}#pxzcont .pxz-adtype-text.pxz-adsize-small .pxz-window.pxz-bottom-stretch .pxz-closebox,#pxzcont .pxz-adtype-product.pxz-adsize-small .pxz-window.pxz-bottom-stretch .pxz-closebox,#pxzcont .pxz-adsize-small .pxz-slidedrawer .pxz-closebox,#pxzcont .pxz-adtype-text.pxz-adsize-tiny .pxz-window.pxz-bottom-stretch .pxz-closebox,#pxzcont .pxz-adtype-product.pxz-adsize-tiny .pxz-window.pxz-bottom-stretch .pxz-closebox,#pxzcont .pxz-adsize-tiny .pxz-slidedrawer .pxz-closebox{padding:0;right:-3px;bottom:-2px}#pxzcont.pxz-touch .pxz-window.pxz-bottom-stretch .pxz-closebox{width:45px;height:45px;bottom:-5px;right:-10px;padding:0;background-image:url(http://assets.luminate.com/4.0/icon/png/closeboxes_ads_touch.v2.png);background-position:-5px -102px}#pxzcont.pxz-touch .pxz-window.pxz-bottom-stretch .pxz-closebox:hover,#pxzcont.pxz-touch .pxz-window.pxz-bottom-stretch .pxz-closebox:active{background-image:url(http://assets.luminate.com/4.0/icon/png/closeboxes_ads_touch.v2.png);background-position:-55px -102px}#pxzcont.pxz-touch .pxz-adtype-text.pxz-adsize-small .pxz-window.pxz-bottom-stretch .pxz-closebox,#pxzcont.pxz-touch .pxz-adtype-product.pxz-adsize-small .pxz-window.pxz-bottom-stretch .pxz-closebox,#pxzcont.pxz-touch .pxz-adsize-small .pxz-slidedrawer .pxz-closebox,#pxzcont.pxz-touch .pxz-adtype-text.pxz-adsize-tiny .pxz-window.pxz-bottom-stretch .pxz-closebox,#pxzcont.pxz-touch .pxz-adtype-product.pxz-adsize-tiny .pxz-window.pxz-bottom-stretch .pxz-closebox,#pxzcont.pxz-touch .pxz-adsize-tiny .pxz-slidedrawer .pxz-closebox{right:-15px;bottom:-13px}#pxzcont .pxz-adsize-tiny .pxz-drawer-closed .pxz-ad-thumbnail-present .pxz-ad-content,#pxzcont .pxz-adsize-small .pxz-drawer-closed .pxz-ad-thumbnail-present .pxz-ad-content,#pxzcont .pxz-adsize-large .pxz-drawer-closed .pxz-ad-thumbnail-present .pxz-ad-content,#pxzcont .pxz-drawer-closed .pxz-ad-thumbnail-present .pxz-ad-content{height:auto}#pxzcont .pxz-drawer-closed .pxz-ad-thumbnail,#pxzcont .pxz-drawer-closed .pxz-ad-thumbnail-image,#pxzcont .pxz-drawer-closed .pxz-ad-text,#pxzcont .pxz-drawer-closed .pxz-ad-url,#pxzcont .pxz-drawer-closed .pxz-ad-credits{display:none}#pxzcont .pxz-ad-button{float:right;margin:0 0 5px 10px}#pxzcont a.pxz-ad-button-anchor{font-size:12px;color:white;display:block;height:20px;line-height:20px;padding:0 1em;border-radius:3px;box-shadow:1px 1px 1px rgba(0,0,0,0.5);overflow:hidden;white-space:nowrap;text-shadow:1px 1px 1px rgba(0,0,0,0.8);background:#F37521;opacity:0.85;-webkit-transition:0.2s opacity;-moz-transition:0.2s opacity;-o-transition:0.2s opacity;transition:0.2s opacity;-webkit-transform:scale(0);-webkit-animation-name:grow;-webkit-animation-duration:1s;-webkit-animation-iteration-count:1;-webkit-animation-delay:0.5s;-webkit-animation-fill-mode:forwards;-moz-transform:scale(0);-moz-animation-name:grow;-moz-animation-duration:1s;-moz-animation-iteration-count:1;-moz-animation-delay:0.5s;-moz-animation-fill-mode:forwards;-o-transform:scale(0);-o-animation-name:grow;-o-animation-duration:1s;-o-animation-iteration-count:1;-o-animation-delay:0.5s;-o-animation-fill-mode:forwards;transform:scale(0);animation-name:grow;animation-duration:1s;animation-iteration-count:1;animation-delay:0.5s;animation-fill-mode:forwards}#pxzcont a.pxz-ad-button-anchor:hover{opacity:1;-webkit-transition:0.2s opacity;-moz-transition:0.2s opacity;-o-transition:0.2s opacity;transition:0.2s opacity;text-decoration:none}@-webkit-keyframes grow{from{-webkit-transform:scale(0)}to{-webkit-transform:scale(1)}}@-moz-keyframes grow{from{-moz-transform:scale(0)}to{-moz-transform:scale(1)}}@-o-keyframes grow{from{-o-transform:scale(0)}to{-o-transform:scale(1)}}@keyframes grow{from{transform:scale(0)}to{transform:scale(1)}}#pxzcont .pxz-adsize-small .pxz-ad-logo-present .pxz-ad-text,#pxzcont .pxz-adsize-small .pxz-ad-thumbnail-present .pxz-ad-text{margin:0 0 12px 0}#pxzcont .pxz-adsize-small .pxz-ad-thumbnail-present .pxz-ad-button{margin:3px 0 2px 5px}#pxzcont .pxz-adsize-small a.pxz-ad-button-anchor{font-size:10px;height:16px;line-height:16px}#pxzcont .pxz-adsize-small a.pxz-ad-button-anchor .pxz-ad-button-B{display:none}#pxzcont .pxz-adsize-tiny .pxz-ad-button{display:none}#pxzcont .pxz-adsize-large a.pxz-ad-button-anchor{font-size:14px;height:24px;line-height:24px}#pxzcont .pxz-adsize-tiny .pxz-ad-logo-present .pxz-ad-logo,#pxzcont .pxz-adsize-small .pxz-ad-logo-present .pxz-ad-logo{display:none}#pxzcont .pxz-adsize-medium .pxz-ad-logo-present .pxz-ad-text,#pxzcont .pxz-adsize-large .pxz-ad-logo-present .pxz-ad-text{padding-right:0}#pxzcont .pxz-adsize-medium .pxz-ad-logo-present .pxz-ad-button,#pxzcont .pxz-adsize-large .pxz-ad-logo-present .pxz-ad-button{display:none}#pxzcont .pxz-adsize-medium .pxz-ad-logo-present .pxz-ad-text-inline-cta,#pxzcont .pxz-adsize-large .pxz-ad-logo-present .pxz-ad-text-inline-cta{display:inline}#pxzcont .pxz-adtype-image .pxz-ad-body{padding-bottom:10px}#pxzcont .pxz-ad-image{display:block;margin:auto;float:none}#pxzcont .pxz-image-anchor-wrapper{margin:auto}#pxzcont .pxz-ad-expanded-image{display:none;margin:auto;float:none}#pxzcont .pxz-impression-image{opacity:0.05;filter:alpha(opacity=5)}#pxzcont .pxz-impression-expanded-image{opacity:0.05;filter:alpha(opacity=5)}#pxzcont .pxz-impression-tags{display:none}#pxzcont .pxz-ad-expando-help{height:10px;line-height:10px;position:absolute;bottom:0;left:0;text-align:left;display:none;font-size:9px;color:#999}#pxzcont .pxz-adtype-image .pxz-ad-credits{bottom:0}#pxzcont .pxz-iframe-ad{display:none}#pxzcont .pxz-iframe-ad iframe{display:block;width:300px;height:60px;margin-left:auto;margin-right:auto}#pxzcont .pxz-alliframe-ad{display:none}#pxzcont .pxz-alliframe-ad iframe{display:block;width:100%;min-height:10px;height:1px}#pxzcont .pxz-ad-carousel-controlbar{margin:0 10px;padding:0;height:30px;border-top:1px solid #999;border-top:1px solid rgba(122,122,122,0.25)}#pxzcont .pxz-ad-carousel-controls{width:60px;margin-left:auto;margin-right:auto;height:30px;padding:0px}#pxzcont .pxz-ad-carousel-control{float:left;padding:10px 5px}#pxzcont .pxz-ad-carousel-control:hover{cursor:pointer}#pxzcont .pxz-ad-carousel-control-dot{width:10px;height:10px;border-radius:5px;background-color:#999;opacity:0.5;-webkit-transition:0.2s background-color,0.2s opacity;-moz-transition:0.2s background-color,0.2s opacity;-o-transition:0.2s background-color,0.2s opacity;transition:0.2s background-color,0.2s opacity}#pxzcont .pxz-ad-carousel-control:hover .pxz-ad-carousel-control-dot,#pxzcont .pxz-ad-carousel-selected .pxz-ad-carousel-control-dot{background-color:#F37521!important;-webkit-transition:0.2s background-color,0.2s opacity;-moz-transition:0.2s background-color,0.2s opacity;-o-transition:0.2s background-color,0.2s opacity;transition:0.2s background-color,0.2s opacity}#pxzcont .pxz-ad-carousel-selected:hover .pxz-ad-carousel-control-dot,#pxzcont .pxz-ad-carousel-control:hover .pxz-ad-carousel-control-dot{opacity:1;-webkit-transition:0.2s opacity;-moz-transition:0.2s opacity;-o-transition:0.2s opacity;transition:0.2s opacity}#pxzcont .pxz-multiple-ads .pxz-bottom-stretch .pxz-ad-credits,#pxzcont .pxz-multiple-ads .pxz-slidedrawer .pxz-ad-credits{right:auto;left:0;bottom:0}#pxzcont .pxz-multiple-ads .pxz-bottom-stretch .pxz-ad-credits-divider,#pxzcont .pxz-multiple-ads .pxz-slidedrawer .pxz-ad-credits-divider{display:none}#pxzcont .pxz-multiple-ads .pxz-window.pxz-bottom-stretch .pxz-closebox{right:0;bottom:0;padding:0 2px 2px 0}#pxzcont .pxz-adsize-small .pxz-ad-carousel-controlbar{margin:0 5px;height:20px}#pxzcont .pxz-adsize-small .pxz-ad-carousel-controls{height:20px}#pxzcont .pxz-adsize-small .pxz-ad-carousel-control{float:left;padding:5px 5px}#pxzcont .pxz-adsize-small.pxz-multiple-ads .pxz-bottom-stretch .pxz-ad-credits,#pxzcont .pxz-adsize-small.pxz-multiple-ads .pxz-slidedrawer .pxz-ad-credits{right:auto;left:0;bottom:0;width:auto}#pxzcont .pxz-adsize-small.pxz-multiple-ads .pxz-bottom-stretch a.pxz-ad-credits-anchor,#pxzcont .pxz-adsize-small.pxz-multiple-ads .pxz-slidedrawer a.pxz-ad-credits-anchor{padding:0 5px}#pxzcont .pxz-adtype-text.pxz-adsize-small.pxz-multiple-ads .pxz-window.pxz-bottom-stretch .pxz-closebox,#pxzcont .pxz-adtype-product.pxz-adsize-small.pxz-multiple-ads .pxz-window.pxz-bottom-stretch .pxz-closebox,#pxzcont .pxz-adsize-small .pxz-slidedrawer .pxz-closebox{}#pxzcont.pxz-touch .pxz-multiple-ads .pxz-window.pxz-bottom-stretch .pxz-closebox{right:-5px;bottom:-5px;padding:0}#pxzcont .pxz-adtype-text.pxz-adsize-small.pxz-multiple-ads .pxz-window.pxz-bottom-stretch .pxz-closebox,#pxzcont .pxz-adtype-product.pxz-adsize-small.pxz-multiple-ads .pxz-window.pxz-bottom-stretch .pxz-closebox,#pxzcont .pxz-adsize-small .pxz-slidedrawer .pxz-closebox{}#pxzcont .pxz-adstyle-light_micro .pxz-slidedrawer{background:transparent url(http://assets.luminate.com/4.0/backgrounds/background-ffffff85.png) repeat 0 0}#pxzcont .pxz-adstyle-dark_micro .pxz-slidedrawer{background:transparent url(http://assets.luminate.com/4.0/backgrounds/background-00000080.png) repeat 0 0}#pxzcont .pxz-adstyle-adx .pxz-window{padding:5px 5px 0 5px;color:#505050;background-color:white;border-radius:5px 5px 0px 0px;box-shadow:2px -2px 2px rgba(0,0,0,0.48)}#pxzcont .pxz-adstyle-adx .pxz-ad-body{height:60px}#pxzcont .pxz-adstyle-adx .pxz-ad-body .pxz-iframe-ad,#pxzcont .pxz-adstyle-adx .pxz-ad-body .pxz-iframe-ad iframe{width:234px;height:60px}#pxzcont .pxz-adstyle-adx .pxz-ad-credits{background-color:#EEE;padding-left:5px;padding-right:5px;padding-bottom:0px;position:relative;bottom:0;left:-5px;width:100%;right:auto;border-radius:0;height:15px;line-height:16px;text-align:right}#pxzcont .pxz-adstyle-adx a.pxz-ad-credits-anchor,#pxzcont .pxz-adstyle-adx a.pxz-ad-credits-anchor:link,#pxzcont .pxz-adstyle-adx a.pxz-ad-credits-anchor:visited,#pxzcont .pxz-adstyle-adx a.pxz-ad-credits-anchor:hover,#pxzcont .pxz-adstyle-adx a.pxz-ad-credits-anchor:active{color:#000 !important;line-height:16px}#pxzcont .pxz-adstyle-criteo .pxz-window{padding:5px 5px 0 5px;color:#505050;background-color:white;border-radius:5px 5px 0px 0px;box-shadow:2px -2px 2px rgba(0,0,0,0.48)}#pxzcont .pxz-adstyle-criteo .pxz-ad-body{height:110px}#pxzcont .pxz-adstyle-criteo .pxz-ad-body .pxz-iframe-ad,#pxzcont .pxz-adstyle-criteo .pxz-ad-body .pxz-iframe-ad iframe{width:300px;height:100px}#pxzcont .pxz-adstyle-criteo .pxz-ad-credits{display:none;background-color:#EEE;padding-left:5px;padding-right:5px;padding-bottom:0px;position:relative;bottom:0;left:-5px;width:100%;right:auto;border-radius:0;height:15px;line-height:16px;text-align:right}#pxzcont .pxz-adstyle-criteo a.pxz-ad-credits-anchor,#pxzcont .pxz-adstyle-criteo a.pxz-ad-credits-anchor:link,#pxzcont .pxz-adstyle-criteo a.pxz-ad-credits-anchor:visited,#pxzcont .pxz-adstyle-criteo a.pxz-ad-credits-anchor:hover,#pxzcont .pxz-adstyle-criteo a.pxz-ad-credits-anchor:active{color:#000 !important;line-height:16px}#pxzcont .pxz-adstyle-rich_media .pxz-ad-container,#pxzcont .pxz-adstyle-rich_media .pxz-slidedrawer{background:none}#pxzcont .pxz-adstyle-rich_media .pxz-bottom-stretch .pxz-ad-targetarea,#pxzcont .pxz-adstyle-rich_media .pxz-slidedrawer .pxz-ad-targetarea{padding:0}#pxzcont .pxz-adstyle-rich_media .pxz-slidedrawer{background:none !important}#pxzcont .pxz-adstyle-invisible .pxz-window{visibility:hidden;padding:10px;color:#505050;background-color:white;border-radius:10px;border:1px solid #EDEBEB;box-shadow:2px 2px 2px rgba(0,0,0,0.48)}#pxzcont .pxz-adstyle-invisible.pxz-adtype-text.pxz-adsize-medium .pxz-ad-body,#pxzcont .pxz-adstyle-invisible.pxz-adtype-product.pxz-adsize-medium .pxz-ad-body{width:300px}#pxzcont .pxz-adstyle-invisible.pxz-adtype-text.pxz-adsize-small .pxz-window,#pxzcont .pxz-adstyle-invisible.pxz-adtype-product.pxz-adsize-small .pxz-window{padding:7px 7px 10px 7px}#pxzcont .pxz-adstyle-invisible.pxz-adtype-text.pxz-adsize-small .pxz-ad-body,#pxzcont .pxz-adstyle-invisible.pxz-adtype-product.pxz-adsize-small .pxz-ad-body{width:176px}#pxzcont .pxz-adstyle-invisible.pxz-adsize-small .pxz-ad-credits{bottom:1px}#pxzcont .pxz-adstyle-invisible.pxz-adtype-text.pxz-adsize-large .pxz-ad-body,#pxzcont .pxz-adstyle-invisible.pxz-adtype-product.pxz-adsize-large .pxz-ad-body{width:425px}#pxzcont .pxz-adstyle-dark_dmuk{overflow:hidden}#pxzcont .pxz-adstyle-dark_dmuk .pxz-window{box-shadow:0 0 10px black}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-container{background:transparent url(http://assets.luminate.com/4.0/backgrounds/background-00000080.png) repeat 0 0}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-targetarea{-webkit-transition:background-color 0.3s;-moz-transition:background-color 0.3s;-o-transition:background-color 0.3s;transition:background-color 0.3s;background-color:transparent}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-headline{color:#F37521}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-medium .pxz-ad-headline{font-size:14px;line-height:16px}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-medium a.pxz-ad-headline-anchor{font-size:14px;line-height:16px}#pxzcont .pxz-adstyle-dark_dmuk a.pxz-ad-text-anchor{color:#eef2f3 !important;font-size:11px;line-height:normal}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-targetarea:hover{background-color:#000;-webkit-transition:background-color 0.3s;-moz-transition:background-color 0.3s;-o-transition:background-color 0.3s;transition:background-color 0.3s}#pxzcont .pxz-adstyle-dark_dmuk a.pxz-ad-headline-anchor:hover,#pxzcont .pxz-adstyle-dark_dmuk a.pxz-ad-text-anchor:hover,#pxzcont .pxz-adstyle-dark_dmuk a.pxz-ad-url-anchor:hover{text-decoration:underline !important}#pxzcont .pxz-adstyle-dark_dmuk .pxz-dmuk-cta{font-size:14px;color:white;line-height:24px;padding:0 5px}#pxzcont .pxz-adstyle-dark_dmuk .pxz-dmuk-ctb{bottom:0;font-size:9px;color:#959499;line-height:17px;text-align:center}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-thumbnail{margin-left:10px}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-thmbnail-image{max-width:80px;max-height:80px}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-content{margin-left:10px}#pxzcont .pxz-adstyle-dark_dmuk .pxz-closebox{z-index:100;padding-left:10px;padding-bottom:10px;position:absolute;right:0 !important;top:0 !important;width:15px;height:15px;background-image:url(http://assets.luminate.com/3.0/icons/card3_tags_close_sprite.png);background-position:4px -4px}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-body{padding-top:4px}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-headline{padding-right:50px}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-text-truncate{padding-right:50px}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-button{float:none;position:absolute;top:0;bottom:0;right:8px;width:40px}#pxzcont .pxz-adstyle-dark_dmuk a.pxz-ad-button-anchor{font-size:0;position:absolute;top:50%;margin-top:-20px;width:40px;height:40px;border-radius:50%;opacity:1;background-color:#F37521;background-image:url(http://demo.luminate.com/sarah_demos/responsive/multiproduct/ad-button-arrow.png);background-position:-48px 0;background-repeat:no-repeat;box-shadow:none;-webkit-transition:none;-webkit-animation:none;-webkit-transform:none;-moz-transition:none;-moz-animation:none;-moz-transform:none;-o-transition:none;-o-animation:none;-o-transform:none;transition:none;transform:none;animation:none}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-tiny .pxz-ad-headline{padding-right:32px}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-tiny .pxz-ad-text-truncate{padding-right:32px}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-tiny .pxz-ad-button{top:-12px;display:block}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-tiny a.pxz-ad-button-anchor{background-position:-118px 0;width:24px;height:24px}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-small .pxz-ad-content{min-height:50px}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-small .pxz-ad-headline{padding-right:40px}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-small .pxz-ad-text-truncate{padding-right:40px}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-small .pxz-ad-button{top:-14px}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-small a.pxz-ad-button-anchor{background-position:-88px 0;width:30px;height:30px}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-large .pxz-ad-headline{padding-right:60px}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-large .pxz-ad-text-truncate{padding-right:60px}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-large .pxz-ad-button{top:-22px}#pxzcont .pxz-adstyle-dark_dmuk.pxz-adsize-large a.pxz-ad-button-anchor{background-position:0 0;width:48px;height:48px}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-logo-present .pxz-ad-logo-dark{display:table}#pxzcont.pxz-ie .pxz-adstyle-dark_dmuk .pxz-ad-logo-present .pxz-ad-logo-dark{display:block}#pxzcont .pxz-adstyle-dark_dmuk .pxz-ad-logo-present .pxz-ad-logo-light{display:none}</style><div class="pxz-home-top-left pxz-home-top pxz-home-left" style="top: 0px; left: 0px; z-index: 9999;" pxz:pub="efd0c8c3cc" id="pxzcont"><div style="top: 5691.43px; left: 394.5px; display: block;" class="pxz-anchor pxz-state-minimized"><div style="display: none;" class="pxz-app-anchor-mask"></div><div class="pxz-anchor pxz-app-anchor pxz-taskbar-anchor"><div style="left: 5px; top: 5px; display: block;" class="pxz-taskbar pxz-taskbar-vertical"><div style="left: 0px; top: 0px; position: absolute;" class="pxz-taskbar-icon-taskbar"><div style="opacity: 0;" class="pxz-icon-icon pxz-taskbar-icon pxz-small"> <div class="pxz-tooltip pxz-noselect">Luminate is on</div> <div class="pxz-icon-svg pxz-noselect"> <!--?xml version="1.0" encoding="utf-8"?-->   <svg version="1.1" id="pxz_svg_0_Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="48px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve"> <g> <g> <g opacity="0.75" clip-path="url(#sharing_taskbar_icon_SVGID_2_)"> <image overflow="visible" enable-background="new" width="162" height="162" xlink:href="http://assets.luminate.com/4.0/icons/png/shadow_taskbar.png" transform="matrix(0.28 0 0 0.28 3 3)"> </image> </g> <circle style="fill: rgb(51, 51, 51);" class="highlight-fill" cx="24" cy="24" r="14"></circle> </g> <g> <g> <linearGradient id="pxz_svg_0_SVGID_1_" gradientUnits="userSpaceOnUse" x1="-104.1997" y1="612.8008" x2="-80.1997" y2="612.8008" gradientTransform="matrix(1.25 0 0 1.25 139.25 -742)"> <stop offset="0" style="stop-color:#FFFFFF"></stop> <stop offset="1" style="stop-color:#E3E4E3"></stop> </linearGradient> </g> <g> <path fill="url(#pxz_svg_0_SVGID_1_)" d="M24,9C15.719,9,9,15.718,9,24c0,8.284,6.719,15,15,15c8.286,0,15-6.716,15-15 C39,15.718,32.286,9,24,9z M25.604,31.233c0,0.079-0.068,0.144-0.145,0.144h-8.795c-0.079,0-0.139-0.064-0.139-0.144v-14.47 c0-0.059,0.033-0.111,0.091-0.132c0.055-0.024,0.115-0.005,0.153,0.035l3.74,4.144c0.024,0.025,0.038,0.06,0.038,0.095v6.444 h4.911c0.075,0,0.145,0.069,0.145,0.143L25.604,31.233L25.604,31.233z M31.478,31.233c0,0.059-0.034,0.113-0.091,0.128 c-0.022,0.012-0.033,0.016-0.055,0.016c-0.034,0-0.072-0.021-0.101-0.049l-3.742-4.14c-0.026-0.028-0.036-0.061-0.036-0.095 v-6.449h-4.912c-0.078,0-0.142-0.064-0.142-0.142v-3.74c0-0.077,0.062-0.142,0.142-0.142h8.791c0.081,0,0.146,0.065,0.146,0.142 V31.233z"></path> </g> </g> </g> </svg>  </div>  </div> </div></div></div><div class="pxz-anchor pxz-app-anchor pxz-burma-anchor pxz-active"></div></div><div style="top: 8158.77px; left: 394.5px; display: block;" class="pxz-anchor pxz-state-minimized"><div style="display: none;" class="pxz-app-anchor-mask"></div><div class="pxz-anchor pxz-app-anchor pxz-taskbar-anchor"><div style="left: 5px; top: 5px; display: block;" class="pxz-taskbar pxz-taskbar-vertical"><div style="left: 0px; top: 0px; position: absolute;" class="pxz-taskbar-icon-taskbar"><div style="opacity: 0;" class="pxz-icon-icon pxz-taskbar-icon pxz-small"> <div class="pxz-tooltip pxz-noselect">Luminate is on</div> <div class="pxz-icon-svg pxz-noselect"> <!--?xml version="1.0" encoding="utf-8"?-->   <svg version="1.1" id="pxz_svg_1_Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="48px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve"> <g> <g> <g opacity="0.75" clip-path="url(#sharing_taskbar_icon_SVGID_2_)"> <image overflow="visible" enable-background="new" width="162" height="162" xlink:href="http://assets.luminate.com/4.0/icons/png/shadow_taskbar.png" transform="matrix(0.28 0 0 0.28 3 3)"> </image> </g> <circle style="fill: rgb(51, 51, 51);" class="highlight-fill" cx="24" cy="24" r="14"></circle> </g> <g> <g> <linearGradient id="pxz_svg_1_SVGID_1_" gradientUnits="userSpaceOnUse" x1="-104.1997" y1="612.8008" x2="-80.1997" y2="612.8008" gradientTransform="matrix(1.25 0 0 1.25 139.25 -742)"> <stop offset="0" style="stop-color:#FFFFFF"></stop> <stop offset="1" style="stop-color:#E3E4E3"></stop> </linearGradient> </g> <g> <path fill="url(#pxz_svg_1_SVGID_1_)" d="M24,9C15.719,9,9,15.718,9,24c0,8.284,6.719,15,15,15c8.286,0,15-6.716,15-15 C39,15.718,32.286,9,24,9z M25.604,31.233c0,0.079-0.068,0.144-0.145,0.144h-8.795c-0.079,0-0.139-0.064-0.139-0.144v-14.47 c0-0.059,0.033-0.111,0.091-0.132c0.055-0.024,0.115-0.005,0.153,0.035l3.74,4.144c0.024,0.025,0.038,0.06,0.038,0.095v6.444 h4.911c0.075,0,0.145,0.069,0.145,0.143L25.604,31.233L25.604,31.233z M31.478,31.233c0,0.059-0.034,0.113-0.091,0.128 c-0.022,0.012-0.033,0.016-0.055,0.016c-0.034,0-0.072-0.021-0.101-0.049l-3.742-4.14c-0.026-0.028-0.036-0.061-0.036-0.095 v-6.449h-4.912c-0.078,0-0.142-0.064-0.142-0.142v-3.74c0-0.077,0.062-0.142,0.142-0.142h8.791c0.081,0,0.146,0.065,0.146,0.142 V31.233z"></path> </g> </g> </g> </svg>  </div>  </div> </div></div></div><div class="pxz-anchor pxz-app-anchor pxz-burma-anchor pxz-active"></div></div><div style="top: 6373.55px; left: 394.5px; display: block;" class="pxz-anchor pxz-state-minimized"><div style="display: none;" class="pxz-app-anchor-mask"></div><div class="pxz-anchor pxz-app-anchor pxz-taskbar-anchor"><div style="left: 5px; top: 5px; display: block;" class="pxz-taskbar pxz-taskbar-vertical"><div style="left: 0px; top: 0px; position: absolute;" class="pxz-taskbar-icon-taskbar"><div style="opacity: 0;" class="pxz-icon-icon pxz-taskbar-icon pxz-medium"> <div class="pxz-tooltip pxz-noselect">Luminate is on</div> <div class="pxz-icon-svg pxz-noselect"> <!--?xml version="1.0" encoding="utf-8"?-->   <svg version="1.1" id="pxz_svg_2_Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="48px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve"> <g> <g> <g opacity="0.75" clip-path="url(#sharing_taskbar_icon_SVGID_2_)"> <image overflow="visible" enable-background="new" width="162" height="162" xlink:href="http://assets.luminate.com/4.0/icons/png/shadow_taskbar.png" transform="matrix(0.28 0 0 0.28 3 3)"> </image> </g> <circle style="fill: rgb(51, 51, 51);" class="highlight-fill" cx="24" cy="24" r="14"></circle> </g> <g> <g> <linearGradient id="pxz_svg_2_SVGID_1_" gradientUnits="userSpaceOnUse" x1="-104.1997" y1="612.8008" x2="-80.1997" y2="612.8008" gradientTransform="matrix(1.25 0 0 1.25 139.25 -742)"> <stop offset="0" style="stop-color:#FFFFFF"></stop> <stop offset="1" style="stop-color:#E3E4E3"></stop> </linearGradient> </g> <g> <path fill="url(#pxz_svg_2_SVGID_1_)" d="M24,9C15.719,9,9,15.718,9,24c0,8.284,6.719,15,15,15c8.286,0,15-6.716,15-15 C39,15.718,32.286,9,24,9z M25.604,31.233c0,0.079-0.068,0.144-0.145,0.144h-8.795c-0.079,0-0.139-0.064-0.139-0.144v-14.47 c0-0.059,0.033-0.111,0.091-0.132c0.055-0.024,0.115-0.005,0.153,0.035l3.74,4.144c0.024,0.025,0.038,0.06,0.038,0.095v6.444 h4.911c0.075,0,0.145,0.069,0.145,0.143L25.604,31.233L25.604,31.233z M31.478,31.233c0,0.059-0.034,0.113-0.091,0.128 c-0.022,0.012-0.033,0.016-0.055,0.016c-0.034,0-0.072-0.021-0.101-0.049l-3.742-4.14c-0.026-0.028-0.036-0.061-0.036-0.095 v-6.449h-4.912c-0.078,0-0.142-0.064-0.142-0.142v-3.74c0-0.077,0.062-0.142,0.142-0.142h8.791c0.081,0,0.146,0.065,0.146,0.142 V31.233z"></path> </g> </g> </g> </svg>  </div>  </div> </div></div></div><div class="pxz-anchor pxz-app-anchor pxz-burma-anchor pxz-active"></div></div><div style="top: 8452.77px; left: 394.5px; display: block;" class="pxz-anchor pxz-state-open"><div style="display: none;" class="pxz-app-anchor-mask"></div><div class="pxz-anchor pxz-app-anchor pxz-taskbar-anchor"><div style="left: 5px; top: 5px; display: block;" class="pxz-taskbar pxz-taskbar-vertical"><div style="left: 0px; top: 0px; position: absolute;" class="pxz-taskbar-icon-taskbar"><div style="opacity: 0;" class="pxz-icon-icon pxz-taskbar-icon pxz-small"> <div class="pxz-tooltip pxz-noselect">Luminate is on</div> <div class="pxz-icon-svg pxz-noselect"> <!--?xml version="1.0" encoding="utf-8"?-->   <svg version="1.1" id="pxz_svg_3_Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="48px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve"> <g> <g> <g opacity="0.75" clip-path="url(#sharing_taskbar_icon_SVGID_2_)"> <image overflow="visible" enable-background="new" width="162" height="162" xlink:href="http://assets.luminate.com/4.0/icons/png/shadow_taskbar.png" transform="matrix(0.28 0 0 0.28 3 3)"> </image> </g> <circle style="fill: rgb(51, 51, 51);" class="highlight-fill" cx="24" cy="24" r="14"></circle> </g> <g> <g> <linearGradient id="pxz_svg_3_SVGID_1_" gradientUnits="userSpaceOnUse" x1="-104.1997" y1="612.8008" x2="-80.1997" y2="612.8008" gradientTransform="matrix(1.25 0 0 1.25 139.25 -742)"> <stop offset="0" style="stop-color:#FFFFFF"></stop> <stop offset="1" style="stop-color:#E3E4E3"></stop> </linearGradient> </g> <g> <path fill="url(#pxz_svg_3_SVGID_1_)" d="M24,9C15.719,9,9,15.718,9,24c0,8.284,6.719,15,15,15c8.286,0,15-6.716,15-15 C39,15.718,32.286,9,24,9z M25.604,31.233c0,0.079-0.068,0.144-0.145,0.144h-8.795c-0.079,0-0.139-0.064-0.139-0.144v-14.47 c0-0.059,0.033-0.111,0.091-0.132c0.055-0.024,0.115-0.005,0.153,0.035l3.74,4.144c0.024,0.025,0.038,0.06,0.038,0.095v6.444 h4.911c0.075,0,0.145,0.069,0.145,0.143L25.604,31.233L25.604,31.233z M31.478,31.233c0,0.059-0.034,0.113-0.091,0.128 c-0.022,0.012-0.033,0.016-0.055,0.016c-0.034,0-0.072-0.021-0.101-0.049l-3.742-4.14c-0.026-0.028-0.036-0.061-0.036-0.095 v-6.449h-4.912c-0.078,0-0.142-0.064-0.142-0.142v-3.74c0-0.077,0.062-0.142,0.142-0.142h8.791c0.081,0,0.146,0.065,0.146,0.142 V31.233z"></path> </g> </g> </g> </svg>  </div>  </div> </div></div></div><div class="pxz-anchor pxz-app-anchor pxz-burma-anchor pxz-active"></div></div></div><iframe style="display: none; width: 0px; height: 0px;" name="google_osd_static_frame" id="google_osd_static_frame_8218284095194"></iframe></body><iframe src="" style="display: none;"></iframe></html>

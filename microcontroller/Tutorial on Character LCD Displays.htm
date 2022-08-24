@@ -1,0 +1,2924 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
+<head profile="http://gmpg.org/xfn/11">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta name="google-site-verification" content="mQ3jeRbNtdS8HLeWb5ZAoeDs5XfuB5Js6VqcBo2ldx0" />
+
+<title>Tutorial on Character LCD Displays</title>
+
+<link rel="stylesheet" href="http://www.circuitstoday.com/wp-content/themes/wpct/style.css" type="text/css" media="screen" />
+
+<link rel="pingback" href="http://www.circuitstoday.com/xmlrpc.php" />
+
+<link rel="alternate" type="application/rss+xml" title="Electronic Circuits and Diagram-Electronics Projects and Design RSS Feed" href="http://www.circuitstoday.com/feed" />
+
+
+
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.2.5 - http://yoast.com/wordpress/seo/ -->
+<meta name="description" content="A note on technical specifications of LCD character displays, block diagrams, 8/4 bit LCD interfacing with micro controller &amp; LCD initialization flow chart"/>
+<link rel="canonical" href="http://www.circuitstoday.com/a-note-on-character-lcd-displays" />
+<meta name="robots" content="noodp"/>
+<!-- / Yoast WordPress SEO plugin. -->
+
+<link rel="alternate" type="application/rss+xml" title="Electronic Circuits and Diagram-Electronics Projects and Design &raquo; A Note on Character LCD Displays Comments Feed" href="http://www.circuitstoday.com/a-note-on-character-lcd-displays/feed" />
+<link rel='stylesheet' id='wp-paginate-css'  href='http://www.circuitstoday.com/wp-content/plugins/wp-paginate/wp-paginate.css?ver=1.2.4' type='text/css' media='screen' />
+<script type='text/javascript' src='http://www.circuitstoday.com/wp-includes/js/l10n.js?ver=20101110'></script>
+<script type='text/javascript' src='http://www.circuitstoday.com/wp-includes/js/jquery/jquery.js?ver=1.6.1'></script>
+<script type='text/javascript' src='http://www.circuitstoday.com/wp-includes/js/comment-reply.js?ver=20090102'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.circuitstoday.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.circuitstoday.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 3.2.1" />
+<link rel='shortlink' href='http://www.circuitstoday.com/?p=7644' />
+<link rel="stylesheet" href="http://www.circuitstoday.com/wp-content/plugins/digg-digg/include/../css/diggdigg-style.css?ver=5.2.9" type="text/css" media="screen" />	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3792613-1']);
+  _gaq.push(['_setDomainName', 'circuitstoday.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+</head>
+
+
+
+<body>
+
+<div id="main">
+
+<div id="ctr">
+
+<div id="topnav">
+
+<ul>
+
+<li><a title="Home" href="http://www.circuitstoday.com">Home</a></li>
+
+<li><a title="Forums" href="http://forums.circuitstoday.com/">Forums</a></li>
+
+<li><a title="Datasheets" href="http://www.circuitstoday.com/datasheets">Datasheets</a></li>
+
+<li><a title="Lab Manual" href="http://www.circuitstoday.com/lab-manuals">Lab Manual</a></li>
+
+<li><a title="Testing Components" href="http://www.circuitstoday.com/category/testing-components">Testing Components</a></li>
+
+<li><a title="Project Kits" href="http://www.circuitstoday.com/project-kits">Buy Project Kits</a></li>
+
+</ul>
+
+<div class="clear"></div>
+
+</div>
+
+<div id="cr">
+
+<div id="header">
+
+<div id="logo">
+
+<h1><a href="http://www.circuitstoday.com/">Electronic Circuits and Diagram-Electronics Projects and Design</a></h1>
+
+
+
+</div>
+
+<div id="hbox">
+
+<div id="hboxi">
+
+<div id="sbox">
+
+<style type="text/css">
+
+@import url(http://www.google.com/cse/api/branding.css);
+
+</style>
+
+<div class="cse-branding-bottom" style="background-color:#FFFFFF;color:#000000">
+
+  <div class="cse-branding-form">
+
+    <form action="http://www.google.com/cse" id="cse-search-box">
+
+      <div>
+
+        <input type="hidden" name="cx" value="partner-pub-3246204657963347:sk79kg-rjb5" />
+
+        <input type="hidden" name="ie" value="ISO-8859-1" />
+
+        <input type="text" name="q" size="31" />
+
+        <input type="submit" name="sa" value="Search" />
+
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="cse-branding-logo">
+
+    <img src="http://www.google.com/images/poweredby_transparent/poweredby_FFFFFF.gif" alt="Google" />
+
+  </div>
+
+  <div class="cse-branding-text">
+
+    Custom Search
+
+  </div>
+
+</div>
+
+
+
+</div>
+
+<div id="rbox">
+
+
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+
+<div id="hboxads">
+
+
+
+
+
+<script type="text/javascript"><!--
+
+google_ad_client = "pub-3246204657963347";
+
+/* 728x15, created 15/12/10 */
+
+google_ad_slot = "2692199018";
+
+google_ad_width = 728;
+
+google_ad_height = 15;
+
+//-->
+
+</script>
+
+<script type="text/javascript"
+
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+
+</script>
+
+</div>
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+<div id="crr">
+<div id="cleft">
+
+<div class="clearfix"></div>
+
+		
+<div class="post-arena">
+
+
+			<div class="post" id="post-7644">
+				<h2>A Note on Character LCD Displays</h2>
+
+				<div class="postmetatop"><div class="meta-in"><div class="auth"><a href="http://www.circuitstoday.com/author/rakesh" title="Posts by rakesh" rel="author">rakesh</a></div> <div class="date"> February - 28 - 2012</div> <div class="comm"><a href="http://www.circuitstoday.com/a-note-on-character-lcd-displays#comments" title="Comment on A Note on Character LCD Displays">10 Comments</a></div><div class="clear"></div></div><div class="clear"></div></div>
+
+
+<!--ads code starts-->
+
+<div class="adunit1">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3246204657963347";
+/* CT5 */
+google_ad_slot = "7464568207";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+
+
+</div>
+
+<!--ads code ends-->
+<div class="entry">
+					<a id="dd_start"></a><p style="text-align: justify;">There are many display devices used by the hobbyists. LCD displays are one of the most sophisticated display devices used by them. Once you learn how to interface it, it will be the easiest and very reliable output device used by you! More, for micro controller based project, not every time any debugger can be used. So LCD displays can be used to test the outputs. Obviously, for last possibility, you need to know how to use this stuff pretty well.</p>
+<p style="text-align: justify;"><span style="color: #0000ff;"><strong>Note 1:</strong></span>  We have sub divided this article for easy navigation as shown below:-</p>
+<p style="text-align: justify;"><strong>1.  <a href="#pin-configuration">Pin Configuration</a>  2. <a href="#block-diagram">Block Diagram</a> 3. <a href="#commands">Control and Display Commands</a>  4. <a href="#interfacing">LCD Interfacing</a>  5. <a href="#initialisation">LCD Initialization</a></strong></p>
+<p style="text-align: justify;"><span style="color: #ff0000;"><strong>Note 2:</strong></span> If you are interested in reading about working of LCD &#8211; we have an excellent article for you &#8211; <a href="http://www.circuitstoday.com/liquid-crystal-displays-lcd-working"><span style="text-decoration: underline;"><strong>Working of Liquid Crystal Displays (LCD)</strong></span></a></p>
+<p style="text-align: justify;">                Hitachi has set up a mile stone by its LCD controller IC. All the LCD displays use the same, or any one of the IC s based upon the architecture introduced by Hitachi.</p>
+<p style="text-align: justify;">Ok, one minute, all I’m talking about is the character LCD display and not Graphical LCD Display.</p>
+<p style="text-align: justify;"> Most of the LCD Displays available in the market are 16X2 (That means, the LCD displays are capable of displaying 2 lines each having 16 Characters a), 20X4 LCD Displays (4 lines, 20 characters). It has 14 pins. It uses 8lines for parallel data plus 3 control signals, 2 connections to power, one more for contrast adjustment and two connections for LED back light. Let us have a look to typical pin configurations:</p>
+<h3 style="text-align: justify;"><a id="pin-configuration">Pin Configuration table for a 16X2 LCD character display:-</a></h3>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>Pin Number</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center"><strong>Symbol</strong></p>
+</td>
+<td valign="top" width="451">
+<p align="center"><strong>Function</strong></p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>1</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">Vss</p>
+</td>
+<td width="451">Ground Terminal</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>2</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">Vcc</p>
+</td>
+<td width="451">Positive Supply</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>3</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">Vdd</p>
+</td>
+<td width="451">Contrast adjustment</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>4</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">RS</p>
+</td>
+<td width="451">Register Select; 0→Instruction Register, 1→Data Register</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>5</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">R/W</p>
+</td>
+<td width="451">Read/write Signal; 1→Read, 0→ Write</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>6</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">E</p>
+</td>
+<td width="451">Enable; Falling edge</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>7</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">DB0</p>
+</td>
+<td rowspan="8" width="451">Bi-directional data bus, data transfer is performed once, thru DB0 to DB7, in the case of interface data length is 8-bits; and twice, through DB4 to DB7 in the case of interface data length is 4-bits. Upper four bits first then lower four bits.</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>8</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">DB1</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>9</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">DB2</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>10</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">DB3</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>11</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">DB4</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>12</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">DB5</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>13</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">DB6</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>14</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">DB7</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>15</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">LED-(K)</p>
+</td>
+<td width="451">Back light LED cathode terminal</td>
+</tr>
+<tr>
+<td valign="top" width="91">
+<p align="center"><strong>16</strong></p>
+</td>
+<td valign="top" width="96">
+<p align="center">LED+(A)</p>
+</td>
+<td width="451">Back Light LED anode terminal</td>
+</tr>
+</tbody>
+</table>
+<h3 style="text-align: justify;">Data/Signals/Execution of LCD</h3>
+<p style="text-align: justify;">Now that was all about the signals and the hardware. Let us come to data, signals and execution.</p>
+<p style="text-align: justify;">LCD accepts two types of signals, one is data, and another is control. These signals are recognized by the LCD module from status of the RS pin. Now data can be read also from the LCD display, by pulling the R/W pin high. As soon as the E pin is pulsed, LCD display reads data at the falling edge of the pulse and executes it, same for the case of transmission.</p>
+<p style="text-align: justify;">                LCD display takes a time of 39-43µS to place a character or execute a command. Except for clearing display and to seek cursor to home position it takes 1.53ms to 1.64ms. Any attempt to send any data before this interval may lead to failure to read data or execution of the current data in some devices. Some devices compensate the speed by storing the incoming data to some temporary registers.</p>
+<p style="text-align: justify;">                LCD displays have two RAMs, naming DDRAM and CGRAM. DDRAM registers in which position which character in the ASCII chart would be displayed. Each byte of DDRAM represents each unique position on the LCD display. The LCD controller reads the information from the DDRAM and displays it on the LCD screen. CGRAM allows user to define their custom characters. For that purpose, address space for first 16 ASCII characters are reserved for users. After CGRAM has been setup to display characters, user can easily display their custom characters on the LCD screen.</p>
+<h3 style="text-align: justify;">Images of LCD Display:-</h3>
+<div id="attachment_7645" class="wp-caption aligncenter" style="width: 638px"><a href="http://www.circuitstoday.com/wp-content/uploads/2012/02/LCD-Display-Front-Side.jpg"><img class="size-full wp-image-7645" title="LCD Display Front Side" src="http://www.circuitstoday.com/wp-content/uploads/2012/02/LCD-Display-Front-Side.jpg" alt="LCD Display" width="628" height="472" /></a><p class="wp-caption-text">LCD - Front View</p></div>
+<div id="attachment_7646" class="wp-caption aligncenter" style="width: 638px"><a href="http://www.circuitstoday.com/wp-content/uploads/2012/02/lcd-display-back-side.jpg"><img class="size-full wp-image-7646" title="lcd display back side" src="http://www.circuitstoday.com/wp-content/uploads/2012/02/lcd-display-back-side.jpg" alt="LCD Display Circuit Board" width="628" height="472" /></a><p class="wp-caption-text">LCD - Back View</p></div>
+<h3></h3>
+<h3><a id="block-diagram">Block Diagram of LCD Display:-</a></h3>
+<div id="attachment_7647" class="wp-caption aligncenter" style="width: 618px"><a href="http://www.circuitstoday.com/wp-content/uploads/2012/02/LCD-Display-Block-Diagram.png"><img class="size-full wp-image-7647" title="LCD Display Block Diagram" src="http://www.circuitstoday.com/wp-content/uploads/2012/02/LCD-Display-Block-Diagram.png" alt="" width="608" height="351" /></a><p class="wp-caption-text">LCD - Block Diagram</p></div>
+<h3><a id="commands">Control and display commands</a></h3>
+<table width="696" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td rowspan="2" valign="top" width="96"><strong>Instruction</strong></td>
+<td colspan="10" valign="top" width="387">
+<p align="center"><strong>Instruction Code</strong></p>
+</td>
+<td rowspan="2" valign="top" width="135"><strong>Instruction Code Description</strong></td>
+<td rowspan="2" valign="top" width="78"><strong>Execution time</strong></td>
+</tr>
+<tr>
+<td width="35">
+<p align="center">RS</p>
+</td>
+<td width="41">
+<p align="center">R/W</p>
+</td>
+<td width="39">
+<p align="center">DB7</p>
+</td>
+<td width="39">
+<p align="center">DB6</p>
+</td>
+<td width="39">
+<p align="center">DB5</p>
+</td>
+<td width="39">
+<p align="center">DB4</p>
+</td>
+<td width="39">
+<p align="center">DB3</p>
+</td>
+<td width="39">
+<p align="center">DB2</p>
+</td>
+<td width="39">
+<p align="center">DB1</p>
+</td>
+<td width="39">
+<p align="center">DB0</p>
+</td>
+</tr>
+<tr>
+<td width="96">Read Data From RAM</td>
+<td width="35">
+<p align="center">1</p>
+</td>
+<td width="41">
+<p align="center">1</p>
+</td>
+<td width="39">
+<p align="center">D7</p>
+</td>
+<td width="39">
+<p align="center">D6</p>
+</td>
+<td width="39">
+<p align="center">D5</p>
+</td>
+<td width="39">
+<p align="center">D4</p>
+</td>
+<td width="39">
+<p align="center">D3</p>
+</td>
+<td width="39">
+<p align="center">D2</p>
+</td>
+<td width="39">
+<p align="center">D1</p>
+</td>
+<td width="39">
+<p align="center">D0</p>
+</td>
+<td width="135">Read data from internal RAM</td>
+<td width="78">
+<p align="center">1.53-1.64ms</p>
+</td>
+</tr>
+<tr>
+<td width="96">Write data to RAM</td>
+<td width="35">
+<p align="center">1</p>
+</td>
+<td width="41">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">D7</p>
+</td>
+<td width="39">
+<p align="center">D6</p>
+</td>
+<td width="39">
+<p align="center">D5</p>
+</td>
+<td width="39">
+<p align="center">D4</p>
+</td>
+<td width="39">
+<p align="center">D3</p>
+</td>
+<td width="39">
+<p align="center">D2</p>
+</td>
+<td width="39">
+<p align="center">D1</p>
+</td>
+<td width="39">
+<p align="center">D0</p>
+</td>
+<td width="135">Write data into internal RAM (DDRAM/CGRAM)</td>
+<td width="78">
+<p align="center">1.53-1.64ms</p>
+</td>
+</tr>
+<tr>
+<td width="96">Busy flag &amp; Address</td>
+<td width="35">
+<p align="center">0</p>
+</td>
+<td width="41">
+<p align="center">1</p>
+</td>
+<td width="39">
+<p align="center">BF</p>
+</td>
+<td width="39">
+<p align="center">AC6</p>
+</td>
+<td width="39">
+<p align="center">AC5</p>
+</td>
+<td width="39">
+<p align="center">AC4</p>
+</td>
+<td width="39">
+<p align="center">AC3</p>
+</td>
+<td width="39">
+<p align="center">AC2</p>
+</td>
+<td width="39">
+<p align="center">AC1</p>
+</td>
+<td width="39">
+<p align="center">AC0</p>
+</td>
+<td width="135">Busy flag (BF: 1→ LCD Busy) and contents of address counter in bits AC6-AC0.</td>
+<td width="78">
+<p align="center">39 µs</p>
+</td>
+</tr>
+<tr>
+<td width="96">Set DDRAM Address</td>
+<td width="35">
+<p align="center">0</p>
+</td>
+<td width="41">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">1</p>
+</td>
+<td width="39">
+<p align="center">AC6</p>
+</td>
+<td width="39">
+<p align="center">AC5</p>
+</td>
+<td width="39">
+<p align="center">AC4</p>
+</td>
+<td width="39">
+<p align="center">AC3</p>
+</td>
+<td width="39">
+<p align="center">AC2</p>
+</td>
+<td width="39">
+<p align="center">AC1</p>
+</td>
+<td width="39">
+<p align="center">AC0</p>
+</td>
+<td width="135">Set DDRAM address in address counter.</td>
+<td width="78">
+<p align="center">39 µs</p>
+</td>
+</tr>
+<tr>
+<td width="96">Set CGRAM Address</td>
+<td width="35">
+<p align="center">0</p>
+</td>
+<td width="41">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">1</p>
+</td>
+<td width="39">
+<p align="center">AC5</p>
+</td>
+<td width="39">
+<p align="center">AC4</p>
+</td>
+<td width="39">
+<p align="center">AC3</p>
+</td>
+<td width="39">
+<p align="center">AC2</p>
+</td>
+<td width="39">
+<p align="center">AC1</p>
+</td>
+<td width="39">
+<p align="center">AC0</p>
+</td>
+<td width="135">Set CGRAM Address in address counter.</td>
+<td width="78">
+<p align="center">39 µs</p>
+</td>
+</tr>
+<tr>
+<td width="96">Function Set</td>
+<td width="35">
+<p align="center">0</p>
+</td>
+<td width="41">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">1</p>
+</td>
+<td width="39">
+<p align="center">DL</p>
+</td>
+<td width="39">
+<p align="center">N</p>
+</td>
+<td width="39">
+<p align="center">F</p>
+</td>
+<td width="39">
+<p align="center">X</p>
+</td>
+<td width="39">
+<p align="center">X</p>
+</td>
+<td width="135">Set interface data length (DL: 4bit/8bit), Numbers of display line (N: 1-line/2-line) display font type (F:0→ 5&#215;8 dots, F:1→ 5&#215;11 dots)</td>
+<td width="78">
+<p align="center">39 µs</p>
+</td>
+</tr>
+<tr>
+<td width="96">Cursor or Display Shift</td>
+<td width="35">
+<p align="center">0</p>
+</td>
+<td width="41">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">1</p>
+</td>
+<td width="39">
+<p align="center">S/C</p>
+</td>
+<td width="39">
+<p align="center">R/L</p>
+</td>
+<td width="39">
+<p align="center">X</p>
+</td>
+<td width="39">
+<p align="center">X</p>
+</td>
+<td width="135">Set cursor moving and display shift control bit, and the direction without changing DDRAM data</td>
+<td width="78">
+<p align="center">39 µs</p>
+</td>
+</tr>
+<tr>
+<td width="96">Display &amp; Cursor On/Off</td>
+<td width="35">
+<p align="center">0</p>
+</td>
+<td width="41">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">1</p>
+</td>
+<td width="39">
+<p align="center">D</p>
+</td>
+<td width="39">
+<p align="center">C</p>
+</td>
+<td width="39">
+<p align="center">B</p>
+</td>
+<td width="135">Set Display(D),Cursor(C) and cursor blink(b) on/off control</td>
+<td width="78">
+<p align="center">39 µs</p>
+</td>
+</tr>
+<tr>
+<td width="96">Entry Mode Set</td>
+<td width="35">
+<p align="center">0</p>
+</td>
+<td width="41">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">1</p>
+</td>
+<td width="39">
+<p align="center">I/D</p>
+</td>
+<td width="39">
+<p align="center">SH</p>
+</td>
+<td width="135">Assign cursor moving direction and enable shift entire display.</td>
+<td width="78">
+<p align="center">0µs</p>
+</td>
+</tr>
+<tr>
+<td width="96">Return Home</td>
+<td width="35">
+<p align="center">0</p>
+</td>
+<td width="41">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">1</p>
+</td>
+<td width="39">
+<p align="center">X</p>
+</td>
+<td width="135">Set DDRAM Address to “00H” from AC and return cursor to its original position if shifted.</td>
+<td width="78">
+<p align="center">43µs</p>
+</td>
+</tr>
+<tr>
+<td width="96">Clear Display</td>
+<td width="35">
+<p align="center">0</p>
+</td>
+<td width="41">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">0</p>
+</td>
+<td width="39">
+<p align="center">1</p>
+</td>
+<td width="135">Write “20H” to DDRAM and set DDRAM Address to “00H” from AC</td>
+<td width="78">
+<p align="center">43µs</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>AC -Address Counter</p>
+<p><strong>Outline</strong></p>
+<p>Now the instruction can be divided mainly in four kinds</p>
+<p>1)      Function set instructions</p>
+<p>2)      Address set instructions</p>
+<p>3)      Data transfer instructions with internal RAM</p>
+<p>4)      Others</p>
+<p><strong>Details of the Instructions</strong></p>
+<p><strong>1)      </strong><strong>Read Data from RAM</strong></p>
+<table width="696" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="62">
+<p align="center">RS</p>
+</td>
+<td width="74">
+<p align="center">R/W</p>
+</td>
+<td width="70">
+<p align="center">DB7</p>
+</td>
+<td width="70">
+<p align="center">DB6</p>
+</td>
+<td width="70">
+<p align="center">DB5</p>
+</td>
+<td width="70">
+<p align="center">DB4</p>
+</td>
+<td width="70">
+<p align="center">DB3</p>
+</td>
+<td width="70">
+<p align="center">DB2</p>
+</td>
+<td width="70">
+<p align="center">DB1</p>
+</td>
+<td width="70">
+<p align="center">DB0</p>
+</td>
+</tr>
+<tr>
+<td width="62">
+<p align="center">1</p>
+</td>
+<td width="74">
+<p align="center">1</p>
+</td>
+<td width="70">
+<p align="center">D7</p>
+</td>
+<td width="70">
+<p align="center">D6</p>
+</td>
+<td width="70">
+<p align="center">D5</p>
+</td>
+<td width="70">
+<p align="center">D4</p>
+</td>
+<td width="70">
+<p align="center">D3</p>
+</td>
+<td width="70">
+<p align="center">D2</p>
+</td>
+<td width="70">
+<p align="center">D1</p>
+</td>
+<td width="70">
+<p align="center">D0</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Read 8bit binary data from DDRAM/CGRAM</strong></p>
+<p style="text-align: justify;">The selection of RAM is set by the previous address set instruction. If the address set instruction of RAM is not performed before this instruction, the data that is read first is invalid, because the direction of AC is not determined. If the RAM data is read several times without RAM address set instruction before read operation, the correct RAM data from the second, but the first data would be incorrect, as there is no time to transfer RAM data. In case of DDRAM read operation, cursor shift instruction plays the same role as DDRAM address set instruction; it also transfers RAM data to the output data registers.</p>
+<p style="text-align: justify;">After read operation, the data address counter is automatically increased or decreased by 1 according to the entry mode. After CGRAM read operation, display shift may not be executed properly.</p>
+<p style="text-align: justify;">*In case of RAM write operation, AC is increased or decreased by 1 like that of the read operation. In this time AC indicates the next address position, but the previous data can only by the read instruction.</p>
+<p><strong>2)      </strong><strong>Write data to ram</strong></p>
+<table width="696" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="62">
+<p align="center">RS</p>
+</td>
+<td width="74">
+<p align="center">R/W</p>
+</td>
+<td width="70">
+<p align="center">DB7</p>
+</td>
+<td width="70">
+<p align="center">DB6</p>
+</td>
+<td width="70">
+<p align="center">DB5</p>
+</td>
+<td width="70">
+<p align="center">DB4</p>
+</td>
+<td width="70">
+<p align="center">DB3</p>
+</td>
+<td width="70">
+<p align="center">DB2</p>
+</td>
+<td width="70">
+<p align="center">DB1</p>
+</td>
+<td width="70">
+<p align="center">DB0</p>
+</td>
+</tr>
+<tr>
+<td width="62">
+<p align="center">1</p>
+</td>
+<td width="74">
+<p align="center">0</p>
+</td>
+<td width="70">
+<p align="center">D7</p>
+</td>
+<td width="70">
+<p align="center">D6</p>
+</td>
+<td width="70">
+<p align="center">D5</p>
+</td>
+<td width="70">
+<p align="center">D4</p>
+</td>
+<td width="70">
+<p align="center">D3</p>
+</td>
+<td width="70">
+<p align="center">D2</p>
+</td>
+<td width="70">
+<p align="center">D1</p>
+</td>
+<td width="70">
+<p align="center">D0</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Write binary 8bit data to DDRAM/CGRAM. The selection of CGRAM or DRAM is set by the previous address set instruction; DDRAM address set, CGRAM address set. RAM set instruction can also determine the AC direction to RAM.</p>
+<p>After write operation, the address is automatically increased or decreased by 1 according to the entry mode.</p>
+<p><strong>3)      </strong><strong>Read Busy Flag and Address</strong></p>
+<table width="696" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="62">
+<p align="center">RS</p>
+</td>
+<td width="74">
+<p align="center">R/W</p>
+</td>
+<td width="70">
+<p align="center">DB7</p>
+</td>
+<td width="70">
+<p align="center">DB6</p>
+</td>
+<td width="70">
+<p align="center">DB5</p>
+</td>
+<td width="70">
+<p align="center">DB4</p>
+</td>
+<td width="70">
+<p align="center">DB3</p>
+</td>
+<td width="70">
+<p align="center">DB2</p>
+</td>
+<td width="70">
+<p align="center">DB1</p>
+</td>
+<td width="70">
+<p align="center">DB0</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="62">
+<p align="center">0</p>
+</td>
+<td valign="top" width="74">
+<p align="center">1</p>
+</td>
+<td valign="top" width="70">
+<p align="center">BF</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC6</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC5</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC4</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC3</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC2</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC1</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC0</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: justify;">By making this read out operation, it can be determined if the LCD is performing some internal operation or not. If Busy Flag (BF) is high, some internal operation is going inside the LCD at that particular moment. To perform further operation the data source (e.g. micro controller) must wait for the BF to go low. Here, the address counter value can also be read.</p>
+<p><strong>4)      </strong><strong>Set DDRAM Address</strong></p>
+<table width="696" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="62">
+<p align="center">RS</p>
+</td>
+<td width="74">
+<p align="center">R/W</p>
+</td>
+<td width="70">
+<p align="center">DB7</p>
+</td>
+<td width="70">
+<p align="center">DB6</p>
+</td>
+<td width="70">
+<p align="center">DB5</p>
+</td>
+<td width="70">
+<p align="center">DB4</p>
+</td>
+<td width="70">
+<p align="center">DB3</p>
+</td>
+<td width="70">
+<p align="center">DB2</p>
+</td>
+<td width="70">
+<p align="center">DB1</p>
+</td>
+<td width="70">
+<p align="center">DB0</p>
+</td>
+</tr>
+<tr>
+<td width="62">
+<p align="center">0</p>
+</td>
+<td width="74">
+<p align="center">0</p>
+</td>
+<td width="70">
+<p align="center">1</p>
+</td>
+<td width="70">
+<p align="center">AC6</p>
+</td>
+<td width="70">
+<p align="center">AC5</p>
+</td>
+<td width="70">
+<p align="center">AC4</p>
+</td>
+<td width="70">
+<p align="center">AC3</p>
+</td>
+<td width="70">
+<p align="center">AC2</p>
+</td>
+<td width="70">
+<p align="center">AC1</p>
+</td>
+<td width="70">
+<p align="center">AC0</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: justify;">Set DDRAM address to AC, this instruction makes DDRAM data available from MPU. In 1-line display mode, DDRAM address rangers from “00H” to “4FH”. In 2-line display mode, DDRAM address in the first line ranges from “00H” to “27H”, and DDRAM address in the 2<sup>nd</sup> line is from “40H” to “67H”.</p>
+<p><strong>5)      </strong><strong>Set CGRAM address</strong></p>
+<table width="696" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="62">
+<p align="center">RS</p>
+</td>
+<td width="74">
+<p align="center">R/W</p>
+</td>
+<td width="70">
+<p align="center">DB7</p>
+</td>
+<td width="70">
+<p align="center">DB6</p>
+</td>
+<td width="70">
+<p align="center">DB5</p>
+</td>
+<td width="70">
+<p align="center">DB4</p>
+</td>
+<td width="70">
+<p align="center">DB3</p>
+</td>
+<td width="70">
+<p align="center">DB2</p>
+</td>
+<td width="70">
+<p align="center">DB1</p>
+</td>
+<td width="70">
+<p align="center">DB0</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="62">
+<p align="center">0</p>
+</td>
+<td valign="top" width="74">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">1</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC5</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC4</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC3</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC2</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC1</p>
+</td>
+<td valign="top" width="70">
+<p align="center">AC0</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Set CGRAM address to AC. This instruction makes CGRAM data available from MPU.</p>
+<p><strong>6)      </strong><strong>Function Set</strong></p>
+<table width="696" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="62">
+<p align="center">RS</p>
+</td>
+<td width="74">
+<p align="center">R/W</p>
+</td>
+<td width="70">
+<p align="center">DB7</p>
+</td>
+<td width="70">
+<p align="center">DB6</p>
+</td>
+<td width="70">
+<p align="center">DB5</p>
+</td>
+<td width="70">
+<p align="center">DB4</p>
+</td>
+<td width="70">
+<p align="center">DB3</p>
+</td>
+<td width="70">
+<p align="center">DB2</p>
+</td>
+<td width="70">
+<p align="center">DB1</p>
+</td>
+<td width="70">
+<p align="center">DB0</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="62">
+<p align="center">0</p>
+</td>
+<td valign="top" width="74">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">1</p>
+</td>
+<td valign="top" width="70">
+<p align="center">DL</p>
+</td>
+<td valign="top" width="70">
+<p align="center">N</p>
+</td>
+<td valign="top" width="70">
+<p align="center">F</p>
+</td>
+<td valign="top" width="70">
+<p align="center">X</p>
+</td>
+<td valign="top" width="70">
+<p align="center">X</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DL: Interface data length control bit</strong></p>
+<p>DL=’1’ means 8bit mode of data transfer.</p>
+<p>DL=’0’ means 4bit mode of data transfer</p>
+<p>When 4 bit mode is activated, the data needs to be transferred in two parts, first higher 4bits, and then lower 4 bits.</p>
+<p><strong>N: display line number control bit</strong></p>
+<p>N=’1’ will allows to characters to display in 2-lines</p>
+<p>N=’0’ will allows to characters to display in the first line only</p>
+<p><strong>F: display font control bit</strong></p>
+<p>F=’0’ will use 5&#215;8 dots format display mode</p>
+<p>F=’1’ will use 5&#215;11 dots format display mode</p>
+<p><strong>7)      </strong><strong>Cursor or display Shift</strong></p>
+<table width="696" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="62">
+<p align="center">RS</p>
+</td>
+<td width="74">
+<p align="center">R/W</p>
+</td>
+<td width="70">
+<p align="center">DB7</p>
+</td>
+<td width="70">
+<p align="center">DB6</p>
+</td>
+<td width="70">
+<p align="center">DB5</p>
+</td>
+<td width="70">
+<p align="center">DB4</p>
+</td>
+<td width="70">
+<p align="center">DB3</p>
+</td>
+<td width="70">
+<p align="center">DB2</p>
+</td>
+<td width="70">
+<p align="center">DB1</p>
+</td>
+<td width="70">
+<p align="center">DB0</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="62">
+<p align="center">0</p>
+</td>
+<td valign="top" width="74">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">1</p>
+</td>
+<td valign="top" width="70">
+<p align="center">S/C</p>
+</td>
+<td valign="top" width="70">
+<p align="center">R/L</p>
+</td>
+<td valign="top" width="70">
+<p align="center">X</p>
+</td>
+<td valign="top" width="70">
+<p align="center">X</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Without writing or reading the display data, shifting right/left cursor position or display.</p>
+<p>This instruction is made to correct or search or display data. During 2-line display mode, cursor moves to the 2<sup>nd</sup> line after the 40<sup>th</sup> digit of the 1<sup>st</sup> line.</p>
+<p>When displayed data is shifted repeatedly, each line shifts individually.</p>
+<p>When display shift is performed, the contents of the address counter are not changed.</p>
+<p><strong>8)      </strong><strong>Display On/Off Control</strong></p>
+<table width="696" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="62">
+<p align="center">RS</p>
+</td>
+<td width="74">
+<p align="center">R/W</p>
+</td>
+<td width="70">
+<p align="center">DB7</p>
+</td>
+<td width="70">
+<p align="center">DB6</p>
+</td>
+<td width="70">
+<p align="center">DB5</p>
+</td>
+<td width="70">
+<p align="center">DB4</p>
+</td>
+<td width="70">
+<p align="center">DB3</p>
+</td>
+<td width="70">
+<p align="center">DB2</p>
+</td>
+<td width="70">
+<p align="center">DB1</p>
+</td>
+<td width="70">
+<p align="center">DB0</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="62">
+<p align="center">0</p>
+</td>
+<td valign="top" width="74">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">1</p>
+</td>
+<td valign="top" width="70">
+<p align="center">D</p>
+</td>
+<td valign="top" width="70">
+<p align="center">C</p>
+</td>
+<td valign="top" width="70">
+<p align="center">B</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This instruction controls Display, Cursor and cursor blink.</p>
+<p><strong>D: Display On/Off control bit</strong></p>
+<p>D=’1’ means entire display is turned on</p>
+<p>D=’0’ means entire display is turned off. But Display data remains in DDRAM.</p>
+<p><strong>C: cursor On/Off control bit</strong></p>
+<p>C=’1’ turns on the cursor</p>
+<p>C=’0’ turns off the cursor. But I/D register retains the data</p>
+<p><strong>B: Cursor blink On/Off control bit</strong></p>
+<p>B=’1’ makes cursor blink periodically.</p>
+<p>B=’0’ stops the cursor to blink and cursor looks steady if the Cursor is turned on.</p>
+<p>&nbsp;</p>
+<p><strong>9)      </strong><strong>Entry Mode Set</strong></p>
+<table width="696" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="62">
+<p align="center">RS</p>
+</td>
+<td width="74">
+<p align="center">R/W</p>
+</td>
+<td width="70">
+<p align="center">DB7</p>
+</td>
+<td width="70">
+<p align="center">DB6</p>
+</td>
+<td width="70">
+<p align="center">DB5</p>
+</td>
+<td width="70">
+<p align="center">DB4</p>
+</td>
+<td width="70">
+<p align="center">DB3</p>
+</td>
+<td width="70">
+<p align="center">DB2</p>
+</td>
+<td width="70">
+<p align="center">DB1</p>
+</td>
+<td width="70">
+<p align="center">DB0</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="62">
+<p align="center">0</p>
+</td>
+<td valign="top" width="74">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">1</p>
+</td>
+<td valign="top" width="70">
+<p align="center">I/D</p>
+</td>
+<td valign="top" width="70">
+<p align="center">SH</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This instruction sets the moving direction of cursor and display.</p>
+<p>When I/D= ’1’ cursor moves to the right and DDRAM address is increased by 1.</p>
+<p>When I/D= ’0’ cursor moves to the left and DDRAM address is decreased by 1.</p>
+<p>CGRAM operates in the same way in this setting.</p>
+<p><strong>10)   </strong><strong>Return Home</strong></p>
+<table width="696" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="62">
+<p align="center">RS</p>
+</td>
+<td width="74">
+<p align="center">R/W</p>
+</td>
+<td width="70">
+<p align="center">DB7</p>
+</td>
+<td width="70">
+<p align="center">DB6</p>
+</td>
+<td width="70">
+<p align="center">DB5</p>
+</td>
+<td width="70">
+<p align="center">DB4</p>
+</td>
+<td width="70">
+<p align="center">DB3</p>
+</td>
+<td width="70">
+<p align="center">DB2</p>
+</td>
+<td width="70">
+<p align="center">DB1</p>
+</td>
+<td width="70">
+<p align="center">DB0</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="62">
+<p align="center">0</p>
+</td>
+<td valign="top" width="74">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">1</p>
+</td>
+<td valign="top" width="70">
+<p align="center">X</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This instruction sets the address counter to ‘00H’, and returns the cursor to the first column of first line. And if display is shifted previously, this instruction shifts this too. The DDRAM contents don’t change in this instruction.</p>
+<p><strong>11)   </strong><strong>Clear display</strong></p>
+<table width="696" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="62">
+<p align="center">RS</p>
+</td>
+<td width="74">
+<p align="center">R/W</p>
+</td>
+<td width="70">
+<p align="center">DB7</p>
+</td>
+<td width="70">
+<p align="center">DB6</p>
+</td>
+<td width="70">
+<p align="center">DB5</p>
+</td>
+<td width="70">
+<p align="center">DB4</p>
+</td>
+<td width="70">
+<p align="center">DB3</p>
+</td>
+<td width="70">
+<p align="center">DB2</p>
+</td>
+<td width="70">
+<p align="center">DB1</p>
+</td>
+<td width="70">
+<p align="center">DB0</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="62">
+<p align="center">0</p>
+</td>
+<td valign="top" width="74">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">0</p>
+</td>
+<td valign="top" width="70">
+<p align="center">1</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Clear all the display data by writing “20H” (ASCII code of ‘space’ character) to all DDRAM address, AND set value DDRAM address counter (AC) to “00H”. It returns the cursor to the first column of first line and sets the entry mode to increment mode (I/D=’1’).</p>
+<h3><a id="interfacing">8-bit and 4-bit interfacing of LCD</a></h3>
+<p style="text-align: justify;">Now the question is how to display data in the LCD or give command to it. There is two modes of data transfer are supported by LCD displays. One is 4bit mode, another is 8 bit mode. To transfer data In 8 bit mode, first put your data in the 8bit bus, then put command in the command bus and then pulse the enable signal.</p>
+<p style="text-align: justify;">                To send data in 4bit mode; first put upper 4bit in the 4 bit data bus connected to 4MSB pins of LCD display, then put control signals in the control bus, then pulse the E pin once. Next put the lower 4 bit in the data bus and pulse the E pin again. Here is a flowchart simply describing it.</p>
+<h3>LCD Display Interfacing &#8211; Flowchart:-</h3>
+<div id="attachment_7648" class="wp-caption aligncenter" style="width: 486px"><a href="http://www.circuitstoday.com/wp-content/uploads/2012/02/LCD-Display-Interfacing-Flowchart.png"><img class="size-full wp-image-7648" title="LCD Display Interfacing-Flowchart" src="http://www.circuitstoday.com/wp-content/uploads/2012/02/LCD-Display-Interfacing-Flowchart.png" alt="LCD Interfacing" width="476" height="451" /></a><p class="wp-caption-text">LCD Interfacing - Flowchart</p></div>
+<h3><a id="initialisation">LCD Initialisation</a></h3>
+<p>We are pretty familiar how to send data. But before displaying characters on the LCD display, it must be configured first. To configure an LCD display, four command words must be sent to LCD in either 4 bit mode, or in 8 bit mode. The commands are:</p>
+<p>1. Function set</p>
+<p>2. Display On/Off control</p>
+<p>3. Entry mode set</p>
+<p>4. Display Clear</p>
+<p>Here is a flow chart of the initialization sequence of LCD display.</p>
+<div id="attachment_7649" class="wp-caption aligncenter" style="width: 433px"><a href="http://www.circuitstoday.com/wp-content/uploads/2012/02/LCD-Intialization-Flow-Chart.png"><img class="size-full wp-image-7649" title="LCD Intialization Flow Chart" src="http://www.circuitstoday.com/wp-content/uploads/2012/02/LCD-Intialization-Flow-Chart.png" alt="" width="423" height="507" /></a><p class="wp-caption-text">LCD Initialization</p></div>
+<h3>Displaying Custom Characters</h3>
+<p style="text-align: justify;">All these character display modules got the feature to create 8 user defined characters (ASCII Codes 0&#8230;7) in addition to the ROM fixed codes.</p>
+<p style="text-align: justify;">1.) The command &#8220;CG RAM Address Set&#8221; defines the ASCII code (Bit 3, 4, 5) and the dot line (Bit 0, 1, 2) of the new character. Example demonstrates creating ASCII code “00H”.</p>
+<p style="text-align: justify;">2.) Doing 8 times the write command &#8220;Data Write&#8221; defines line by line the new character. 8th byte stands for the cursor line.</p>
+<p style="text-align: justify;">3.) The new defined character can be used as a &#8220;normal&#8221; ASCII code (0&#8230;7); use with &#8220;DD RAM Address Set&#8221; and &#8220;Data Write&#8221;.</p>
+<p><a href="http://www.circuitstoday.com/wp-content/uploads/2012/02/lcd-characters.png"><img class="aligncenter size-full wp-image-7650" title="lcd characters" src="http://www.circuitstoday.com/wp-content/uploads/2012/02/lcd-characters.png" alt="" width="606" height="287" /></a></p>
+<p>Now let us look up the character set that can be displayed using the LCD Displayed</p>
+<table width="614" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="top" nowrap="nowrap" width="89"></td>
+<td valign="top" nowrap="nowrap" width="43">0&#215;00</td>
+<td valign="top" nowrap="nowrap" width="43">0&#215;10</td>
+<td valign="top" nowrap="nowrap" width="43">0&#215;20</td>
+<td valign="top" nowrap="nowrap" width="43">0&#215;30</td>
+<td valign="top" nowrap="nowrap" width="43">0&#215;40</td>
+<td valign="top" nowrap="nowrap" width="43">0&#215;50</td>
+<td valign="top" nowrap="nowrap" width="43">0&#215;60</td>
+<td valign="top" nowrap="nowrap" width="43">0&#215;70</td>
+<td valign="top" width="95">0&#215;80 to 0xd0</td>
+<td valign="bottom" width="43">0xE0</td>
+<td valign="bottom" width="42">0xF0</td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0&#215;00</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG1</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">0</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">@</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">P</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">`</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">p</p>
+</td>
+<td rowspan="16" width="95">
+<p align="center">CUSTOM REGIONAL CHARACHTERS</p>
+</td>
+<td valign="bottom" width="43">
+<p align="right">Α</p>
+</td>
+<td valign="bottom" width="42"></td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0&#215;01</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG2</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">!</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">1</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">A</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">Q</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">a</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">q</p>
+</td>
+<td valign="bottom" width="43">
+<p align="right">Ä</p>
+</td>
+<td valign="bottom" width="42"></td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0&#215;02</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG3</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">&#8220;</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">2</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">B</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">R</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">b</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">r</p>
+</td>
+<td valign="bottom" width="43">
+<p align="right">Β</p>
+</td>
+<td valign="bottom" width="42">
+<p align="right">θ</p>
+</td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0&#215;03</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG4</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">#</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">3</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">C</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">S</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">c</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">s</p>
+</td>
+<td valign="bottom" width="43">
+<p align="right">Ε</p>
+</td>
+<td valign="bottom" width="42"></td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0&#215;04</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG5</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">$</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">4</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">D</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">T</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">d</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">t</p>
+</td>
+<td valign="bottom" width="43">
+<p align="right">Μ</p>
+</td>
+<td valign="bottom" width="42">
+<p align="right">Ω</p>
+</td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0&#215;05</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG6</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">%</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">5</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">E</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">U</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">e</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">u</p>
+</td>
+<td valign="bottom" width="43">
+<p align="right">Σ</p>
+</td>
+<td valign="bottom" width="42">
+<p align="right">ϋ</p>
+</td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0&#215;06</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG7</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">&amp;</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">6</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">F</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">V</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">f</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">v</p>
+</td>
+<td valign="bottom" width="43">
+<p align="right">Ρ</p>
+</td>
+<td valign="bottom" width="42">
+<p align="right">Σ</p>
+</td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0&#215;07</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG8</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">7</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">G</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">W</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">g</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">w</p>
+</td>
+<td valign="bottom" width="43">
+<p align="right">G</p>
+</td>
+<td valign="bottom" width="42">
+<p align="right">π</p>
+</td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0&#215;08</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG1</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">(</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">8</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">H</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">X</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">h</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">x</p>
+</td>
+<td valign="bottom" width="43">
+<p align="right">√</p>
+</td>
+<td valign="bottom" width="42"></td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0&#215;09</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG2</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">)</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">9</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">I</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">Y</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">i</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">y</p>
+</td>
+<td valign="bottom" width="43">
+<p align="right">¯¹</p>
+</td>
+<td valign="bottom" width="42">
+<p align="right">y</p>
+</td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0x0A</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG3</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">*</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">:</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">J</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">Z</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">j</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">z</p>
+</td>
+<td valign="bottom" width="43">
+<p align="right">J</p>
+</td>
+<td valign="bottom" width="42"></td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0x0B</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG4</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">+</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">;</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">K</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">[</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">k</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">{</p>
+</td>
+<td valign="bottom" width="43"></td>
+<td valign="bottom" width="42"></td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0x0C</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG5</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">,</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">&lt;</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">L</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">¥</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">l</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">|</p>
+</td>
+<td valign="bottom" width="43"></td>
+<td valign="bottom" width="42"></td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0x0D</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG6</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">-</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">=</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">M</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">]</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">m</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">}</p>
+</td>
+<td valign="bottom" width="43"></td>
+<td valign="bottom" width="42"></td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0x0E</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG7</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">.</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">&gt;</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">N</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">^</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">n</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">→</p>
+</td>
+<td valign="bottom" width="43"></td>
+<td valign="bottom" width="42"></td>
+</tr>
+<tr>
+<td valign="top" nowrap="nowrap" width="89">
+<p align="right">0x0F</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">CG8</td>
+<td valign="top" nowrap="nowrap" width="43"></td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">/</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">?</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">O</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">_</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">o</p>
+</td>
+<td valign="top" nowrap="nowrap" width="43">
+<p align="right">←</p>
+</td>
+<td valign="bottom" width="43"></td>
+<td valign="bottom" width="42">
+<p align="right">█</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>CG→ CGRAM User Defined Character</p>
+<p>Custom Regional characters vary from manufacturer to manufacturer. The Greek letters may or may not appear. It too depends upon the design.</p>
+<p>&nbsp;</p>
+<a id="dd_end"></a><div class='dd_outer'><div class='dd_inner'><div id='dd_ajax_float'><div class='dd_button_v'><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="http://www.circuitstoday.com/a-note-on-character-lcd-displays" send="false" show_faces="false"  layout="box_count" width="50"  ></fb:like></div><div style='clear:left'></div><div class='dd_button_v'><a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.circuitstoday.com/a-note-on-character-lcd-displays" data-count="vertical" data-text="A Note on Character LCD Displays" data-via="" ></a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div><div style='clear:left'></div><div class='dd_button_v'><script type='text/javascript' src='https://apis.google.com/js/plusone.js'></script><g:plusone size='tall' href='http://www.circuitstoday.com/a-note-on-character-lcd-displays'></g:plusone></div><div style='clear:left'></div><div class='dd_button_v'><a name='fb_share' type='box_count' share_url='http://www.circuitstoday.com/a-note-on-character-lcd-displays' href='http://www.facebook.com/sharer.php'></a><script src='http://static.ak.fbcdn.net/connect.php/js/FB.Share' type='text/javascript'></script></div><div style='clear:left'></div><div class='dd_button_v'><script type='text/javascript' src='http://platform.linkedin.com/in.js'></script><div class='dd-linkedin-share'><div data-url='http://www.circuitstoday.com/a-note-on-character-lcd-displays' data-counter='top'></div></div></div><div style='clear:left'></div><div class='dd_button_v'><a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.circuitstoday.com%2Fa-note-on-character-lcd-displays&description=A%20Note%20on%20Character%20LCD%20Displays&media=http://www.circuitstoday.com/wp-content/uploads/2012/02/LCD-Display-Front-Side.jpg" class="pin-it-button" count-layout="vertical"></a><script type="text/javascript" src="http://assets.pinterest.com/js/pinit.js"></script></div><div style='clear:left'></div></div></div></div><script type="text/javascript">var dd_offset_from_content = 40; var dd_top_offset_from_content = 0;</script><script type="text/javascript" src="http://www.circuitstoday.com/wp-content/plugins/digg-digg/include/../js/diggdigg-floating-bar.js?ver=5.2.9"></script>	
+
+
+
+<div class="clear"></div>
+<!--ads code starts-->
+<div class="gads">
+<table>
+<tbody>
+<tr>
+<td>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3246204657963347";
+/* 336x280, created 15/12/10 */
+google_ad_slot = "5793902454";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!--ads code ends-->
+<div class="rr">
+<div class="rr1">
+<h3>You may also like:</h3>
+   <ul>
+    <li>
+
+<a href="http://www.circuitstoday.com/resistor-color-code-chart" title="Resistor Color Code Chart &#8211; Understanding Resistance Color Coding" >Resistor Color Code Chart &#8211; Understanding Resistance Color Coding</a>
+
+   
+</li>
+    
+    <li>
+
+<a href="http://www.circuitstoday.com/how-to-debug-in-keil-microvision" title="How to debug in Keil Microvision" >How to debug in Keil Microvision</a>
+
+   
+</li>
+    
+    <li>
+
+<a href="http://www.circuitstoday.com/getting-started-with-keil-uvision" title="Getting Started with Keil uVision" >Getting Started with Keil uVision</a>
+
+   
+</li>
+    
+    <li>
+
+<a href="http://www.circuitstoday.com/bit-rate-vs-baud-rate-the-common-misconception" title="Bit rate Vs Baud rate &#8211; the common misconception" >Bit rate Vs Baud rate &#8211; the common misconception</a>
+
+   
+</li>
+    
+    <li>
+
+<a href="http://www.circuitstoday.com/how-to-recoverreset-admin-username-and-password-of-vbulletin-forum-software" title="How to recover/reset admin username and password of Vbulletin forum software" >How to recover/reset admin username and password of Vbulletin forum software</a>
+
+   
+</li>
+    </ul>
+</div>
+<div class="rr2">
+<h3>We recommend:</h3>
+<ul>
+	<li><a href="http://www.circuitstoday.com/pulse-width-modulation-what-is-it">Pulse Width Modulation &#8211; What is it?</a></li>
+	<li><a href="http://www.circuitstoday.com/simple-electronics-projects-and-circuits">Simple electronics projects and circuits</a></li>
+	<li><a href="http://www.circuitstoday.com/control-structures-in-c-and-cpp">Control structures and statements in C and C++</a></li>
+	<li><a href="http://www.circuitstoday.com/switching-voltage-regulators">Switching Voltage Regulators</a></li>
+	<li><a href="http://www.circuitstoday.com/electronic-galvanometers">Electronic Galvanometers</a></li>
+</ul>
+
+</div>
+</div>
+<div class="clear"></div>
+</div>
+
+<div id="sbox2">
+<style type="text/css">
+@import url(http://www.google.com/cse/api/branding.css);
+</style>
+<div class="cse-branding-bottom" style="background-color:#FFFFFF;color:#000000">
+  <div class="cse-branding-form">
+    <form action="http://www.google.com/cse" id="cse-search-box">
+      <div>
+        <input type="hidden" name="cx" value="partner-pub-3246204657963347:sk79kg-rjb5" />
+        <input type="hidden" name="ie" value="ISO-8859-1" />
+        <input type="text" name="q" size="31" />
+        <input type="submit" name="sa" value="Search" />
+      </div>
+    </form>
+  </div>
+  <div class="cse-branding-logo">
+    <img src="http://www.google.com/images/poweredby_transparent/poweredby_FFFFFF.gif" alt="Google" />
+  </div>
+  <div class="cse-branding-text">
+    Custom Search
+  </div>
+</div>
+</div>
+
+<div class="clear"></div>
+
+<div class="postmetabottom"><div class="p-cat"> Posted in <a href="http://www.circuitstoday.com/category/tutorials" title="View all posts in Tutorials" rel="category tag">Tutorials</a></div> <div class="p-tag"></div><div class="clear"></div></div>
+
+<!--Begin share this post-->
+
+<div id="share"></div>
+
+<!--End share this post-->
+
+				</div>
+	</div>
+<div id="comments">
+
+
+
+<!-- You can start editing here. -->
+
+
+
+
+
+
+<div id="respond">
+
+
+
+<h3>Leave a Reply</h3>
+
+
+
+<div class="cancel-comment-reply">
+
+	<small><a rel="nofollow" id="cancel-comment-reply-link" href="/a-note-on-character-lcd-displays#respond" style="display:none;">Click here to cancel reply.</a></small>
+
+</div>
+
+
+
+
+
+
+<form action="http://www.circuitstoday.com/wp-comments-post.php" method="post" id="commentform">
+
+
+
+
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" aria-required='true' />
+
+<label for="author"><small>Name (required)</small></label></p>
+
+
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" aria-required='true' />
+
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+
+<label for="url"><small>Website</small></label></p>
+
+
+
+
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></small></p>-->
+
+
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+
+<input type='hidden' name='comment_post_ID' value='7644' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+
+</p>
+
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="214fd2c456" /></p>
+
+
+</form>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+	<h3 id="comments">10 Responses to &#8220;A Note on Character LCD Displays&#8221;</h3>
+
+
+
+	<div class="navigation">
+
+		<div class="alignleft"></div>
+
+		<div class="alignright"></div>
+
+		<div class="clear"></div>
+
+	</div>
+
+
+
+	<ul class="commentlist">
+
+			<li class="comment even thread-even depth-1" id="comment-146558">
+				<div id="div-comment-146558" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn">rajat sharma</cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.circuitstoday.com/a-note-on-character-lcd-displays#comment-146558">
+			July 5, 2014 at 10:59 pm</a>		</div>
+
+		<p>sir pls tell me how to print a heart symbol on the l.c.d screen..</p>
+
+		<div class="reply">
+		<a class='comment-reply-link' href='/a-note-on-character-lcd-displays?replytocom=146558#respond' onclick='return addComment.moveForm("div-comment-146558", "146558", "respond", "7644")'>Reply</a>		</div>
+				</div>
+		</li>
+		<li class="pingback odd alt thread-odd thread-alt depth-1" id="comment-141323">
+				<div id="div-comment-141323" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn"><a href='http://engineeroutside.wordpress.com/2014/05/10/lcd-tutorial/' rel='external nofollow' class='url'>LCD tutorial | outside</a></cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.circuitstoday.com/a-note-on-character-lcd-displays#comment-141323">
+			May 10, 2014 at 3:04 am</a>		</div>
+
+		<p>[...] Pin Configuration  2. Block Diagram 3. Control and Display Commands  4. LCD Interfacing  5. LCD [...]</p>
+
+		<div class="reply">
+		<a class='comment-reply-link' href='/a-note-on-character-lcd-displays?replytocom=141323#respond' onclick='return addComment.moveForm("div-comment-141323", "141323", "respond", "7644")'>Reply</a>		</div>
+				</div>
+		</li>
+		<li class="comment even thread-even depth-1" id="comment-113969">
+				<div id="div-comment-113969" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn">Henri</cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.circuitstoday.com/a-note-on-character-lcd-displays#comment-113969">
+			January 3, 2014 at 6:35 pm</a>		</div>
+
+		<p>I need a sample code for the special character like the downwards arrow. Would you be enough kind to provide me with that or explain me how to do? I do change LCD_command and LCD_data to make such pattern but it does not work out for me! <img src='http://www.circuitstoday.com/wp-includes/images/smilies/icon_sad.gif' alt=':(' class='wp-smiley' /> </p>
+
+		<div class="reply">
+		<a class='comment-reply-link' href='/a-note-on-character-lcd-displays?replytocom=113969#respond' onclick='return addComment.moveForm("div-comment-113969", "113969", "respond", "7644")'>Reply</a>		</div>
+				</div>
+		</li>
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-95508">
+				<div id="div-comment-95508" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn">Rakesh</cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.circuitstoday.com/a-note-on-character-lcd-displays#comment-95508">
+			July 9, 2013 at 8:22 am</a>		</div>
+
+		<p>Henner. Sorry for replying you late. Thanks for spotting out the errors. I&#8217;ll remove them in the next edit. Yes, the read/write don&#8217;t take time in the order of mili seconds but in the order of micro seconds.</p>
+
+		<div class="reply">
+		<a class='comment-reply-link' href='/a-note-on-character-lcd-displays?replytocom=95508#respond' onclick='return addComment.moveForm("div-comment-95508", "95508", "respond", "7644")'>Reply</a>		</div>
+				</div>
+		</li>
+		<li class="comment even thread-even depth-1" id="comment-94604">
+				<div id="div-comment-94604" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn">Henner</cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.circuitstoday.com/a-note-on-character-lcd-displays#comment-94604">
+			June 2, 2013 at 10:18 am</a>		</div>
+
+		<p>Hi,<br />
+Me again; another typo in the table: the Entry Mode Set operation is shown as taking 0 usec, while the busy flag is shown to take 37 usec.<br />
+That is reverse: the busy flag takes 0 usec, while the Entry Mode Set takes the regular 37usec.</p>
+<p>-h</p>
+
+		<div class="reply">
+		<a class='comment-reply-link' href='/a-note-on-character-lcd-displays?replytocom=94604#respond' onclick='return addComment.moveForm("div-comment-94604", "94604", "respond", "7644")'>Reply</a>		</div>
+				</div>
+		</li>
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-94578">
+				<div id="div-comment-94578" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn">Henner</cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.circuitstoday.com/a-note-on-character-lcd-displays#comment-94578">
+			June 1, 2013 at 4:26 pm</a>		</div>
+
+		<p>Thanks for this overview!</p>
+<p>I think I&#8217;ve found a little error in the table. Comparing data sheets (Looking directly at the Hitachi HD44780), looks like the last column is messed up. Read and write data from RAM is actually ~43usec (instead of ~1.5ms), while the Clear Screen and Home operation is 1.5ms.</p>
+<p>I presume this happened because commonly the Clear/Home operation is shown first and the Read/Write operation last in these tables &#8230; and while swapping the rows around, that column didn&#8217;t make it.</p>
+<p>Anyway, thanks for this resource.</p>
+
+		<div class="reply">
+		<a class='comment-reply-link' href='/a-note-on-character-lcd-displays?replytocom=94578#respond' onclick='return addComment.moveForm("div-comment-94578", "94578", "respond", "7644")'>Reply</a>		</div>
+				</div>
+		</li>
+		<li class="comment even thread-even depth-1" id="comment-80707">
+				<div id="div-comment-80707" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn">haider</cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.circuitstoday.com/a-note-on-character-lcd-displays#comment-80707">
+			March 2, 2012 at 11:09 am</a>		</div>
+
+		<p>NICE WORK THERE IS ONLY ONE WEBSITE WHICH PROVIDES QUALITY AND INFORMATIVE ARTICLES .DO YOU KNOW WHICH IS ? .IT IS OFCOURSE CIRCUITSTODAY</p>
+
+		<div class="reply">
+		<a class='comment-reply-link' href='/a-note-on-character-lcd-displays?replytocom=80707#respond' onclick='return addComment.moveForm("div-comment-80707", "80707", "respond", "7644")'>Reply</a>		</div>
+				</div>
+		</li>
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-80600">
+				<div id="div-comment-80600" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn">Rakesh</cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.circuitstoday.com/a-note-on-character-lcd-displays#comment-80600">
+			March 1, 2012 at 2:23 am</a>		</div>
+
+		<p>Hi everyone,<br />
+You can ask me questions over the FaceBook too. I can answer there also.</p>
+
+		<div class="reply">
+		<a class='comment-reply-link' href='/a-note-on-character-lcd-displays?replytocom=80600#respond' onclick='return addComment.moveForm("div-comment-80600", "80600", "respond", "7644")'>Reply</a>		</div>
+				</div>
+		</li>
+		<li class="comment even thread-even depth-1 parent" id="comment-80588">
+				<div id="div-comment-80588" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn">prashant</cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.circuitstoday.com/a-note-on-character-lcd-displays#comment-80588">
+			February 29, 2012 at 7:11 pm</a>		</div>
+
+		<p>I like your most valuable information regarding LCD character  display . Thank</p>
+
+		<div class="reply">
+		<a class='comment-reply-link' href='/a-note-on-character-lcd-displays?replytocom=80588#respond' onclick='return addComment.moveForm("div-comment-80588", "80588", "respond", "7644")'>Reply</a>		</div>
+				</div>
+		<ul class='children'>
+		<li class="comment odd alt depth-2" id="comment-91940">
+				<div id="div-comment-91940" class="comment-body">
+				<div class="comment-author vcard">
+				<cite class="fn">sreenu</cite> <span class="says">says:</span>		</div>
+
+		<div class="comment-meta commentmetadata"><a href="http://www.circuitstoday.com/a-note-on-character-lcd-displays#comment-91940">
+			February 20, 2013 at 10:24 pm</a>		</div>
+
+		<p>It will be more valuable if it provides how to access each pixel (address lines) in LCD Display</p>
+
+		<div class="reply">
+		<a class='comment-reply-link' href='/a-note-on-character-lcd-displays?replytocom=91940#respond' onclick='return addComment.moveForm("div-comment-91940", "91940", "respond", "7644")'>Reply</a>		</div>
+				</div>
+		</li>
+</ul>
+</li>
+
+	</ul>
+
+
+
+	<div class="navigation">
+
+		<div class="alignleft"></div>
+
+		<div class="alignright"></div>
+
+	</div>
+
+ </div>
+
+				
+	
+</div>
+<div id="sidebar">
+<div class="snl">
+
+
+<form style=" padding: 3px; text-align: center;" action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=2373081', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+<h2>Get Daily Updates via Email</h2>
+<div class="sform"> 
+<input type="text" onblur="if (this.value == '') {this.value = 'Enter your email';}" onfocus="if (this.value == 'Enter your email') {this.value = '';}" id="subbox" value="Enter your email" name="email" style="width: 125px;"/>
+<input type="hidden" value="http://feeds.feedburner.com/~e?ffid=2373081" name="url"/><input type="hidden" value="Circuits Today" name="title"/><input type="hidden" name="loc" value="en_US"/><input type="submit" value="Subscribe" id="sub-button"/>
+</div>
+<!-- Begin -feed count -->
+
+
+<p class="readers"><a href="http://feeds.feedburner.com/Circuitstodaycom"><img src="http://feeds.feedburner.com/~fc/Circuitstodaycom?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a></p>		
+
+		
+
+<!-- End -feed count -->
+
+
+</div>
+
+
+
+<div>
+
+				<div id="recent-posts-4" class="widget widget_recent_entries">		<h2 class="widgettitle"><span>Latest Articles</span></h2>		<ul>
+				<li><a href="http://www.circuitstoday.com/tachometer-using-arduino" title="Tachometer using arduino">Tachometer using arduino</a></li>
+				<li><a href="http://www.circuitstoday.com/interfacing-lcd-to-arduino" title="Interfacing  LCD to arduino">Interfacing  LCD to arduino</a></li>
+				<li><a href="http://www.circuitstoday.com/motor-speed-control-using-arduino" title="Motor speed control using arduino">Motor speed control using arduino</a></li>
+				<li><a href="http://www.circuitstoday.com/digital-code-lock-using-arduino" title="Digital code lock using arduino">Digital code lock using arduino</a></li>
+				<li><a href="http://www.circuitstoday.com/interfacing-hex-keypad-to-arduino" title="Interfacing hex keypad to arduino">Interfacing hex keypad to arduino</a></li>
+				<li><a href="http://www.circuitstoday.com/digital-thermometer-using-arduino" title="Digital thermometer using arduino">Digital thermometer using arduino</a></li>
+				<li><a href="http://www.circuitstoday.com/temperature-logger-using-arduino" title="Temperature logger using arduino">Temperature logger using arduino</a></li>
+				<li><a href="http://www.circuitstoday.com/ultrasonic-rangefinder-using-arduino" title="Ultrasonic range finder using arduino">Ultrasonic range finder using arduino</a></li>
+				<li><a href="http://www.circuitstoday.com/voltmeter-using-arduino" title="Voltmeter using arduino">Voltmeter using arduino</a></li>
+				<li><a href="http://www.circuitstoday.com/pwm-generation-and-control-using-arduino" title="PWM Control using Arduino &#8211; Learn to Control DC Motor Speed and LED Brightness">PWM Control using Arduino &#8211; Learn to Control DC Motor Speed and LED Brightness</a></li>
+				</ul>
+		</div><div class="clear"></div><div id="text-4" class="widget widget_text">			<div class="textwidget"></div>
+		</div><div class="clear"></div><div id="text-3" class="widget widget_text">			<div class="textwidget"><div class="adunit1">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-3246204657963347";
+/* CT new HP SB */
+google_ad_slot = "3125657069";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<a href="http://www.fabstream.com/"><img src="http://www.circuitstoday.com/wp-content/uploads/2014/03/FabStream-300x250.gif"/></a></div>
+		</div><div class="clear"></div><div id="categories-2" class="widget widget_categories"><h2 class="widgettitle"><span>Categories</span></h2>		<ul>
+	<li class="cat-item cat-item-1"><a href="http://www.circuitstoday.com/category/announcements" title="View all posts filed under 101-Announcements">101-Announcements</a>
+</li>
+	<li class="cat-item cat-item-276"><a href="http://www.circuitstoday.com/category/555-timer-ic" title="View all posts filed under 555 Timer IC">555 Timer IC</a>
+</li>
+	<li class="cat-item cat-item-749"><a href="http://www.circuitstoday.com/category/8051" title="View all posts filed under 8051">8051</a>
+</li>
+	<li class="cat-item cat-item-744"><a href="http://www.circuitstoday.com/category/8051-projects" title="View all posts filed under 8051 projects">8051 projects</a>
+</li>
+	<li class="cat-item cat-item-234"><a href="http://www.circuitstoday.com/category/amplifier-circuits" title="Various amplifier circuits used for making amplifiers such as Power amplifier, Audio amplifier, Car amplifier, Stereo amplifier,Operational amplifier, Rf amplifier">Amplifier Circuits</a>
+</li>
+	<li class="cat-item cat-item-754"><a href="http://www.circuitstoday.com/category/arduino" title="View all posts filed under Arduino">Arduino</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://www.circuitstoday.com/category/audio-circuits" title="View all posts filed under Audio Circuits">Audio Circuits</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="http://www.circuitstoday.com/category/automotive-circuits" title="View all posts filed under Automotive Circuits">Automotive Circuits</a>
+</li>
+	<li class="cat-item cat-item-752"><a href="http://www.circuitstoday.com/category/avr" title="View all posts filed under AVR">AVR</a>
+</li>
+	<li class="cat-item cat-item-734"><a href="http://www.circuitstoday.com/category/basic-electricity" title="View all posts filed under Basic Electricity">Basic Electricity</a>
+</li>
+	<li class="cat-item cat-item-649"><a href="http://www.circuitstoday.com/category/basic-electronics" title="View all posts filed under Basic Electronics">Basic Electronics</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="http://www.circuitstoday.com/category/battery-related" title="View all posts filed under Battery Circuits">Battery Circuits</a>
+</li>
+	<li class="cat-item cat-item-758"><a href="http://www.circuitstoday.com/category/cpluplus" title="View all posts filed under C plus plus">C plus plus</a>
+</li>
+	<li class="cat-item cat-item-750"><a href="http://www.circuitstoday.com/category/c-programming" title="View all posts filed under C Programming">C Programming</a>
+</li>
+	<li class="cat-item cat-item-217"><a href="http://www.circuitstoday.com/category/cable-tv" title="View all posts filed under Cable TV Circuits">Cable TV Circuits</a>
+</li>
+	<li class="cat-item cat-item-348"><a href="http://www.circuitstoday.com/category/camera" title="View all posts filed under Camera Technology">Camera Technology</a>
+</li>
+	<li class="cat-item cat-item-314"><a href="http://www.circuitstoday.com/category/clipping-and-clamping-circuits" title="All the clipping and clamping circuits are described in this category. Circuit diagrams ad their corresponding waveforms are shown and are explained in detail. Diode clippers, transistor clipping circuits, diode clampers are explained in detail.">Clipping and Clamping Circuits</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="http://www.circuitstoday.com/category/clocking-timer-circuits" title="View all posts filed under Clocking &amp; Timer Circuits">Clocking &amp; Timer Circuits</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="http://www.circuitstoday.com/category/conversion-circuits" title="View all posts filed under Conversion Circuits">Conversion Circuits</a>
+</li>
+	<li class="cat-item cat-item-157"><a href="http://www.circuitstoday.com/category/counter-circuits" title="View all posts filed under Counter Circuits">Counter Circuits</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="http://www.circuitstoday.com/category/counters" title="View all posts filed under Counters">Counters</a>
+</li>
+	<li class="cat-item cat-item-487"><a href="http://www.circuitstoday.com/category/digital-electronics" title="View all posts filed under Digital Electronics">Digital Electronics</a>
+</li>
+	<li class="cat-item cat-item-695"><a href="http://www.circuitstoday.com/category/education-training" title="View all posts filed under Education &amp; Training">Education &amp; Training</a>
+</li>
+	<li class="cat-item cat-item-213"><a href="http://www.circuitstoday.com/category/components" title="View all posts filed under Electronic Components">Electronic Components</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="http://www.circuitstoday.com/category/electronic-keys-locks" title="View all posts filed under Electronic Keys &amp; Locks">Electronic Keys &amp; Locks</a>
+</li>
+	<li class="cat-item cat-item-61"><a href="http://www.circuitstoday.com/category/electronics-books" title="View all posts filed under Electronics Books">Electronics Books</a>
+</li>
+	<li class="cat-item cat-item-563"><a href="http://www.circuitstoday.com/category/electronics-jobs" title="View all posts filed under Electronics Jobs">Electronics Jobs</a>
+</li>
+	<li class="cat-item cat-item-716"><a href="http://www.circuitstoday.com/category/embedded-systems" title="View all posts filed under Embedded Systems">Embedded Systems</a>
+</li>
+	<li class="cat-item cat-item-595"><a href="http://www.circuitstoday.com/category/equipment-reviews" title="View all posts filed under Equipment Reviews">Equipment Reviews</a>
+</li>
+	<li class="cat-item cat-item-556"><a href="http://www.circuitstoday.com/category/events" title="View all posts filed under Events">Events</a>
+</li>
+	<li class="cat-item cat-item-496"><a href="http://www.circuitstoday.com/category/fan-circuits" title="View all posts filed under Fan Circuits">Fan Circuits</a>
+</li>
+	<li class="cat-item cat-item-263"><a href="http://www.circuitstoday.com/category/filter-circuits" title="View all posts filed under Filter Circuits">Filter Circuits</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="http://www.circuitstoday.com/category/fire-alarm" title="View all posts filed under Fire Alarm">Fire Alarm</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="http://www.circuitstoday.com/category/fun-game" title="View all posts filed under Fun &amp; Game Circuits">Fun &amp; Game Circuits</a>
+</li>
+	<li class="cat-item cat-item-52"><a href="http://www.circuitstoday.com/category/gadget-reviews" title="View all posts filed under Gadget Reviews">Gadget Reviews</a>
+</li>
+	<li class="cat-item cat-item-34"><a href="http://www.circuitstoday.com/category/ham-radio-circuits" title="View all posts filed under Ham Radio Circuits">Ham Radio Circuits</a>
+</li>
+	<li class="cat-item cat-item-341"><a href="http://www.circuitstoday.com/category/high-voltage-circuits" title="View all posts filed under High Voltage Circuits">High Voltage Circuits</a>
+</li>
+	<li class="cat-item cat-item-748"><a href="http://www.circuitstoday.com/category/history" title="View all posts filed under History">History</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="http://www.circuitstoday.com/category/home-circuits" title="View all posts filed under Home Circuits">Home Circuits</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="http://www.circuitstoday.com/category/industrial-circuits" title="View all posts filed under Industrial Circuits">Industrial Circuits</a>
+</li>
+	<li class="cat-item cat-item-212"><a href="http://www.circuitstoday.com/category/instruments" title="View all posts filed under Instruments">Instruments</a>
+</li>
+	<li class="cat-item cat-item-279"><a href="http://www.circuitstoday.com/category/integrated-circuits" title="View all posts filed under Integrated Circuits">Integrated Circuits</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://www.circuitstoday.com/category/inverter" title="View all posts filed under Inverters">Inverters</a>
+</li>
+	<li class="cat-item cat-item-39"><a href="http://www.circuitstoday.com/category/lab-manual" title="View all posts filed under Lab Manuals">Lab Manuals</a>
+</li>
+	<li class="cat-item cat-item-718"><a href="http://www.circuitstoday.com/category/led-related" title="View all posts filed under LED related">LED related</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="http://www.circuitstoday.com/category/light-related" title="View all posts filed under Light Related">Light Related</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="http://www.circuitstoday.com/category/lighting-circuits" title="View all posts filed under Lighting Circuits">Lighting Circuits</a>
+</li>
+	<li class="cat-item cat-item-765"><a href="http://www.circuitstoday.com/category/matlab" title="View all posts filed under MATLAB">MATLAB</a>
+</li>
+	<li class="cat-item cat-item-66"><a href="http://www.circuitstoday.com/category/microcontrollers" title="View all posts filed under Microcontrollers">Microcontrollers</a>
+</li>
+	<li class="cat-item cat-item-35"><a href="http://www.circuitstoday.com/category/mobile-phone-related" title="View all posts filed under Mobile Phone Related">Mobile Phone Related</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="http://www.circuitstoday.com/category/motor-related" title="View all posts filed under Motor Related">Motor Related</a>
+</li>
+	<li class="cat-item cat-item-666"><a href="http://www.circuitstoday.com/category/nanotechnology" title="View all posts filed under Nanotechnology">Nanotechnology</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="http://www.circuitstoday.com/category/oscillators" title="View all posts filed under Oscillators">Oscillators</a>
+</li>
+	<li class="cat-item cat-item-558"><a href="http://www.circuitstoday.com/category/peripheral-interface-controller-pic" title="View all posts filed under Peripheral Interface Controller (PIC)">Peripheral Interface Controller (PIC)</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="http://www.circuitstoday.com/category/power-controller-circuits" title="View all posts filed under Power Controller Circuits">Power Controller Circuits</a>
+</li>
+	<li class="cat-item cat-item-725"><a href="http://www.circuitstoday.com/category/power-electronics" title="View all posts filed under Power Electronics">Power Electronics</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="http://www.circuitstoday.com/category/power-supplies" title="View all posts filed under Power Supplies">Power Supplies</a>
+</li>
+	<li class="cat-item cat-item-555"><a href="http://www.circuitstoday.com/category/project-ideas" title="View all posts filed under Project Ideas">Project Ideas</a>
+</li>
+	<li class="cat-item cat-item-567"><a href="http://www.circuitstoday.com/category/projects" title="View all posts filed under Projects">Projects</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://www.circuitstoday.com/category/proximity-detectors" title="View all posts filed under Proximity Detectors">Proximity Detectors</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://www.circuitstoday.com/category/radio-circuits" title="View all posts filed under Radio Circuits">Radio Circuits</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://www.circuitstoday.com/category/radio-transmitters" title="View all posts filed under Radio Transmitters">Radio Transmitters</a>
+</li>
+	<li class="cat-item cat-item-762"><a href="http://www.circuitstoday.com/category/raspberry-pi" title="View all posts filed under Raspberry Pi">Raspberry Pi</a>
+</li>
+	<li class="cat-item cat-item-353"><a href="http://www.circuitstoday.com/category/relays" title="View all posts filed under Relays">Relays</a>
+</li>
+	<li class="cat-item cat-item-26"><a href="http://www.circuitstoday.com/category/remote-circuits" title="View all posts filed under Remote Circuits">Remote Circuits</a>
+</li>
+	<li class="cat-item cat-item-693"><a href="http://www.circuitstoday.com/category/reviews" title="View all posts filed under Reviews">Reviews</a>
+</li>
+	<li class="cat-item cat-item-564"><a href="http://www.circuitstoday.com/category/robotics" title="View all posts filed under Robotics">Robotics</a>
+</li>
+	<li class="cat-item cat-item-753"><a href="http://www.circuitstoday.com/category/rtos" title="View all posts filed under RTOS">RTOS</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="http://www.circuitstoday.com/category/security-saftey" title="View all posts filed under Security &amp; Saftey">Security &amp; Saftey</a>
+</li>
+	<li class="cat-item cat-item-31"><a href="http://www.circuitstoday.com/category/sensor-circuits" title="View all posts filed under Sensor Circuits">Sensor Circuits</a>
+</li>
+	<li class="cat-item cat-item-36"><a href="http://www.circuitstoday.com/category/signal-conditioners" title="View all posts filed under Signal Conditioners">Signal Conditioners</a>
+</li>
+	<li class="cat-item cat-item-37"><a href="http://www.circuitstoday.com/category/signal-generators" title="View all posts filed under Signal Generators">Signal Generators</a>
+</li>
+	<li class="cat-item cat-item-495"><a href="http://www.circuitstoday.com/category/speed-controller-circuits" title="View all posts filed under Speed Controller Circuits">Speed Controller Circuits</a>
+</li>
+	<li class="cat-item cat-item-707"><a href="http://www.circuitstoday.com/category/state-space-analysis" title="View all posts filed under State space analysis">State space analysis</a>
+</li>
+	<li class="cat-item cat-item-51"><a href="http://www.circuitstoday.com/category/switching-circuits" title="View all posts filed under Switching Circuits">Switching Circuits</a>
+</li>
+	<li class="cat-item cat-item-49"><a href="http://www.circuitstoday.com/category/tech-news" title="View all posts filed under Tech News">Tech News</a>
+</li>
+	<li class="cat-item cat-item-33"><a href="http://www.circuitstoday.com/category/telephone-related" title="View all posts filed under Telephone Related">Telephone Related</a>
+</li>
+	<li class="cat-item cat-item-139"><a href="http://www.circuitstoday.com/category/television-related" title="View all posts filed under Television Related">Television Related</a>
+</li>
+	<li class="cat-item cat-item-79"><a href="http://www.circuitstoday.com/category/temperature-related" title="View all posts filed under Temperature Related">Temperature Related</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="http://www.circuitstoday.com/category/test-measurement-gadgets" title="View all posts filed under Test &amp; Measurement Circuits">Test &amp; Measurement Circuits</a>
+</li>
+	<li class="cat-item cat-item-90"><a href="http://www.circuitstoday.com/category/testing-components" title="View all posts filed under Testing Components">Testing Components</a>
+</li>
+	<li class="cat-item cat-item-474"><a href="http://www.circuitstoday.com/category/three-phase-circuits" title="View all posts filed under Three phase circuits">Three phase circuits</a>
+</li>
+	<li class="cat-item cat-item-38"><a href="http://www.circuitstoday.com/category/timer-circuits" title="View all posts filed under Timer Circuits">Timer Circuits</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://www.circuitstoday.com/category/tone-generator-circuits" title="View all posts filed under Tone generator circuits">Tone generator circuits</a>
+</li>
+	<li class="cat-item cat-item-699"><a href="http://www.circuitstoday.com/category/tools-and-softwares" title="View all posts filed under Tools and Softwares">Tools and Softwares</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://www.circuitstoday.com/category/transmitters" title="View all posts filed under Transmitters">Transmitters</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://www.circuitstoday.com/category/tutorials" title="View all posts filed under Tutorials">Tutorials</a>
+</li>
+	<li class="cat-item cat-item-312"><a href="http://www.circuitstoday.com/category/ups" title="View all posts filed under UPS">UPS</a>
+</li>
+	<li class="cat-item cat-item-27"><a href="http://www.circuitstoday.com/category/usb-circuits" title="View all posts filed under USB Circuits">USB Circuits</a>
+</li>
+	<li class="cat-item cat-item-47"><a href="http://www.circuitstoday.com/category/videos" title="View all posts filed under Videos">Videos</a>
+</li>
+	<li class="cat-item cat-item-349"><a href="http://www.circuitstoday.com/category/vlsi" title="Topics on VLSI-Very Large Scale Integration">VLSI</a>
+</li>
+	<li class="cat-item cat-item-310"><a href="http://www.circuitstoday.com/category/voltage-regulators" title="View all posts filed under Voltage Regulators">Voltage Regulators</a>
+</li>
+		</ul>
+</div><div class="clear"></div><div id="text-2" class="widget widget_text"><h2 class="widgettitle"><span>Like Us on Facebook</span></h2>			<div class="textwidget"><iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fcircuitstoday&amp;width=292&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=false&amp;header=false&amp;appId=207729785936384" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:258px;" allowTransparency="true"></iframe></div>
+		</div><div class="clear"></div><div id="recent-comments-4" class="widget widget_recent_comments"><h2 class="widgettitle"><span>Recent Comments</span></h2><ul id="recentcomments"><li class="recentcomments">vasudev on <a href="http://www.circuitstoday.com/pwm-inverter-circuit#comment-146596">PWM inverter circuit</a></li><li class="recentcomments">Anjan on <a href="http://www.circuitstoday.com/chager-circuit-for-smf-batteries#comment-146585">Chager circuit for SMF batteries.</a></li><li class="recentcomments">ashwin on <a href="http://www.circuitstoday.com/line-follower-robot-using-8051-microcontroller#comment-146574">Line follower robot using 8051 microcontroller</a></li><li class="recentcomments">deepa on <a href="http://www.circuitstoday.com/electronics-mini-projects#comment-146573">Electronics Mini projects</a></li><li class="recentcomments">hariesh on <a href="http://www.circuitstoday.com/automatic-led-emergency-light-modified-version#comment-146559">Automatic LED Emergency Light-Modified Version</a></li><li class="recentcomments">rajat sharma on <a href="http://www.circuitstoday.com/a-note-on-character-lcd-displays#comment-146558">A Note on Character LCD Displays</a></li><li class="recentcomments">Michael on <a href="http://www.circuitstoday.com/15w-class-b-audio-amplifier#comment-146550">15W Class B Audio Amplifier</a></li><li class="recentcomments">mohith on <a href="http://www.circuitstoday.com/cro-cathode-ray-oscilloscope#comment-146545">CRO-Cathode Ray Oscilloscope</a></li><li class="recentcomments">b delaram on <a href="http://www.circuitstoday.com/automatic-night-light#comment-146515">Automatic night light</a></li><li class="recentcomments">vasudev on <a href="http://www.circuitstoday.com/simple-100w-inverter-circuit#comment-146499">Simple 100W inverter circuit</a></li><li class="recentcomments">shruthi on <a href="http://www.circuitstoday.com/human-skin-as-a-touch-screen-interface#comment-146495">Human Skin as a Touch-Screen Interface</a></li><li class="recentcomments">Mihuuup on <a href="http://www.circuitstoday.com/tda7294-100w-audiio-amplifier#comment-146493">TDA7294 100W Audio Amplifier</a></li><li class="recentcomments"><a href='http://abubakarm382@gmail.com' rel='external nofollow' class='url'>abubakar</a> on <a href="http://www.circuitstoday.com/motional-feed-back-amplifier#comment-146490">Motional feed back amplifier</a></li><li class="recentcomments">Nikita on <a href="http://www.circuitstoday.com/battery-charger-circuit-using-scr#comment-146480">Battery charger circuit using SCR.</a></li><li class="recentcomments">seetharaman on <a href="http://www.circuitstoday.com/pwm-inverter-circuit#comment-146477">PWM inverter circuit</a></li></ul></div><div class="clear"></div><div id="pages-4" class="widget widget_pages"><h2 class="widgettitle"><span>Pages</span></h2>		<ul>
+			<li class="page_item page-item-2"><a href="http://www.circuitstoday.com/about" title="About">About</a></li>
+<li class="page_item page-item-8103"><a href="http://www.circuitstoday.com/advertise-with-us" title="Advertise With Us">Advertise With Us</a></li>
+<li class="page_item page-item-7164"><a href="http://www.circuitstoday.com/authors" title="Authors">Authors</a></li>
+<li class="page_item page-item-8791"><a href="http://www.circuitstoday.com/project-kits" title="Buy Project Kits">Buy Project Kits</a></li>
+<li class="page_item page-item-702"><a href="http://www.circuitstoday.com/datasheets" title="Datasheets">Datasheets</a></li>
+<li class="page_item page-item-6798"><a href="http://www.circuitstoday.com/electronic-circuit-symbols" title="Electronic Circuit Symbols">Electronic Circuit Symbols</a></li>
+<li class="page_item page-item-1533"><a href="http://www.circuitstoday.com/lab-manuals" title="Lab Manuals">Lab Manuals</a>
+<ul class='children'>
+	<li class="page_item page-item-1543"><a href="http://www.circuitstoday.com/lab-manuals/electronic-circuits-lab" title="Electronic Circuits Lab">Electronic Circuits Lab</a></li>
+	<li class="page_item page-item-1593"><a href="http://www.circuitstoday.com/lab-manuals/microcontroller-lab" title="Microcontroller lab">Microcontroller lab</a></li>
+	<li class="page_item page-item-1536"><a href="http://www.circuitstoday.com/lab-manuals/microprocessor-lab" title="Microprocessor Lab">Microprocessor Lab</a></li>
+</ul>
+</li>
+<li class="page_item page-item-1110"><a href="http://www.circuitstoday.com/privacy-policy" title="Privacy Policy">Privacy Policy</a></li>
+<li class="page_item page-item-929"><a href="http://www.circuitstoday.com/project-contests" title="Project Contests">Project Contests</a></li>
+<li class="page_item page-item-10300"><a href="http://www.circuitstoday.com/resistor-color-code-calculator" title="Resistor Color Code Calculator">Resistor Color Code Calculator</a></li>
+<li class="page_item page-item-5346"><a href="http://www.circuitstoday.com/sitemap" title="Sitemap">Sitemap</a></li>
+<li class="page_item page-item-888"><a href="http://www.circuitstoday.com/testing-components" title="Testing Components">Testing Components</a></li>
+		</ul>
+		</div><div class="clear"></div></div>
+
+
+
+
+
+</div>
+
+
+<div class="clear"></div>
+</div>
+
+</div>
+<div id="cbr">
+
+<div class="fleft">
+<h2>Popular Tags</h2>
+<a href='http://www.circuitstoday.com/tag/555-ic' class='tag-link-277' title='10 topics' style='font-size: 8pt;'>555 IC</a>
+<a href='http://www.circuitstoday.com/tag/555-timer' class='tag-link-397' title='40 topics' style='font-size: 13.5982142857pt;'>555 timer</a>
+<a href='http://www.circuitstoday.com/tag/audio-amplifier-circuits' class='tag-link-145' title='14 topics' style='font-size: 9.375pt;'>Audio Amplifier Circuits</a>
+<a href='http://www.circuitstoday.com/tag/audio-circuit' class='tag-link-56' title='73 topics' style='font-size: 16.1517857143pt;'>Audio circuits</a>
+<a href='http://www.circuitstoday.com/tag/circuit-design' class='tag-link-479' title='80 topics' style='font-size: 16.5446428571pt;'>circuit design</a>
+<a href='http://www.circuitstoday.com/tag/circuit-diagram' class='tag-link-478' title='143 topics' style='font-size: 19pt;'>circuit diagram</a>
+<a href='http://www.circuitstoday.com/tag/electronic-circuits' class='tag-link-386' title='126 topics' style='font-size: 18.4107142857pt;'>Electronic Circuits</a>
+<a href='http://www.circuitstoday.com/tag/components' class='tag-link-213' title='21 topics' style='font-size: 10.9464285714pt;'>Electronic Components</a>
+<a href='http://www.circuitstoday.com/tag/electronic-instruments' class='tag-link-305' title='11 topics' style='font-size: 8.39285714286pt;'>Electronic Instruments</a>
+<a href='http://www.circuitstoday.com/tag/filter-circuits' class='tag-link-263' title='15 topics' style='font-size: 9.57142857143pt;'>Filter Circuits</a>
+<a href='http://www.circuitstoday.com/tag/history-of-electronics' class='tag-link-776' title='18 topics' style='font-size: 10.3571428571pt;'>History of Electronics</a>
+<a href='http://www.circuitstoday.com/tag/hobby-circuits' class='tag-link-484' title='49 topics' style='font-size: 14.4821428571pt;'>hobby circuits</a>
+<a href='http://www.circuitstoday.com/tag/hobby-projects' class='tag-link-483' title='62 topics' style='font-size: 15.4642857143pt;'>hobby projects</a>
+<a href='http://www.circuitstoday.com/tag/home-circuits' class='tag-link-14' title='34 topics' style='font-size: 12.9107142857pt;'>Home Circuits</a>
+<a href='http://www.circuitstoday.com/tag/ic' class='tag-link-280' title='15 topics' style='font-size: 9.57142857143pt;'>IC</a>
+<a href='http://www.circuitstoday.com/tag/integrated-circuits' class='tag-link-279' title='16 topics' style='font-size: 9.86607142857pt;'>Integrated Circuits</a>
+<a href='http://www.circuitstoday.com/tag/most-popular-circuits' class='tag-link-657' title='21 topics' style='font-size: 10.9464285714pt;'>Most Popular Circuits</a>
+<a href='http://www.circuitstoday.com/tag/nanotechnology' class='tag-link-666' title='14 topics' style='font-size: 9.375pt;'>Nanotechnology</a>
+<a href='http://www.circuitstoday.com/tag/ne555-timer' class='tag-link-394' title='38 topics' style='font-size: 13.4017857143pt;'>NE555 timer</a>
+<a href='http://www.circuitstoday.com/tag/oscillators' class='tag-link-32' title='23 topics' style='font-size: 11.3392857143pt;'>Oscillators</a>
+<a href='http://www.circuitstoday.com/tag/pic' class='tag-link-560' title='20 topics' style='font-size: 10.75pt;'>PIC</a>
+<a href='http://www.circuitstoday.com/tag/power-supplies' class='tag-link-18' title='18 topics' style='font-size: 10.3571428571pt;'>Power Supplies</a>
+<a href='http://www.circuitstoday.com/tag/radio-circuits' class='tag-link-5' title='10 topics' style='font-size: 8pt;'>Radio Circuits</a>
+<a href='http://www.circuitstoday.com/tag/scr' class='tag-link-282' title='13 topics' style='font-size: 9.08035714286pt;'>SCR</a>
+<a href='http://www.circuitstoday.com/tag/simple-electronics-projects' class='tag-link-660' title='29 topics' style='font-size: 12.3214285714pt;'>Simple Electronics Projects</a>
+<a href='http://www.circuitstoday.com/tag/tech-news' class='tag-link-49' title='83 topics' style='font-size: 16.6428571429pt;'>Tech News</a>
+<a href='http://www.circuitstoday.com/tag/thyristors' class='tag-link-281' title='23 topics' style='font-size: 11.3392857143pt;'>Thyristors</a>
+<a href='http://www.circuitstoday.com/tag/tutorials' class='tag-link-15' title='83 topics' style='font-size: 16.6428571429pt;'>Tutorials</a>
+<a href='http://www.circuitstoday.com/tag/vlsi' class='tag-link-349' title='37 topics' style='font-size: 13.3035714286pt;'>VLSI</a>
+<a href='http://www.circuitstoday.com/tag/voltage-regulators' class='tag-link-310' title='13 topics' style='font-size: 9.08035714286pt;'>Voltage Regulators</a>
+</div>
+<div class="fright">
+<h2>Most Discussed</h2>
+<ul>
+
+
+
+<li><a href="http://www.circuitstoday.com/150-watt-amplifier-circuit" title="150 Watt amplifier circuit" >150 Watt amplifier circuit</a></li>
+
+
+
+<li><a href="http://www.circuitstoday.com/100-watt-sub-woofer-amplifier" title="100 Watt sub woofer amplifier." >100 Watt sub woofer amplifier.</a></li>
+
+
+
+<li><a href="http://www.circuitstoday.com/mains-operated-led-circuit" title="Mains Operated LED Circuit" >Mains Operated LED Circuit</a></li>
+
+
+
+<li><a href="http://www.circuitstoday.com/automatic-led-emergency-light-modified-version" title="Automatic LED Emergency Light-Modified Version" >Automatic LED Emergency Light-Modified Version</a></li>
+
+
+
+<li><a href="http://www.circuitstoday.com/2-km-fm-transmitter" title="2 km FM transmitter" >2 km FM transmitter</a></li>
+
+
+
+<li><a href="http://www.circuitstoday.com/suggest-a-topic-to-publish" title="Suggest a Topic to Publish &#038; Win a 8GB Pen Drive" >Suggest a Topic to Publish &#038; Win a 8GB Pen Drive</a></li>
+
+
+
+<li><a href="http://www.circuitstoday.com/automatic-led-emergency-light" title="Automatic LED Emergency Light" >Automatic LED Emergency Light</a></li>
+</ul>
+</div>
+<div class="clear"></div>
+Copyright © 2007 - 2011 <a href="http://www.circuitstoday.com/">Circuitstoday.com</a> Designed by <a href="http://www.webnesters.com/web-design-cochin">Web Design Cochin</a>
+
+<div class="clear"></div>
+</div>
+</div>
+
+</div>
+
+
+
+
+</body>

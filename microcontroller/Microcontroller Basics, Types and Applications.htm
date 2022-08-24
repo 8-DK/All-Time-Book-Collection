@@ -1,0 +1,513 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US" prefix="og: http://ogp.me/ns#">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.5.3.3 - https://yoast.com/wordpress/plugins/seo/ -->
+<title>Microcontroller Basics, Types and Applications</title>
+<meta name="description" content="Here is the complete details of Microcontroller - Microcontroller Basics, Types and Applications of Microcontrollers, 8051, AVR and AMR microcontrollers."/>
+<link rel="canonical" href="http://www.electronicshub.org/microcontrollers/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Microcontroller Basics, Types and Applications" />
+<meta property="og:description" content="Here is the complete details of Microcontroller - Microcontroller Basics, Types and Applications of Microcontrollers, 8051, AVR and AMR microcontrollers." />
+<meta property="og:url" content="http://www.electronicshub.org/microcontrollers/" />
+<meta property="og:site_name" content="Electronics Hub" />
+<meta property="article:author" content="elktros" />
+<meta property="article:section" content="General Articles" />
+<meta property="article:published_time" content="2013-06-15T07:42:50+00:00" />
+<meta property="article:modified_time" content="2014-07-08T07:41:43+00:00" />
+<meta property="og:updated_time" content="2014-07-08T07:41:43+00:00" />
+<meta property="og:image" content="http://www.electronicshub.org/wp-content/uploads/2013/06/Microcontroller.jpg" />
+<!-- / Yoast WordPress SEO plugin. -->
+
+
+            <script type="text/javascript">//<![CDATA[
+            // Google Analytics for WordPress by Yoast v4.3.5 | http://yoast.com/wordpress/google-analytics/
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-40919084-1']);
+				            _gaq.push(['_trackPageview']);
+            (function () {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+            //]]></script>
+			<link rel='stylesheet' id='eleven40-theme-css'  href='http://www.electronicshub.org/wp-content/themes/eleven40/style.css?ver=2.0.2' type='text/css' media='all' />
+<link rel='stylesheet' id='cntctfrm_stylesheet-css'  href='http://www.electronicshub.org/wp-content/plugins/contact-form-plugin/css/style.css?ver=3.9.1' type='text/css' media='all' />
+<link rel='stylesheet' id='simple-social-icons-font-css'  href='http://www.electronicshub.org/wp-content/plugins/simple-social-icons/css/style.css?ver=1.0.5' type='text/css' media='all' />
+<link rel='stylesheet' id='tablepress-default-css'  href='http://www.electronicshub.org/wp-content/plugins/tablepress/css/default.min.css?ver=1.4' type='text/css' media='all' />
+<link rel='stylesheet' id='page-list-style-css'  href='http://www.electronicshub.org/wp-content/plugins/sitemap/css/page-list.css?ver=4.2' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.electronicshub.org/wp-includes/js/jquery/jquery.js?ver=1.11.0'></script>
+<script type='text/javascript' src='http://www.electronicshub.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='http://www.electronicshub.org/wp-content/plugins/sharebar/js/sharebar.js?ver=3.9.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.electronicshub.org/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.electronicshub.org/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 3.9.1" />
+<link rel='shortlink' href='http://www.electronicshub.org/?p=658' />
+<script type="text/javascript">
+	window._zem_rp_post_id = '658';
+	window._zem_rp_thumbnails = true;
+	window._zem_rp_post_title = 'Types+and+Applications+of+Microcontrollers';
+	window._zem_rp_post_tags = ['general+articles', 'motor', 'market', 'home', 'machin', 'robot', 'electr', 'system', 'fabric', 'control', 'chip', 'comput', 'applianc', 'gadget', 'uc', 'micro'];
+	window._zem_rp_static_base_url = 'https://content.zemanta.com/static/';
+	window._zem_rp_wp_ajax_url = 'http://www.electronicshub.org/wp-admin/admin-ajax.php';
+	window._zem_rp_plugin_version = '1.9';
+	window._zem_rp_num_rel_posts = '4';
+</script>
+<link rel="stylesheet" href="http://www.electronicshub.org/wp-content/plugins/related-posts-by-zemanta/static/themes/vertical.css?version=1.9" />
+<link rel="stylesheet" href="http://www.electronicshub.org/wp-content/plugins/sharebar/css/sharebar.css" type="text/css" media="screen" />
+<script type="text/javascript">jQuery(document).ready(function($) { $('.sharebar').sharebar({horizontal:'true',swidth:'65',minwidth:1000,position:'left',leftOffset:25,rightOffset:10}); });</script>
+<!-- Sharebar Plugin by Monjurul Dolon (http://mdolon.com/) - more info at: http://devgrow.com/sharebar-wordpress-plugin -->
+<script src="//load.sumome.com/" data-sumo-site-id="a9cd4a7156bd2c7c77f528da7f047a825df6765df7a021404dd2e605ff9d3ace" async></script><link rel="stylesheet" type="text/css" href="http://www.electronicshub.org/wp-content/plugins/wp-recaptcha/recaptcha.css" /><link rel="Shortcut Icon" href="http://www.electronicshub.org/wp-content/themes/eleven40/images/favicon.ico" type="image/x-icon" />
+<script>
+var _prum = [['id', '53502263abe53d5332427270'],
+             ['mark', 'firstbyte', (new Date()).getTime()]];
+(function() {
+    var s = document.getElementsByTagName('script')[0]
+      , p = document.createElement('script');
+    p.async = 'async';
+    p.src = '//rum-static.pingdom.net/prum.min.js';
+    s.parentNode.insertBefore(p, s);
+})();
+</script><link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'><style type="text/css" media="screen"> .simple-social-icons ul li a, .simple-social-icons ul li a:hover { background-color: #003580 !important; border-radius: 3px; color: #ffffff !important; font-size: 18px; padding: 9px; }  .simple-social-icons ul li a:hover { background-color: #ffffff !important; color: #003580 !important; }</style></head>
+<body class="single single-post postid-658 single-format-standard header-image content-sidebar"><div id="wrap"><div id="header"><div class="wrap"><div id="title-area"><p id="title"><a href="http://www.electronicshub.org/" title="Electronics Hub">Electronics Hub</a></p></div><div class="widget-area header-widget-area"><div id="text-4" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"></div>
+		</div></div>
+</div></div></div><div id="nav"><div class="wrap"><ul id="menu-electronics-hub-menu-2" class="menu genesis-nav-menu menu-primary js-superfish"><li id="menu-item-1332" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1332"><a href="http://www.electronicshub.org" >HOME</a></li>
+<li id="menu-item-2105" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2105"><a href="#">PROJECT IDEAS</a>
+<ul class="sub-menu">
+	<li id="menu-item-1451" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1451"><a href="http://www.electronicshub.org/electronics-mini-projects-ideas/" >MINI PROJECTS</a>
+	<ul class="sub-menu">
+		<li id="menu-item-1460" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1460"><a href="http://www.electronicshub.org/top-electrical-mini-projects/" >TOP ELECTRICAL</a></li>
+		<li id="menu-item-1461" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1461"><a href="http://www.electronicshub.org/microcontroller-based-mini-projects-ideas/" >MICROCONTROLLER</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1437" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1437"><a href="http://www.electronicshub.org/electronics-projects-ideas/" >ELECTRONICS</a>
+	<ul class="sub-menu">
+		<li id="menu-item-1462" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1462"><a href="http://www.electronicshub.org/latest-electronics-projects-ideas/" >LATEST</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1438" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1438"><a href="http://www.electronicshub.org/electrical-projects-ideas/" >ELECTRICAL</a>
+	<ul class="sub-menu">
+		<li id="menu-item-1463" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1463"><a href="http://www.electronicshub.org/top-power-electronics-projects-ideas/" >TOP POWER ELECTRONICS</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1441" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1441"><a href="http://www.electronicshub.org/embedded-systems-projects-ideas/" >EMBEDDED</a>
+	<ul class="sub-menu">
+		<li id="menu-item-2187" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2187"><a href="http://www.electronicshub.org/8051-microcontroller-projects-engineering-students/" >8051 Microcontroller Projects</a></li>
+		<li id="menu-item-1459" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1459"><a href="http://www.electronicshub.org/top-pic-microcontroller-projects-ideas/" >TOP PIC PROJECTS</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1439" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1439"><a href="http://www.electronicshub.org/robotics-projects-ideas/" >ROBOTICS</a></li>
+	<li id="menu-item-1442" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1442"><a href="http://www.electronicshub.org/solar-energy-projects-ideas/" >SOLAR</a></li>
+	<li id="menu-item-1443" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1443"><a href="http://www.electronicshub.org/sensor-based-projects-ideas/" >SENSOR</a></li>
+	<li id="menu-item-2363" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2363"><a href="http://www.electronicshub.org/arduino-project-ideas/" >ARDUINO</a></li>
+	<li id="menu-item-1440" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1440"><a href="http://www.electronicshub.org/communication-based-projects-ideas/" >COMMUNICATION</a>
+	<ul class="sub-menu">
+		<li id="menu-item-1444" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1444"><a href="http://www.electronicshub.org/dtmf-projects-ideas/" >DTMF</a></li>
+		<li id="menu-item-1445" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1445"><a href="http://www.electronicshub.org/gsm-based-projects/" >GSM</a></li>
+		<li id="menu-item-1446" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1446"><a href="http://www.electronicshub.org/rfid-projects-ideas/" >RFID</a></li>
+		<li id="menu-item-1464" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1464"><a href="http://www.electronicshub.org/wireless-communication-based-projects-ideas/" >WIRELESS</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-1447" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1447"><a href="#">B.TECH</a>
+<ul class="sub-menu">
+	<li id="menu-item-1449" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1449"><a href="http://www.electronicshub.org/ece-projects-ideas/" >ECE</a></li>
+	<li id="menu-item-1448" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1448"><a href="http://www.electronicshub.org/eee-projects-ideas/" >EEE</a></li>
+	<li id="menu-item-1450" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1450"><a href="http://www.electronicshub.org/eie-projects-ideas/" >EIE</a></li>
+</ul>
+</li>
+<li id="menu-item-1799" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1799"><a href="/android-projects-ideas/">ANDROID</a></li>
+<li id="menu-item-1344" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1344"><a href="http://www.electronicshub.org/free-project-circuits/" >FREE PROJECT CIRCUITS</a>
+<ul class="sub-menu">
+	<li id="menu-item-1472" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1472"><a href="http://www.electronicshub.org/electronics-mini-project-circuits/" >MINI PROJECT CIRCUITS</a></li>
+	<li id="menu-item-1689" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1689"><a href="http://www.electronicshub.org/free-project-circuits/electronics/" >ELECTRONICS</a>
+	<ul class="sub-menu">
+		<li id="menu-item-1343" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1343"><a href="http://www.electronicshub.org/555-timer/" >555 TIMER</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1347" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1347"><a href="http://www.electronicshub.org/free-project-circuits/embedded/" >EMBEDDED</a>
+	<ul class="sub-menu">
+		<li id="menu-item-3130" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3130"><a href="http://www.electronicshub.org/free-project-circuits/embedded/8051/" >8051</a></li>
+		<li id="menu-item-3131" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3131"><a href="http://www.electronicshub.org/free-project-circuits/embedded/avr/" >AVR</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1345" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1345"><a href="http://www.electronicshub.org/free-project-circuits/communication/" >COMMUNICATION</a></li>
+	<li id="menu-item-1346" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1346"><a href="http://www.electronicshub.org/free-project-circuits/electrical/" >ELECTRICAL</a></li>
+	<li id="menu-item-1348" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1348"><a href="http://www.electronicshub.org/free-project-circuits/robotics/" >ROBOTICS</a></li>
+	<li id="menu-item-1349" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1349"><a href="http://www.electronicshub.org/free-project-circuits/solar/" >SOLAR</a></li>
+	<li id="menu-item-2928" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2928"><a href="http://www.electronicshub.org/free-project-circuits/sensor/" >SENSOR</a></li>
+</ul>
+</li>
+<li id="menu-item-1436" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1436"><a href="http://www.electronicshub.org/how-to/" >HOW TO</a></li>
+<li id="menu-item-1350" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1350"><a href="http://www.electronicshub.org/general-articles/" >GENERAL ARTICLES</a></li>
+<li id="menu-item-1452" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1452"><a href="http://www.electronicshub.org/mini-projects/" >MINI PROJECTS</a></li>
+<li id="menu-item-1351" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1351"><a href="http://www.electronicshub.org/contact/" >CONTACT US</a>
+<ul class="sub-menu">
+	<li id="menu-item-1453" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1453"><a href="http://www.electronicshub.org/friends/" >FRIENDS</a></li>
+</ul>
+</li>
+</ul></div></div><div id="inner"><div class="wrap"><div id="content-sidebar-wrap"><div id="content" class="hfeed"><div class="breadcrumb">
+		<span prefix="v: http://rdf.data-vocabulary.org/#">
+			<span typeof="v:Breadcrumb"><a href="http://www.electronicshub.org" rel="v:url" property="v:title">Home</a></span> &raquo; <span typeof="v:Breadcrumb"><span class="breadcrumb_last" property="v:title">Types and Applications of Microcontrollers</span></span>
+		</span></div><div class="post-658 post type-post status-publish format-standard has-post-thumbnail hentry category-general-articles entry"><h1 class="entry-title">Types and Applications of Microcontrollers</h1> 
+<div class="post-info"><span class="date published time" title="2013-06-15T07:42:50+00:00">June 15, 2013</span>  By <span class="author vcard"><span class="fn"><a href="http://www.electronicshub.org/author/elktros/" title="Administrator" rel="author">Administrator</a></span></span> <span class="post-comments"><a href="http://www.electronicshub.org/microcontrollers/#comments">4 Comments</a></span> </div><div id="text-6" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Below Title Big Ad - EH -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:600px;height:300px"
+     data-ad-client="ca-pub-0788306562255704"
+     data-ad-slot="5782743682"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</div></div>
+<div class="entry-content"><ul id="sharebar" style="background:#;border-color:#;">
+<li><iframe src="http://www.facebook.com/plugins/like.php?href=http://www.electronicshub.org/microcontrollers/&layout=box_count&show_faces=false&width=60&action=like&colorscheme=light&height=45" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:45px; height:60px;" allowTransparency="true"></iframe></li><li><!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-size="tall"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script></li><li><a href="http://twitter.com/share" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" class="twitter-share-button" data-count="vertical" data-via="ThinkDevGrow">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li><li><script src="http://www.stumbleupon.com/hostedbadge.php?s=5"></script></li></ul><ul id="sharebarx">
+<li><iframe src="http://www.facebook.com/plugins/like.php?href=http://www.electronicshub.org/microcontrollers/&layout=button_count&show_faces=false&width=85&action=like&colorscheme=light&height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe></li><li><!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-size="small"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script></li><li><a href="http://twitter.com/share" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" class="twitter-share-button" data-count="horizontal" data-via="ThinkDevGrow">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li><li><script src="http://www.stumbleupon.com/hostedbadge.php?s=2"></script></li></ul><h4 style="text-align: justify;"><span style="color: #800000;"><strong>Introduction to Microcontroller:</strong></span></h4>
+<p style="text-align: justify;">A microcontroller (μC or uC) is a solitary chip microcomputer fabricated from VLSI fabrication. A micro controller is also known as embedded controller. Today various types of microcontrollers are available in market with different word lengths such as 4bit, 8bit, 64bit and 128bit microcontrollers. Microcontroller is a compressed micro computer manufactured to control the functions of embedded systems in office machines, robots, home appliances, motor vehicles, and a number of other gadgets. A microcontroller is comprises components like- memory, peripherals and most importantly a processor. Microcontrollers are basically employed in devices that need a degree of control to be applied by the user of the device.</p>
+<h4 style="text-align: justify;"><span style="color: #800000;"><strong>Microcontroller Basics:</strong></span></h4>
+<p style="text-align: justify;">Any electric appliance that stores, measures, displays information or calculates comprise of a microcontroller chip inside it. The basic structure of a microcontroller comprise of:-</p>
+<ol style="text-align: justify;">
+<li>CPU- Microcontrollers brain is named as CPU. CPU is the device which is employed to fetch data, decode it and at the end complete the assigned task successfully. With the help of CPU all the components of microcontroller is connected into a single system. Instruction fetched by the programmable memory is decoded by the CPU.</li>
+<li>Memory &#8211; In a microcontroller memory chip works same as <span style="color: #ff0000;"><strong><a title="Microprocessors" href="/microprocessors/" target="_blank"><span style="color: #ff0000;">microprocessor</span></a></strong></span>. Memory chip stores all programs &amp; data. Microcontrollers are built with certain amount of ROM or RAM (EPROM, EEPROM, etc) or flash memory for the storage of program source codes.</li>
+<li>Input/output ports &#8211; I/O ports are basically employed to interface or drive different appliances such as- printers, LCD’s, LED’s, etc.</li>
+<li>Serial Ports &#8211; These ports give serial interfaces amid microcontroller &amp; various other peripherals such as parallel port.</li>
+<li>Timers &#8211; A microcontroller may be in-built with one or more timer or counters. The timers &amp; counters control all counting &amp; timing operations within a microcontroller. Timers are employed to count external pulses. The main operations performed by timers’ are- pulse generations, clock functions, frequency measuring, modulations, making oscillations, etc.</li>
+<li>ADC (Analog to digital converter) &#8211; ADC is employed to convert analog signals to digital ones. The input signals need to be analog for ADC. The digital signal production can be employed for different digital applications (such as- measurement gadgets).</li>
+<li>DAC (digital to analog converter) – this converter executes opposite functions that ADC perform. This device is generally employed to supervise analog appliances like- DC motors, etc.</li>
+<li>Interpret Control- This controller is employed for giving delayed control for a working program. The interpret can be internal or external.</li>
+<li>Special Functioning Block &#8211; Some special microcontrollers manufactured for special appliances like- space systems, robots, etc, comprise of this special function block. This special block has additional ports so as to carry out some special operations.</li>
+</ol>
+<h3 style="text-align: justify;"><span style="color: #800000;"><strong>Types of Microcontroller:</strong></span></h3>
+<p style="text-align: justify;">Microcontrollers are divided into categories according to their memory, architecture, bits and instruction sets. So let’s discuss types of microcontrollers:-</p>
+<h5 style="text-align: justify;"><span style="color: #800000;">Bits:</span></h5>
+<ul style="text-align: justify;">
+<li>8 bits microcontroller executes logic &amp; arithmetic operations. Examples of 8 bits micro controller is Intel 8031/8051.</li>
+<li>16 bits microcontroller executes with greater accuracy and performance in contrast to 8-bit. Example of 16 bit microcontroller is Intel 8096.</li>
+<li>32 bits microcontroller is employed mainly in automatically controlled appliances such as office machines, implantable medical appliances, etc. It requires 32-bit instructions to carry out any logical or arithmetic function.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="color: #800000;">Memory:</span></h5>
+<ul style="text-align: justify;">
+<li>External Memory Microcontroller &#8211; When an embedded structure is built with a microcontroller which does not comprise of all the functioning blocks existing on a chip it is named as external memory microcontroller. For illustration- 8031 microcontroller does not have program memory on the chip.</li>
+<li>Embedded Memory Microcontroller &#8211; When an embedded structure is built with a microcontroller which comprise of all the functioning blocks existing on a chip it is named as embedded memory microcontroller. For illustration- 8051 microcontroller has all program &amp; data memory, counters &amp; timers, interrupts, I/O ports and therefore its embedded memory microcontroller.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="color: #800000;">Instruction Set:</span></h5>
+<ul style="text-align: justify;">
+<li>CISC- CISC means complex instruction set computer, it allows the user to apply 1 instruction as an alternative to many simple instructions.</li>
+<li>RISC- RISC means Reduced Instruction Set Computers. RISC reduces the operation time by shortening the clock cycle per instruction.</li>
+</ul>
+<h5 style="text-align: justify;"><span style="color: #800000;">Memory Architecture:</span></h5>
+<ul style="text-align: justify;">
+<li>Harvard Memory Architecture Microcontroller</li>
+<li>Princeton Memory Architecture Microcontroller</li>
+</ul>
+<h3 style="text-align: justify;"><span style="color: #800000;"><strong>8051 Microcontroller:</strong></span></h3>
+<p style="text-align: justify;">The most universally employed set of microcontrollers come from the 8051 family. <strong>8051 Microcontrollers</strong> persist to be an ideal choice for a huge group of hobbyists and experts. In the course of <strong>8051</strong>, the humankind became eyewitness to the most ground-breaking set of microcontrollers. The original 8051 microcontroller was initially invented by Intel. The two other members of this 8051 family are-</p>
+<ul style="text-align: justify;">
+<li>8052- This microcontroller has 3 timers &amp; 256 bytes of RAM. Additionally it has all the features of the traditional 8051 microcontroller. 8051 microcontroller is a subset of 8052 microcontroller.</li>
+<li>8031- This microcontroller is ROM less, other than that it has all the features of a traditional 8051 microcontroller. For execution an external ROM of size 64K bytes can be added to its chip.</li>
+</ul>
+<p style="text-align: justify;">8051 microcontroller brings into play 2 different sorts of memory such as- NV-RAM, UV-EPROM and Flash.</p>
+<h4 style="text-align: justify;"><span style="color: #800000;"><strong>8051 Microcontroller Architecture:</strong></span></h4>
+<p style="text-align: justify;">8051 microcontroller is an eight bit microcontroller launched in the year 1981 by Intel Corporation. It is available in 40 pin DIP (dual inline package). It has 4kb of ROM (on-chip programmable space) and 128 bytes of RAM space which is inbuilt, if desired 64KB of external memory can be interfaced with the microcontroller. There are four parallel 8 bits ports which are easily programmable as well as addressable. An on-chip crystal oscillator is integrated in the microcontroller which has crystal frequency of 12MHz. In the microcontroller there is a serial input/output port which has 2 pins. Two timers of 16 bits are also incorporated in it; these timers can be employed as timer for internal functioning as well as counter for external functioning. The microcontroller comprise of 5 interrupt sources namely- Serial Port Interrupt, Timer Interrupt 1, External Interrupt 0, Timer Interrupt 0, External Interrupt 1. The programming mode of this micro-controller includes GPRs (general purpose registers), SFRs (special function registers) and SPRs (special purpose registers).</p>
+<h4 style="text-align: justify;"><span style="color: #800000;"><strong>PIC Microcontroller:</strong></span></h4>
+<p style="text-align: justify;">Peripheral Interface Controller (PIC) provided by Micro-chip Technology to categorize its solitary chip microcontrollers. These appliances have been extremely successful in 8 bit micro-controllers. The foremost cause behind it is that Micro-chip Technology has been constantly upgrading the appliance architecture and included much required peripherals to the micro-controller to go well with clientele necessities. PIC microcontrollers are very popular amid hobbyists and industrialists; this is only cause of wide availability, low cost, large user base &amp; serial programming capability.</p>
+<h4 style="text-align: justify;"><strong><span style="color: #800000;">PIC Microcontroller Architecture:</span></strong></h4>
+<p style="text-align: justify;"><b> </b>The architecture of the 8 bit PIC microcontrollers can be categorized as below -</p>
+<ol style="text-align: justify;">
+<li><span style="color: #800000;"><b>Base Line Architecture </b></span>- In the base-line architecture PIC microcontrollers of PIC10F family is included, other than that a fraction of PIC12 &amp; PIC16 families are also included. These gadgets make use of 12 bit program word architecture with six to twenty-eight pin package alternatives.  Briefly defined attribute set of baseline architecture allows the most lucrative product solutions. This architecture is perfect for battery enabled gadgets. The PIC10F200 series is another reasonably priced 8 bit flash micro-controller with a 6 pin package.</li>
+<li><b><span style="color: #800000;">Mid Range Architecture</span> </b>- In this midline member of PIC12 &amp; PIC16 families are added that attribute 14 bit program word architecture. The midrange PIC16 gadgets proffer a broad variety of package alternatives (from 8 to 64 package), with low to high levels of peripheral incorporation. This PIC16 appliance attributes a variety of analog, digital &amp; serial peripherals, like- SPI, USART, I2C, USB, LCD &amp; A/D converters. The mid-range PIC16 micro-controllers have suspended controlling ability with an eight level hardware load.</li>
+<li><span style="color: #800000;"><b>High Performance Architecture </b></span>- The high performance architecture included the PIC18 family of appliances. These micro-controllers make use of 16 bit program word architecture along with 18 to 100 pin package alternatives. The PIC18 appliances are high performance micro-controllers with incorporated Analog to Digital converters. All PIC18 micro-controllers integrate a highly developed RISC architecture that supports flash appliances. The PIC18 has improved foundation attributes, 32 level deep load and several inner and exterior interrupts.</li>
+</ol>
+<blockquote><p><em><strong><span style="color: #008000;">Note: List of</span> <span style="color: #ff0000;"><a href="/top-pic-microcontroller-projects-ideas/" target="_blank"><span style="color: #ff0000;">Top PIC Microcontroller Projects</span></a></span> <span style="color: #008000;">for Engineering Students</span></strong></em></p></blockquote>
+<h3 style="text-align: justify;"><span style="color: #800000;"><strong>AVR Microcontroller:</strong></span></h3>
+<p style="text-align: justify;">AVR also known as Advanced Virtual RISC, is a customized Harvard architecture 8 bit RISC solitary chip micro-controller. It was invented in the year 1966 by Atmel. Harvard architecture signifies that program &amp; data are amassed in different spaces and are used simultaneously. It was one of the foremost micro-controller families to employ on-chip flash memory basically for storing program, as contrasting to one time programmable EPROM, EEPROM or ROM, utilized by other micro-controllers at the same time. Flash memory is a non-volatile (constant on power down) programmable memory.</p>
+<h4 style="text-align: justify;"><strong><span style="color: #800000;">AVR Microcontroller Architecture:</span></strong></h4>
+<p style="text-align: justify;">AVR microcontrollers’ architecture was developed by Alf-Egil Bogen and Vegard Wollan. The name AVR is derived from the names of the architecture developers of the microcontroller. The AT90S8515 was the foremost micro-controller which was AVR architecture based; on the other hand the foremost micro-controller to strike the commercial marketplace was AT90S1200 which was launched in the year 1997.</p>
+<p style="text-align: justify;">The SRAM, Flash and EEPROM all are incorporated on a single chip, thereby eliminating the requirement of any other external memory in maximum devices. Several appliances comprise of parallel external bus alternative, so as to add extra data memory gadgets. Approximately all appliances, except TinyAVR chips comprise serial interface, which is used to link large serial Flash &amp; EEPROMs chips.</p>
+<h3 style="text-align: justify;"><span style="color: #800000;"><strong>AMR Microcontroller:</strong></span></h3>
+<p style="text-align: justify;">AMR is the name of a company that designs micro-processors architecture. It is also engaged in licensing them to the producers who fabricate genuine chips. In actuality AMR is a 32 bit genuine RISC architecture. It was initially developed in the year 1980 by Acorn Computers Ltd. This AMR base microprocessor does not have on-board flash memory. ARM is particularly designed for micro-controller devices, it is simple to be trained and make use of, however powerful enough for the most challenging embedded devices.</p>
+<h4 style="text-align: justify;"><strong><span style="color: #800000;">AMR Microcontroller Architecture:</span></strong></h4>
+<p style="text-align: justify;">The AMR architecture is a 32 bit RISC processor developed by ARM Ltd. Owing to its power-saving attributes, ARM central processing units are prevailing in the mobile electronics marketplace, where less power expenditure is a vital design aim. ARM architecture comprise of the underneath RISC elements:-</p>
+<ul>
+<li>Maximum single cycle functioning</li>
+<li>Constant 16&#215;32 bit register file.</li>
+<li>Load or store architecture.</li>
+<li>Preset instruction width of 32 bits so as to simplify pipelining and decoding, at minimized code density.</li>
+<li>For misaligned memory access there is no support.</li>
+</ul>
+<h3 style="text-align: justify;"><span style="color: #800000;"><strong>Microcontroller Applications:</strong></span></h3>
+<p style="text-align: justify;">Microcontrollers are intended for embedded devices, in comparison to the micro-processors which are used in PCs or other all-purpose devices. Microcontrollers are employed in automatically managed inventions and appliances like- power tools, implantable medical devices, automobile engine control systems, , office machines, remote controls appliances, toys and many more embedded systems. By dipping the size and expenditure in comparison to a design that make use of a different micro-processor, I/O devices and memory, micro-controllers formulate it inexpensive to digitally control more &amp; more appliances and operations. Mixed signal micro-controllers are general; putting together analog constituents required controlling non-digital electronic structures.</p>
+<h4 style="text-align: justify;"><strong><span style="color: #800000;">Application of Microcontroller in Day to Day Life Devices:</span></strong></h4>
+<ul style="text-align: justify;">
+<li>Light sensing &amp; controlling devices</li>
+<li>Temperature sensing and controlling devices</li>
+<li>Fire detection &amp; safety devices</li>
+<li>Industrial instrumentation devices</li>
+<li>Process control devices</li>
+</ul>
+<h4 style="text-align: justify;"><strong><span style="color: #800000;">Application of Microcontroller in Industrial Control Devices:</span></strong></h4>
+<ul>
+<li>Industrial instrumentation devices</li>
+<li>Process control devices</li>
+</ul>
+<h4 style="text-align: justify;"><span style="color: #800000;">Application of Microcontroller in Metering &amp; Measurement Devices:</span></h4>
+<ul>
+<li>Volt Meter</li>
+<li>Measuring revolving objects</li>
+<li>Current meter</li>
+<li>Hand-held metering systems</li>
+</ul>
+<p><em><strong><span style="color: #008000;">Related Link:</span> <span style="color: #ff0000;"><a href="/difference-between-microprocessor-and-microcontroller/" target="_blank"><span style="color: #ff0000;">Difference Between Microcontroller and Microprocessor</span></a></span></strong></em></p>
+<div class="after-post widget-area"><div id="text-11" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><center><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- After Post Big Ad - EH -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:600px;height:300px"
+     data-ad-client="ca-pub-0788306562255704"
+     data-ad-slot="2229099680"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></center></div>
+		</div></div>
+</div></div><div class="post-meta"><span class="categories">Filed Under: <a href="http://www.electronicshub.org/general-articles/" title="View all posts in General Articles" rel="category tag">General Articles</a></span> </div>
+<div class="zem_rp_wrap zem_rp_th_vertical" id="zem_rp_first"><div class="zem_rp_content"><h3 class="related_post_title">Related Posts</h3><ul class="related_post zem_rp"><li data-position="0" data-poid="in-656" data-post-type="none"><a href="http://www.electronicshub.org/microprocessors/" class="zem_rp_thumbnail"><img src="http://www.electronicshub.org/wp-content/uploads/2013/06/Microprocessor-150x150.jpg" alt="All About Microprocessors" width="150" height="150"  /></a><a href="http://www.electronicshub.org/microprocessors/" class="zem_rp_title">All About Microprocessors</a></li><li data-position="1" data-poid="in-1178" data-post-type="none"><a href="http://www.electronicshub.org/pwm-led-dimmer-using-ne555/" class="zem_rp_thumbnail"><img src="http://www.electronicshub.org/wp-content/uploads/2013/09/Block-Diagram-of-LED-Dimmer-150x150.png" alt="PWM LED Dimmer Using NE555" width="150" height="150"  /></a><a href="http://www.electronicshub.org/pwm-led-dimmer-using-ne555/" class="zem_rp_title">PWM LED Dimmer Using NE555</a></li><li data-position="2" data-poid="in-992" data-post-type="none"><a href="http://www.electronicshub.org/home-automation-system/" class="zem_rp_thumbnail"><img src="http://www.electronicshub.org/wp-content/uploads/2013/07/Home-Automation-150x150.png" alt="Home Automation System and Its Applications" width="150" height="150"  /></a><a href="http://www.electronicshub.org/home-automation-system/" class="zem_rp_title">Home Automation System and Its Applications</a></li><li data-position="3" data-poid="in-1032" data-post-type="none"><a href="http://www.electronicshub.org/rfid-technology-and-its-applications/" class="zem_rp_thumbnail"><img src="http://www.electronicshub.org/wp-content/uploads/2013/07/Functioning-Principle-of-RFID-Device-150x150.png" alt="RFID Technology and Its Applications" width="150" height="150"  /></a><a href="http://www.electronicshub.org/rfid-technology-and-its-applications/" class="zem_rp_title">RFID Technology and Its Applications</a></li></ul></div></div>
+</div><div id="comments"><h3>Comments</h3><ol class="comment-list">
+	<li class="comment even thread-even depth-1" id="comment-540">
+
+		
+		<div class="comment-header">
+			<div class="comment-author vcard">
+				<img alt='' src='http://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=48' class='avatar avatar-48 photo avatar-default' height='48' width='48' />				<cite class="fn">Srivasthav</cite> <span class="says">says:</span>		 	</div>
+
+			<div class="comment-meta commentmetadata">
+				<a href="http://www.electronicshub.org/microcontrollers/#comment-540">December 13, 2013 at 9:55 pm</a>
+							</div>
+		</div>
+
+		<div class="comment-content">
+			
+			<p>Hi! Do you use Twitter? I&#8217;d like to follow you if that would be okay. I&#8217;m absolutely enjoying your blog and look forward to new posts.</p>
+		</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='#comment-540' onclick='return addComment.moveForm("comment-540", "540", "respond", "658")'>Reply</a>		</div>
+
+		<ul class="children">
+
+	<li class="comment byuser comment-author-elktros bypostauthor odd alt depth-2" id="comment-542">
+
+		
+		<div class="comment-header">
+			<div class="comment-author vcard">
+				<img alt='' src='http://1.gravatar.com/avatar/317abd64b9b1c6ffe1c98cb18ede317a?s=48&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D48&amp;r=G' class='avatar avatar-48 photo' height='48' width='48' />				<cite class="fn">Administrator</cite> <span class="says">says:</span>		 	</div>
+
+			<div class="comment-meta commentmetadata">
+				<a href="http://www.electronicshub.org/microcontrollers/#comment-542">December 14, 2013 at 8:11 am</a>
+							</div>
+		</div>
+
+		<div class="comment-content">
+			
+			<p>Yes. This is our twitter official account: <a href="https://twitter.com/eeehub" onclick="javascript:_gaq.push(['_trackEvent','outbound-comment','http://twitter.com']);" rel="nofollow">https://twitter.com/eeehub</a></p>
+		</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='#comment-542' onclick='return addComment.moveForm("comment-542", "542", "respond", "658")'>Reply</a>		</div>
+
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comment even thread-odd thread-alt depth-1" id="comment-50959">
+
+		
+		<div class="comment-header">
+			<div class="comment-author vcard">
+				<img alt='' src='http://0.gravatar.com/avatar/c079d8b28bc5f4dfead3f218d808fcda?s=48&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D48&amp;r=G' class='avatar avatar-48 photo' height='48' width='48' />				<cite class="fn">shivam</cite> <span class="says">says:</span>		 	</div>
+
+			<div class="comment-meta commentmetadata">
+				<a href="http://www.electronicshub.org/microcontrollers/#comment-50959">May 24, 2014 at 12:27 am</a>
+							</div>
+		</div>
+
+		<div class="comment-content">
+			
+			<p>A very well written article. Must read for beginners.</p>
+		</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='#comment-50959' onclick='return addComment.moveForm("comment-50959", "50959", "respond", "658")'>Reply</a>		</div>
+
+		</li><!-- #comment-## -->
+
+	<li class="comment odd alt thread-even depth-1" id="comment-52403">
+
+		
+		<div class="comment-header">
+			<div class="comment-author vcard">
+				<img alt='' src='http://0.gravatar.com/avatar/0e7d48c50d42d319a7376ecd983e00d2?s=48&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D48&amp;r=G' class='avatar avatar-48 photo' height='48' width='48' />				<cite class="fn">amir khan</cite> <span class="says">says:</span>		 	</div>
+
+			<div class="comment-meta commentmetadata">
+				<a href="http://www.electronicshub.org/microcontrollers/#comment-52403">May 31, 2014 at 3:56 am</a>
+							</div>
+		</div>
+
+		<div class="comment-content">
+			
+			<p>explanation is good&#8230;&#8230;thanx</p>
+		</div>
+
+		<div class="reply">
+			<a class='comment-reply-link' href='#comment-52403' onclick='return addComment.moveForm("comment-52403", "52403", "respond", "658")'>Reply</a>		</div>
+
+		</li><!-- #comment-## -->
+</ol></div>								<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">Speak Your Mind <small><a rel="nofollow" id="cancel-comment-reply-link" href="/microcontrollers/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://www.electronicshub.org/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+																										<p class="comment-form-author"><input id="author" name="author" type="text" value="" size="30" tabindex="1" aria-required="true" /><label for="author">Name</label> <span class="required">*</span></p>
+<p class="comment-form-email"><input id="email" name="email" type="text" value="" size="30" tabindex="2" aria-required="true" /><label for="email">Email</label> <span class="required">*</span></p>
+<p class="comment-form-url"><input id="url" name="url" type="text" value="" size="30" tabindex="3" /><label for="url">Website</label></p>
+												<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="8" tabindex="4" aria-required="true"></textarea></p>												<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Post Comment" />
+							<input type='hidden' name='comment_post_ID' value='658' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+						                <script type='text/javascript'>
+                    var RecaptchaOptions = { theme : 'red', lang : 'en' , tabindex : 5 };
+                </script><script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LfIc-0SAAAAAB27kM3ZRw9K0Q277SFMFuridU4_"></script>
+
+	<noscript>
+  		<iframe src="http://www.google.com/recaptcha/api/noscript?k=6LfIc-0SAAAAAB27kM3ZRw9K0Q277SFMFuridU4_" height="300" width="500" frameborder="0"></iframe><br/>
+  		<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+  		<input type="hidden" name="recaptcha_response_field" value="manual_challenge"/>
+	</noscript>                        <div id="recaptcha-submit-btn-area">&nbsp;</div>
+                        <noscript>
+                         <style type='text/css'>#submit {display:none;}</style>
+                         <input name="submit" type="submit" id="submit-alt" tabindex="6" value="Submit Comment"/> 
+                        </noscript>					</form>
+							</div><!-- #respond -->
+			        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                jQuery('#commentform').submit(function () {
+                    _gaq.push(
+                            ['_setAccount', 'UA-40919084-1'],
+                            ['_trackEvent', 'comment', 'submit']
+                    );
+                });
+            });
+        </script>
+		</div><div id="sidebar" class="sidebar widget-area"><div id="search-2" class="widget widget_search"><div class="widget-wrap"><form method="get" class="searchform search-form" action="http://www.electronicshub.org/" role="search" ><input type="text" value="Search this website&#x2026;" name="s" class="s search-input" onfocus="if (&#039;Search this website&#x2026;&#039; === this.value) {this.value = &#039;&#039;;}" onblur="if (&#039;&#039; === this.value) {this.value = &#039;Search this website&#x2026;&#039;;}" /><input type="submit" class="searchsubmit search-submit" value="Search" /></form></div></div>
+<div id="text-5" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Sidebar - Big Ad - EH -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-0788306562255704"
+     data-ad-slot="5917059686"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</div></div>
+<div id="text-9" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><!-- Place this tag where you want the widget to render. -->
+<div class="g-page" data-width="318" data-href="//plus.google.com/112595085701924990706" data-theme="dark" data-layout="landscape" data-showtagline="false" data-showcoverphoto="false" data-rel="publisher"></div>
+
+<!-- Place this tag after the last widget tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script></div>
+		</div></div>
+		<div id="recent-posts-3" class="widget widget_recent_entries"><div class="widget-wrap">		<h4 class="widget-title widgettitle">Recent Posts</h4>
+		<ul>
+					<li>
+				<a href="http://www.electronicshub.org/wailing-siren-circuit/">Wailing Siren Circuit</a>
+						</li>
+					<li>
+				<a href="http://www.electronicshub.org/led-interfacing-8051/">LED Interfacing with 8051</a>
+						</li>
+					<li>
+				<a href="http://www.electronicshub.org/transistor-intercom-circuit/">Transistor Intercom Circuit</a>
+						</li>
+					<li>
+				<a href="http://www.electronicshub.org/stun-gun-circuit/">Stun Gun Circuit</a>
+						</li>
+					<li>
+				<a href="http://www.electronicshub.org/interfacing-dc-motor-8051-microcontroller/">Interfacing DC Motor with 8051 Microcontroller</a>
+						</li>
+					<li>
+				<a href="http://www.electronicshub.org/tv-transmitter-circuit/">TV Transmitter Circuit</a>
+						</li>
+					<li>
+				<a href="http://www.electronicshub.org/lc-meter-circuit-using-555-timer/">LC Meter Circuit using 555 Timer</a>
+						</li>
+					<li>
+				<a href="http://www.electronicshub.org/interfacing-7-segment-display-8051/">Interfacing 7 Segment Display to 8051</a>
+						</li>
+					<li>
+				<a href="http://www.electronicshub.org/delay-using-8051-timers/">Delay using 8051 Timers</a>
+						</li>
+					<li>
+				<a href="http://www.electronicshub.org/frequency-counter-circuit/">Frequency Counter Circuit</a>
+						</li>
+				</ul>
+		</div></div>
+<div id="text-7" class="widget widget_text"><div class="widget-wrap"><h4 class="widget-title widgettitle">Subscribe for Free Project Circuits</h4>
+			<div class="textwidget"><form style="border:1px solid #ccc;padding:3px;text-align:center;" action="http://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=ElectronicsHub', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><p>Enter your email address:</p><p><input type="text" style="width:140px" name="email"/></p><input type="hidden" value="ElectronicsHub" name="uri"/><input type="hidden" name="loc" value="en_US"/><input type="submit" value="Subscribe" /><p>Delivered by <a href="http://feedburner.google.com" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://feedburner.google.com']);" target="_blank">FeedBurner</a></p></form></div>
+		</div></div>
+<div id="simple-social-icons-2" class="widget simple-social-icons"><div class="widget-wrap"><ul class="alignleft"><li class="social-facebook"><a href="https://www.facebook.com/electronicshub.org" target="_blank">&#xe802;</a></li><li class="social-gplus"><a href="https://plus.google.com/112595085701924990706/posts" target="_blank">&#xe801;</a></li><li class="social-pinterest"><a href="http://www.pinterest.com/electronicsorg/" target="_blank">&#xe803;</a></li><li class="social-rss"><a href="http://www.electronicshub.org/feed" target="_blank">&#xe805;</a></li><li class="social-stumbleupon"><a href="http://www.stumbleupon.com/stumbler/ElectronicsHub" target="_blank">&#xe808;</a></li><li class="social-twitter"><a href="https://twitter.com/eeehub" target="_blank">&#xe80d;</a></li><li class="social-youtube"><a href="http://www.youtube.com/electronicshuborg" target="_blank">&#xe804;</a></li></ul></div></div>
+<div id="text-10" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Felectronicshub.org&amp;width&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=397271360394736" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:258px;" allowTransparency="true"></iframe></div>
+		</div></div>
+<div id="text-12" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><script id="mNCC" language="javascript">  medianet_width='300';  medianet_height= '600';  medianet_crid='463227569';  </script>  <script id="mNSC" src="http://contextual.media.net/nmedianet.js?cid=8CU7QB33Q" language="javascript"></script> </div>
+		</div></div>
+</div></div></div></div><div id="footer" class="footer"><div class="wrap"><div class="gototop"><p><a href="#wrap" rel="nofollow">Return to top of page</a></p></div><div class="creds"><p>Copyright &#x000A9;&nbsp;2014 Electronicshub.org</p></div></div></div></div>                <script type="text/javascript">
+                var sub = document.getElementById('submit');
+                document.getElementById('recaptcha-submit-btn-area').appendChild (sub);
+                document.getElementById('submit').tabIndex = 6;
+                if ( typeof _recaptcha_wordpress_savedcomment != 'undefined') {
+                        document.getElementById('comment').value = _recaptcha_wordpress_savedcomment;
+                }
+                document.getElementById('recaptcha_table').style.direction = 'ltr';
+                </script><script type='text/javascript' src='http://www.electronicshub.org/wp-includes/js/comment-reply.min.js?ver=3.9.1'></script>
+<script type='text/javascript' src='http://www.electronicshub.org/wp-content/themes/genesis/lib/js/menu/superfish.min.js?ver=1.7.4'></script>
+<script type='text/javascript' src='http://www.electronicshub.org/wp-content/themes/genesis/lib/js/menu/superfish.args.min.js?ver=2.0.2'></script>
+<script type='text/javascript' src='http://www.electronicshub.org/wp-content/themes/genesis/lib/js/menu/superfish.compat.min.js?ver=2.0.2'></script>
+</body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk
+Page Caching using disk: enhanced
+Database Caching 1/37 queries in 0.014 seconds using disk
+Object Caching 2237/2303 objects using disk
+
+ Served from: www.electronicshub.org @ 2014-07-09 01:52:27 by W3 Total Cache -->

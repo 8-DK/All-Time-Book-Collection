@@ -1,0 +1,706 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head><link rel="canonical" href="analog-to-digital-converter.html"/>
+ 
+<title>PIC microcontroller analog to digital converter tutorial</title>
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="microcontroller-projects.xml">
+
+  
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=iso-8859-1">
+<META Name="Description" Content="PIC interrupt forces the microcontroller to suspend execution of the main program and immediately execute a special set of instructions. Afterward the micro continues from where it left off.">
+<META Name="Keywords" Content="pic interrupt tutorial, pic microcontroller interrupts, microcontroller interrupt">
+
+<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="favicon.ico">
+
+  
+  <link href="support-files/style.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+<!--
+.style1 {
+	color: #FF3399;
+	font-weight: bold;
+}
+-->
+  </style>
+</head>
+ 
+<body>
+ 
+  <div id="PageWrapper">
+
+  
+ <!-- #BeginLibraryItem "/Library/header.lbi" -->
+ <div id="Header">
+   <!--	
+	
+ <MARQUEE behavior="alternate" scrollamount="3" bgcolor="#ffffff" width="50%">
+ <A HREF="http://www.microcontrollerboard.com/store.html"  >Limited time offer: FREE SHIPPING and HANDLING*** </A>
+ 
+ </MARQUEE>
+
+-->
+   <div id="pagetop-NavBar">
+     <ul>
+       <li> <a  href="pic_programmer.html">PIC Microcontroller programmer</a> </li>
+       <li> <a  href="analog-to-digital-converter.html">PIC Microcontroller ADC</a> </li>
+  
+       <li> <a  href="contact.html">Contact us</a> </li>
+       <li> <a href="http://microcontrollerboard.blogspot.com/" onClick="window.location.href='http://www.microcontrollerboard.com/cgi-bin/counter.pl?url=http%3A%2F%2Fmicrocontrollerboard%2Eblogspot%2Ecom%2F&amp;referrer=http%3A%2F%2Fwww%2Emicrocontrollerboard%2Ecom%2Findex%2Ehtml'; return false;">Blog</a> </li>
+     </ul>
+   </div>
+   <div class="Liner"></div>
+   <!-- end Liner -->
+   <!--horizontal google 5 links ad -->
+   <div id="Google-Horiz-link">
+     <script type="text/javascript"><!--
+google_ad_client = "pub-7671331486997987";
+/* horiz-5links, 728x15, created 8/9/10 */
+google_ad_slot = "7760391552";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+ </script>
+     <script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/show_ads.js">
+ </script>
+   </div>
+ </div>
+ <!-- end Header -->
+ <!-- #EndLibraryItem -->
+<div id="ContentWrapper">
+	
+	
+<div id="CenterColumn">
+        <div class="Liner">
+        
+        <!-- Begin Center Column Content -->
+ 
+      
+<h1 >PIC Analog to Digital Converter tutorial</h1>
+<h3> Theoretical background </h3>
+<script language="javascript" id="mNSC" src="http://search.keywordblocks.com/cmedianet?cid=8CU9F5TY2&size=336x280&crid=194311305"></script>
+
+
+</br>
+
+
+
+<p>
+
+The role of the ANALOG-TO-DIGITAL CONVERTER (A/D) is to convert analog voltage values to digital values. 
+Let’s explore the principle of operation of the A/D converter:</p>
+
+
+
+
+
+<p>
+The ANALOG-TO-DIGITAL CONVERTER converts analog voltage to binary numbers. These binary numbers can be in different length - 2, 4, 8, 10-bit. The more bits the binary number has, the higher the resolution of the - A/D. 
+</p>
+
+
+<p>
+For example: 
+Suppose that the voltage that supplied to the A/D converter varies from 0 to 5 volt, and the A/D converter converts the input voltage to a binary number of two-bits.
+</p>
+<p>
+
+<span style="background-color:yellow;padding:0 2px;">With two bits, we can ONLY display 4 different options: </span>
+</p>
+
+<table border="1" width="95%">	<tr>		<td align="center">00</td>		<td align="center">01</td>		<td align="center">10</td>		<td align="center">11</td>	</tr></table>
+
+
+
+<p>
+That is, we can show the changes from 0 to 5 volt with 4 numbers, or more precisely four levels. 
+</p>
+<p>
+You can see the 4 levels in the following illustration: 
+</p>
+
+<img border="0" src="images/a2d_2bits.jpg" width="400" height="300" alt="Analog to Ditital 2 bits converter">
+
+<p>
+<font color="#0000FF">BLUE line</font> describes the changes in the input voltage of the ANALOG-TO-DIGITAL CONVERTER (A/D) of the microcontroller.<br>
+
+<font color="#FF0000">RED line</font> represents the digital levels at the output of the ANALOG-TO-DIGITAL CONVERTER (A/D) of the microcontroller.
+
+</p>
+<p>
+
+We can see that the red signal far from being ideal, i.e. not close enough to the original analog input voltage values.  Thus, we can say that A/D  with the binary number of two-bits has <span style="background-color:yellow;padding:0 2px;">a low resolution</span> and there is a large gap between the real value of the analog input voltage and the values represented by the A/D. 
+</p>
+
+<p>Now, suppose that the voltage that supplied to the A/D converter is still varies from 0 to 5 volt, however, the A/D converter converts the input voltage to a binary number of three-bits. 
+
+</p>
+
+
+
+<p>
+<span style="background-color:yellow;padding:0 2px;">With three bits we can get 8 different options:</span>
+</p>
+
+
+<table border="1" width="95%">	<tr>		<td align="center">000</td>		<td align="center">001</td>		<td align="center">010</td>		<td align="center">011</td>		<td align="center">100</td>		<td align="center">101</td>		<td align="center">110</td>		<td align="center">111</td>	</tr></table>
+
+
+<p>
+That is, we can show the changes from 0 to 5 volt with 8 numbers, or more precisely 8 levels. 
+</p>
+
+<p>
+You can see the eight levels in the following illustration: 
+</p>
+
+<img border="0" src="images/a2d_3bits.jpg" width="400" height="300" alt="Analog to Digital 3bits converter">
+
+
+
+
+<p class="AdSenseBoxRight">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7671331486997987";
+/* 250x250, created 7/27/09 */
+google_ad_slot = "2916699128";
+google_ad_width = 250;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</p>
+
+<p>
+Now we can see that the <font color="#FF0000">RED line</font> represents the original signal “better” than the previous RED line. The gap between the analog signal and the digital signal smaller compared to the previous graph. Based on the "good" results that we received, we can say that current A/D converter has a  <span style="background-color:yellow;padding:0 2px;"> high-resolution </span>compare to previous case. </p>
+<p>
+Therefore we can say that the ANALOG TO DIGITAL CONVERTER (A/D) of the microcontroller with a larger amount of bits has a higher resolution and better accuracy when converting from analog signal to digital signal.
+
+</p>
+
+<p>
+
+There is another fact to mention about the resolution of the A/D converter. Since the converter converts the signals, it takes a certain time. The conversion time of the <span style="background-color:yellow;padding:0 2px;">low resolution A/D takes less time than the conversion time of the high resolution A/D. </span>
+</p>
+
+<p>
+
+When you are planning special systems, you have to take into account this fact. If you are planning to build accurate and fast systems, you have to consider carefully which convert to choose: if you select an analog to digital converter (A/D) with high resolution – system will not be as “fast; but if you select an analog to digital converter (A/D) with high-speed response – you will loose the resolution of the system. 
+
+</p>
+
+
+<h3>
+How to convert analog values to digital values: 
+</h3>
+
+<p>
+If we decide to work with an analog to digital converter (A/D) with three-bit length, we obtain eight different binary numbers which represent different voltage levels. For example: 
+
+</p>
+
+
+
+<table border="1" width="64%">	<tr>		<td align="center" bgcolor="#0099FF">		<b>Voltage levels [V]</b></td>		<td align="center" bgcolor="#0099FF"><b>Binary 		representation </b> </td>	</tr>	<tr>		<td align="center">0-0.62</td>		<td align="center">000</td>	</tr>	<tr>		<td align="center">0.621-1.25</td>		<td align="center">001</td>	</tr>	<tr>		<td align="center">1.251-1.87</td>		<td align="center">010</td>	</tr>	<tr>		<td align="center">1.871-2.5</td>		<td align="center">011</td>	</tr>	<tr>		<td align="center">2.51-3.12</td>		<td align="center">100</td>	</tr>	<tr>		<td align="center">3.121-3.75</td>		<td align="center">101</td>	</tr>	<tr>		<td align="center">3.751-4.37</td>		<td align="center">110</td>	</tr>	<tr>		<td align="center">4.371-5.00</td>		<td align="center">111</td>	</tr></table>
+
+
+
+<p>
+
+In this example, the analog voltage values from 0v to 0.62v have a binary representation of 000; the analog voltage values from 0.621v to 1.25v have a binary representation of 001 so on. 
+</p>
+
+<p class="AdSenseBoxRight">
+<script language="javascript" id="mNSC" src="http://search.keywordblocks.com/cmedianet?cid=8CU9F5TY2&size=250x250&crid=438883856"></script>
+</p>
+
+
+
+<p>
+
+The Analog to Digital Converter (ADC) module located within the PIC microcontroller has a <span style="background-color:yellow;padding:0 2px;">resolution of ten-bit length.</span> Therefore, the converter can divide the analog input voltage between 0v and 5v to 2^ 10 levels, which are 1024 levels. We can say that the resolution of this component is very high. 
+
+</p>
+
+<h3>
+
+How do we know what is the binary value/representation of the analog input voltage?
+</h3>
+
+<p>
+We can use the triangle method to calculate/find the binary representation of an analog input voltage. 
+
+For example, lets calculate/find the binary value representation on the analog input voltage of 3.65 volt: 
+
+</p>
+
+<img border="0" src="images/binary_represantation_of_the_analog_voltage.jpg" width="364" height="66" alt="Formula to calculate the binary represantation of an analog input voltage">
+
+<p>
+
+The analog input voltage of 3.65v will be represented by decimal number 748 or by binary number 1011101100.Using similar way we can find a binary representation for any desired level of the analog input voltage.
+
+</p>
+
+<p>
+
+The A/D module has four 8 bit registers. These registers are:
+
+</p>
+
+<ul>
+
+
+<li>ADCON0 - A/D Control Register 0; determines the behavior of the A/D</li>
+<li>ADCON1 - A/D Control Register 1; determines the configuration of the PORTA and PORTE and how the result of conversion of A/D will be store
+</li>
+<li>ADRESH - A/D Result High Register </li>
+<li>ADRESL - A/D Result Low Register </li>
+
+
+</ul>
+
+
+<img border="0" src="images/ADCON0_REG.jpg" width="515" height="88" alt="ADCON0 Register">
+
+
+<p>
+The size of this register is one byte (8 bits). Each bit has an important role in the definition of the component. Here's a breakdown of the bits role: 
+
+
+</p>
+
+<div class="CalloutBox">
+
+ <p class="AdSenseBoxCenter">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7671331486997987";
+/* 468x60, created 7/27/09 */
+google_ad_slot = "3586055936";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</p>
+</div>
+
+<img border="0" src="images/ADCS1_ADCS0.jpg" width="442" height="97" alt="ADCS1:ADCS0">
+
+
+<p>
+
+After we define the appropriate pins in the specific PORT to be analog inputs, we can sample the analog input voltage using one of the following channels: 
+
+</p>
+
+
+<img border="0" src="images/CHS2_CHS0.jpg" width="290" height="168" alt="CHS2:CHS0">
+
+<p>
+
+You can sample from PORTA each of the pins RA0 and RA5 except pin RA4 (used for other purposes) as well as of PORTE.
+
+</p>
+
+<p>
+
+<strong>GO/DONE:</strong> A/D Conversion Status bit</strong><br>
+
+If ADON = 1:<br>
+1 = A/D conversion in progress (setting this bit starts the A/D conversion)<br>
+0 = A/D conversion not in progress (this bit is automatically cleared by hardware when the A/D conversion is complete) 
+
+
+</p>
+
+<p>
+<strong>ADON:</strong> A/D On bit<br>
+1 = A/D converter module is operating<br>
+0 = A/D converter module is shut-off and consumes no operating current
+
+</p>
+
+<img border="0" src="images/ADCON1_REG.jpg" width="518" height="90" alt="ADCON1 Register">
+
+
+<p>
+
+
+The size of this register is one byte (8 bits). Each bit has an important role in the definition of the component. Here's a breakdown of the bits role: 
+</p>
+
+<p>
+
+<strong>ADFM:</strong> A/D Result Format Select bit<br>
+1 = Right justified. 6 Most Significant bits of ADRESH are read as ‘0’.<br>
+0 = Left justified. 6 Least Significant bits of ADRESL are read as ‘0’.
+
+</p>
+
+
+<p>
+
+As we said, the A/D converter has a resolution of ten bits, i.e., the result of the conversion can not be stored in one register of eight bits. <br>.
+Therefore, the result is stored in two registers: ADRESL and ADRESH. The size of each register is 8 bits long, so that we have 16 (2*8) bits all together. 
+We can store the result of the conversion which is 10 bits long using the two registers ADRESL and ADRESH in the following 2 ways:
+</p>
+
+<ul>
+<li>alignment to the left</li>
+<li>alignment to the right</li>
+</ul>
+
+<p>
+
+<span style="background-color:yellow;padding:0 2px;"><strong>Alignment to the left </strong></span>– the eight MSB bits are stored in the ADRESH, and the two LSB bits are stored in ADRESL. In this case, the remaining six bits appear as - "0".
+
+</p>
+
+<table border="1" width="95%">	<tr>		<td align="center" colspan="16"><span class="style1">Left Justified</span></td>	
+</tr>	<tr>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center">0</td>		<td align="center">0</td>		<td align="center">0</td>		<td align="center">0</td>		<td align="center">0</td>		<td align="center">0</td>	</tr></table>
+<table border="0" width="75%" id="table3">	<tr>		<td align="center"><strong>ADRESH</strong></td>		<td align="center">ADRESL</td>	</tr></table>
+
+<p>
+
+<span style="background-color:yellow;padding:0 2px;"><strong>Alignment to the right</strong></span> – the eight LSB bits are stored in ADRESL, and two MSB bits are stored in the ADRESH. In this case six highest bits appear as - "0". 
+
+</p>
+
+<table border="1" width="95%">	<tr>		<td align="center" colspan="16"><span class="style1">Right Justified</span></td>	
+</tr>	<tr>		<td align="center">0</td>		<td align="center">0</td>		<td align="center">0</td>		<td align="center">0</td>		<td align="center">0</td>		<td align="center">0</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>		<td align="center" bgcolor="#FF99CC">X</td>	</tr></table>
+
+<table border="0" width="75%" id="table7">	<tr>		<td align="center">ADRESH</td>		<td align="center"><strong>ADRESL</strong></td>	</tr></table>
+
+
+<p>
+<strong>PCFG3:PCFG0:</strong> A/D Port Configuration Control bits:<br>
+
+With these bits we can control the pins of PORTA or PORTE. We can decide an analog (A) or digital (D) mode. 
+
+</p>
+
+<img border="0" src="images/PCFG3_PCFG0_Port_Configuration_Control_bits.jpg" width="590" height="375" alt="PCFG3:PCFG0 port configuration control bits">
+
+<p>
+
+If we want to work with the PORTA and PORTE as analog ports, then we select the option PCFG3: PCFG0 = 0000; If we want to work with ports as digital, then we select the option PCFG3: PCFG0 = 011x. </p>
+
+
+<p>
+
+In general, after the specified desired behavior of the A/D converter unit and before we start the conversion operation, we have to set up channel through which the analog information will be received using TRIS command. To begin making the conversion, we have to set the GO/DONE =1. This is done by using the command ADGO = 1. When the conversion ends, the result will be loaded into 2 registers ADRESH: ADRESL. Status bit GO/DONE (the register ADCON0) will be set to zero and the ADIF flag is set. 
+
+</p>
+
+
+<h3>Analog to Digital BLOCK DIAGRAM</h3>
+<br>
+<p class="ItemCenter">
+
+<img border="0" src="images/AD_BLOCK_DIAGRAM.jpg" width="472" height="447" alt="PIC microcontroller A/D block diagram">
+</p>
+
+<p>
+To summarize, the following steps should be followed for doing an A/D Conversion:
+</p>
+
+<ol>
+<li>Configure the A/D module:</li>
+
+<ul>
+<li>Configure analog pins/voltage reference and digital I/O (ADCON1)</li>
+<li>Select A/D input channel (ADCON0)</li>
+<li>Select A/D conversion clock (ADCON0)</li>
+<li>Turn on A/D module (ADCON0)</li>
+</ul>
+
+<li>Configure A/D interrupt (if desired):</li>
+
+<ul>
+<li>Clear ADIF bit</li>
+<li>Set ADIE bit</li>
+<li>Set PEIE bit</li>
+<li>Set GIE bit </li>
+</ul>
+
+<li>Wait the required acquisition time.</li>
+ <li>Start conversion:</li>
+
+	<ul>
+
+	<li>Set GO/DONE bit (ADCON0)</li>
+	</ul>
+
+
+<li> Wait for A/D conversion to complete, by either:</li>
+
+	<ul>
+
+	<li>Polling for the GO/DONE bit to be cleared(with interrupts enabled); OR</li>
+	<li>Waiting for the A/D interrupt</li>
+	</ul>
+	
+<li> Read A/D result register pair (ADRESH:ADRESL), clear bit ADIF if required.</li>
+<li> For the next conversion, go to step 1 or step 2, as required.</li>
+
+</ol>
+
+
+
+ <!--
+ <div class="AdSenseBoxLeft">
+ 
+ 
+</div>     
+-->
+
+ <!--
+<div class="ReturnToNavBox">
+<p>
+<a href="#">Back to TIER 2 from SBI! 3-Column and CSS</a>
+</p>
+ 
+<p>
+<a href="#">Back to Anguilla home from SBI! 3-Column and CSS</a>
+ 
+</p>
+</div>
+         
+     -->     
+	 
+	 
+	 
+	 <div class="ReturnToNavBox">
+<p>
+<a  href="pic_microcontroller.html">Back to PIC microcontroller tutorial </a>
+</p>
+ 
+<p>
+<a  href="development_tools-MPLAB-IDE.html">Back to Development tools</a>
+</p>
+ 
+<p>
+<a  href="pic_interrupt.html">Back to PIC Microcontroller Interrupt Tutorial</a>
+</p>
+
+
+
+</div></div> <!-- end Liner -->
+      </div> <!-- end CenterColumn -->
+    </div> <!-- end ContentWrapper -->
+ 
+ <!-- SETTING FOR THE LEFT NAVIGATION COLUMN -->
+    
+	<div id="LeftColumn">
+      <div class="Liner">
+ 
+ 
+      <!--  <h4>
+          Left Column: Content can be here
+        </h4>
+		
+		-->
+		
+ 	<!-- GOOGLE CUSTOM SEARCH BOX -->
+	
+	<form action="http://www.microcontrollerboard.com/google-search-result.html" id="cse-search-box">
+  <div>
+<font color="#FFFF"><strong><em>Search this web site:</em></strong></font>
+    <input type="hidden" name="cx" value="partner-pub-7671331486997987:zcn699lbibb" />
+    <input type="hidden" name="cof" value="FORID:10" />
+    <input type="hidden" name="ie" value="ISO-8859-1" />
+    <input type="text" name="q" size="17" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+ 	
+		<!-- THE END OF GOOGLE CUSTOM SEARCH BOX -->
+		
+			<!-- google vertical link -->
+        
+        
+        <script type="text/javascript"><!--
+google_ad_client = "pub-7671331486997987";
+/* verical 5 links 160x90, created 8/9/10 */
+google_ad_slot = "3003867399";
+google_ad_width = 160;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<br />
+
+		
+		
+		<!-- #BeginLibraryItem "/Library/Left_Nav.lbi" --><div class="Navigation">
+          
+          <h3>
+            PIC Microcontroller Development tools
+          </h3>
+          <ul>
+		        <li><a  href="index.html">Home</a></li>
+			 <li><a  href="pic-microcontroller-kits.html">PIC microcontroller kits</a></li>
+			<li><a  href="usb-pic-microcontroller-kits.html">USB PIC microcontroller kits</a></li>
+			 <li><a  href="pic-microcontroller-books.html">PIC programming books</a></li>
+			 <li><a  href="pic-microcontroller-books-in-c.html">Programming PIC in C</a></li>
+		
+          </ul>
+          
+          <h3>
+            PIC Microcontroller Tutorials
+          </h3>
+		  
+		  <ul>  
+		  <li>
+		  	<!-- google vertical link -->
+        
+        
+        <script type="text/javascript"><!--
+google_ad_client = "pub-7671331486997987";
+/* verical 5 links 160x90, created 8/9/10 */
+google_ad_slot = "3003867399";
+google_ad_width = 160;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<br />
+	</li>
+		 </ul> 
+
+          <ul>
+            <li><a  href="pic_microcontroller.html">PIC Introduction to PIC</a></li>
+            <li><a  href="pic_memory_organization.html">PIC Memory Organization</a></li>
+			 <li><a  href="development_tools-MPLAB-IDE.html">Microchip MPLAB IDE</a></li>
+			
+            <li><a  href="development_tools-HI-TECH.html">HI-TECH compiler</a></li>
+			
+			
+            <li><a  href="microcontroller_board.html">Microcontroller Board</a></li>
+            <li><a  href="pic_programmer.html">PIC USB Programmer</a></li>
+            <li><a  href="pic_programmer.html">PIC Debuger</a></li>
+           <br> 
+           
+           <ul>
+           <h4>
+            PIC Timer Modules
+            </h4>
+           
+            
+            <li><a  href="pic-timer0-tutorial.html">PIC Timer0 tutorial</a></li>
+            
+            <li><a  href="pic-timer1-tutorial.html">PIC Timer1 tutorial</a></li>
+            
+            <li><a  href="pic-timer2-tutorial.html">PIC Timer2 tutorial</a></li>
+            </ul>
+            
+            <li><a  href="pic_serial_communication.html">Serial communication / USART</a></li>
+            <li><a  href="pic_interrupt.html">PIC Interrupts</a></li>
+
+			<li><a  href="analog-to-digital-converter.html">PIC A/D converter</a></li>
+          </ul>
+          
+		 <h3>
+           PIC Microcontroller Projects
+          </h3>
+      
+	      <ul>
+            <li><a  href="pic-microcontroller-projects.html">Creating new project</a></li>
+          <li><a  href="pic-projects-fire-detector-system.html">PIC Fire Detector project</a></li>
+	
+          </ul>
+          
+		  <h3>
+           General
+          </h3>
+      
+	          <ul>
+		  
+		   <li> <a  href="lcd.html">Liquid Crystal Display - LCD</a></li>
+            <li><a  href="contact.html">Contact Us</a></li>
+          
+			
+          </ul>
+		  
+		  
+		  
+		  
+		  
+        </div><!-- end Navigation --><!-- #EndLibraryItem --><!--
+ 
+        <p>
+          Content can be written anywhere into the left column, like this.
+        </p>
+ 
+ 		-->
+ 
+      </div> <!-- end Liner -->
+    </div> <!-- end LeftColumn -->
+ 
+ 
+ 
+ 
+ 
+    <div id="RightColumn">
+      <div class="Liner">
+      
+	  <!-- 
+        <h4>
+          Right Column: <em>180 px</em>
+        </h4>
+ 
+<p>
+          Content can be written anywhere into the right column, like this.
+        </p>
+		
+		-->
+		
+		
+		 
+ 
+        <!-- ~~~~~ Google Ad Box ~~~~~ -->  
+
+ 
+        <!-- ~~~~~ Google Ad Box ~~~~~ -->
+ 
+      </div><!-- end Liner-->
+    </div><!-- end RightColumn --><!-- #BeginLibraryItem "/Library/Footer.lbi" -->      <div id="Footer">
+      <div class="Liner">
+ 
+<div class="text-NavBar">
+       	<ul>
+       		<li><a href="http://microcontrollerboard.blogspot.com/" onClick="window.location.href='http://www.microcontrollerboard.com/cgi-bin/counter.pl?url=http%3A%2F%2Fmicrocontrollerboard%2Eblogspot%2Ecom%2F&amp;referrer=http%3A%2F%2Fwww%2Emicrocontrollerboard%2Ecom%2Findex%2Ehtml'; return false;"><strong>Microcontroller Board Blog</strong></a></li>
+       		<li><a  href="pic-timer0-tutorial.html">PIC Microcontroller Timer0 </a></li>
+       		<li><a  href="contact.html">Contact Page</a></li>
+       		
+       	</ul>
+       </div>
+        
+       <p>
+          Copyright &copy; 2008-
+		  <script language="JavaScript" type="text/javascript">
+now = new Date
+theYear=now.getFullYear()
+document.write(theYear)
+</script> MicrocontrollerBoard.com. All rights reserved.
+        </p>
+    </div><!-- end Liner -->
+   </div><!-- end Footer --><!-- #EndLibraryItem --></div> <!-- end PageWrapper -->
+ 
+</body>
+
+
+</html>
+

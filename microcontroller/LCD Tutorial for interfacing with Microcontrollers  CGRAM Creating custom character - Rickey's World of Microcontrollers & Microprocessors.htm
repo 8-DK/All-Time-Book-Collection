@@ -1,0 +1,637 @@
+<!DOCTYPE html><html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LCD Tutorial for interfacing with Microcontrollers: CGRAM Creating custom character - Rickey's World of Microcontrollers &amp; Microprocessors</title>
+<!-- *JS* -->
+<!-- *CSS* -->
+<!-- *META* -->
+<!-- addthis_menu meta -->
+<!-- akismet meta -->
+<!-- e107helpers meta -->
+<!-- forumthanks meta -->
+<!-- rss_menu meta -->
+<link rel='alternate' type='application/rss+xml' title='Rickey&#039;s World of Microcontrollers &amp;amp; Microprocessors Comments' href='http://www.8051projects.net/plugins/rss_menu/rss.php?comments.2' />
+<link rel='alternate' type='application/rss+xml' title='Rickey&#039;s World of Microcontrollers &amp;amp; Microprocessors Downloads' href='http://www.8051projects.net/plugins/rss_menu/rss.php?download.2' />
+<link rel='alternate' type='application/rss+xml' title='Rickey&#039;s World of Microcontrollers &amp;amp; Microprocessors Forum / posts' href='http://www.8051projects.net/plugins/rss_menu/rss.php?forumposts.2' />
+<link rel='alternate' type='application/rss+xml' title='Rickey&#039;s World of Microcontrollers &amp;amp; Microprocessors Forum / threads' href='http://www.8051projects.net/plugins/rss_menu/rss.php?forumthreads.2' />
+<link rel='alternate' type='application/rss+xml' title='Rickey&#039;s World of Microcontrollers &amp;amp; Microprocessors News' href='http://www.8051projects.net/plugins/rss_menu/rss.php?news.2' />
+
+
+<!-- tagcloud meta -->
+<!-- trackback meta -->
+<link rel='pingback' href='http://www.8051projects.net/plugins/trackback/trackback.php' /><!-- twitter meta -->
+
+<!-- Core Meta Tags -->
+<meta name="description" content="LCD tutorial - LCD type HD44780 interfacing tutorial with microcontroller PIC, 8051 and AVR. lcd initialization in 8-bit mode. LCD commands and instruction with examples." />
+<meta name="keywords" content="LCD interfacing tutorial, LCD HD44780,LCD tutorial, LCD connection with microcontroller, LCD commands, LCD instructions, LCD and 8051, PIC, AVR, character based LCD module, HD44780 character LCD" />
+<meta name="author" content="Ajay Bhargav" />
+
+<!-- *FAV-ICONS* -->
+<link rel='icon' href='http://www.8051projects.net/favicon.ico' type='image/x-icon' />
+<link rel='shortcut icon' href='http://www.8051projects.net/favicon.ico' type='image/xicon' />
+
+<!-- *THEME HEAD* -->
+<link href="/themes/rwnewtheme/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="/themes/rwnewtheme/assets/css/bootstrap-responsive.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/themes/rwnewtheme/assets/css/font-awesome.min.css" />
+
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="/themes/rwnewtheme/assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+		
+		<!--page specific plugin styles-->
+		<link rel="stylesheet" href="/themes/rwnewtheme/assets/css/jquery.gritter.css" />
+		<link rel="stylesheet" href="/themes/rwnewtheme/assets/css/prettify.css" />
+		<!--fonts-->
+
+		<!-- link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" / -->
+		<link rel="stylesheet" href="/themes/rwnewtheme/assets/css/ace-fonts.css" />
+
+		<!--ace styles-->
+
+		<link rel="stylesheet" href="/themes/rwnewtheme/assets/css/ace_04092013.css" />
+		<link rel="stylesheet" href="/themes/rwnewtheme/assets/css/ace-responsive.min.css" />
+		<link rel="stylesheet" href="/themes/rwnewtheme/assets/css/ace-skins.min.css" />
+
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="/themes/rwnewtheme/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!--inline styles related to this page-->
+		<style>
+		.video-container {position: relative;padding-bottom: 280px;/*56.25%;*/padding-top: 30px; height: 0; overflow: hidden;max-width:550px;}
+		.video-container iframe,.video-container object,.video-container embed {position: absolute;top: 0;left: 0;width: 100%;height:100%}
+		/*@media(max-width: 750px){.video-container iframe,.video-container object,.video-container embed {height:100%}}*/
+		.top-header-responsive-ad { width: 320px; height: 50px; }
+		@media(min-width: 500px) { .top-header-responsive-ad { width: 468px; height: 60px; } }
+		@media(min-width: 750px) { .top-header-responsive-ad { width: 728px; height: 90px; } }
+		@media(min-width: 1100px) { .top-header-responsive-ad { width: 970px; height: 90px; } }
+		.forum-ad-1 { width: 320px; height: 50px; }
+		@media(min-width: 500px) { .forum-ad-1 { width: 468px; height: 60px; } }
+		@media(min-width: 750px) { .forum-ad-1 { width: 728px; height: 90px; } }
+		@media(min-width: 1100px) { .forum-ad-1 { width: 970px; height: 90px; } }
+		.sidead {margin-left: 15px; position: absolute;}
+		.sidead.sideadfix {top: 10px; position: fixed;}
+		.sidebar-adunit { width: 160px; height: 600px; }
+		.right-side-ad { width: 200px; height: 200px; }
+		@media(min-width: 768px) { .right-side-ad { width: 160px; height: 600px; } }
+		@media(min-width: 1180px) { .right-side-ad { width: 300px; height: 600px; } }
+		.forum-main-responsive { width: 200px; height: 200px; }
+		@media(min-width: 768px) { .forum-main-responsive { width: 160px; height: 600px; } }
+		//@media(min-width: 1024px) { .forum-main-responsive { width: 250px; height: 250px; } }
+		//@media(min-width: 1180px) { .forum-main-responsive { width: 300px; height: 250px; } }
+		
+		input.gsc-input {vertical-align:top;}
+		.inner-item {text-align:center;}
+		.inner-item img {margin:0 auto;}
+		</style>
+		<!--ace settings handler-->
+
+		<script src="/themes/rwnewtheme/assets/js/ace-extra.min.js"></script>
+		
+<!-- *PRELOAD* -->
+</head>
+<body onload="externalLinks();">
+		<div class="navbar" id="navbar">			<script type="text/javascript">				try{ace.settings.check('navbar' , 'fixed')}catch(e){}			</script>			<div class="navbar-inner">				<div class="container-fluid">					<a href="http://www.8051projects.net/" class="brand">						<small>							<i class="icon-leaf"></i>							Rickey&#39;s World						</small>					</a><!--/.brand-->					<ul class="nav ace-nav pull-right">												
+<li class="green">
+	<a href="../signup.php" title="Signup">
+		<i class="icon-laptop"></i> Register
+	</a>
+</li>
+<li class="light-blue user-login">
+	<a data-toggle="dropdown" href="/login.php" class="user-login dropdown-toggle">
+		<i class="icon-key"></i> Login
+		<i class="icon-caret-down"></i>
+	</a>
+	<div id="user_login" class="pull-right dropdown-menu dropdown-yellow dropdown-caret login-dropbox">
+		<div class="login-container">
+			<div class="position-relative">
+				<div id="login-box" class="login-box widget-box no-border visible">
+					<div class="widget-body">
+						<div class="widget-main">
+							<h4 class="blue header lighter">
+								<i class="icon-coffee green"></i>
+								Please Enter Your Information
+							</h4>
+							
+							<form method="post" action="http://www.8051projects.net/lcd-interfacing/lcd-custom-character.php">
+								<fieldset>
+									<label class="span">
+										<span class="block input-icon input-icon-right">
+										<input type="text" placeholder="Username" class="span3" name="username" id="username" maxlength="30">
+										<i class="icon-user"></i>
+										</span>
+									</label>
+									<label class="span">
+										<span class="block input-icon input-icon-right">
+										<input type="password" placeholder="Password" class="span3" name="userpass" id="userpass">
+										<i class="icon-lock"></i>
+										</span>
+									</label>
+									<div class="row-fluid span">
+										<div>
+											<label>
+											<input class="ace ace-switch ace-switch-2" type="checkbox" name="autologin">
+											<span class="lbl"></span>
+											Remember Me
+											</label>
+										</div>
+										<div>
+											<button class="span4 btn btn-small btn-primary" type="submit" name="userlogin" >
+											<i class="icon-key"></i>
+											Login
+											</button>
+										</div>
+									</div>
+								</fieldset>
+							</form>
+						</div><!--/widget-main-->
+						<div class="toolbar clearfix">
+							<div>
+							<a href="http://www.8051projects.net/fpw.php" onclick="show_box('forgot-box'); return false;" class="forgot-password-link">
+								<i class="icon-arrow-left"></i>
+								I forgot my password
+							</a>
+							</div>
+							<div>
+							<a href="#" class="user-signup-link">
+								I want to register
+								<i class="icon-arrow-right"></i>
+							</a>
+							</div>
+						</div>
+					</div><!--/widget-body-->
+				</div>
+				<div id="forgot-box" class="forgot-box widget-box no-border">
+					<div class="widget-body">
+						<div class="widget-main">
+							<h4 class="header red lighter bigger">
+								<i class="icon-key"></i>
+								Retrieve Password
+							</h4>
+							<p>Enter your email and to receive instructions</p>
+							<form method="post" action="http://www.8051projects.net/fpw.php">
+								<fieldset>
+								<label class="span">
+									<span class="block input-icon input-icon-right">
+									<input name="username" type="text" class="span3" placeholder="Username">
+									<i class="icon-user"></i>
+									</span>
+								</label>
+								<label class="span">
+									<span class="block input-icon input-icon-right">
+									<input name="email" type="email" class="span3" placeholder="Email">
+									<i class="icon-envelope"></i>
+									</span>
+								</label>								<label class="span">
+									<img src='/handlers/secure_img_render.php?1404731093078993200' alt='' />
+		<input type='text' id='email2' name='email2' value='' style='display:none' />
+								</label>
+								<label class="span">
+									<span class="block input-icon input-icon-right">
+									<input name="code_verify" type="text" class="span3" placeholder="Image Verify">
+									<i class="icon-key"></i>
+									</span>
+								</label>
+								<input type="hidden" name="rand_num" value="1404731093078993200">								<div class="row-fluid">
+									<input type="hidden" name="e-token" value="3e4d95605597c28eb6b157dc96f2b88d53ba7ed5bde967.05830711" />
+									<button name="pwsubmit" type="submit" class="span5 offset6 btn btn-small btn-danger">
+									<i class="icon-lightbulb"></i> Send Me!
+									</button>
+								</div>
+								</fieldset>
+							</form>
+						</div><!--/widget-main-->
+						<div class="toolbar center">
+							<a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
+								Back to login
+								<i class="icon-arrow-right"></i>
+							</a>
+						</div>
+					</div><!--/widget-body-->
+				</div>
+			</div>
+		</div>
+	</div>
+</li>
+						</ul> <!-- ace-nav -->				</div><!--/.container-fluid-->			</div><!--/.navbar-inner-->		</div>		<div id="main-container" class="main-container container-fluid">			<a id="menu-toggler" class="menu-toggler" href="#">				<span class="menu-text"></span>			</a>			<div id="sidebar" class="sidebar">				<!-- script type="text/javascript">					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}				</script -->				<div id="sidebar-shortcuts" class="sidebar-shortcuts">					<div id="sidebar-shortcuts-large" class="sidebar-shortcuts-large">						<a href="http://www.facebook.com/sharer.php?u=http://www.8051projects.net&t=Rickey%27s+World+of+Microcontrollers" target="_blank" class="btn btn-small btn-success tooltip-success" title="Share on Facebook" data-placement="bottom" data-rel="tooltip">							<i class="icon-facebook"></i>						</a>						<a class="btn btn-small btn-info tooltip-info" title="Share on Twitter" data-placement="bottom" data-rel="tooltip" href="https://twitter.com/intent/tweet?text=Rickey%27s+World+of+Microcontrollers&url=http://www.8051projects.net" target="_blank">							<i class="icon-twitter"></i>						</a>						<a hrf="http://www.linkedin.com/shareArticle?url=http://www.8051projects.net&title=Rickey%27s+World+of+Microcontrollers" target="_blank" class="btn btn-small btn-warning tooltip-warning" title="Share on LinkedIn" data-placement="bottom" data-rel="tooltip">							<i class="icon-linkedin"></i>						</a>						<a href="https://plus.google.com/share?url=http://www.8051projects.net" target="_blank" class="btn btn-small btn-danger tooltip-error" title="Share on Google+" data-placement="bottom" data-rel="tooltip">							<i class="icon-google-plus"></i>						</a>					</div>					<div id="sidebar-shortcuts-mini" class="sidebar-shortcuts-mini">						<span class="btn btn-success"></span>						<span class="btn btn-info"></span>						<span class="btn btn-warning"></span>						<span class="btn btn-danger"></span>					</div>				</div><!--#sidebar-shortcuts-->				
+				<ul class="nav nav-list">
+					<li itemscope itemtype="http://schema.org/SiteNavigationElement" >
+						<a itemprop="url" href="http://www.8051projects.net/">
+							<i class="icon-home"></i>
+							<span itemprop="name" class="menu-text"> Home </span>
+							<meta itemprop="description" content="Rickeys world of microcontrollers homepage">
+						</a>
+					</li>
+
+					<li itemscope itemtype="http://schema.org/SiteNavigationElement" >
+						<a itemprop="url" href="http://www.8051projects.net/news.php">
+							<i class="icon-th"></i>
+							<span itemprop="name" class="menu-text"> News </span>
+							<meta itemprop="description" content="Read articles about Microcontrollers, 8051, pic, avr, arm and embedded system">
+						</a>
+					</li>
+
+					<li itemscope itemtype="http://schema.org/SiteNavigationElement" >
+						<a itemprop="url" href="../plugins/forum/forum.php">
+							<i class="icon-group"></i>
+							<span itemprop="name" class="menu-text"> Discussion Forum </span>
+							<meta itemprop="description" content="post your doubts regarding microcontroller and embedded systems in our discusion forum">
+						</a>
+					</li>
+
+					<li itemscope itemtype="http://schema.org/SiteNavigationElement">
+						<a itemprop="url" href="http://www.8051projects.net/microcontroller-tutorials/" class="dropdown-toggle">
+							<i class="icon-book"></i>
+							<span itemprop="name" class="menu-text"> Tutorials </span>
+							<b class="arrow icon-angle-down"></b>
+							<meta itemprop="description" content="Tutorials on microcontroller and microprocessors">
+						</a>
+
+						<ul class="submenu">
+							<li itemscope itemtype="http://schema.org/SiteNavigationElement">
+								<a itemprop="url" href="http://www.8051projects.net/microcontroller-tutorials/">
+									<i class="icon-double-angle-right"></i>
+									<span itemprop="name">Microcontrollers</span>
+									<meta itemprop="description" content="Tutorials on microcontroller and microprocessors">
+								</a>
+							</li>
+
+							<li itemscope itemtype="http://schema.org/SiteNavigationElement">
+								<a itemprop="url" href="http://www.8051projects.net/microcontroller-tutorials/#interfacing">
+									<i class="icon-double-angle-right"></i>
+									<span itemprop="name">Interfacing</span>
+									<meta itemprop="description" content="Interfacing tutorials: Learn to interface lcd, dcmotor, stepper motor and other peripherals with microcontrollers.">
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li itemscope itemtype="http://schema.org/SiteNavigationElement" >
+						<a itemprop="url" href="http://www.8051projects.net/download.html">
+							<i class="icon-cloud-download"></i>
+							<span itemprop="name" class="menu-text"> Downloads </span>
+							<meta itemprop="description" content="Download latest microcontroller projects related to 8051, pic, avr, arm microcontroller">
+						</a>
+					</li>
+
+					<li itemscope itemtype="http://schema.org/SiteNavigationElement">
+						<a itemprop="url" href="http://www.8051projects.net/lcdpinouts.html">
+							<i class="icon-desktop"></i>
+							<span itemprop="name" class="menu-text"> LCD Pinouts </span>
+							<meta itemprop="description" content="Get information on mobile phone LCD pinouts">
+						</a>
+					</li>
+
+					<li itemscope itemtype="http://schema.org/SiteNavigationElement">
+						<a itemprop="url" href="http://www.8051projects.net/jetengine/">
+							<i class="icon-fighter-jet"></i>
+							<span itemprop="name" class="menu-text"> Jet Engine </span>
+							<meta itemprop="description" content="GR1 based home made jet engine project">
+						</a>
+					</li>
+
+					<li itemscope itemtype="http://schema.org/SiteNavigationElement">
+						<a itemprop="url" href="http://www.8051projects.net/arcade.html">
+							<i class="icon-gamepad"></i>
+							<span itemprop="name" class="menu-text"> Games </span>
+							<meta itemprop="description" content="Kill time with playing games on rickeys world arcade">
+						</a>
+					</li>
+
+					<li itemscope itemtype="http://schema.org/SiteNavigationElement" >
+						<a href="#" class="dropdown-toggle">
+							<i class="icon-code-fork"></i>
+							<span class="menu-text"> More </span>
+							<b class="arrow icon-angle-down"></b>
+						</a>
+
+						<ul class="submenu">
+							<li itemscope itemtype="http://schema.org/SiteNavigationElement">
+								<a itemprop="url" href="http://www.8051projects.net/aboutme.html">
+									<i class="icon-double-angle-right"></i>
+									<span itemprop="name">About Me</span>
+								</a>
+							</li>
+
+							<li itemscope itemtype="http://schema.org/SiteNavigationElement" >
+								<a itemprop="url" href="http://www.8051projects.net/user.html">
+									<i class="icon-double-angle-right"></i>
+									<span itemprop="name">Members</span>
+								</a>
+							</li>
+
+							<li itemscope itemtype="http://schema.org/SiteNavigationElement">
+								<a itemprop="url" href="http://www.8051projects.net/links.html">
+									<i class="icon-double-angle-right"></i>
+									<span itemprop="name">Links</span>
+								</a>
+							</li>
+
+							<li itemscope itemtype="http://schema.org/SiteNavigationElement">
+								<a itemprop="url" href="http://www.8051projects.net/rss-8051microcontroller.html">
+									<i class="icon-double-angle-right"></i>
+									<span itemprop="name">RSS Feeds</span>
+								</a>
+							</li>
+
+							<li itemscope itemtype="http://schema.org/SiteNavigationElement">
+								<a itemprop="url" href="http://www.8051projects.net/guestbook.html">
+									<i class="icon-double-angle-right"></i>
+									<span itemprop="name">Guestbook</span>
+								</a>
+							</li>
+
+							<li itemscope itemtype="http://schema.org/SiteNavigationElement">
+								<a itemprop="url" href="http://www.8051projects.net/sitemap.html">
+									<i class="icon-double-angle-right"></i>
+									<span itemprop="name">Sitemap</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul><!--/.nav-list-->
+				<div class="sidebar-collapse" id="sidebar-collapse">					<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>				</div>				<script type="text/javascript">					try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}				</script>				<div class="space-8"></div>				<div id="sidead" class="sidead">					<!-- sidebar-adunit -->					<ins id="sidebar-adunit" class="adsbygoogle sidebar-adunit"						 style="display:inline-block"						 data-ad-client="ca-pub-0371245781681096"						 data-ad-slot="8160399368"></ins>					<script>					(adsbygoogle = window.adsbygoogle || []).push({});					</script>				</div>							</div>			<div id="main-content" class="main-content">				<div id="breadcrumbs" class="breadcrumbs">					<script type="text/javascript">						try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}					</script>					<ul class="breadcrumb">						<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">							<i class="icon-home home-icon"></i>							<a itemprop="url" href="http://www.8051projects.net/"><span itemprop="title">Home</span></a>							<span class="divider">								<i class="icon-angle-right"></i>							</span>						</li>											<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">						<a itemprop="url" href="/microcontroller-tutorials/"><span itemprop="title">Tutorials</span></a>						<span class="divider">							<i class="icon-angle-right"></i>						</span>					</li>					<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">						<a itemprop="url" href="/lcd-interfacing/"><span itemprop="title">LCD Interfacing tutorial</span></a>					</li>					</ul><!--.breadcrumb-->					<div id="nav-search" class="nav-search">						<form class="form-search" action="/search.php">							<span class="input-icon">								<input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input" name="search" autocomplete="off" />								<i class="icon-search nav-search-icon"></i>							</span>						</form>					</div><!--#nav-search-->				</div><!--#breadcrumbs-->				<div id="page-content" class="page-content">					<div class="page-header position-relative">						<h1>							LCD Interfacing Tutorial: CGRAM Creating custom character						</h1>					</div><!--/.page-header-->					<div class="row-fluid">						<div class="span12">							<!--PAGE CONTENT BEGINS HERE-->							<div class="center">								<!-- Top Header Responsive Ad -->								<ins class="adsbygoogle top-header-responsive-ad"									 style="display:inline-block"									 data-ad-client="ca-pub-0371245781681096"									 data-ad-slot="5346533765"></ins>								<script>								(adsbygoogle = window.adsbygoogle || []).push({});								</script>							</div>							<div class="space-8"></div><div class="row-fluid">	<div class="span6 widget-container-span">		<div class="widget-box">			<div class="widget-header widget-header-small">				<h6><i class="icon-list-alt bigger-120"></i>					Table of Content</h6>				<div class="widget-toolbar">					<a href="#" data-action="collapse">						<i class="icon-chevron-down"></i>					</a>				</div>			</div>			<div class="widget-body">				<div class="widget-main padding-8">					<ul class="unstyled spaced">						<li class="text-success">							<i class="icon-ok bigger-120"></i>							<a href="index.php">Index</a>						</li>						<li class="text-success">							<i class="icon-ok bigger-120"></i>							<a href="introduction.php" title="Introduction to Alphanumeric LCD">Introduction to Alphanumeric LCD</a>						</li>						<li class="text-success">							<i class="icon-ok bigger-120"></i>							<a href="basics.php" title="Basics of LCD">Basics of LCD</a>						</li>						<li class="text-success">							<i class="icon-ok bigger-120"></i>							<a href="commands.php" title="LCD Commands">LCD Commands</a>						</li>						<li class="text-success">							<i class="icon-ok bigger-120"></i>							<a href="initialization.php" title="LCD 8-bit Initialization">LCD 8-bit Initialization</a>						</li>						<li class="text-success">							<i class="icon-ok bigger-120"></i>							<a href="busyflag.php" title="Checking Busy Flag of LCD">Checking Busy Flag of LCD</a>						</li>						<li class="text-success">							<i class="icon-ok bigger-120"></i>							<a href="lcd-programming.php" title="Sending command and data to LCD">Sending command &amp; data to LCD</a>						</li>						<li class="text-warning">							<i class="icon-angle-right bigger-120"></i>							<a href="lcd-custom-character.php" title="Creating custom character and patters">Creating custom character and patters</a>						</li>						<li class="text-info">							<i class="icon-circle smaller-80"></i>							<a href="lcd-4-bit.php" title="LCD in 4-bit Mode - Introduction">LCD in 4-bit Mode - Introduction</a>						</li>						<li class="text-info">							<i class="icon-circle smaller-80"></i>							<a href="lcd-4-bit-programming.php" title="LCD in 4-bit Mode - Programming">LCD in 4-bit Mode - Programming</a>						</li>					</ul>				</div>			</div>		</div>	</div></div><div class="space-8"></div><h3 class="header smaller lighter blue"><i class="icon-hand-right red"></i> CGRAM and Character Building</h3>As already explained, all character based LCD of type HD44780 has CGRAM area to create user defined patterns. For making custom patterns we need to write values to the CGRAM area defining which pixel to glow. These values are to be written in the CGRAM adress starting from 0x40. If you are wondering why it starts from 0x40? Then the answer is given below.<br /><div class="text-center"><br /><div class='imgbox'><img src='cgram.gif' class='bbcode' alt='' /></div><br /></div><br /><br><br>Bit 7 is 0 and Bit 6 is 1, due to which the CGRAM adress command starts from 0x40, where the address of CGRAM (Acg) starts from 0x00. CGRAM has a total of 64 Bytes. When you are using LCD as 5x8 dots in function set then you can define a total of 8 user defined patterns (1 Byte for each row and 8 rows for each pattern), where as when LCD is working in 5x10 dots, you can define 4 user defined patterns.<br /><br>Lets take an of bulding a custom pattern. All we have to do is make a pixel-map of 7x5 and get the hex or decimal value or hex value for each row, bit value is 1 if pixel is glowing and bit value is 0 if pixel is off. The final 7 values are loaded to the CGRAM one by one. As i said there are 8 rows for each pattern, so last row is usually left blank (0x00) for the cursor. If you are not using cursor then you can make use of that 8th row also. so you get a bigger pattern.<br /><br /><br />To explain the above explaination in a better way. I am going to take an example. Lets make a "Bell" pattern as shown below.<br /><div class="text-center"><br /><div class='imgbox'><img src='custom.png' class='bbcode' alt='' /></div><br /></div><br />Now we get the values for each row as shown.<br><br><pre class="prettyprint linenums lang-c"> Bit: 4 3 2 1 0 - HexRow1: 0 0 1 0 0 - 0x04Row2: 0 1 1 1 0 - 0x0ERow3: 0 1 1 1 0 - 0x0ERow4: 0 1 1 1 0 - 0x0ERow5: 1 1 1 1 1 - 0x1FRow6: 0 0 0 0 0 - 0x00Row7: 0 0 1 0 0 - 0x04Row8: 0 0 0 0 0 - 0x00</pre><br />We are not using row 8 as in our pattern it is not required. if you are using cursor then it is recommended not to use the 8th row. Now as we have got the values. We just need to put these values in the CGRAM. You can decided which place you want to store in. Following is the memory map for custom patterns in CGRAM.<br /><br><div class="row-fluid">	<div class="span6">		<table class="table table-striped table-bordered table-hover">			<thead>				<tr>					<th colspan="2" class="center">Memory Map</th>				</tr>			</thead>			<tbody>				<tr><td class="center"><strong>Pattern No.</strong></td><td class="center"><strong>CGRAM Address (Acg)</strong></td></tr>				<tr><td class="center">1</td><td class="center">0x00 - 0x07</td></tr>				<tr><td class="center">2</td><td class="center">0x08 - 0x0F</td></tr>				<tr><td class="center">3</td><td class="center">0x10 - 0x17</td></tr>				<tr><td class="center">4</td><td class="center">0x18 - 0x1F</td></tr>				<tr><td class="center">5</td><td class="center">0x20 - 0x27</td></tr>				<tr><td class="center">6</td><td class="center">0x28 - 0x2F</td></tr>				<tr><td class="center">7</td><td class="center">0x30 - 0x37</td></tr>				<tr><td class="center">8</td><td class="center">0x38 - 0x3F</td></tr>			</tbody>		</table>	</div>	<div class="span6">	</div></div><br>We can point the cursor to CGRAM address by sending command, which is 0x40 + CGRAM address (For more information please see <a href="commands.php#table4">Table 4 in commands section</a>). Lets say we want to write the Bell pattern at second pattern location. So we send the command as 0x48 (0x40 + 0x08), and then we send the pattern data. Below is a small programming example to do this.<br><br><pre class="prettyprint linenums lang-asm">;LCD Ports are same as discussed in previous sectionsLCD_build:         mov   A,#48H         ;Load the location where we want to store         acall LCD_command    ;Send the command         mov   A,#04H         ;Load row 1 data         acall LCD_senddata   ;Send the data         mov   A,#0EH         ;Load row 2 data         acall LCD_senddata   ;Send the data         mov   A,#0EH         ;Load row 3 data         acall LCD_senddata   ;Send the data         mov   A,#0EH         ;Load row 4 data         acall LCD_senddata   ;Send the data         mov   A,#1FH         ;Load row 5 data         acall LCD_senddata   ;Send the data         mov   A,#00H         ;Load row 6 data         acall LCD_senddata   ;Send the data         mov   A,#04H         ;Load row 7 data         acall LCD_senddata   ;Send the data         mov   A,#00H         ;Load row 8 data         acall LCD_senddata   ;Send the data         ret                  ;Return from routine</pre><br />The above routine will create bell character at pattern location 2. To display the above generated pattern on LCD, simply load the pattern location (0,1,2,...7) and call the LCD_senddata subroutine. Now we can also write the above routine in C as...<br /><br /><pre class="prettyprint linenums lang-c">//LCD Ports are same as discussed in previous sectionsvoid LCD_build(){	LCD_command(0x48);       //Load the location where we want to store	LCD_senddata(0x04);      //Load row 1 data	LCD_senddata(0x0E);      //Load row 2 data	LCD_senddata(0x0E);      //Load row 3 data	LCD_senddata(0x0E);      //Load row 4 data	LCD_senddata(0x1F);      //Load row 5 data	LCD_senddata(0x00);      //Load row 6 data	LCD_senddata(0x04);      //Load row 7 data	LCD_senddata(0x00);      //Load row 8 data}</pre><br /><br />I think now most of you find programing in C more simple than assembly. We can also summarize the above in a simple small routine so that you can simply call the build routine providing a pointer to array containing the build data. Below example shows how to do it.<br><pre class="prettyprint linenums lang-c">//Input://     location: location where you want to store//               0,1,2,....7//     ptr: Pointer to pattern data////Usage://     pattern&#091;8]={0x04,0x0E,0x0E,0x0E,0x1F,0x00,0x04,0x00};//     LCD_build(1,pattern);////LCD Ports are same as discussed in previous sectionsvoid LCD_build(unsigned char location, unsigned char *ptr){      unsigned char i;      if(location<8){          LCD_command(0x40+(location*8));          for(i=0;i<8;i++)             LCD_senddata(ptr&#091; i ]);     }}</pre><br />So the above example shows how to simpify most of your work. To make easy for you to find the values for custom patterns. You can make use of Custom Character Calculator given below.<br /><br /><form name='pixCalc'><table cellspacing='0' cellpadding='0' class='width-50'><tr><td colspan='3' style='text-align:center' class='forumheader'><b></b></td></tr><tr><td style='text-align:center; min-width:200px;' class='width-80'>Bitmap</td><td style='text-align:center' class='width-10'>Decimal</td><td style='text-align:center' class='width-10'>Hex</td></tr><tr><td style='text-align:center'><a href='javascript: togImage("p04")'><img name='p04' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p03")'><img name='p03' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p02")'><img name='p02' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p01")'><img name='p01' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p00")'><img name='p00' src='pixel0.gif' border='0' height='25' width='25'></a></td><td style='text-align:center'><input class='no-margin no-padding'  name='row0' size='5' value='0' type='text' readonly></td><td style='text-align:center'><input class='no-margin no-padding'  name='row01' size='5' value='0' type='text' readonly></td></tr><tr><td style='text-align:center'><a href='javascript: togImage("p14")'><img name='p14' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p13")'><img name='p13' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p12")'><img name='p12' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p11")'><img name='p11' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p10")'><img name='p10' src='pixel0.gif' border='0' height='25' width='25'></a></td><td style='text-align:center'><input class='no-margin no-padding'  name='row1' size='5' value='0' type='text' readonly></td><td style='text-align:center'><input class='no-margin no-padding'  name='row11' size='5' value='0' type='text' readonly></td></tr><tr><td style='text-align:center'><a href='javascript: togImage("p24")'><img name='p24' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p23")'><img name='p23' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p22")'><img name='p22' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p21")'><img name='p21' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p20")'><img name='p20' src='pixel0.gif' border='0' height='25' width='25'></a></td><td style='text-align:center'><input class='no-margin no-padding'  name='row2' size='5' value='0' type='text' readonly></td><td style='text-align:center'><input class='no-margin no-padding'  name='row21' size='5' value='0' type='text' readonly></td></tr><tr><td style='text-align:center'><a href='javascript: togImage("p34")'><img name='p34' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p33")'><img name='p33' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p32")'><img name='p32' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p31")'><img name='p31' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p30")'><img name='p30' src='pixel0.gif' border='0' height='25' width='25'></a></td><td style='text-align:center'><input class='no-margin no-padding'  name='row3' size='5' value='0' type='text' readonly></td><td style='text-align:center'><input class='no-margin no-padding'  name='row31' size='5' value='0' type='text' readonly></td></tr><tr><td style='text-align:center'><a href='javascript: togImage("p44")'><img name='p44' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p43")'><img name='p43' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p42")'><img name='p42' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p41")'><img name='p41' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p40")'><img name='p40' src='pixel0.gif' border='0' height='25' width='25'></a></td><td style='text-align:center'><input class='no-margin no-padding'  name='row4' size='5' value='0' type='text' readonly></td><td style='text-align:center'><input class='no-margin no-padding'  name='row41' size='5' value='0' type='text' readonly></td></tr><tr><td style='text-align:center'><a href='javascript: togImage("p54")'><img name='p54' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p53")'><img name='p53' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p52")'><img name='p52' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p51")'><img name='p51' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p50")'><img name='p50' src='pixel0.gif' border='0' height='25' width='25'></a></td><td style='text-align:center'><input class='no-margin no-padding'  name='row5' size='5' value='0' type='text' readonly></td><td style='text-align:center'><input class='no-margin no-padding'  name='row51' size='5' value='0' type='text' readonly></td></tr><tr><td style='text-align:center'><a href='javascript: togImage("p64")'><img name='p64' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p63")'><img name='p63' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p62")'><img name='p62' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p61")'><img name='p61' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p60")'><img name='p60' src='pixel0.gif' border='0' height='25' width='25'></a></td><td style='text-align:center'><input class='no-margin no-padding'  name='row6' size='5' value='0' type='text' readonly></td><td style='text-align:center'><input class='no-margin no-padding'  name='row61' size='5' value='0' type='text' readonly></td></tr><tr><td style='text-align:center'><a href='javascript: togImage("p74")'><img name='p74' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p73")'><img name='p73' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p72")'><img name='p72' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p71")'><img name='p71' src='pixel0.gif' border='0' height='25' width='25'></a><a href='javascript: togImage("p70")'><img name='p70' src='pixel0.gif' border='0' height='25' width='25'></a></td><td style='text-align:center'><input class='no-margin no-padding'  name='row7' size='5' value='0' type='text' readonly></td><td style='text-align:center'><input class='no-margin no-padding'  name='row71' size='5' value='0' type='text' readonly></td></tr><tr><td colspan='3' style='text-align:center'><br>List of bitmap values:<br />Dec: <input class='no-margin no-padding' name='dataList' value='0, 0, 0, 0, 0, 0, 0, 0' type='text' readonly><br>Hex: <input class='no-margin no-padding' name='dataList1' value='0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00' type='text' readonly></td></tr><tr><td colspan='3' style='text-align:center'><br><input type='button' class='button' name='clear' value=' Clear Bitmap ' onClick='clearit()'>&nbsp;&nbsp;<input type='button' class='button' name='negative' value=' Negative ' onClick='invert()'></td></tr></table><div class="pagination text-center">	<ul class="pager">		<li class="previous"><a href="lcd-programming.php">&larr; Previous Page</a></li>		<li><a href="index.php">Index</a></li>		<li><a href="introduction.php">1</a></li>		<li><a href="basics.php">2</a></li>		<li><a href="commands.php">3</a></li>		<li><a href="initialization.php">4</a></li>		<li><a href="busyflag.php">5</a></li>		<li><a href="lcd-programming.php">6</a></li>		<li class="active"><a href="lcd-custom-character.php">7</a></li>		<li><a href="lcd-4-bit.php">8</a></li>		<li><a href="lcd-4-bit-programming.php">9</a></li>		<li class="next"><a href="lcd-4-bit.php">Next Page &rarr;</a></li>	</ul></div><div class="row-fluid">	<h3 class="header smaller lighter blue"><i class="icon-share red"></i> Share it! Like it!</h3>	<span st_url="http://www.8051projects.net/lcd-interfacing/" st_title="LCD Interfacing Tutorial" class="st_fblike_hcount" displayText="Facebook Like"></span>	<span st_url="http://www.8051projects.net/lcd-interfacing/" st_title="LCD Interfacing Tutorial" class="st_plusone_hcount" displayText="Google +1"></span>	<span st_url="http://www.8051projects.net/lcd-interfacing/" st_title="LCD Interfacing Tutorial" class="st_facebook_hcount" displayText="Facebook"></span>	<span st_url="http://www.8051projects.net/lcd-interfacing/" st_title="LCD Interfacing Tutorial" class="st_twitter_hcount" displayText="Tweet"></span>	<span st_url="http://www.8051projects.net/lcd-interfacing/" st_title="LCD Interfacing Tutorial" class="st_googleplus_hcount" displayText="Google +"></span>	<span st_url="http://www.8051projects.net/lcd-interfacing/" st_title="LCD Interfacing Tutorial" class="st_linkedin_hcount" displayText="LinkedIn"></span>	<span st_url="http://www.8051projects.net/lcd-interfacing/" st_title="LCD Interfacing Tutorial" class="st_sharethis_hcount" displayText="ShareThis"></span>	<span st_url="http://www.8051projects.net/lcd-interfacing/" st_title="LCD Interfacing Tutorial" class="st_email_hcount" displayText="Email"></span></div>							<!--PAGE CONTENT ENDS HERE-->						</div><!--/span-->					</div><!--/row-->				</div><!--/#page-content-->				<div id="ace-settings-container" class="ace-settings-container">					<div class="btn btn-app btn-mini btn-warning ace-settings-btn" id="ace-settings-btn">						<i class="icon-cog bigger-150"></i>					</div>					<div id="ace-settings-box" class="ace-settings-box">						<div>							<div class="pull-left">								<select id="skin-colorpicker" class="hide">									<option data-skin="default" value="#438EB9">#438EB9</option>									<option data-skin="skin-1" value="#222A2D">#222A2D</option>									<option data-skin="skin-2" value="#C6487E">#C6487E</option>									<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>								</select>							</div>							<span>&nbsp; Choose Skin</span>						</div>						<div>							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />							<label class="lbl" for="ace-settings-navbar"> Fixed Header</label>						</div>						<div>							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />							<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>						</div>						<div>							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />							<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>						</div>					</div>				</div><!--/#ace-settings-container-->			</div><!--/#main-content-->		</div><!--/.fluid-container#main-container-->		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-small btn-inverse">			<i class="icon-double-angle-up icon-only bigger-110"></i>		</a>		
+		<!--basic scripts-->
+		<!--[if !IE]>-->
+			<script type="text/javascript">
+				window.jQuery || document.write("<script src='/themes/rwnewtheme/assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+			</script>
+
+		<!--<![endif]-->
+		<!--[if IE]>
+			<script type="text/javascript">
+				window.jQuery || document.write("<script src='/themes/rwnewtheme/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+			</script>
+		<![endif]-->
+		<script type="text/javascript">
+			if("ontouchend" in document) document.write("<script src='/themes/rwnewtheme/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+		<script src="/themes/rwnewtheme/assets/js/bootstrap.min.js"></script>
+
+		<!--page specific plugin scripts-->
+		<script src="/themes/rwnewtheme/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+		<script src="/themes/rwnewtheme/assets/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="/themes/rwnewtheme/assets/js/jquery.nicescroll.min.js"></script>
+		<script src="/themes/rwnewtheme/assets/js/jquery.gritter.min.js"></script>
+		<script src="/themes/rwnewtheme/assets/js/jquery.easydate-0.2.4.min.js"></script>
+		<script src="/themes/rwnewtheme/assets/js/footable.js" type="text/javascript"></script>
+		<script src="/themes/rwnewtheme/assets/js/bootstrap-tag.min.js"></script>
+		<script src="/themes/rwnewtheme/assets/js/prettify.js"></script>
+		<script src="/themes/rwnewtheme/assets/js/prettify-asm.js"></script>
+		<script src="/files/e107.js"></script>
+
+		<!-- twitter -->
+		<script async type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+		<!--ace scripts-->
+		<script src="/themes/rwnewtheme/assets/js/ace-elements.min.js"></script>
+		<script src="/themes/rwnewtheme/assets/js/ace.min.js"></script>
+
+		<script type="text/javascript">
+		// Remove responsive ad
+
+		var width = window.innerWidth || document.documentElement.clientWidth;
+		if ((width < 1000) || ($("#sidebar").width() < 160)) {
+			$("#sidebar-adunit").removeClass('adsbygoogle');
+			window.adsbygoogle.shift(); //Remove an item from the ads array.
+		}
+		</script>
+		<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+		<!--inline scripts related to this page-->
+		<script type="text/javascript">
+			jQuery(function($) {
+				$('#myCarousel').carousel();
+				function show_message(obj, time)
+				{
+					$.gritter.add({
+						title: obj.attr("title"),
+						text: obj.html(),
+						image: obj.data("image"),
+						sticky: false,
+						time: (time >= 1000 ? time : 5000),
+						class_name: (obj.data("type") == "error" ? 'gritter-error' : ''),
+					});
+				}
+				$('[data-rel=tooltip]').tooltip();
+				$('.footable').footable({
+					breakpoints: {
+						phone: 480,
+						tablet: 600
+					}
+				});
+				$('#user_login').click(function(e) {
+					e.stopPropagation();
+				});
+				
+				var dheight = 450 - $('#chatbox').height();
+				$('#latest-forum').height(450);
+				$('#latest-forum').niceScroll("#forumwrapper");
+				$("#chatboxwrapper").height(dheight);
+				$("#chatboxwrapper").niceScroll("#chatbox-posts");
+
+				$("[id^=updatetags]").click(function(){
+					$(this).next().toggle();
+				});
+				var tag_input = $("[id^=tagid]");
+				tag_input.each(function(){
+					if(! ( /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase())) ) 
+						$(this).tag({placeholder:$(this).attr("placeholder")});
+					else {
+						//display a textarea for old IE, because it doesn't support this plugin or another one I tried!
+						$(this).after('<textarea id="'+$(this).attr('id')+'" name="'+$(this).attr('name')+'" rows="3">'+$(this).val()+'</textarea>').remove();
+					}
+				});
+				
+				$(".easydate, .chatbox-date").easydate({live: false});
+				$.fn.exists = function(){
+					return jQuery(this).length > 0;
+				}
+				if ($(".rw-notify").length) {
+					$(".rw-notify").each(function () {
+						$(this).hide();
+						$.gritter.add({
+							title: $(this).attr("title"),
+							text: $(this).html(),
+							image: $(this).data("image"),
+							sticky: ($(this).data("type") == "chatbox" ? false : true),
+							time: $(this).data("time"),
+							class_name: ($(this).data("type") == "error" ? 'gritter-error' : ''),
+						});
+					});
+				}
+				$(".chatbox-reply").click(function(e) {
+					$("#cmessage").focus();
+				});
+
+				/* chatbox */
+				var cb_counter = 0;
+				$("#chatbox_modal").hide();
+				$("#chatbox").submit(function(e){
+					e.preventDefault();
+				});
+				function chatbox_post(obj, clrmsg)
+				{
+					var postdata = $("#chatbox").serialize() + "&chat_submit=" + obj.val() + "&lastpost=" + $("#cb_lastpost").html();
+					var jqxr = $.post("/plugins/chatbox_menu/chatbox_menu.php", postdata);
+					jqxr.done(function (data, textStatus, jqXHR){
+						$("#chatbox-posts").html(data);
+						$(".chatbox-date").easydate({live: false});
+						if (clrmsg) $("#cmessage").val("");
+						if ($("#cb_error").exists()) {
+							show_message($("#cb_error"), 5000);
+						}
+						if ($("#cb_newmsg").exists()) {
+							show_message($("#cb_newmsg"), 10000);
+						}
+						$(".chatbox-reply").click(function(e) {
+							$("#cmessage").focus();
+						});
+					});
+				}
+				$("#chat_submit").click(function(event) {
+					if (cb_counter > 20)
+						setTimeout(cb_autorefresh, 15000);
+					cb_counter = 0;
+					chatbox_post($(this), true);
+					event.stopPropagation();
+				});
+				$("#chat_refresh").click(function(event) {
+					chatbox_post($(this), false);
+					event.stopPropagation();
+				});
+				function cb_autorefresh()
+				{
+					cb_counter++;
+					if (cb_counter < 21) {
+						chatbox_post($("#chat_refresh"));
+						setTimeout(cb_autorefresh, 15000);
+					}
+				}
+				if ($("#chatbox").exists())
+					setTimeout(cb_autorefresh, 5000);
+				$("[data-rel=popover]").click(function(e) {
+					e.preventDefault();
+				});
+				$("[data-rel=popover]").popover({html:true});
+				$("#colorpick-btns .colorpick-btn").click(function(e) {
+					e.preventDefault();
+					addtext('[color='+ $(this).data("color") + '][/color]');
+				});
+				$(".wysiwyg-style2 .btn-group > a.btn[title]").tooltip({container:'body',animation:false});
+				$("#attach-box").hide();
+				var boxid = 0;
+				var count = 0;
+				$("#attach-button").click(function(e){
+					boxid++;
+					count++
+					$("#attach-box").show().append('<div class="span7" style="margin:0"><button id="id-input-file-rem-' + boxid + '" class="btn btn-mini btn-danger pull-right"><i class="icon-trash"></i></button><div class="span11" style="margin:0"><input type="file" id="id-input-file-' + boxid + '" name="file_userfile[]"></div></div>');
+					$("#id-input-file-" + boxid).ace_file_input({
+						no_file:'No File ...',
+						btn_choose:'Choose',
+						btn_change:'Change',
+						droppable:false,
+						onchange:null,
+						thumbnail:false
+					});
+					$("#id-input-file-rem-" + boxid).click(function(e){
+						$(this).parent().remove();
+						count--;
+						$("#attach-button").removeAttr("disabled");
+					});
+					if (count == 5) {
+						$("#attach-button").attr("disabled", "disabled");
+					}
+					e.preventDefault();
+				});
+
+				$(".profile-activity").hover( function () {
+					$(this).find(".icon-hand-right").addClass("icon-animated-hand-pointer");
+				}, function () {
+					$(this).find(".icon-hand-right").removeClass("icon-animated-hand-pointer");
+				});
+
+				if ($("#sidead").exists()) {
+					var sideadtop = $("#sidead").offset().top;
+					$(window).scroll(function(event){
+						if($(this).scrollTop() > sideadtop) {
+							$("#sidead").addClass("sideadfix");
+						} else {
+							$("#sidead").removeClass("sideadfix");
+						}
+					});
+				}
+				/* comment validation */
+				function formalert(obj, status) {
+					if (status)
+						obj.parents(".control-group").removeClass("error").addClass("success");
+					else
+						obj.parents(".control-group").addClass("error");
+				}
+
+				function checkemail(obj) {
+					var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+					var status = regex.test(obj.val());
+					formalert(obj, status);
+					return status;
+				}
+
+				function checktext(obj, minlen) {
+					var status = obj.val().length > minlen;
+					formalert(obj, status);
+					return status;
+				}
+
+				$("#author_name").change(function(){
+					checkname($(this));
+				});
+
+				$("#author_email").change(function(){
+					checkemail($(this));
+				});
+
+				
+				
+				$("#list_recent_page_news,#list_recent_menu_download").addClass("in active");
+				
+
+				
+			});
+				
+			function show_box(id) {
+				$('.widget-box.visible').removeClass('visible');
+				$('#'+id).addClass('visible');
+			}
+
+			window.prettyPrint && prettyPrint();
+
+			//GA
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-2161571-2']);
+			  _gaq.push(['_setDomainName', '8051projects.net']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+		</script>
+		<!-- Kontera(TM);-->
+		<script type="text/javascript">
+		var dc_AdLinkColor = "#0088cc" ; 
+		var dc_PublisherID = 18498 ; 
+		</script>
+		<script type="text/javascript" src="http://kona.kontera.com/javascript/lib/KonaLibInline.js">
+		</script>
+		<!-- end Kontera(TM) --> 
+		<script type="text/javascript">var switchTo5x=true;</script>
+		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+		<script type="text/javascript">stLight.options({publisher: "2d2c903e-339e-4619-bcc3-a5eb5e581b07", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+<script type='text/javascript' src='http://www.8051projects.net/lcd-interfacing/tog.js'></script>
+<script type='text/javascript'>
+SyncWithServerTime('1404731093','8051projects.net');
+       </script>
+</body></html>

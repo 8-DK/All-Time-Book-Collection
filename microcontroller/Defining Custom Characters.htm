@@ -1,0 +1,291 @@
+<html>
+<head>
+<title>Defining Custom Characters</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-329996-1";
+urchinTracker();
+</script>
+
+<body bgcolor="#6495ED" link="#FFFFFF" vlink="#FFCC99" alink="#FFFF66">
+<!-- following code added by server. PLEASE REMOVE -->
+<!-- preceding code added by server. PLEASE REMOVE -->
+<table width="100%" border="0" cellspacing="2" cellpadding="2" height="100%">
+  <tr>
+    <td height="704" width="10%" valign="top" bgcolor="#00009F">
+      <table width="100%" border="0">
+        <tr bgcolor="#FFFFFF" valign="top">
+          <td bgcolor="#FFFFFF"><div align="center"><font size="6" face="Copperplate Gothic Bold"><a href="../index.html"><font face="sans-serif" color="#0066CC">HOME</font></a></font></div></td>
+        </tr>
+      </table>
+      <div align="left">
+        <pre><font size="3" face="Impact"><font face="sans-serif"><a href="../z80/index.html"><font size="4" color="#FFFFFF">Z80</font></a><font size="4" color="#FFFFFF">
+<a href="index.html">LCD</a>
+<a href="../pic/index.html">PIC</a>
+<a href="../8051/index.html">8051</a>
+<a href="../opera.htm">Opera</a>
+<a href="../soft.htm">Software</a>
+<a href="../files/index.html">Files</a>
+<a href="../books.htm">Bookstore</a>
+<a href="../links.htm">Links</a>
+<a href="../me.htm">About me</a></font></font></font></pre>
+      </div>
+      <p><!-- #BeginLibraryItem "/Library/google_blue_120_vertADsense.lbi" --><script type="text/javascript"><!--
+google_ad_client = "pub-5120552571919249";
+google_ad_width = 120;
+google_ad_height = 600;
+google_ad_format = "120x600_as";
+google_ad_type = "text";
+google_ad_channel ="";
+google_page_url = document.location;
+google_color_border = "00009F";
+google_color_link = "FFFFFF";
+google_color_bg = "00009F";
+google_color_text = "CCCCCC";
+google_color_url = "999999";
+//--></script>
+        <script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+        <!-- #EndLibraryItem --></p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <h1>&nbsp;</h1>
+      <p>&nbsp;</p>    </td>
+    <td height="1408" valign="top" width="90%">
+      <blockquote>
+        <div align="center"><!-- #BeginLibraryItem "/Library/google_lb_body_leaderborad.lbi" -->
+        <script type="text/javascript"><!--
+google_ad_client = "pub-5120552571919249";
+google_ad_width = 728;
+google_ad_height = 90;
+google_ad_format = "728x90_as";
+google_ad_type = "text";
+google_ad_channel ="";
+google_color_border = "6495ED";
+google_color_bg = "6495ED";
+google_color_link = "FFFFFF";
+google_color_text = "000000";
+google_color_url = "000000";
+//--></script>
+        <script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+          </script>
+        <!-- #EndLibraryItem --></div>
+        <div align="center">
+          <div align="left">
+            <div align="center">
+              <p>&nbsp;</p>
+              <p><font size="7" face="Copperplate Gothic Bold"><b><font color="#FF3333"><i><font color="#FFFFFF" size="6">Defining
+                Custom Characters</font></i></font></b></font></p>
+              <p align="left"><font face="sans-serif" size="3">The text below
+                is a part of<b> LCD Serial Backpack App Note No. 2</b></font><font face="Comic Sans MS" size="3"><font face="sans-serif">
+                from <a href="http://www.seetron.com">Scott Edwards Electronics,
+                Inc</a>. In case you wondered, The LCD Serial Backpack ® is a
+                daughterboard that attaches to standard character LCD modules.
+                It receives data serially and displays it on the LCD. The Backpack
+                supports any alphanumeric LCD up to 80 screen characters (e.g.
+                4 lines by 20 characters). It accepts serial data at 2400 or 9600
+                baud (switch selectable). It is sold by itself, or preinstalled
+                to high-quality 2x16 LCD modules.</font></font></p>
+              <p align="left"><font face="Comic Sans MS" size="3"><font face="Comic Sans MS" size="3"><font face="sans-serif">I
+                edited the application note slightly to suit paralell LCD modules.
+                You can find the original document in PDF format at<a href="http://www.seetron.com">
+                www.seetron.com</a> .</font></font></font></p>
+              <hr width="50%" />
+              <p align="left"><font face="sans-serif" size="3">ALPHANUMERIC LCDS
+                are inexpensive and easy to use. But there are times when you'd
+                like to add some graphical pizzazz to your display without the
+                expense and code overhead of a graphics display. With a little
+                ingenuity, you may find that the block-graphics capabilities of
+                standard LCDs can fill the bill without busting your budget. </font></p>
+              <p align="left"><font face="sans-serif"><b><font size="3">Character-Generator
+                ROM and RAM.</font></b></font> </p>
+              <p align="left"><font face="sans-serif" size="3">When you send the
+                ASCII code for a character like "A" to an LCD module, the module's
+                controller looks up the appropriate 5x8-pixel pattern in ROM (read-only
+                memory) and displays that pattern on the LCD. That character-generator
+                ROM contains 192 bit maps corresponding to the alphabet, numbers,
+                punctuation, Japanese Kanji characters, and Greek symbols. The
+                ROM is part of the main LCD controller (e.g., HD44780, KS0066,
+                etc.), is mask-programmed, and cannot be changed by the user.
+                The manufacturers do offer alternative symbols sets in ROM for
+                European and Asian languages, but most U.S. distributors stock
+                only the standard character set shown in the LCD Serial Backpack
+                manual. Alphanumeric LCD controllers do not allow you to turn
+                individual pixels on or off-they just let you pick a particular
+                pattern (corresponding to an ASCII code) and display it on the
+                screen. If you can't change the ROM and you can't control pixels,
+                how do you create graphics on these LCDs? Easy. There's a 64-byte
+                hunk of RAM (random-access memory) that the LCD controller uses
+                in the same way as character-generator (CG) ROM. When the controller
+                receives an ASCII code in the range that's mapped to the CG RAM,
+                it uses the bit patterns stored there to display a pattern on
+                the LCD. The main difference is that you can write to CG RAM,
+                thereby defining your own graphic symbols.</font></p>
+              <p align="left"><font face="sans-serif" size="3">Each byte of CG
+                RAM is mapped to a five-bit horizontal row of pixels, and LCD
+                characters are typically eight rows high, so 64 bytes of CG RAM
+                is enough to define eight custom characters. These characters
+                correspond to ASCII codes 0 through 7, which normally serve as
+                control codes for marking the beginning of a serial transmission
+                or ringing the bell on a terminal. Since these have no meaning
+                to an LCD module, the designers appropriated them for CG RAM.</font></p>
+              <p align="left"><font face="sans-serif" size="3">When an LCD is
+                first powered up, CG RAM contains random bits garbage. If necessary,you
+                may clear CG RAM by writing 00 into each CG RAM cell.</font></p>
+              <p align="left"><font face="sans-serif"><b><font size="3">Writing
+                to CG RAM.</font></b></font></p>
+              <p align="left"> <font face="sans-serif" size="3"> Writing to CG
+                RAM is a lot like moving the cursor to a particular position on
+                the display and displaying characters at that new location. The
+                steps are: </font></p>
+            </div>
+          </div>
+        </div>
+      </blockquote>
+      <div align="left">
+        <ul>
+          <li><font face="sans-serif" size="3">Reset RS and R/W pins of the LCD
+            to prepare the LCD to accept instructions </font></li>
+          <li> <font face="sans-serif" size="3"> Set the CG RAM address by sending
+            an instruction byte from 64 to 127 (locations 0-63 in CG RAM).</font></li>
+          <li><font face="sans-serif" size="3">Switch to DATA MODE by changing
+            setting the RS pin </font></li>
+          <li> <font face="sans-serif" size="3"> Send bytes with the bit patterns
+            for your symbol(s). The LCD controller automatically increments CG
+            RAM addresses, just as it does cursor positions on the display. </font></li>
+          <li> <font face="sans-serif" size="3">To leave CG RAM,switch to COMMAND
+            MODE to set address counter to a valid display address (e.g. 128,
+            1st character of 1st line); the clear-screen instruction (byte 1);
+            or the home instruction (byte 2). Now bytes are once again being written
+            to the visible portion of the display.</font></li>
+          <li><font face="sans-serif" size="3">To see the custom character(s)
+            you have defined, print ASCII codes 0 through 7.</font></li>
+        </ul>
+        <p align="center"><font face="sans-serif" size="3">Bitmap layout example
+          :</font></p>
+        <p align="center"><font face="sans-serif"><img src="../img/custom.gif" width="575" height="281" /></font></p>
+        <div align="center">
+          <div align="center">
+                        
+                                    <table width="528" border="0" cellspacing="3" align="center">
+                                        <tr bgcolor="#FFFFFF"> 
+                                            <td colspan="2"> 
+                                                <div align="center"> 
+                                                    <div align="center"> </div>
+                                                    <div align="center"><font size="3" face="System" color="navy"><b>Follow 
+                                                        these links to navigate 
+                                                        through my LCD related 
+                                                        pages:</b></font> </div>
+                                                </div>                                            </td>
+                                        </tr>
+                                        <tr> 
+                                            <td width="39%" height="212"> 
+                                                <div align="center"> 
+                                                    <div align="left"> 
+                                                        <p align="left"><font size="1" color="#FFFF00" face="Verdana, Arial, Helvetica, sans-serif">Character 
+                                                            Type LCD:</font></p>
+                                                    </div>
+                                                </div>
+                                                <div align="center"> 
+                                                    <div align="left"> 
+                                                        <ul>
+                                                            <li><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="intro.htm">Introduction</a></font></li>
+                                                            <li><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="commands.htm">Commands</a></font></li>
+                                                            <li><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="initalization.htm">Initialization</a></font></li>
+                                                            <li><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="custom.htm">Defining 
+                                                                custom characters</a></font></li>
+                                                            <li><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="animations.htm">Creating 
+                                                                animations</a></font></li>
+                                                            <li><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="z80example.htm">Z80 
+                                                                Examples</a></font></li>
+                                                            <li><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="charcalc.htm">Custom-Character 
+                                                                Calculator</a></font></li>
+                                                            <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><a href="../djlcdsim/djlcdsim.html">LCD 
+                                                                simulator </a></font></li>
+                                                            <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><a href="fin.htm">Final 
+                                                                words</a><br />
+                                                                </font></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>                                            </td>
+                                            <td valign="top" width="61%" height="212"> 
+                                                <div align="center"> 
+                                                    <div align="left"> 
+                                                        <div align="left"> 
+                                                            <p><font size="1" color="#FFFF00" face="Verdana, Arial, Helvetica, sans-serif">Graphics 
+                                                                LCD: (Based on: 
+                                                                KS0108, HD61202 
+                                                                and similars...)</font></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ul>
+                                                    <li> 
+                                                        <div align="center"> 
+                                                            <div align="left"> 
+                                                                <div align="left"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="gfxintro.htm">Introduction</a></font></div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="pg12864d.htm">Powertip 
+                                                        PG12864D</a></font></li>
+                                                    <li><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="gfxhowto.htm">Graphics 
+                                                        How To</a></font></li>
+                                                    <li><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="gfxz80example.htm">Z80 
+                                                        Examples</a></font></li>
+                                                    <li><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="gfxcalc.htm">Custom-Character 
+                                                        Calculator for KS0108 
+                                                        and compatibles</a>(5*7 
+                                                        Font)</font></li>
+                                                    <li><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><a href="gfxcalc88.htm">Custom-Character 
+                                                        Calculator for KS0108 
+                                                        and compatibles</a>(8*8 
+                                                        Font)</font></li>
+                                                    <li><a href="../djgfxlcdsim/djgfxlcdsim.html"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Graphic 
+                                                        LCD simulator</font></a></li>
+                                                    <li><font face="Verdana, Arial, Helvetica, sans-serif" size="1"><a href="gfxfin.htm">Final 
+                                                        words</a><br />
+                                                        </font></li>
+                                                </ul>                                            </td>
+                                        </tr>
+                                    </table>
+          </div>
+          <div align="center"><div align="left"><div align="left"><div align="center"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p align="center">&nbsp;</p>
+      </div>
+      <blockquote>
+        <div align="left"> </div>
+      </blockquote>
+      <div align="left">
+        <p>&nbsp;</p>
+      </div>    </td>
+  </tr>
+</table>
+  <p align="center">
+</p></body>
+</html>
+<!-- text below generated by server. PLEASE REMOVE --></object></layer></div></span></style></noscript></table></script></applet><script language="JavaScript" src="http://l.yimg.com/a/i/mc/mc.js"></script><script language="JavaScript" src="http://l.yimg.com/d/lib/smb/js/hosting/cp/js_source/geov2_001.js"></script><script language="javascript">geovisit();</script><noscript><img src="http://visit.geocities.yahoo.com/visit.gif?us1404730712" alt="setstats" border="0" width="1" height="1"></noscript>
+<IMG SRC="http://geo.yahoo.com/serv?s=76001544&t=1404730712&f=us-w2" ALT=1 WIDTH=1 HEIGHT=1>

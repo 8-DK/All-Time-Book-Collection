@@ -1,0 +1,663 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+   "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head>
+<title> HD44780 LCD User-Defined Graphics </title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="description" content="quinapalus">
+<meta name="keywords" content="wireworld, crossword, word matcher, construction, grid, word puzzle, linux, greek, modern greek, greek alphabet, translation, translating, translate, wires, wireworld computer, cellular automaton, embedded web server, PIC web server, neural network, self-organising system, teeko">
+<style type="text/css">
+* {font-family: "Gill Sans", Arial, sans-serif}
+body {color:#000000;background-color:#ffffff;margin:0em 0em 0em 0em;min-width:36em}
+div.nv {clear:both;display:block;width:100%;background-color:#ffcc00}
+div.nvt {margin: 0em 1em 0em 1em;background-color:#ffcc00;font-weight:bold}
+div.rt {clear:both;margin:8px 0px 8px 0px;font-size:small}
+div.rh {clear:both;margin:0px 0px 0px 0px;font-size:medium;font-weight:bold}
+div.in {margin: 1em 1em 1em 1em}
+h1 {color:#999999;text-align:center;margin:16px 0px 0px 0px;font-size:x-large}
+h2 {font-size:large;font-weight:bold}
+h3 {font-size:medium;font-weight:bold;font-style:italic}
+h4 {font-size:medium;font-weight:bold}
+h5 {font-size:medium;font-weight:normal}
+h6 {font-size:small;font-weight:bold}
+p {font-size:medium}
+tt {font-family:courier, monospace;font-size:medium}
+pre {font-family:courier, monospace;font-size:medium}
+ul.a {list-style: square outside url('http://www.zen6741.zen.co.uk/quinapalus/bullet.gif');margin-left:2em;padding-left:0em}
+li.a {font-size:medium}
+a:link {text-decoration:underline; color:#000000;}
+a:visited {text-decoration:underline; color:#000000;}
+a:active {text-decoration:underline; color:#000000;}
+a:hover {text-decoration:underline; color:#999999;}
+div.gp {clear:both;margin:0px 0px 0px 0px; width:100%;height:8px}
+span.b {font-weight:bold}
+form {font-size:medium}
+input {font-size:medium}
+select {font-size:medium}
+form.wm {width:128px;margin:0;padding:0;font-size:medium}
+input.wm {width:120px;font-size:medium}
+input.gb {font-size:medium}
+img.r {width:8em}
+img.l {clear:both;float:left}
+img.se {float:right;position:relative;right:0px}
+img.ne {float:right;position:relative;right:0px}
+td.l {min-width:26em}
+td.r {width:10em;background-color:#ffcc00}
+td.m {font-size:medium}
+</style>
+</head>
+<body>
+<table border=0 cellpadding=0 cellspacing=0><tr valign="top"><td class="l">
+<h1>HD44780 LCD User-Defined Graphics</h1>
+<img class="se" src="http://www.zen6741.zen.co.uk/quinapalus/nq.se.gif" alt="">
+<div class="nv"><div class="nvt">
+<a href="http://www.quinapalus.com/index.html">Quinapalus Home</a> :: <a href="http://www.quinapalus.com/technical.html">Things Technical</a> :: HD44780 LCD User-Defined Graphics
+</div>
+</div>
+<img class="ne" src="http://www.zen6741.zen.co.uk/quinapalus/nq.ne.gif" alt="">
+<div class="in">
+<script type="text/javascript">
+var size=0
+var xx=5,yy=7
+var mxx=8,myy=8 // maximum possible values
+var  px=new Array(mxx)
+var opx=new Array(mxx)
+for(var x=0;x<mxx;x++)  px[x]=new Array(myy);
+for(var x=0;x<mxx;x++) opx[x]=new Array(myy);
+
+var nclib=156
+var nsize=2
+var clib=[
+
+[ // size 0
+[14,27,27,31,27,27,27], // A
+[30,27,27,30,27,27,30],
+[14,27,24,24,24,27,14],
+[30,27,27,27,27,27,30],
+[31,24,24,30,24,24,31],
+[31,24,24,30,24,24,24],
+[14,27,24,27,27,25,15],
+[27,27,27,31,27,27,27],
+[0,0,14,3,15,27,15], // a
+[24,24,30,27,27,27,30],
+[0,0,14,27,24,27,14],
+[1,1,15,27,27,27,15],
+[0,0,14,27,31,24,15],
+[7,12,30,12,12,12,12],
+[0,0,15,27,15,3,14],
+[24,24,30,27,27,27,27],
+[14,17,31,17,17,0,31],
+[30,17,30,17,30,0,31],
+[14,17,16,17,14,0,31],
+[30,17,17,17,30,0,31],
+[31,16,30,16,31,0,31],
+[31,16,30,16,16,0,31],
+[14,16,19,17,14,0,31],
+[17,17,31,17,17,0,31],
+[14,27,31,27,27,0,31], // A_
+[30,27,30,27,30,0,31],
+[14,27,24,27,14,0,31],
+[30,27,27,27,30,0,31],
+[31,24,30,24,31,0,31],
+[31,24,30,24,24,0,31],
+[14,24,27,27,14,0,31],
+[27,27,31,27,27,0,31],
+[14,27,27,27,27,27,14], // 0
+[2,6,14,6,6,6,6],
+[14,27,3,6,12,24,31],
+[14,27,3,14,3,27,14],
+[3,7,15,27,31,3,3],
+[31,24,30,3,3,27,14],
+[14,27,24,30,27,27,14],
+[31,3,6,12,12,12,12],
+[14,27,27,14,27,27,14],
+[14,27,27,15,3,27,14],
+[23,21,21,21,23,0,31], // 10
+[10,10,10,10,10,0,31],
+[23,17,23,20,23,0,31],
+[23,17,19,17,23,0,31],
+[21,21,23,17,17,0,31],
+[23,20,23,17,23,0,31],
+[23,20,23,21,23,0,31],
+[23,17,18,18,18,0,31],
+[23,21,23,21,23,0,31],
+[23,21,23,17,23,0,31],
+[0,14,17,17,17,14,0], // rounds
+[0,14,17,21,17,14,0],
+[0,14,21,23,17,14,0],
+[0,14,31,27,31,14,0],
+[0,14,31,31,31,14,0],
+[0,31,17,17,17,31,0], // squares
+[0,31,17,21,17,31,0],
+[0,31,31,31,31,31,0],
+[0,0,14,10,14,0,0],
+[0,0,14,14,14,0,0],
+[8,12,10,9,10,12,8],
+[2,6,10,18,10,6,2],
+[16,16,16,16,16,16,16],
+[24,24,24,24,24,24,24],
+[28,28,28,28,28,28,28],
+[30,30,30,30,30,30,30],
+[31,31,31,31,31,31,31],
+[15,15,15,15,15,15,15],
+[7,7,7,7,7,7,7],
+[3,3,3,3,3,3,3],
+[1,1,1,1,1,1,1],
+[31,0,0,0,0,0,0],
+[31,31,0,0,0,0,0],
+[31,31,31,0,0,0,0],
+[31,31,31,31,0,0,0],
+[31,31,31,31,31,0,0],
+[31,31,31,31,31,31,0],
+[31,31,31,31,31,31,31],
+[0,31,31,31,31,31,31],
+[0,0,31,31,31,31,31],
+[0,0,0,31,31,31,31],
+[0,0,0,0,31,31,31],
+[0,0,0,0,0,31,31],
+[0,0,0,0,0,0,31],
+[0,0,0,0,0,0,0],
+[31,16,16,16,16,16,31],
+[15,8,8,8,8,8,15],
+[7,4,4,4,4,4,7],
+[3,2,2,2,2,2,3],
+[1,1,1,1,1,1,1],
+[31,0,0,0,0,0,31],
+[31,1,1,1,1,1,31],
+[30,2,2,2,2,2,30],
+[28,4,4,4,4,4,28],
+[24,8,8,8,8,8,24],
+[16,16,16,16,16,16,16],
+[3,3,3,0,0,0,0],
+[24,24,24,0,0,0,0],
+[27,27,27,0,0,0,0],
+[0,0,0,0,3,3,3],
+[3,3,3,0,3,3,3],
+[24,24,24,0,3,3,3],
+[27,27,27,0,3,3,3],
+[0,0,0,0,24,24,24],
+[3,3,3,0,24,24,24],
+[24,24,24,0,24,24,24],
+[27,27,27,0,24,24,24],
+[0,0,0,0,27,27,27],
+[3,3,3,0,27,27,27],
+[24,24,24,0,27,27,27],
+[27,27,27,0,27,27,27],
+[3,4,30,8,30,8,7], // euro
+[0,14,17,16,21,14,8], // cent/c-cedilla
+[2,3,2,14,30,12,0], // note
+[4,14,14,14,31,0,4],
+[1,3,15,15,15,3,1],
+[8,16,0,24,0,16,8],
+[0,27,14,4,14,27,0], // cross
+[0,1,3,22,28,8,0], // tick
+[0,10,17,21,17,10,0],
+[0,8,12,14,12,8,0], // pointers
+[0,0,4,14,31,0,0],
+[0,2,6,14,6,2,0],
+[0,0,31,14,4,0,0],
+[0,15,3,5,9,16,0],
+[0,30,24,20,18,1,0],
+[0,1,18,20,24,30,0],
+[0,16,9,5,3,15,0],
+[0,0,0,4,0,0,0],
+[0,16,0,0,0,1,0],
+[0,16,0,4,0,1,0],
+[0,17,0,0,0,17,0],
+[0,17,0,4,0,17,0],
+[0,17,0,17,0,17,0],
+
+[ 4,0,14,17,31,17,17],
+[10,0,14,17,31,17,17],
+[ 4,0,14,1,15,17,15],
+[10,14,17,17,17,17,14],
+
+[0,14,1,15,17,15,2],
+[2,4,14,16,16,17,14],
+[0,14,17,31,16,14,2],
+[12,4,6,12,4,4,14],
+[2,4,22,25,17,17,17],
+[2,4,14,17,17,17,14],
+[2,4,14,16,14,1,30],
+[2,4,31,2,4,8,31],
+[4,0,31,2,4,8,31],
+
+[31,17,10,4,10,17,31],
+[31,17,10,4,10,31,31],
+[31,17,10,4,14,31,31],
+
+[0,0,10,0,17,14,0],
+[0,0,10,0,14,17,0],
+
+[0,10,21,17,10,4,0],
+[0,10,31,31,14,4,0],
+
+
+],
+
+[ // size 1
+[14,27,27,31,27,27,27], // A
+[30,27,27,30,27,27,30],
+[14,27,24,24,24,27,14],
+[30,27,27,27,27,27,30],
+[31,24,24,30,24,24,31],
+[31,24,24,30,24,24,24],
+[14,27,24,27,27,25,15],
+[27,27,27,31,27,27,27],
+[0,0,14,3,15,27,15], // a
+[24,24,30,27,27,27,30],
+[0,0,14,27,24,27,14],
+[1,1,15,27,27,27,15],
+[0,0,14,27,31,24,15],
+[7,12,30,12,12,12,12],
+[0,0,15,27,27,15,3,14],
+[24,24,30,27,27,27,27],
+[14,17,31,17,17,0,31],
+[30,17,30,17,30,0,31],
+[14,17,16,17,14,0,31],
+[30,17,17,17,30,0,31],
+[31,16,30,16,31,0,31],
+[31,16,30,16,16,0,31],
+[14,16,19,17,14,0,31],
+[17,17,31,17,17,0,31],
+[14,27,31,27,27,0,31], // A_
+[30,27,30,27,30,0,31],
+[14,27,24,27,14,0,31],
+[30,27,27,27,30,0,31],
+[31,24,30,24,31,0,31],
+[31,24,30,24,24,0,31],
+[14,24,27,27,14,0,31],
+[27,27,31,27,27,0,31],
+[14,27,27,27,27,27,14], // 0
+[2,6,14,6,6,6,6],
+[14,27,3,6,12,24,31],
+[14,27,3,14,3,27,14],
+[3,7,15,27,31,3,3],
+[31,24,30,3,3,27,14],
+[14,27,24,30,27,27,14],
+[31,3,6,12,12,12,12],
+[14,27,27,14,27,27,14],
+[14,27,27,15,3,27,14],
+[23,21,21,21,23,0,31], // 10
+[10,10,10,10,10,0,31],
+[23,17,23,20,23,0,31],
+[23,17,19,17,23,0,31],
+[21,21,23,17,17,0,31],
+[23,20,23,17,23,0,31],
+[23,20,23,21,23,0,31],
+[23,17,18,18,18,0,31],
+[23,21,23,21,23,0,31],
+[23,21,23,17,23,0,31],
+[0,14,17,17,17,14,0], // rounds
+[0,14,17,21,17,14,0],
+[0,14,21,23,17,14,0],
+[0,14,31,27,31,14,0],
+[0,14,31,31,31,14,0],
+[0,31,17,17,17,31,0], // squares
+[0,31,17,21,17,31,0],
+[0,31,31,31,31,31,0],
+[0,0,14,10,14,0,0],
+[0,0,14,14,14,0,0],
+[8,12,10,9,10,12,8],
+[2,6,10,18,10,6,2],
+[16,16,16,16,16,16,16,16],
+[24,24,24,24,24,24,24,24],
+[28,28,28,28,28,28,28,28],
+[30,30,30,30,30,30,30,30],
+[31,31,31,31,31,31,31,31],
+[15,15,15,15,15,15,15,15],
+[7,7,7,7,7,7,7,7],
+[3,3,3,3,3,3,3,3],
+[1,1,1,1,1,1,1,1],
+[31,0,0,0,0,0,0,0],
+[31,31,0,0,0,0,0,0],
+[31,31,31,0,0,0,0,0],
+[31,31,31,31,0,0,0,0],
+[31,31,31,31,31,0,0,0],
+[31,31,31,31,31,31,0,0],
+[31,31,31,31,31,31,31,0],
+[0,31,31,31,31,31,31,31],
+[0,0,31,31,31,31,31,31],
+[0,0,0,31,31,31,31,31],
+[0,0,0,0,31,31,31,31],
+[0,0,0,0,0,31,31,31],
+[0,0,0,0,0,0,31,31],
+[0,0,0,0,0,0,0,31],
+[31,16,16,16,16,16,16,31],
+[15,8,8,8,8,8,8,15],
+[7,4,4,4,4,4,4,7],
+[3,2,2,2,2,2,2,3],
+[1,1,1,1,1,1,1,1],
+[31,0,0,0,0,0,0,31],
+[31,1,1,1,1,1,1,31],
+[30,2,2,2,2,2,2,30],
+[28,4,4,4,4,4,4,28],
+[24,8,8,8,8,8,8,24],
+[16,16,16,16,16,16,16,16],
+[3,3,3,0,0,0,0],
+[24,24,24,0,0,0,0],
+[27,27,27,0,0,0,0],
+[0,0,0,0,3,3,3],
+[3,3,3,0,3,3,3],
+[24,24,24,0,3,3,3],
+[27,27,27,0,3,3,3],
+[0,0,0,0,24,24,24],
+[3,3,3,0,24,24,24],
+[24,24,24,0,24,24,24],
+[27,27,27,0,24,24,24],
+[0,0,0,0,27,27,27],
+[3,3,3,0,27,27,27],
+[24,24,24,0,27,27,27],
+[27,27,27,0,27,27,27],
+[3,4,30,8,30,8,7], // euro
+[0,0,14,17,16,21,14,8], // cent/c-cedilla
+[2,3,2,2,14,30,12,0], // note
+[4,14,14,14,31,0,4],
+[1,3,15,15,15,3,1],
+[8,16,0,24,0,16,8],
+[0,27,14,4,14,27,0], // cross
+[0,1,3,22,28,8,0], // tick
+[0,10,17,21,17,10,0],
+[0,8,12,14,12,8,0], // pointers
+[0,0,4,14,31,0,0],
+[0,2,6,14,6,2,0],
+[0,0,31,14,4,0,0],
+[0,15,3,5,9,16,0],
+[0,30,24,20,18,1,0],
+[0,1,18,20,24,30,0],
+[0,16,9,5,3,15,0],
+[0,0,0,4,0,0,0],
+[0,16,0,0,0,1,0],
+[0,16,0,4,0,1,0],
+[0,17,0,0,0,17,0],
+[0,17,0,4,0,17,0],
+[0,17,0,17,0,17,0],
+
+[ 4,0,14,17,31,17,17],
+[10,0,14,17,31,17,17],
+[ 4,0,14,1,15,17,15],
+[10,14,17,17,17,17,14],
+
+[0,0,14,1,15,17,15,2],
+[2,4,14,16,16,17,14,0],
+[0,0,14,17,31,16,14,2],
+[12,4,6,12,4,4,14,0],
+[2,4,22,25,17,17,17,0],
+[2,4,14,17,17,17,14,0],
+[2,4,14,16,14,1,30,0],
+[2,4,31,2,4,8,31,0],
+[4,0,31,2,4,8,31,0],
+
+[31,17,10,4,10,17,31,0],
+[31,17,10,4,10,31,31,0],
+[31,17,10,4,14,31,31,0],
+
+[0,0,10,0,17,14,0,0],
+[0,0,10,0,14,17,0,0],
+
+[0,0,10,21,17,10,4,0],
+[0,0,10,31,31,14,4,0],
+
+
+]
+
+
+
+]
+
+function iclk(x,y) {
+px[x][y]=!px[x][y]
+update()
+}
+
+function lclk(c) {
+for(var y=0;y<yy;y++)
+  for(var x=0;x<xx;x++)
+    if((clib[size][c][y]>>x)&1) px[xx-x-1][y]=1
+    else                        px[xx-x-1][y]=0
+update()
+}
+
+function clrall() {
+for(var y=0;y<myy;y++) for(var x=0;x<mxx;x++) px[x][y]=0
+update()
+}
+
+function setall() {
+for(var y=0;y<yy;y++) for(var x=0;x<xx;x++) px[x][y]=1
+update()
+}
+
+function update() {
+var u=new Array(yy)
+var tr=document.getElementById('data').rows
+var lr=document.getElementById('lcd').rows
+var sd,sh,sb
+var comma
+
+sd="";sh="";sb="" 
+for(var y=0;y<myy;y++) {
+  u[y]=0;
+  for(var x=0;x<mxx;x++) {
+    if(px[x][y]!=opx[x][y]) {
+      if(x>=xx||y>=yy)     lr[y].cells[x].innerHTML=''
+      else if(px[x][y]==0) lr[y].cells[x].innerHTML='<img src="http://www.zen6741.zen.co.uk/quinapalus/lc0.gif">'
+      else                 lr[y].cells[x].innerHTML='<img src="http://www.zen6741.zen.co.uk/quinapalus/lc1.gif">'
+      }
+    opx[x][y]=px[x][y]
+    if(px[x][y]) u[y]+=1<<(xx-x-1)
+    }
+  if(y==yy-1) comma=""
+  else comma=","
+  if(y<yy) {
+    sd+=u[y]+comma
+    sh+="0x"+u[y].toString(16)+comma
+    sb+="%"+u[y].toString(2)+comma
+    }
+  }
+tr[0].cells[1].innerHTML=sd
+tr[1].cells[1].innerHTML=sh
+tr[2].cells[1].innerHTML=sb
+}
+
+function poplib() {
+for(var c=0;c<nclib;c++) {
+  for(var y=0;y<myy;y++) {
+    var cr=document.getElementById('libc'+c).rows[y].cells
+    for(var x=0;x<mxx;x++) {
+      if(x>=xx||y>=yy)     cr[x].innerHTML=''
+      else if((clib[size][c][y]>>(xx-x-1))&1) cr[x].innerHTML='<img src="http://www.zen6741.zen.co.uk/quinapalus/lcs1.gif">'
+      else                                    cr[x].innerHTML='<img src="http://www.zen6741.zen.co.uk/quinapalus/lcs0.gif">'
+      }
+    }
+  }
+}
+
+function init() {
+for(var y=0;y<myy;y++) for(var x=0;x<mxx;x++)  px[x][y]=0
+for(var y=0;y<myy;y++) for(var x=0;x<mxx;x++) opx[x][y]=-1
+poplib()
+update()
+}
+
+function sizechange() {
+size=document.getElementById('size').value
+
+if(size<0) size=0
+if(size>=nsize) size=nsize-1
+if(size==0) {xx=5; yy=7; init();}
+if(size==1) {xx=5; yy=8; init();}
+}
+
+window.onload=function() {init();}
+</script>
+
+<p>
+The HD44780 is a controller for character-based liquid crystal
+displays (LCDs). In addition to the standard pre-programmed
+characters, it allows you to define up to eight of
+your own graphic patterns on a 5-by-7 (or sometimes
+5-by-8) grid. This page
+lets you experiment with various patterns and shows the
+numbers that need to be programmed into the controller to
+get those patterns on to the display.
+</p>
+
+<p>
+<!--
+<a href="http://www.doc.ic.ac.uk/~ih/doc/lcd/index.html">Ian
+Harries</a> and
+-->
+<a href="http://robo.fe.uni-lj.si/~kamnikr/sola/urac/vaja3_display/How%20to%20control%20HD44780%20display.pdf">Peter
+Ouwehand</a> has
+written an excellent article describing how to use the HD44780.
+</p>
+
+<p>
+Click in the green grid to the left to set and clear pixels to
+create the graphic you want. Then copy the decimal, hex or
+binary values as necessary and paste them into your program.
+If it doesn&rsquo;t work, try enabling JavaScript. If it
+still doesn&rsquo;t work, please let me know with an e-mail
+to the address on the
+<a href="index.html">home page</a>. It would be helpful if
+you could say what version of what browser on what operating
+system you are using. I am aware that Internet Explorer can
+complain that this page contains a lot of JavaScript.
+</p>
+
+<form>
+<select id="size" onchange='javascript:sizechange();'>
+<option value='0'>Character size: 5 by 7</option>
+<option value='1'>Character size: 5 by 8</option>
+</select> 
+</form>
+
+<table border="0" cellspacing="0" cellpadding="10"><tr><td>
+
+<table border="0" cellspacing="0" cellpadding="0" id="lcd">
+<script type="text/javascript">
+for(var y=0;y<myy;y++) {
+  document.write("<tr>\n")
+  for(var x=0;x<mxx;x++) document.write("<td onclick=\"iclk("+x+","+y+")\" id=\"x"+x+"y"+y+"\"></td>\n")
+  document.write("</tr>\n")
+  }
+</script>
+</table>
+
+</td><td>
+
+<form>
+<input type="button" value="Clear all" onClick="clrall()" />
+<input type="button" value="Set all"   onClick="setall()" />
+</form>
+
+<table border="0" cellspacing="0" cellpadding="0" id="data">
+<tr><td>In decimal:&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>In hex:&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td>In binary:&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+
+</td></tr></table>
+
+<h3>Pattern library</h3>
+
+<p>
+Click on any of the library characters below to use it as a
+base from which to work.
+</p>
+
+<table border="0" cellspacing="0" cellpadding="2">
+<script type="text/javascript">
+for(var c0=0;c0<nclib;c0+=16) {
+  document.write("<tr>\n")
+  for(var c=c0;c<c0+16&&c<nclib;c++) {
+    document.write("<td>\n")
+    document.write("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" id=\"libc"+c+"\">");
+    for(var y=0;y<myy;y++) {
+      document.write("<tr>\n")
+      for(var x=0;x<mxx;x++) document.write("<td onclick=\"lclk("+c+")\"></td>\n")
+      document.write("</tr>\n")
+      }
+    document.write("</table>\n")
+    document.write("</td>\n")
+    }
+  document.write("</tr>\n")
+  }
+</script>
+</table>
+
+<p>
+<i>Thanks to Arthur Benemann, Mark Colan, Tore Eriksson and Tomasz Jozwik.</i>
+</p>
+</p>
+<p>
+If you create any new characters you&rsquo;d be happy to see included
+in the library, please e-mail the decimal values and a brief
+explanation of what the character represents to the address on the
+<a href="index.html">home page</a>.
+</p>
+<br><small><i>This page most recently updated
+Sat Jun 28 15:52:35 BST 2014
+</i></small></div></td>
+
+<td class="r"><div class="in">
+<div class="rh">Word Matcher</div>
+<form class="wm" action="http://www.quinapalus.com/cgi-bin/match">
+<div class="rt">
+<input class="wm" type="text" name="pat" value="*" maxlength="250"><br>
+<input class="gb" type="hidden" name="ent" value="Search">
+<input class="gb" type="submit" value="Go!">
+<a href="http://www.quinapalus.com/cgi-bin/match">Options...</a><br>
+Type a pattern, e.g.<br>
+<center><span class="b">h???o</span></center>
+into the box and click
+&lsquo;Go!&rsquo; to see a list of matching words.
+<a href="http://www.quinapalus.com/matcher.html">More...</a>
+</div>
+</form>
+<hr>
+<div class="rt">
+<b>New:</b>
+<a href="http://www.quinapalus.com/logictutor.html">Logic&nbsp;Tutor</a>;
+<a href="http://www.quinapalus.com/goom.html">The Goom Strikes Bach</a>
+<br>
+</div> 
+<hr>
+
+<img class="r" src="http://www.zen6741.zen.co.uk/quinapalus/qxwbar.gif" alt="Qxw screen"><br>
+<div class="rt">
+Qxw is a free (GPL) crossword construction program.
+Answer treatments, circular and hex grids, jumbled entries, more besides.
+<b>New release 20140331</b> for both Linux and Windows.
+<a href="http://www.quinapalus.com/qxw.html">More...</a><br>
+</div>
+<hr>
+<img class="r" src="http://www.zen6741.zen.co.uk/quinapalus/pspcov.gif" alt="Practical Signal Processing front cover"><br>
+<div class="rt">
+My book, &lsquo;Practical Signal Processing&rsquo;, is published by
+<a href="http://www.cup.cam.ac.uk/uk/catalogue/catalogue.asp?isbn=9780521854788">Cambridge University Press</a>.
+You can order it directly from them, or via
+<a href="http://www.amazon.co.uk/dp/0521854784">amazon.co.uk</a> or
+<a href="http://www.amazon.com/dp/0521854784">amazon.com</a>. Paperback
+edition now also available.
+Browse before you buy at
+<a href="http://books.google.com/books/cambridge?vid=ISBN0521854784">Google Books</a>.
+<!-- <b>Nowo&#347;&#263;!</b> -->
+<a href="http://www.wkl.com.pl/przetwarzanie-sygnalow-w-praktyce,1,1,520">Wydanie polskie</a>.
+</div>
+<hr>
+<div class="rt">
+If you find this site useful or diverting, please consider a donation to
+<a href="http://www.nass.co.uk">NASS</a> (a UK registered
+charity), to <a href="http://www.kickas.org/donations/index.shtml">KickAS</a>
+(in the US), or to a similar body in your own
+country.
+</div>
+<hr>
+<div class="rt">
+<small><i>Copyright &copy;2004&ndash;14.<br>
+All trademarks used are hereby acknowledged.<br></i></small>
+</div>
+
+</div></tr></table></body></html>

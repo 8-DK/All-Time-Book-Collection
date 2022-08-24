@@ -1,0 +1,1023 @@
+	<!doctype html>
+	<!--[if !IE]>
+	<html class="no-js non-ie" lang="en-US"> <![endif]-->
+	<!--[if IE 7 ]>
+	<html class="no-js ie7" lang="en-US"> <![endif]-->
+	<!--[if IE 8 ]>
+	<html class="no-js ie8" lang="en-US"> <![endif]-->
+	<!--[if IE 9 ]>
+	<html class="no-js ie9" lang="en-US"> <![endif]-->
+	<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en-US"> <!--<![endif]-->
+	<head>
+
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>The ST7565 display controller &#124; edeca.net</title>
+
+		<link rel="profile" href="http://gmpg.org/xfn/11"/>
+		<link rel="pingback" href="http://edeca.net/wp/xmlrpc.php"/>
+
+		<link rel="alternate" type="application/rss+xml" title="edeca.net &raquo; Feed" href="http://edeca.net/wp/feed/" />
+<link rel="alternate" type="application/rss+xml" title="edeca.net &raquo; Comments Feed" href="http://edeca.net/wp/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="edeca.net &raquo; The ST7565 display controller Comments Feed" href="http://edeca.net/wp/electronics/the-st7565-display-controller/feed/" />
+<link rel='stylesheet' id='responsive-style-css'  href='http://edeca.net/wp/wp-content/themes/responsive/core/css/style.css?ver=1.9.5.9' type='text/css' media='all' />
+<link rel='stylesheet' id='responsive-media-queries-css'  href='http://edeca.net/wp/wp-content/themes/responsive/core/css/responsive.css?ver=1.9.5.9' type='text/css' media='all' />
+<link rel='stylesheet' id='codecolorer-css'  href='http://edeca.net/wp/wp-content/plugins/codecolorer/codecolorer.css?ver=0.9.9' type='text/css' media='screen' />
+<link rel='stylesheet' id='orbitslider_main-css'  href='http://edeca.net/wp/wp-content/plugins/wp-orbit-slider/css/default.css?ver=3.9.1' type='text/css' media='all' />
+<script type='text/javascript' src='http://edeca.net/wp/wp-includes/js/jquery/jquery.js?ver=1.11.0'></script>
+<script type='text/javascript' src='http://edeca.net/wp/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='http://edeca.net/wp/wp-content/themes/responsive/core/js/responsive-modernizr.min.js?ver=2.6.1'></script>
+<script type='text/javascript' src='http://edeca.net/wp/wp-content/plugins/wp-orbit-slider/js/jquery.orbit-1.3.0.min.js?ver=3.9.1'></script>
+<script type='text/javascript' src='http://edeca.net/wp/wp-content/plugins/google-analyticator/external-tracking.min.js?ver=6.4.7.3'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://edeca.net/wp/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://edeca.net/wp/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='PCB0006 - RFM12 breakout' href='http://edeca.net/wp/electronics/pcb0006-rfm12-breakout/' />
+<link rel='next' title='PCB0003 - Breadboard supply' href='http://edeca.net/wp/electronics/pcb0003/' />
+<meta name="generator" content="WordPress 3.9.1" />
+<link rel='canonical' href='http://edeca.net/wp/electronics/the-st7565-display-controller/' />
+<link rel='shortlink' href='http://edeca.net/wp/?p=990' />
+<style type="text/css"></style><link rel="stylesheet" type="text/css" href="http://edeca.net/wp/wp-content/plugins/wp-recaptcha/recaptcha.css" /><!-- We need this for debugging -->
+<!-- Responsive 1.9.5.9 -->
+
+<!-- Begin Orbit Slider -->
+<script type="text/javascript">
+/* <![CDATA[ */
+jQuery(document).ready(function() {
+jQuery('#orbit-inside').orbit({
+animation: "fade",
+animationSpeed: 800,
+timer: true,
+advanceSpeed: 4000,
+pauseOnHover: false,
+directionalNav: true,
+captions: true,
+captionAnimation: "fade",
+captionAnimationSpeed: 800,
+bullets: true,
+bulletThumbs: false,
+centerBullets: true,
+fluid: true
+});
+});
+/* ]]> */
+</script>
+<!-- End Orbit Slider -->
+
+<!-- Google Analytics Tracking by Google Analyticator 6.4.7.3: http://www.videousermanuals.com/google-analyticator/ -->
+<script type="text/javascript">
+                var analyticsFileTypes = ['zip','lbr','exe'];
+                            var analyticsSnippet = 'enabled';
+                var analyticsEventTracking = 'enabled';
+            </script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+  
+	_gaq.push(['_setAccount', 'UA-16411160-1']);
+    _gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+<!-- Custom CSS Styles -->
+<style type="text/css" media="screen">
+.custom-slider { 
+    max-height:300px; 
+    max-width:440px; 
+}
+.important {
+        background:#ffcdc5;
+        border:1px solid #cd2d12;
+        padding:5px;
+        margin:.5em 0 .5em 0;
+        color:#8c1400;
+}
+
+.important a {
+        color:#8c1400;
+}
+
+.note {
+        background:#d5f69b;
+}
+
+.note, .download {
+        border:1px solid #75ad14;
+        padding:5px;
+        margin:.5em 0 .5em 0;
+        color:#446c00;
+}
+
+.note a, .download a {
+        color:#446c00 !important;
+}
+
+.download a {
+        font-weight:bold;
+}
+
+.download {
+        background:#d5f69b url(/images/download.png) no-repeat top left;
+        padding-left:46px;
+        min-height:35px;
+}
+
+.commentlist li.comment-author-admin {
+	background-color:#FBF9E9;
+}
+
+* html .download {
+        background-image:none;
+        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/download.png', sizingMethod='scale');
+}
+</style>
+	</head>
+
+<body class="page page-id-990 page-child parent-pageid-983 page-template page-template-full-width-page-php">
+
+<div id="container" class="hfeed">
+
+	<div class="skip-container cf">
+		<a class="skip-link screen-reader-text focusable" href="#main">&darr; Skip to Main Content</a>
+	</div><!-- .skip-container -->
+	<div id="header">
+
+		
+		
+		
+		
+			<div id="logo">
+				<a href="http://edeca.net/wp/"><img src="http://edeca.net/wp/wp-content/uploads/2012/07/top-transparent.png" width="265" height="46" alt="edeca.net"/></a>
+			</div><!-- end of #logo -->
+
+		
+		
+				<div class="main-nav"><ul class="menu"><li ><a href="http://edeca.net/wp/">Home</a></li><li class="page_item page-item-919"><a href="http://edeca.net/wp/blog/">Blog</a></li><li class="page_item page-item-983 page_item_has_children current_page_ancestor current_page_parent"><a href="#">Electronics</a><ul class='children'><li class="page_item page-item-386"><a href="http://edeca.net/wp/electronics/eagle-library/">Eagle library</a></li><li class="page_item page-item-1227"><a href="http://edeca.net/wp/electronics/kart-timing-mk1/">Kart Timing Mk1</a></li><li class="page_item page-item-1510"><a href="http://edeca.net/wp/electronics/measuring-pic-vdd-with-no-external-components-using-the-fvr/">Measuring PIC Vdd with no external components using the FVR</a></li><li class="page_item page-item-1148"><a href="http://edeca.net/wp/electronics/pcb0001-18f-breakout/">PCB0001 - 18F breakout</a></li><li class="page_item page-item-557"><a href="http://edeca.net/wp/electronics/pcb0002-led-matrix/">PCB0002 - LED matrix</a></li><li class="page_item page-item-1006"><a href="http://edeca.net/wp/electronics/pcb0003/">PCB0003 - Breadboard supply</a></li><li class="page_item page-item-986"><a href="http://edeca.net/wp/electronics/pcb0006-rfm12-breakout/">PCB0006 - RFM12 breakout</a></li><li class="page_item page-item-990 current_page_item"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/">The ST7565 display controller</a></li><li class="page_item page-item-1124"><a href="http://edeca.net/electronics/library-docs/html/" target="_blank">uC libraries documentation</a></li></ul></li><li class="page_item page-item-17"><a href="http://edeca.net/wp/graphics/">Graphics</a></li><li class="page_item page-item-45 page_item_has_children"><a href="http://edeca.net/wp/programs/">Computing stuff</a><ul class='children'><li class="page_item page-item-85"><a href="http://edeca.net/wp/programs/gnu-screen-config/">GNU screen config</a></li><li class="page_item page-item-72"><a href="http://edeca.net/wp/programs/motd-maker/">MOTD maker</a></li><li class="page_item page-item-1577"><a href="http://edeca.net/wp/programs/overview/">Overview</a></li><li class="page_item page-item-25"><a href="http://edeca.net/wp/programs/rot-util/">ROT Util</a></li><li class="page_item page-item-135"><a href="http://edeca.net/wp/programs/vb6-reverse-dns/">VB6 reverse DNS</a></li><li class="page_item page-item-145"><a href="http://edeca.net/wp/programs/vb6-richtextbox-control/">VB6 RichTextBox control</a></li></ul></li></ul>
+</div>
+		
+		
+	</div><!-- end of #header -->
+
+	<div id="wrapper" class="clearfix">
+
+<div id="content-full" class="grid col-940">
+
+	
+		
+			<div class="breadcrumb-list" xmlns:v="http://rdf.data-vocabulary.org/#"><span class="breadcrumb" typeof="v:Breadcrumb"><a rel="v:url" property="v:title" href="http://edeca.net/wp/">Home</a></span> <span class="chevron">&#8250;</span> <span class="breadcrumb" typeof="v:Breadcrumb"><a rel="v:url" property="v:title" href="#">Electronics</a></span> <span class="chevron">&#8250;</span> <span class="breadcrumb-current">The ST7565 display controller</span></div>
+						<div id="post-990" class="post-990 page type-page status-publish hentry">
+				
+				
+	<h1 class="entry-title post-title">The ST7565 display controller</h1>
+
+	<div class="post-meta">
+		<span class="meta-prep meta-prep-author posted">Posted on </span><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/" title="The ST7565 display controller" rel="bookmark"><time class="timestamp updated" datetime="2012-07-13T21:01:04+00:00">July 13, 2012</time></a><span class="byline"> by </span><span class="author vcard"><a class="url fn n" href="http://edeca.net/wp/author/admin/" title="View all posts by David">David</a></span>
+					<span class="comments-link">
+		<span class="mdash">&mdash;</span>
+				<a href="http://edeca.net/wp/electronics/the-st7565-display-controller/#comments" title="Comment on The ST7565 display controller">34 Comments &darr;</a>		</span>
+			</div><!-- end of .post-meta -->
+
+				<div class="post-entry">
+					<p>This post covers the theory of using a graphic LCD based on the ST7565 controller. These are widely available with popular sizes of 132x32 and 128x64, a number cost below £10.</p>
+<p><img class="aligncenter size-full wp-image-725" title="EADOGL28B" src="http://edeca.net/wp/wp-content/uploads/2012/02/ea_dogl128b-6.jpg" alt="" width="150" height="146" /></p>
+<p><em>(Image © Electronic Assembly, lcd-module.de)</em></p>
+<p>The tutorial follows the same path I took whilst developing a simple library for a screen I had bought. I set myself the challenge of doing this from scratch, rather than using code from the internet.</p>
+<p><span id="more-990"></span></p>
+<p>Whilst this post uses a 128x64 screen as an example it is equally applicable to different sizes. <em></em></p>
+<h4>Pros:</h4>
+<ul>
+<li>Easy to interface using fewer pins than other graphic LCDs</li>
+<li>Onboard voltage booster for the liquid crystal display</li>
+<li>Software controlled contrast and rotation</li>
+<li>Works at faster clock speeds</li>
+<li>Good selection of backlight colours</li>
+</ul>
+<h4>Cons:</h4>
+<ul>
+<li>3.3v logic only (not such a problem any more)</li>
+<li>In SPI mode a large buffer is required in local memory</li>
+</ul>
+<h2>Getting started</h2>
+<p>The most important thing needed when developing a library is a good datasheet. The information provided by screen manufacturers is often lacking in detail or quality.  The datasheet I used can be <a href="http://edeca.net/downloads/electronics/ST7565R_V17_960601.pdf" target="_blank">found here</a>.</p>
+<h2>Basic operation (hardware)</h2>
+<p>The most basic pinout for the ST7565 is shown below.  To drive it from a microcontroller in SPI mode 5 pins are required.  All of these pins are outputs from the microcontroller and inputs to the screen.  Because it is not possible to read from the screen there is no requirement for inputs.</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-SPI-pinout.png"><img class="aligncenter size-medium wp-image-834" title="ST7565 - SPI pinout" src="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-SPI-pinout-300x273.png" alt="" width="300" height="273" /></a></p>
+<p>It is necessary to connect RESET to the microcontroller as the initialisation procedure involves toggling this pin.  This pin should not be tied high or low or it may not be possible to reset the screen correctly.</p>
+<p>Depending on your GLCD module it may be necessary to connect a number of capacitors, this is discussed in the next section.</p>
+<h4>Voltage boosting and regulation</h4>
+<p>The ST7565 has an integrated voltage booster (charge pump) circuit that can provide the high voltages needed by the liquid crystal display. If the circuit only has a single supply such as 3.3v then the charge pump is the easiest way to power the screen. If the circuit contains a voltage source of between 9v and 12v then it is possible to reduce the number of external components needed by using this directly.</p>
+<p>The internal booster can provide from 2x to 6x the input voltage depending on how capacitors are connected between the CAPxx terminals. Full details are provided on page 31 to 34 of the datasheet above. The only limitation is that the maximum voltage after boosting must not exceed Vout, which is 13.5v.</p>
+<p>Many LCD specific datasheets will provide the exact capacitors required for a particular model. For some display modules these capacitors are included on the circuit board and do not need to be added.  Check the datasheet carefully!  For example, the image below is taken from the datasheet for an inexpensive model available from Mouser, the EA DOGM132-5:</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/Screen-Shot-2012-02-04-at-14.44.02.png"><img class="aligncenter size-medium wp-image-762" title="Example capacitors for an ST7565 screen" src="http://edeca.net/wp/wp-content/uploads/2012/02/Screen-Shot-2012-02-04-at-14.44.02-300x135.png" alt="" width="300" height="135" /></a></p>
+<p><em>(© Electronic Assembly, lcd-module.de)</em></p>
+<p>In addition to the voltage booster the ST7565 contains an integrated voltage regulator. This has 8 steps and regulates the reference voltage used to drive the liquid crystal display. It is necessary to find a value between 0 and 7 which works well with the specific hardware as this is used with the dynamic contrast feature.  Typically a "middle" value such as 3 will work with any screen.</p>
+<h2>Basic operation (software)</h2>
+<p>SPI mode provides an easy mechanism to drive the screen using few pins.  A single bit is written to the data pin and the clock is pulsed high then low.  The implementation of SPI by the ST7565 is fairly standard, more information can be found on the <a href="http://en.wikipedia.org/wiki/Serial_Peripheral_Interface_Bus">Wikipedia SPI Bus</a> page.</p>
+<p>One limitation of using the screen in SPI mode is that it only supports writing commands or data. It is not possible to read from the screen therefore it is necessary to keep a copy of the current screen data in memory on the microcontroller. The size of this software buffer can be calculated easily, there are 128 columns and 64 rows for a total of 8192 bits (1 bit per pixel for black and white). Therefore 1024 bytes in total are required to store a copy of the screen, which can be a large amount on many smaller microcontrollers.</p>
+<p>With software ('bit banged') SPI it is possible to use the screen at very fast clock speeds. On an PIC 18F I have used my screen with a 64Mhz internal oscillator and it works absolutely fine. It is possible to calculate (or simulate/measure) whether the microcontroller can exceed the ST7565 minimum clock period.</p>
+<h4>Screen layout</h4>
+<p>Unlike displays using the KS0108 the ST7565 has a single controller for the whole screen. There is no need to swap between the left and right in order to send commands.</p>
+<p>A 128x64 screen is made up of 8 pages, each of which is 8 pixels high and 132 wide. This maps nicely to the software buffer required for caching the screen contents because each page is a byte high.</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-outline-light-pixels-pages.png"><img class="aligncenter size-medium wp-image-753" title="ST7565 - pages" src="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-outline-light-pixels-pages-300x170.png" alt="" width="300" height="170" /></a></p>
+<p><em></em>It is easiest to imagine the top left of the screen as 0,0 and the bottom right as 127,63. This makes some of the maths required in software much easier.  To write data at (0,0) it is necessary to select page 0, column 0 and then set the individual bit.  In contrast the location (32,32) is in page 5.  The simplest method of writing data to the screen is to send a whole page at a time, starting from the left in column 0 and continuining to the right at column 127.</p>
+<h4>Sending a command to the screen</h4>
+<p>Issuing a single command to the screen is the most basic building block of the interface code.  The steps required are:</p>
+<ul>
+<li>Set the A0 pin low to indicate that command data is being sent</li>
+<li>Set the chip select (CS) pin low</li>
+<li>Send each bit of the command, starting with the <em>most significant</em> bit and working down to the <em>least significant</em></li>
+<li>Set the chip select (CS) pin high, to free the bus</li>
+</ul>
+<p>Therefore the "display on" command (which is 0xAF or 0b10101111) should be sent as: 1, 0, 1, 0, 1, 1, 1, 1.</p>
+<p>As long as the SPI timings are not violated there is no need to introduce any delays as the screen will never be "busy".</p>
+<h4>Screen initialisation</h4>
+<p>Now that we can send a single command to we need to follow a number of steps to setup the screen.</p>
+<ul>
+<li>Strobe the RESET pin low then high, to initiate a hardware reset</li>
+<li>Setup the duty cycle (either 1/7 or 1/9) depending on the physical LCD</li>
+<li>Set the horizontal and vertical orientation to a known state</li>
+<li>Configure the internal resistor divider which is used by the voltage regulator</li>
+<li>Turn on the internal voltage booster to provide power to the LCD glass</li>
+<li>Initialise the dynamic contrast to a default value</li>
+<li>Reset the current display position to the top left</li>
+</ul>
+<p>The commands for these are a single byte except the dynamic contrast, which is explained later.  Below is an image captured from a logic analyser while the initialisation code runs.</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-Screen-initialisation1.png"><img class="aligncenter size-medium wp-image-805" title="ST7565 - Screen initialisation" src="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-Screen-initialisation1-300x58.png" alt="" width="300" height="58" /></a></p>
+<p>In this trace the following things can be seen:</p>
+<ul>
+<li>Command 0xA2: set the LCD bias to 1/9th</li>
+<li>Command 0xA0: horizontally "normal" (not flipped)</li>
+<li>Command 0xC8: vertically "flipped" (complements the command above)</li>
+<li>Command 0x23: the internal resistor divider set to 3 (from 0..7)</li>
+<li>Command 0x2F: power control, all internal blocks ON</li>
+<li>Command 0x81: enter dynamic contrast mode</li>
+<li>Data for the dynamic contrast mode, set to 31 (from 0..63)</li>
+<li>Command 0x40: go back to the top left of the display</li>
+</ul>
+<p>When power is first applied to the screen it is also important to clear the onboard screen memory. As it is non-volatile RAM it will start in an unknown state.</p>
+<h4>Sending data to the screen</h4>
+<p>The only difference between sending a command and data is the A0 pin.  When sending data the A0 pin must be high to differentiate the bus data from a command.</p>
+<p>To start we send a command to reset the position to the top left corner (0,0). After this a quick trick is to write a single byte and see how it is displayed. It is important to know which way round the screen will display the data it receives, whether the "most significant bit" or "least significant bit" is displayed at the top.  The illustration below shows the output if the byte 0x80 is sent four times to the screen:</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-Basic-data.png"><img class="aligncenter size-medium wp-image-779" title="ST7565 - Basic data" src="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-Basic-data-300x190.png" alt="" width="300" height="190" /></a></p>
+<p>From this it can be seen that the <em>most</em> significant bit displays at the bottom of the page.  The first bit we send is at the bottom, then subsequent bits work upwards toward the top of the page.  This will be important later when we try to set an individual pixel.</p>
+<h4>Displaying a basic test pattern</h4>
+<p>The easiest way to test if the driver code is working is to send a very basic test pattern. A quick check is to send constant bytes of 0xFF to fill the screen. If this works then variations can be tried, such as 0xF0 or 0xAA.</p>
+<p>At the end of each row, after every 128 bytes, it is necessary to select the next page and move to the start of the row.  The following image is the basic test card I used to demonstrate that my display was wired up correctly.</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/IMG_0631.jpg"><img class="aligncenter size-medium wp-image-825" title="ST7565 - Test card" src="http://edeca.net/wp/wp-content/uploads/2012/02/IMG_0631-300x225.jpg" alt="" width="300" height="225" /></a></p>
+<h4>Writing to specific pixels</h4>
+<p>Writing specific pixels opens up a whole world of possibilities from lines, circles, 1 bit-per-pixel graphics and variable height fonts. As these graphics functions are not dependant on a specific controller or screen it is best to split them out into a separate library which is portable across any screen.  This is perhaps the most difficult portion whilst developing a library to work with any screen.</p>
+<p>In order to set a specific pixel it is necessary to break the process into a number of steps:</p>
+<ul>
+<li> Find the corresponding byte in the software buffer</li>
+<li>Calculate the bit within this byte</li>
+<li>Use logical XOR (to set the bit) or AND (to clear the bit)</li>
+</ul>
+<p>Finding the correct byte is straightforward.  The first position in our array is at the top left of the screen.  The 128th byte in the array (Array[127]) is on the first page at the right hand side of the screen.  The next bit "wraps" to the next page, at page 1 column 1.</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-Relationship-to-software-buffer1.png"><img class="aligncenter size-medium wp-image-842" title="ST7565 - Relationship to software buffer" src="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-Relationship-to-software-buffer1-300x192.png" alt="" width="300" height="192" /></a></p>
+<p>To calculate which byte we need to use we need to divide the Y position by 8 and multiple the result by 128.  To this we add the X position, then subtract 1 (as C arrays start from 0).  The equation X + ( ( Y / 8 ) * 128 ) - 1 works well in C.  To verify this is correct:</p>
+<ul>
+<li>(1,1) on the screen would give 1 + ( 1 / 8 ) * 128 - 1 = 0</li>
+<li>(61,52) on the screen would give 61 + ( 52 / 8 ) * 128 - 1 = 828</li>
+</ul>
+<p>To calculate the bit inside this byte we must remember that the 8th (most significant) bit appears at the bottom of the page.  So to write to Y location 8 we need to set the 8th bit of a byte on the first page.  To write to Y location 16 we need to write to the 8th bit of the corresponding byte on the second page.  Therefore we need the remainder after the Y position is divided by 8, which can be found using the <a href="http://en.wikipedia.org/wiki/Modulo_operation">modulo operator</a>.  This is as simple as Y % 8:</p>
+<ul>
+<li>(1,1) means setting 1 % 8 = the 1st bit</li>
+<li>(61,49) means setting 49 % 8 = the 1st bit</li>
+<li>(61,53) means setting 53 % 8 = the 5th bit</li>
+</ul>
+<p>It is now possible to set the correct bit inside the byte, on PIC microcontrollers this can be achieved using very efficient bit operators such as bsf or bcf.</p>
+<h4>Displaying text</h4>
+<p>Like many other graphic LCDs the ST7565 has no built-in font.  The quickest &amp; easiest way of displaying text on this screen is to define an 8 pixel high font. This maps directly to one page (or 'line') of the display and therefore we can use very fast instructions to copy the data from a predefined font to the right area of the screen.</p>
+<p>However this limits us to a fixed height and only 8 lines of the screen. Now that we know how to set individual pixels there are much nicer ways of displaying text. Consider the following image:</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/IMG_0629.jpg"><img class="aligncenter size-medium wp-image-824" title="ST7565 - Variable size fonts" src="http://edeca.net/wp/wp-content/uploads/2012/02/IMG_0629-300x225.jpg" alt="" width="300" height="225" /></a></p>
+<p>Larger fonts take up more room but can be used to provide a much nicer looking user interface for a project.  With the knowledge that we can set a specific pixel it is easy to make advanced graphics functions.  However these are separate to the ST7565 screen itself, so I will cover them in a future blog post.  Impatient readers can check my <a href="https://github.com/edeca/Electronics/blob/master/Include/graphics.h">graphics library</a> (Doxygen documentation <a href="http://edeca.net/temp/Documentation/html/graphics_8h.html">can be found here</a>).</p>
+<h2>Using advanced features</h2>
+<p>So far all of the features are common to all standard graphic LCDs. However there are a number of additional tricks that ST7565 based displays can offer.</p>
+<h4>Inverting the screen</h4>
+<p>With a single command the ST7565 can be instructed to invert the display.  This can be useful for emphasis or to make the screen easier to read in certain situations.  The command "display normal or reverse" is 0b1010011X, where X is 1 for reversed or 0 for normal.</p>
+<p>The picture below shows the same font demonstration as above, but with the inverse feature turned on.</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/IMG_0626.jpg"><img class="aligncenter size-medium wp-image-823" title="ST7565 - Inverse screen" src="http://edeca.net/wp/wp-content/uploads/2012/02/IMG_0626-300x225.jpg" alt="" width="300" height="225" /></a></p>
+<h4>Blacking the screen</h4>
+<p>The ST7565 is capable of setting all points on the display to black without affecting the screen RAM.  Whilst it is hard to think of a situation where this might be useful the command "display all points" is a single byte and can be used to turn the display black if required.</p>
+<h4>Dynamic contrast control</h4>
+<p>Unlike other common graphic LCDs the contrast for the ST7565 is set by an internal resistor divider. This means that it can be set in software and altered dynamically. To change the contrast we need to send two commands. The first enters "volume mode set" and the second sets the contrast from 0..63.</p>
+<p>The number of useful steps may be less than 64, on my test screen the visible steps are from 12 (very light) to 40 (very dark). Lower values are not visible as the voltage is too low, higher values make the screen completely black as there is no distinction between pixels which are off or on.</p>
+<p>This feature could be used with a light sensor to dim the screen depending on ambient conditions. It can also be used to fade the screen in or out.</p>
+<h4>Screen rotation and mirroring</h4>
+<p>In the same way that the screen can be inverted without affecting the display data it is possible to flip the screen in either the horizontal or vertical direction.  This means that the screen can be used either way up with no changes required to the software except sending extra two commands to the screen.</p>
+<p>Flipping the screen horizontally (from left to right) is achieved with the confusingly named "ADC Select" command.  Flipping the screen vertically (from top to bottom) is possible with the "COM Output Mode Select" command.  Unless you want to view the screen in a mirror it is necessary to use both commands at once!</p>
+<p>As mentioned earlier the memory on the screen is actually 132 columns wide, to support a maximum screen size of 132x64.  On 128 pixel wide models there is an important consideration if rotating the display.  If the screen is not rotated as the extra 4 rows are on the right hand side and not visible, as illustrated below:</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-Normal-screen.png"><img class="aligncenter size-medium wp-image-741" title="ST7565 - Normal orientation" src="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-Normal-screen-300x202.png" alt="" width="300" height="202" /></a><em class="aligncenter size-medium wp-image-741" title="ST7565 - Normal orientation"></em></p>
+<p>&nbsp;</p>
+<p>When the screen is rotated the controller outputs these columns in the opposite order, <em>starting with the last column</em>.  Therefore the unused 4 columns from the screen memory are output first, leaving an empty space on the left hand side.</p>
+<p>&nbsp;</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-Rotated-screen.png"><img class="aligncenter size-medium wp-image-742" title="ST7565 - Rotated screen" src="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-Rotated-screen-300x202.png" alt="" width="300" height="202" /></a><em></em></p>
+<p>In order fix this it is necessary to keep track in software of whether the screen is rotated or not.  When it is rotated the column address should be incremented by 4 each time a new line is sent to the screen, skipping the extra columns which would otherwise be displayed.</p>
+<h2>Improving efficiency</h2>
+<p>Refreshing the screen involves sending the entire local buffer to the screen RAM. If only a few changes have been made then this is a very inefficient way to update the screen.</p>
+<p>It would be possible to send each individual write to the screen, simply by copying the single byte that has changed each time a pixel is written. However this is inefficient if more than a single bit (or pixel) is set in the same byte in subsequent operations. Changes to the screen would also be very visible at slower speeds.</p>
+<p>As the screen has 8 pages the most efficient method on a small microcontroller is to send only the pages which have changed. Each time a pixel is set or cleared the corresponding page in the local buffer is marked as 'dirty'. When it comes to refreshing the screen only the dirty pages are transferred.</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-Improving-efficiency.png"><img class="aligncenter size-medium wp-image-746" title="ST7565 - Improving efficiency" src="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-Improving-efficiency-300x175.png" alt="" width="300" height="175" /></a><em></em></p>
+<p>In the example above only pages 2 and 5 have had changes made.  Therefore these will be sent to the screen, which takes 1/4 of the time as sending all 8 pages.</p>
+<p>The screen could be subdivided into even smaller regions, for example 16 half pages. The trade-off of extra code each time a pixel is set and the reduced bus time sending data should be considered carefully.</p>
+<p>&nbsp;</p>
+<h3>Verifying speeds</h3>
+<p>Above I commented that it was possible to run a PIC at 64Mhz and not violate the SPI timings.  The important values are shown in Table 28 of the datasheet:</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-SPI-timings.png"><img class="aligncenter size-medium wp-image-784" title="ST7565 - SPI timings" src="http://edeca.net/wp/wp-content/uploads/2012/02/ST7565-SPI-timings-300x116.png" alt="" width="300" height="116" /></a></p>
+<p>We are interested in Tscyc, Tshw and Tslw.  These relate to the total clock cycle, the HIGH portion of the cycle and the LOW portion respectively.  The overall clock pulse must be <em>at least</em> 50ns and the high and low portions must be <em>at least</em> 25ns each.</p>
+<h4>Crunching the numbers</h4>
+<p>Assume that the SPI code turns ON the clock pin and then OFF again immediately in 2 instructions.  The pin will be HIGH at the end of the first instruction and LOW again after the second, therefore it is only HIGH for the period of 1 instruction.</p>
+<p>On the PIC 12/16/18 family of microcontrollers each instruction takes 4 cycles.  At 64Mhz this means that each instruction takes 1/(64000000/4) seconds, or 62.5ns.  From this we can expect that the HIGH period of the clock pulse should be about 62.5ns, easily within the required timings.</p>
+<h4>Checking with a logic analyser</h4>
+<p>It is also possible to measure and see how long the pulse lasts on real hardware.  The screenshot below shows the HIGH portion of the clock pulse being measured, this is the shortest part of the cycle.  The PIC being used is an 18F25K22 running at 64Mhz.  The code toggles the pin ON and OFF in two instructions.</p>
+<p><a href="http://edeca.net/wp/wp-content/uploads/2012/02/screenshot3.png"><img class="aligncenter size-medium wp-image-788" title="ST7565 - Verifying the clock pulse" src="http://edeca.net/wp/wp-content/uploads/2012/02/screenshot3-300x193.png" alt="" width="300" height="193" /></a></p>
+<p>Remember that it must be at least 25ns long in order to be acceptable.  The measurement shows 41.7ns, which is shorter than calculated but still acceptable.  A number of reasons could produce the difference between our calculation and the physical measurement:</p>
+<ul>
+<li>The resolution of the logic analyser (24Mhz in this example) might not be sufficient for the measurement.</li>
+<li>Setting or clearing bits in hardware might not take the entire 4 cycles.</li>
+<li>The PIC might not be running at exactly 64Mhz due to instability of the oscillator or PLL.</li>
+</ul>
+<p>&nbsp;</p>
+<h2>See also</h2>
+<p>If you are interested in using a ST7565 based screen in an Arduino project then you should check out <a href="http://www.ladyada.net/learn/lcd/st7565.html" target="_blank">Ladyada's tutorial</a> on Adafruit.  My <a href="https://github.com/edeca/Electronics/blob/master/Include/st7565.h">C library is available</a> which was designed for PIC 18F parts with HiTech C.  It would be trivial to change for another compiler or chip.</p>
+									</div>
+				<!-- end of .post-entry -->
+
+				
+
+<div class="post-edit"></div>
+							</div><!-- end of #post-990 -->
+			
+						
+	<h6 id="comments">
+		34 comments on &ldquo;<span>The ST7565 display controller</span>&rdquo;	</h6>
+
+	
+	<ol class="commentlist">
+				<li class="comment even thread-even depth-1" id="comment-1541">
+				<div id="div-comment-1541" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/8d32d814ea89b252bc378ef755ba9598?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Brent Meeker</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-1541">
+			February 9, 2012 at 6:01 pm</a>		</div>
+
+		<p>This is the best information I have seen on programming these displays. I can't wait for your post about creating different fonts. I have been tring to figure out 36pt bold font for my project. Anyway, great job and thanks for your help.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-1775">
+				<div id="div-comment-1775" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/84af2a45ce985ae98a691f46c03406c1?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Sergio KOZARI</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-1775">
+			April 2, 2012 at 10:49 pm</a>		</div>
+
+		<p>Hi David,<br />
+your library for PIC 18F pubblished: <a href="https://github.com/edeca/Electronics/blob/master/Include/st7565.h" rel="nofollow">https://github.com/edeca/Electronics/blob/master/Include/st7565.h</a></p>
+<p>is complete? Thanks a lot.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="comment-1776">
+				<div id="div-comment-1776" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-1776">
+			April 3, 2012 at 6:53 am</a>		</div>
+
+		<p>Yes, it is complete.  It works on a demonstration board I have here and I used it to generate the pictures in this post.</p>
+<p>Any feedback about results with different screens would be interesting.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-2556">
+				<div id="div-comment-2556" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/8d32d814ea89b252bc378ef755ba9598?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Brent Meeker</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-2556">
+			May 17, 2012 at 6:58 pm</a>		</div>
+
+		<p>It's been a while but I finally have time to work on my project again. Is there anyway you could help me understand how to create different fonts. My project will need three different sizes, understanding how to create them would be very helpful. </p>
+<p>Thanks,<br />
+Brent</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="comment-2558">
+				<div id="div-comment-2558" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-2558">
+			May 17, 2012 at 7:13 pm</a>		</div>
+
+		<p>Hey Brent!  This is pretty easy, I use the <a href="http://mugui.de/" title="muGUI font and bitmap generator" rel="nofollow">muGUI font and bitmap generator</a> with a <a href="https://github.com/edeca/Electronics/tree/master/Support/GlcdFiles" rel="nofollow">custom XSL</a> file.  You can check out some sample muGUI projects at github also.</p>
+<p>Check out the software, if you need me to write a tutorial with steps then I'll get something done.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-3065">
+				<div id="div-comment-3065" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/7cb68ec7f7d1b97b51ebbeca8d041266?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Manjit</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-3065">
+			June 13, 2012 at 11:59 am</a>		</div>
+
+		<p>Hi David,<br />
+could you please post the main file to? haveing a litle problem configuratin the spi mode.<br />
+And like Brent said this is the best information I have seen on programming these displays,<br />
+very nice work.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="comment-3067">
+				<div id="div-comment-3067" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-3067">
+			June 13, 2012 at 12:37 pm</a>		</div>
+
+		<p>You can find all of my code in the "include" directory of my <a href="https://github.com/edeca/Electronics" rel="nofollow">Github</a>.</p>
+<p>If you are having problems with a particular display feel free to email me, I'll see if I can help.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-3069">
+				<div id="div-comment-3069" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/7cb68ec7f7d1b97b51ebbeca8d041266?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Manjit</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-3069">
+			June 13, 2012 at 1:05 pm</a>		</div>
+
+		<p>I'm actually using the dogm 128x64 with a pic1845k20 so its almost exact the same as you.<br />
+the thing is that I am quite new to the lcd programming scen and completely new to spi so i searching you code trying to find out how you initialized the spi connection and then synced it but i can't seam to find it. If i got it right you use the st7565 files to initi the screen and graphics to draw stuff but what file is the spi connection and the main code?</p>
+<p>where can i find your mail?<br />
+thx in advance <img src="http://edeca.net/wp/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley" /> </p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="comment-3072">
+				<div id="div-comment-3072" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-3072">
+			June 13, 2012 at 3:52 pm</a>		</div>
+
+		<p>The SPI code is all in software ("bit banged"), I did not use the PIC hardware for it.  SPI is so simple that it is not worth using the MSSP module in this instance.</p>
+<p>You can see the code used to initialise the display (the hardest bit) in glcd_init() <a href="https://github.com/edeca/Electronics/blob/master/Include/st7565.c" rel="nofollow">in st7565.c</a>.  SPI is handled in glcd_command() and glcd_data().  As you can see all I do is flip the PIC LATxx pins on or off.</p>
+<p>I didn't actually use the dogm modules, I just used them as a good example of the module.  The module I used is shown in the pictures and was originally bought from Mouser.</p>
+<p>My email is david at this domain name.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-3634">
+				<div id="div-comment-3634" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/7cc5e30505f4bf238ae37ab7cb7381b4?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Nigel Mercier</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-3634">
+			July 25, 2012 at 6:58 pm</a>		</div>
+
+		<p>Excellent write up, many thanks. I'm about to use one of these devices and many questions have now been answered.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-5903">
+				<div id="div-comment-5903" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/653d2d679c3a82d79849eff53b502d66?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">mandy</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-5903">
+			October 2, 2012 at 12:57 pm</a>		</div>
+
+		<p>Hello David</p>
+<p>excellent work done...hats off to you man...<br />
+i have never seen such a nice connection diagrams.<br />
+which software have you used to design?<br />
+thats really appreciable...</p>
+<p>regards<br />
+mandy</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="comment-5906">
+				<div id="div-comment-5906" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-5906">
+			October 2, 2012 at 5:54 pm</a>		</div>
+
+		<p>Thanks.  All diagrams were drawn manually using <a href="http://inkscape.org/" rel="nofollow">Inkscape</a>.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-22433">
+				<div id="div-comment-22433" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/2cf7a1d9493420af6c5b4cc1b23da5c1?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">eddy</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-22433">
+			January 20, 2013 at 8:23 pm</a>		</div>
+
+		<p>How do I program this st7565 with arduino due?</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="comment-22435">
+				<div id="div-comment-22435" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-22435">
+			January 20, 2013 at 9:13 pm</a>		</div>
+
+		<p>Check the "See Also" section, which says..</p>
+<p>'If you are interested in using a ST7565 based screen in an Arduino project then you should check out <a href="http://www.ladyada.net/learn/lcd/st7565.html" rel="nofollow">Ladyada's tutorial</a> on Adafruit.'</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-25670">
+				<div id="div-comment-25670" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/ab1bd4bc6e9155e432543ae852ceb0b4?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Dan</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-25670">
+			February 4, 2013 at 3:24 pm</a>		</div>
+
+		<p>Dave,</p>
+<p>Thanks for posting a great discussion on using a ST7565 controller. Between your discussion and the datasheet, I can set up my display and control display of specific bits.  However, I am having difficulty with the page commands. For example, when I send a command for page_0, followed by 20 iterations of sending data "0XFF", the pixels are displayed on page_3. All pages are similarly shifted.  The Page_1 command displays on Page_2, Page_2 command displays on page_1, Page_3 displays on Page_0.  Other than pages not matching the commands, columns within the page work as anticipated. I have gone over my code, but nothing stands out. Any idea what may be causing the pages to be shifted?</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="comment-25671">
+				<div id="div-comment-25671" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-25671">
+			February 4, 2013 at 3:31 pm</a>		</div>
+
+		<p>Dan, happy to look at the datasheet if you want to email me a copy.  I have not seen this on the two different screens I tested but I have observed other differences.  It sounds like the whole thing is vertically shifted downward (wrapping back to the top) which might mean the wiring between ST7565 and glass is unusual.  Fire me some details and I'll see what I can do, if anything.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-25674">
+				<div id="div-comment-25674" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/ab1bd4bc6e9155e432543ae852ceb0b4?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Dan</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-25674">
+			February 4, 2013 at 6:50 pm</a>		</div>
+
+		<p>Dave,</p>
+<p>Thank you for the offer to review the datasheet.  I noticed that you have a link to Adafruit.  The GLCD I am working with is their "Graphic ST7565 Negative LCD (128x64) with RGB backlight + extras".  The datasheet I have was downloaded from their site: <a href="http://www.adafruit.com/datasheets/TG12864H3-05A%20EN_V1.0.pdf" rel="nofollow">http://www.adafruit.com/datasheets/TG12864H3-05A%20EN_V1.0.pdf</a></p>
+<p>Dan</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="comment-25676">
+				<div id="div-comment-25676" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-25676">
+			February 4, 2013 at 7:54 pm</a>		</div>
+
+		<p>Looking at the datasheet it doesn't seem to be remarkably different from the one I have.  In particular the display data to screen map is the same.  Are you sure you have the duty cycle set correctly?</p>
+<p>I have sent you the datasheet I use which can sometimes be helpful.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-25854">
+				<div id="div-comment-25854" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/ab1bd4bc6e9155e432543ae852ceb0b4?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Dan</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-25854">
+			February 5, 2013 at 4:12 pm</a>		</div>
+
+		<p>David,</p>
+<p>Thanks for the datasheet.  It is definitely more informative than the one I was using.  Regarding your question about if I have set the duty cycle properly, I have made no changes to the GLCD. I may be missing it, but I think the only software access to changing the duty cycle is linked to setting the bias. I have tried setting the bias at 1/7 and 1/9.  Neither setting affected the page position.  Any other thoughts?</p>
+<p>Dan</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-26893">
+				<div id="div-comment-26893" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/ab1bd4bc6e9155e432543ae852ceb0b4?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Dan</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-26893">
+			February 16, 2013 at 2:10 pm</a>		</div>
+
+		<p>Dave,</p>
+<p>Thanks for the assistance with the paging issue I was having with the Adafruit GLCD.  Using the same code with a different GLCD from DigiKey the paging works as expected. I found no mention of the paging problem on Adafruit's technical forum, so this must not be a common problem.  Just my good luck.</p>
+<p>Dan</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="comment-26894">
+				<div id="div-comment-26894" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-26894">
+			February 16, 2013 at 2:19 pm</a>		</div>
+
+		<p>Glad you got it working!  Best of luck with your project.  It might be worth contact Adafruit, it really sounds like some rows are hooked up wrong on that controller!</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-27351">
+				<div id="div-comment-27351" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/ab1bd4bc6e9155e432543ae852ceb0b4?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Dan</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-27351">
+			February 25, 2013 at 7:29 pm</a>		</div>
+
+		<p>Dave,</p>
+<p>I contacted Adafruit and based on the response, it appears that the paging issue I was having is consistent for that specific GLCD.  The tech rep dug into the matter and provided the following response:  "Well, I found this in the Adafruit ST7565 library: // a handy reference to where the pages are on the screen const uint8_t pagemap[] = { 3, 2, 1, 0, 7, 6, 5, 4 }; This certainly seems to correspond to the page mapping you describe ...".  </p>
+<p>I recommended that they acknowledge this "Feature" and advise users of possible work arounds, thus saving future buyers the frustration of trying to figure out what they are doing wrong.  Hopefully, they will.  Frankly, for $3.00 more, the New Haven display is much better.</p>
+<p>Dan</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="comment-27352">
+				<div id="div-comment-27352" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-27352">
+			February 25, 2013 at 7:34 pm</a>		</div>
+
+		<p>Thanks for the update.  This really doesn't seem quite right, it looks more like someone has mixed up the order of the GLCD pinout and then fixed it in code.  I wont update my library for this unless there is significant demand, like you say the screens with a sensible page order are much easier to use.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-29947">
+				<div id="div-comment-29947" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/46ed1ee722910f048d4629fe84b05811?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">remi</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-29947">
+			May 6, 2013 at 8:54 am</a>		</div>
+
+		<p>Ive tried using this library for my PICf46k22 to the adafruit ST7565 again and again many different ways over the course of a week or two, i just cant seem to get it display anything....I tested the LCD on the an arduino with  Ladyada's tutorial and i got it working on that, and i tried modifying the library so that it follows the same initialization as the tutorial however i am still unable to display anything using the PIC ...</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="comment-29948">
+				<div id="div-comment-29948" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-29948">
+			May 6, 2013 at 10:14 am</a>		</div>
+
+		<p>Hi - double check your connections and make sure you have setup the ports correctly.  The most important thing to get right is the contrast - try different values and see if they help.  It could be that your screen works fine but nothing is visible because it is too light.  If in doubt set the maximum contrast and check for a black screen.  If you have a logic analyser I may be able to help further.</p>
+<p>However a few people have contacted me saying they have difficulty with Adafruit ST7565 screens.  I don't know if there are any differences but my code was designed from the datasheet for the driver chip and is well within timing specifications.  Perhaps try with a screen from Farnell, Digikey or Mouser and see if that helps.  I have verified the code on displays from two different manufacturers and it mostly works fine.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-29951">
+				<div id="div-comment-29951" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/46ed1ee722910f048d4629fe84b05811?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">remi</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-29951">
+			May 6, 2013 at 6:33 pm</a>		</div>
+
+		<p>Hi David</p>
+<p>Thank you for replying. I have double checked all the connections may many times. I am using normal I/O ports for A0, and RST, and i am using the MSSP1 module for the other SPI connections. I tried changing the contrast with no success .. i do not have access to a logic analyser and unfortuantley i am unable to purchase another LCD ..maybe I am doing something wrong in the main () code ..this is what i have right now </p>
+<p>void main()<br />
+{<br />
+     glcd_init(); </p>
+<p>     glcd_blank();</p>
+<p>    glcd_contrast(3, 25);</p>
+<p>while (1)<br />
+	{<br />
+		glcd_test_card();<br />
+				}<br />
+}</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="comment-29955">
+				<div id="div-comment-29955" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-29955">
+			May 7, 2013 at 6:52 am</a>		</div>
+
+		<p>You need to call glcd_refresh() after any changes are made to the contents of the local screen buffer - otherwise the real GLCD will not be updated.  Try that and see if it helps at all.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-31347">
+				<div id="div-comment-31347" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/8a65e4c7b82256adb05706a9634ea6db?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Geoffrey Tucker</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-31347">
+			July 14, 2013 at 11:56 pm</a>		</div>
+
+		<p>I'm with Dan, I had weird page mappings on my Adafruit 128x64 ST7565 Negative RGB (<a href="http://www.adafruit.com/products/438" rel="nofollow">http://www.adafruit.com/products/438</a>).</p>
+<p>The page mappings for the unit I recieved were (from top to bottom)<br />
+4<br />
+5<br />
+6<br />
+7<br />
+0<br />
+1<br />
+2<br />
+3</p>
+<p>It was quite odd to see a break in the center, which gave the illusion it was wrapping back around (vertically) when it reality these pages were mapped incorrectly. I'm sure there are others with my and Dan's issue.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-33893">
+				<div id="div-comment-33893" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/e2c3ec581ccfba355c3b0670ae964948?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Simon King</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-33893">
+			September 9, 2013 at 12:35 pm</a>		</div>
+
+		<p>Hi David,</p>
+<p>Firstly thank you, i agree with the general tone of the messages. This page has been a GREAT help.<br />
+I'm using a Displaytech 64128K glcd (RS 564399) and had the test card on it within the first day... very  happy i can tell you. I did have to turn the display on at the end of the init routine (glcd_command(0xAF);) for it to jump into life but hey.</p>
+<p>Text was a little more effort, but this is partly due to me moving to MPLABX at the same time as attempting to get the screen working and being a bit of a nuby to C in general. I had a load of error messages when compiling until i stripped out all the fonts apart from the one i wanted to use so perhaps it was a space issue, but I'm using a 18F45K22 so i'm doubtful.</p>
+<p>My next task is displaying a variable, and I'm not getting very far at the moment but again that's down to my level of C knowledge rather than your code.</p>
+<p>thanks again, and if you've got any pointers on the displaying a variable thing it'd be greatly appreciated, otherwise keep up the good work.</p>
+<p>Simon</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="comment-33894">
+				<div id="div-comment-33894" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-33894">
+			September 9, 2013 at 12:47 pm</a>		</div>
+
+		<p>Simon, glad you found this useful.  If you have space (both program memory and RAM) then using sprintf() into a string and then putting that string onto the display is the easiest solution.  On any 18F45xx part that should be easy.  If you need help drop me an email and we can work out the details.</p>
+<p>Are you using my graphics library for the text?  I haven't ever written this up properly - doing so is on my very long TODO list.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="comment-33895">
+				<div id="div-comment-33895" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-33895">
+			September 9, 2013 at 12:51 pm</a>		</div>
+
+		<p>Also thanks for the report about turning the display on.  This should be done in glcd_init, I'll make the change and update github when I have a chance.  Perhaps the displays that I have tested are on by default but I've never noticed this.</p>
+<p>Edit: I have now fixed this bug and <a href="https://github.com/edeca/Electronics/commit/a260ce9791a64881556e3a3a8e5b220e66a3e58a" rel="nofollow">committed to github</a>.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-33896">
+				<div id="div-comment-33896" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://0.gravatar.com/avatar/e2c3ec581ccfba355c3b0670ae964948?s=60&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Simon King</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-33896">
+			September 9, 2013 at 2:31 pm</a>		</div>
+
+		<p>Hi David,</p>
+<p>Yes I'm using your graphics library and the Tahoma font. I've used several of the font sizes and all look good and I'm going to try out the other styles. I do keep getting a "warning: illegal conversion between pointer types<br />
+pointer to const unsigned char -&gt; pointer to unsigned char" when i compile but it still works fine.</p>
+<p>I'd really appreciate your advice but for now I'll go away, investigate the sprintf suggestion then see how far i can get with it. I'll almost certainly message you at some point... once I've banged my head against a wall for a while and have to admit defeat.</p>
+<p>Thanks again for your help, </p>
+<p>Simon</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-49398">
+				<div id="div-comment-49398" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/dbfdd82d733b0a8a26c2db3de60cf0c6?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">Edgar (emax) Hermanns</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-49398">
+			January 6, 2014 at 3:38 pm</a>		</div>
+
+		<p>An excellent tutorial which helped me a lot, thank you!</p>
+<p>A question remains: As 1024 bytes for a framebuffer is a lot, I of course tried to do without it. It is possible als long as you use characters only and 'paint' character by character with a complete rewrite of the corresponding area on the display.</p>
+<p>But as soon as it comes to lines and graphics and you want to set a single pixel, it seems to be impossible to abstain from the framebuffer: The display seems to accept only octets of information, a single 'bit' cannot be sent. For that reason, you have to know which values the corresponding other seven pixels have since you are forced to write them as well.</p>
+<p>Is that right? Or is there any trick to change only one single pixel without to need to rewrite the complete octet?</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment byuser comment-author-admin bypostauthor odd alt thread-odd thread-alt depth-1" id="comment-49442">
+				<div id="div-comment-49442" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='http://1.gravatar.com/avatar/51395bca88a86bf4ccac410ff66ecd62?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />			<cite class="fn">David</cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-49442">
+			January 6, 2014 at 7:52 pm</a>		</div>
+
+		<p>When using the SPI interface there is no way to set only one pixel at a time.  For text you could keep a short char[] buffer and then draw a fixed font directly from it, accepting the processing overhead of rendering the pixels each update.  You could also include simple fixed graphics such as dividing lines without too much difficulty.</p>
+<p>It would be much harder to do anything else without keeping some sort of screen buffer - these things really need the 1024 bytes RAM.</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+	</ol>
+
+	
+
+
+	<h6 id="pings">1 Pings&#47;Trackbacks for "The ST7565 display controller"</h6>
+
+	<ol class="commentlist">
+				<li class="pingback even thread-even depth-1" id="comment-5225">
+				<div id="div-comment-5225" class="comment-body">
+				<div class="comment-author vcard">
+						<cite class="fn"><a href='http://www.edaboard.com/thread266239-2.html#post1142856' rel='external nofollow' class='url'>Help With My First LM13232AFW GLCD Project - Page 2</a></cite> <span class="says">says:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://edeca.net/wp/electronics/the-st7565-display-controller/comment-page-1/#comment-5225">
+			September 24, 2012 at 12:53 am</a>		</div>
+
+		<p>[...]  [...]</p>
+
+		<div class="reply">
+					</div>
+				</div>
+		</li><!-- #comment-## -->
+	</ol>
+
+
+
+
+									<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/wp/electronics/the-st7565-display-controller/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://edeca.net/wp/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																			<p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Name</label> <span class="required">*</span><input id="author" name="author" type="text" value="" size="30" /></p>
+<p class="comment-form-email"><label for="email">E-mail</label> <span class="required">*</span><input id="email" name="email" type="text" value="" size="30" /></p>
+<p class="comment-form-url"><label for="url">Website</label><input id="url" name="url" type="text" value="" size="30" /></p>
+												<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>						<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Post Comment" />
+							<input type='hidden' name='comment_post_ID' value='990' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="7f384f3573" /></p>                <script type='text/javascript'>
+                    var RecaptchaOptions = { theme : 'clean', lang : 'en' , tabindex : 5 };
+                </script><script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LedhQcAAAAAAPVqw9Ul5TK-QHo8pfemi-q0pxfl"></script>
+
+	<noscript>
+  		<iframe src="http://www.google.com/recaptcha/api/noscript?k=6LedhQcAAAAAAPVqw9Ul5TK-QHo8pfemi-q0pxfl" height="300" width="500" frameborder="0"></iframe><br/>
+  		<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+  		<input type="hidden" name="recaptcha_response_field" value="manual_challenge"/>
+	</noscript>                        <div id="recaptcha-submit-btn-area">&nbsp;</div>
+                        <noscript>
+                         <style type='text/css'>#submit {display:none;}</style>
+                         <input name="submit" type="submit" id="submit-alt" tabindex="6" value="Submit Comment"/> 
+                        </noscript><script type='text/javascript' src='http://edeca.net/wp/wp-content/plugins/akismet/_inc/form.js?ver=3.0.0'></script>
+<p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="182"/></p>					</form>
+							</div><!-- #respond -->
+			
+
+			
+		
+</div><!-- end of #content-full -->
+
+</div><!-- end of #wrapper -->
+</div><!-- end of #container -->
+
+<div id="footer" class="clearfix">
+	
+	<div id="footer-wrapper">
+
+		
+		<div class="grid col-940">
+
+			<div class="grid col-540">
+							</div>
+			<!-- end of col-540 -->
+
+			<div class="grid col-380 fit">
+				<ul class="social-icons"><li class="twitter-icon"><a href="http://twitter.com/edeca"><img src="http://edeca.net/wp/wp-content/themes/responsive/core/icons/twitter-icon.png" width="24" height="24" alt="Twitter"></a></li><li class="youtube-icon"><a href="http://www.youtube.com/user/sigusr"><img src="http://edeca.net/wp/wp-content/themes/responsive/core/icons/youtube-icon.png" width="24" height="24" alt="YouTube"></a></li></ul><!-- .social-icons -->			</div>
+			<!-- end of col-380 fit -->
+
+		</div>
+		<!-- end of col-940 -->
+		
+		<div class="grid col-300 copyright">
+			&copy; 2014<a href="http://edeca.net/wp/" title="edeca.net">
+				edeca.net			</a>
+		</div>
+		<!-- end of .copyright -->
+
+		<div class="grid col-300 scroll-top"><a href="#scroll-top" title="scroll to top">&uarr;</a></div>
+
+		<div class="grid col-300 fit powered">
+			<a href="http://cyberchimps.com/responsive-theme/" title="Responsive Theme">
+				Responsive Theme</a>
+			powered by <a href="http://wordpress.org/" title="WordPress">
+				WordPress</a>
+		</div>
+		<!-- end .powered -->
+
+	</div>
+	<!-- end #footer-wrapper -->
+
+	</div><!-- end #footer -->
+
+                <script type="text/javascript">
+                var sub = document.getElementById('submit');
+                document.getElementById('recaptcha-submit-btn-area').appendChild (sub);
+                document.getElementById('submit').tabIndex = 6;
+                if ( typeof _recaptcha_wordpress_savedcomment != 'undefined') {
+                        document.getElementById('comment').value = _recaptcha_wordpress_savedcomment;
+                }
+                document.getElementById('recaptcha_table').style.direction = 'ltr';
+                </script><script type='text/javascript' src='http://edeca.net/wp/wp-content/themes/responsive/core/js/responsive-scripts.min.js?ver=1.2.5'></script>
+<script type='text/javascript' src='http://edeca.net/wp/wp-content/themes/responsive/core/js/jquery.placeholder.min.js?ver=2.0.7'></script>
+<script>var pltNewTabURLs = ["http:\/\/edeca.net\/electronics\/library-docs\/html\/"];(function(){jQuery(function(e){return e("body").on("click","a",function(t){var n;n=e(this);if(e.inArray(n.attr("href"),pltNewTabURLs)>-1)return n.attr("target","_blank")})})}).call(this);</script></body>
+</html>

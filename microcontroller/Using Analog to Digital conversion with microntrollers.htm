@@ -1,0 +1,815 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head><title>Using Analog to Digital conversion with microntrollers</title>
+<meta name="keywords" content="A/D converter ADC voltage measurements analog digital microcontroller Arduino " />
+<meta name="description" content="Analog to Digital conversion (A/D or ADC) is used to convert real world analog signals into discrete samples for processing in the digital world. This section describes the basic operation of A/D converters, and some of the important factors in using them." />
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="site.css" />
+</head><body topmargin="0" marginwidth="0" onunload=";" leftmargin="0" bgcolor="#FFFFFF" rightmargin="0" onload="" marginheight="0"><meta http-equiv="imagetoolbar" content="no"><meta http-equiv="imagetoolbar" content="false"><div align=center><div style='position: relative; width:769px' align=left><table cellspacing=0 cellpadding=0 border=0 width=769 height=252 style="z-index: 1;margin-left: -1px;margin-top: -1px;">
+
+<tr><td id=TElem width=1 height=1><img src=img_1224968365_Pixel.gif border=0></td><td id=TElem width=520 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=248 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr><tr>
+<td id=TElem width=1 height=184><img src=img_1224968365_Pixel.gif border=0></td>
+<td style="border-left: 0px solid #E8E8E8;border-right: 0px solid #E8E8E8;border-top: 0px solid #E8E8E8;border-bottom: 8px solid #FFFFFF; background-color: #FFFFFF;"  valign=top width=768 height=176 rowspan=1 colspan=2><table cellspacing=0 cellpadding=0 border=0 width=768 height=318 style="z-index: 1;margin-left: -1px;margin-top: -1px;">
+
+<tr><td id=TElem width=1 height=1><img src=img_1224968365_Pixel.gif border=0></td><td id=TElem width=12 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=755 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr><tr>
+<td id=TElem width=1 height=16><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=16 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=755 height=16 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=82><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=767 height=82 rowspan=1 colspan=2><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=767 height=82><table  style="width: 100%; height: 100%; padding: 0px;border-left: 0px none #000000;border-right: 0px none #000000;border-top: 0px none #000000;border-bottom: 0px none #000000;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><img id="Frame12325" name="Frame12325" alt="" width="767" height="82" src="img_1224968365_12092_1224968365_mod_5687B7_10_4684C2_4C7FB2_10_5687B7__FFFFFF_0_15_0_0_b_n.gif" border=0></td></tr></table></td></tr></table></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=27><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=767 height=27 rowspan=1 colspan=2><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=767 height=27><table class=c12240 style="width: 100%; height: 100%; padding: 0px;border-left: 0px none #000000;border-right: 0px none #000000;border-top: 0px none #000000;border-bottom: 0px none #000000;background-color: #FFFFFF;background-image: url(img_1224968365_11058_1224968365.gif);" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><table border=0 height=100% cellpadding=0 cellspacing=0 align=right><tr><td onmouseover="MOver12240(0)" onmouseout="MOut12240(0)" valign=middle align=right><div ID="Text12240_0_normal" style="margin: 0px; border: solid #E8E8E8; border-width: 0px 0px 0px 0px;"><table  border=0 cellspacing=0 cellpadding=0>	<tr>		<td width="24" ><img src="img_1224968365_12370_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_13_0_0_a_n.gif"></td>		<td align="center" height="27"  style="background-image:  url(img_1224968365_12371_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_5_0_0_a_n.gif);background-position: left center;background-repeat: repeat-x"><a href='page_home.html' class=c12240normal >Home</a></td>		<td width="1" ><img src="img_1224968365_12372_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_7_0_0_a_n.gif"></td>	</tr></table></div><nolayer><div ID="Text12240_0_hover" style="margin: 0px; display: none; border: solid #E8E8E8; border-width: 0px 0px 0px 0px;"><table  border=0 cellspacing=0 cellpadding=0>	<tr>		<td width="24" ><img src="img_1224968365_12370_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_13_0_0_a_n.gif"></td>		<td align="center" height="27"  style="background-image:  url(img_1224968365_12371_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_5_0_0_a_n.gif);background-position: left center;background-repeat: repeat-x"><a href='page_home.html' class=c12240hover >Home</a></td>		<td width="1" ><img src="img_1224968365_12372_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_7_0_0_a_n.gif"></td>	</tr></table></div></nolayer></td><td width=4><img src="img_1224968365_Pixel.gif" height=1 width=4></td><td onmouseover="MOver12240(1)" onmouseout="MOut12240(1)" valign=middle align=right><div ID="Text12240_1_normal" style="margin: 0px; border: solid #E8E8E8; border-width: 0px 0px 0px 0px;"><table  border=0 cellspacing=0 cellpadding=0>	<tr>		<td width="24" ><img src="img_1224968365_12370_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_13_0_0_a_n.gif"></td>		<td align="center" height="27"  style="background-image:  url(img_1224968365_12371_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_5_0_0_a_n.gif);background-position: left center;background-repeat: repeat-x"><a href='page_misc_contest_links.html' class=c12240normal >Misc</a></td>		<td width="1" ><img src="img_1224968365_12372_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_7_0_0_a_n.gif"></td>	</tr></table></div><nolayer><div ID="Text12240_1_hover" style="margin: 0px; display: none; border: solid #E8E8E8; border-width: 0px 0px 0px 0px;"><table  border=0 cellspacing=0 cellpadding=0>	<tr>		<td width="24" ><img src="img_1224968365_12370_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_13_0_0_a_n.gif"></td>		<td align="center" height="27"  style="background-image:  url(img_1224968365_12371_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_5_0_0_a_n.gif);background-position: left center;background-repeat: repeat-x"><a href='page_misc_contest_links.html' class=c12240hover >Misc</a></td>		<td width="1" ><img src="img_1224968365_12372_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_7_0_0_a_n.gif"></td>	</tr></table></div></nolayer></td><td width=4><img src="img_1224968365_Pixel.gif" height=1 width=4></td><td onmouseover="MOver12240(2)" onmouseout="MOut12240(2)" valign=middle align=right><div ID="Text12240_2_normal" style="margin: 0px; border: solid #E8E8E8; border-width: 0px 0px 0px 0px;"><table  border=0 cellspacing=0 cellpadding=0>	<tr>		<td width="24" ><img src="img_1224968365_12370_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_13_0_0_a_n.gif"></td>		<td align="center" height="27"  style="background-image:  url(img_1224968365_12371_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_5_0_0_a_n.gif);background-position: left center;background-repeat: repeat-x"><a href='page_electronics.html' class=c12240normal >Electronics</a></td>		<td width="1" ><img src="img_1224968365_12372_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_7_0_0_a_n.gif"></td>	</tr></table></div><nolayer><div ID="Text12240_2_hover" style="margin: 0px; display: none; border: solid #E8E8E8; border-width: 0px 0px 0px 0px;"><table  border=0 cellspacing=0 cellpadding=0>	<tr>		<td width="24" ><img src="img_1224968365_12370_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_13_0_0_a_n.gif"></td>		<td align="center" height="27"  style="background-image:  url(img_1224968365_12371_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_5_0_0_a_n.gif);background-position: left center;background-repeat: repeat-x"><a href='page_electronics.html' class=c12240hover >Electronics</a></td>		<td width="1" ><img src="img_1224968365_12372_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_7_0_0_a_n.gif"></td>	</tr></table></div></nolayer></td><td width=4><img src="img_1224968365_Pixel.gif" height=1 width=4></td><td onmouseover="MOver12240(3)" onmouseout="MOut12240(3)" valign=middle align=right><div ID="Text12240_3_normal" style="margin: 0px; border: solid #E8E8E8; border-width: 0px 0px 0px 0px;"><table  border=0 cellspacing=0 cellpadding=0>	<tr>		<td width="24" ><img src="img_1224968365_12370_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_13_0_0_a_n.gif"></td>		<td align="center" height="27"  style="background-image:  url(img_1224968365_12371_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_5_0_0_a_n.gif);background-position: left center;background-repeat: repeat-x"><a href='page_tropical_fish.html' class=c12240normal >Tropical Fish</a></td>		<td width="1" ><img src="img_1224968365_12372_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_7_0_0_a_n.gif"></td>	</tr></table></div><nolayer><div ID="Text12240_3_hover" style="margin: 0px; display: none; border: solid #E8E8E8; border-width: 0px 0px 0px 0px;"><table  border=0 cellspacing=0 cellpadding=0>	<tr>		<td width="24" ><img src="img_1224968365_12370_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_13_0_0_a_n.gif"></td>		<td align="center" height="27"  style="background-image:  url(img_1224968365_12371_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_5_0_0_a_n.gif);background-position: left center;background-repeat: repeat-x"><a href='page_tropical_fish.html' class=c12240hover >Tropical Fish</a></td>		<td width="1" ><img src="img_1224968365_12372_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_7_0_0_a_n.gif"></td>	</tr></table></div></nolayer></td><td width=4><img src="img_1224968365_Pixel.gif" height=1 width=4></td><td onmouseover="MOver12240(4)" onmouseout="MOut12240(4)" valign=middle align=right><div ID="Text12240_4_normal" style="margin: 0px; border: solid #E8E8E8; border-width: 0px 0px 0px 0px;"><table  border=0 cellspacing=0 cellpadding=0>	<tr>		<td width="24" ><img src="img_1224968365_12370_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_13_0_0_a_n.gif"></td>		<td align="center" height="27"  style="background-image:  url(img_1224968365_12371_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_5_0_0_a_n.gif);background-position: left center;background-repeat: repeat-x"><a href='page_garden.html' class=c12240normal >Garden</a></td>		<td width="1" ><img src="img_1224968365_12372_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_7_0_0_a_n.gif"></td>	</tr></table></div><nolayer><div ID="Text12240_4_hover" style="margin: 0px; display: none; border: solid #E8E8E8; border-width: 0px 0px 0px 0px;"><table  border=0 cellspacing=0 cellpadding=0>	<tr>		<td width="24" ><img src="img_1224968365_12370_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_13_0_0_a_n.gif"></td>		<td align="center" height="27"  style="background-image:  url(img_1224968365_12371_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_5_0_0_a_n.gif);background-position: left center;background-repeat: repeat-x"><a href='page_garden.html' class=c12240hover >Garden</a></td>		<td width="1" ><img src="img_1224968365_12372_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_7_0_0_a_n.gif"></td>	</tr></table></div></nolayer></td><td width=4><img src="img_1224968365_Pixel.gif" height=1 width=4></td><td onmouseover="MOver12240(5)" onmouseout="MOut12240(5)" valign=middle align=right><div ID="Text12240_5_normal" style="margin: 0px; border: solid #E8E8E8; border-width: 0px 0px 0px 0px;"><table  border=0 cellspacing=0 cellpadding=0>	<tr>		<td width="24" ><img src="img_1224968365_12370_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_13_0_0_a_n.gif"></td>		<td align="center" height="27"  style="background-image:  url(img_1224968365_12371_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_5_0_0_a_n.gif);background-position: left center;background-repeat: repeat-x"><a href='page_ham_radio.html' class=c12240normal >Ham Radio</a></td>		<td width="1" ><img src="img_1224968365_12372_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF__FFFFFF_0_7_0_0_a_n.gif"></td>	</tr></table></div><nolayer><div ID="Text12240_5_hover" style="margin: 0px; display: none; border: solid #E8E8E8; border-width: 0px 0px 0px 0px;"><table  border=0 cellspacing=0 cellpadding=0>	<tr>		<td width="24" ><img src="img_1224968365_12370_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_13_0_0_a_n.gif"></td>		<td align="center" height="27"  style="background-image:  url(img_1224968365_12371_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_5_0_0_a_n.gif);background-position: left center;background-repeat: repeat-x"><a href='page_ham_radio.html' class=c12240hover >Ham Radio</a></td>		<td width="1" ><img src="img_1224968365_12372_1224968365_mod_FF3300_10_4684C2_303030_10_FFFFFF__FFFFFF_0_7_0_0_a_n.gif"></td>	</tr></table></div></nolayer></td><td width=2><img src="img_1224968365_Pixel.gif" height=1 width=2></td><td height=1 width=4><img src="img_1224968365_Pixel.gif"></td></tr></table><script>	var lastHover_12240;
+	var lastNormal_12240;
+	function MOver12240 (i) 
+	{
+		if (document.getElementById &&
+			document.getElementById('Text12240' + '_' + i + '_hover') &&
+			(lastHover_12240 != document.getElementById('Text12240' + '_' + i + '_hover'))) {
+			if (lastHover_12240) {
+				lastHover_12240.style.display = 'none';
+				lastNormal_12240.style.display = 'block';
+			}
+			lastHover_12240 = document.getElementById('Text12240' + '_' + i + '_hover');
+			lastNormal_12240 = document.getElementById('Text12240' + '_' + i + '_normal');
+			lastHover_12240.style.display = 'block';
+			lastNormal_12240.style.display = 'none';
+		}
+		return true;
+	}
+	function MOut12240 (i) {		
+		if (document.getElementById &&
+			document.getElementById('Text12240' + '_' + i + '_hover') &&
+			(lastHover_12240 == document.getElementById('Text12240' + '_' + i + '_hover'))) {
+			lastHover_12240.style.display = 'none';
+			lastNormal_12240.style.display = 'block';
+			lastHover_12240 = null;
+		}
+		return true;
+	}
+</script></td></tr></table></td></tr></table></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=7><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=755 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=185><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=185 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td style="border-left: 0px solid #E8E8E8;border-right: 0px solid #E8E8E8;border-top: 0px solid #E8E8E8;border-bottom: 0px solid #000000; background-color: #FFFFFF;"  valign=top width=755 height=185 rowspan=1 colspan=1><table cellspacing=0 cellpadding=0 border=0 width=754 height=4639 style="z-index: 1;margin-left: -1px;margin-top: -1px;">
+
+<tr><td id=TElem width=1 height=1><img src=img_1224968365_Pixel.gif border=0></td><td id=TElem width=2 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=165 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr><tr>
+<td id=TElem width=1 height=7><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=165 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=7 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=678><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=678 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=678 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=740 height=678 rowspan=1 colspan=17><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=740 height=678><table class=c346 style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><P style="TEXT-ALIGN: center"><SPAN class="s20 S346F4 B">Microcontroller Interfacing Part 13</SPAN></P>
+<P style="TEXT-ALIGN: center"><SPAN class="s14 S346F4 B">Using the A/D Converter Peripheral</SPAN></P>
+<P style="TEXT-ALIGN: justify">&nbsp;&nbsp;</P>
+<P style="TEXT-ALIGN: justify"><SPAN class=B>Goals</SPAN></P>
+<P style="TEXT-ALIGN: justify">The I/O lines discussed in the previous sections were binary – they can have only two states, high or low.&nbsp; The real world is not so simple.&nbsp; Real world signals can have an infinite number of values.&nbsp; The Analog to Digital (A/D) converter is a bridge between the real analog world and our digital microcontroller. This section will be in introduction to using the A/D converter, also referred to as an ADC.</P>
+<P style="TEXT-ALIGN: justify"><SPAN class=B>A/D Basics</SPAN></P>
+<P style="TEXT-ALIGN: justify">The easiest way to think of an A/D converter is as a digital volt meter (DVM).&nbsp; You hook up your DVM up to a battery and it shows something like 8.65 Volts.&nbsp; The ADC measures the voltage, but does not directly provide the absolute voltage.&nbsp; Instead it provides a numerical value, or code, that gives the sampled voltage with respect to a voltage reference.</P>
+<P style="TEXT-ALIGN: justify">The A/D converter can be used for a lot of purposes.&nbsp; Probably the main use is to measure the voltage outputs of sensors.&nbsp; Most electronic sensors produce a voltage that corresponds to temperature, pressure, acceleration or other phenomenon.&nbsp; Music, speech, or other signals can be converted to digital form by A/D converters for storage or additional processing.&nbsp; Finally, A/D converters can be used in some slick user interface applications, some of which will be covered in future segments.</P>
+<P style="TEXT-ALIGN: justify">The first thing to consider on an ADC is the resolution.&nbsp; The A/D converters found on microcontrollers typically are 8 bit or 10 bit.&nbsp; An 8 bit number can range between 0-255, or have 256 different values.&nbsp; A 10 bit number can have a value between 0 and 1023, or 1024 discrete values.&nbsp;</P>
+<P style="TEXT-ALIGN: justify">Assuming a 5 volt reference voltage, an 8 bit ADC&nbsp; will return a value of 0 if the input voltage is zero volts.&nbsp; If 5 volts is put on the A/D pin, the value returned will be the maximum value for 8 bits, or 255. Similarly, if the A/D converter is a 10 bit version, the returned value will be 0 for 0 volts applied, and 1023 with 5 volts applies.</P>
+<P style="TEXT-ALIGN: justify">The resolution of the A/D converter is the voltage change that will result in the returned value changing by 1.&nbsp; Essentially it is the range of voltages divided by the number of possible values for the number of bits. Mathematically the resolution for an A/D is</P>
+<P style="TEXT-ALIGN: left"><SPAN class=B>Resolution = Ref/2^n</SPAN></P>
+<P style="TEXT-ALIGN: left"><SPAN class=B>Where Ref is the A/D reference voltage and n= # of bits</SPAN></P>
+<P style="TEXT-ALIGN: left"><SPAN class=B>&nbsp;&nbsp;</SPAN></P>
+<P style="TEXT-ALIGN: left"><SPAN class=B>For an 8 bit A/D covering 0-5V:&nbsp; Vr es = 5/2^8 = 5/ 256 = 0.0196 V</SPAN></P>
+<P style="TEXT-ALIGN: left"><SPAN class=B>For a 10 bit A/D covering 0-5V:&nbsp;&nbsp;&nbsp; Vr es = 5/2^10 = 5/1024 = 0.00488 V</SPAN></P>
+<P style="TEXT-ALIGN: justify">&nbsp;</P></td></tr></table></td></tr></table></td>
+<td id=TElem width=1 height=678 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=678 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=678 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=678 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=678 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=165 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=1 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=6><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=400 height=389 rowspan=5 colspan=11><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=400 height=389><table class=c346 style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><P style="TEXT-ALIGN: justify">This means that with an 8 bit A/D the returned value will change by 1 when the voltage changes by about 20 mv.&nbsp; With a 10 bit A/D, a change of only about 5 mV will change the count by 1. Clearly an A/D with more bits will give better accuracy.&nbsp; Note that if the micro is running at a lower voltage, say 3.3V, the range covered by the A/D converter will be less.</P>
+<P style="TEXT-ALIGN: justify">Figure 13-1 shows a simplified 3 bit ADC that covers 0-1V.&nbsp; The X-axis is the input voltage and the Y-axis shows the output code. Since it has only 3 bits, there are only 8 possible output codes, 0-7.&nbsp; With this ADC, an input voltage of 0.0 - .125 V will produce an output code of 0.&nbsp; Between .125 and .250 V the output code is 1, and so on.</P>
+<P style="TEXT-ALIGN: justify">There will be an uncertainty of the actual value. In the example of the battery and DVM we have the same situation. Assuming our DVM is perfectly accurate, the 8.65 V reading is an approximation. The battery could have an actual voltage anywhere between 8.645V and 8.654 V.&nbsp; The last digit is rounded off.&nbsp; The same thing happens with the A/D converter.&nbsp; Adding more bits to the A/D&nbsp; is like adding more digits on our DVM.&nbsp; The more bit or digits you have, the finer the resolution.</P></td></tr></table></td></tr></table></td>
+<td id=TElem width=3 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=259><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=259 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=347 height=259 rowspan=1 colspan=10><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=347 height=259><table  style="width: 100%; height: 100%; padding: 0px;border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><img id="Frame15300" name="Frame15300" alt="" width="347" height="259" src="img_1224968365_15483_1331486126_mod_347_259.jpg" border=0></td></tr></table></td></tr></table></td>
+<td id=TElem width=2 height=259 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=259 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=6><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=87><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=346 height=87 rowspan=1 colspan=8><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=346 height=87><table class=c346 style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><P style="TEXT-ALIGN: justify"><SPAN class=B>Figure 13-1.&nbsp;&nbsp;The graph shows the relationship between a voltage applied to the analog input pin for a theoretical 3 bit A/D converter with a 1V reference. </SPAN></P></td></tr></table></td></tr></table></td>
+<td id=TElem width=1 height=87 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=87 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=87 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=87 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=87 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=31><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=2><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=165 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=282><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=746 height=282 rowspan=1 colspan=19><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=746 height=282><table class=c346 style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><P style="TEXT-ALIGN: justify">So why don’t we just use A/Ds with 20 or more bits and get really good resolutions? Well, there are draw backs. First is that the technology used for making fast, inexpensive digital microcontrollers is not conducive to making high resolution A/D converters.&nbsp; If you need more resolution you will probably have to connect an external A/D to your microcontroller.&nbsp; The price will increase as you add more digits. There are a number of additional problems that become harder to solve. We will cover some of these here.</P>
+<P style="TEXT-ALIGN: justify">&nbsp;&nbsp;</P>
+<P style="TEXT-ALIGN: justify"><SPAN class=B>Resolution, Accuracy and Precision</SPAN></P>
+<P style="TEXT-ALIGN: justify">A common misconception is that resolution equates with accuracy. Suppose you have a voltmeter that goes to 3 decimal places.&nbsp; Suppose it reads 8.653 volts.&nbsp; Does it mean that the voltage is really 8.653 volts, +/-&nbsp; .001 V? Not necessarily.&nbsp; There could be any number of reasons the meter was not reading correctly unless you had it properly calibrated recently.&nbsp;&nbsp;&nbsp;</P>
+<P style="TEXT-ALIGN: justify">How close the reading is to the actual voltage is the accuracy. How much the signal has to change to make a change in the reading is the resolution.&nbsp; Resolution is sometimes referred to as the step size.</P>
+<P style="TEXT-ALIGN: justify">&nbsp;&nbsp;</P></td></tr></table></td></tr></table></td>
+<td id=TElem width=1 height=282 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=282 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=282 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=282 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=282 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=3><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=165 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=3 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=75><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=75 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=75 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=75 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=75 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=75 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=75 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=570 height=843 rowspan=3 colspan=15><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=570 height=843><table class=c346 style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><P style="TEXT-ALIGN: justify">Suppose we had a DVM that displayed two digits after the decimal point. It would have a resolution of .01 volts.&nbsp; If we needed to take readings within .1V, the meter would have plenty of resolution.&nbsp; If we needed to measure within .001 V, it would not have enough resolution.</P>
+<P style="TEXT-ALIGN: justify">Suppose we dropped the meter and something happened to it. Now the meter reads .3 volts high. A 1.00 V source would read 1.3V. This is not very accurate. Yet, the resolution would not change. If the voltage being measured went up .01 volts (1.01V), the DVM reading would show 1.31V.</P>
+<P style="TEXT-ALIGN: justify">After discovering this we have the meter calibrated and the accuracy is back to spec.&nbsp;&nbsp; Now suppose we measure a batch of batteries known to be exactly 1.25V.&nbsp; We find some read high or low.&nbsp; How much the readings vary from 1.25 is the precision, or repeatability.&nbsp;</P>
+<P style="TEXT-ALIGN: justify"><SPAN class=B>ADC Accuracy</SPAN></P>
+<P style="TEXT-ALIGN: justify">There are a number of things that can adversely affect the accuracy of an A/D converter.&nbsp; The first is the accuracy of the reference voltage.&nbsp; With a 5V reference and an 8 bit A/D, we have a resolution of 0.0196 V as shown earlier.&nbsp; If we make a reading, we can calculate the voltage by multiplying our reading by .0196.&nbsp; A more general form would be</P>
+<P style="TEXT-ALIGN: justify">&nbsp;&nbsp;</P>
+<P style="TEXT-ALIGN: justify"><SPAN class=B>Vin = ADreading * (Vref /2^n)&nbsp;&nbsp; </SPAN><SPAN>where n is the number of bits.</SPAN></P>
+<P style="TEXT-ALIGN: justify">&nbsp;&nbsp;</P>
+<P style="TEXT-ALIGN: justify">Now suppose our 5V reference was really 4.9V. We would not get accurate results if we used 5V for our calculations.&nbsp; The accuracy of the ADC reading can be no better than the accuracy of the reference.</P>
+<P style="TEXT-ALIGN: justify">There are often options for the reference voltage source for the ADC on a microcontroller.&nbsp; These are configured under program control.&nbsp; The most common reference voltage is the microcontroller supply voltage.&nbsp; A power supply built with a garden variety 7805 voltage regulator may be off by a few percent. This is not very accurate, and depending on&nbsp; your application, not be accurate enough.</P>
+<P style="TEXT-ALIGN: justify">Some microcontrollers have a more accurate internal voltage reference. Usually this will be at some lower voltage than the supply voltage.&nbsp; A micro with a 5V supply might have an internal reference of 3.8V. This means you can only measure voltages between 0-3.8 volts when using this reference.&nbsp; Microcontrollers with internal A/D converters often have a pin that an external voltage reference can be connected to. There are special ICs that are designed to be highly accurate voltage references.</P>
+<P style="TEXT-ALIGN: justify"><SPAN>You can perform an interesting experiment with an Arduino by using the program in listing 13-1. It reads an external voltage applied to analog input A0 and displays the result on a Unified Microsystems </SPAN><a  target="_self" href="http://www.unifiedmicro.com/ats1-arduino-shield.html">ATS-1 LCD terminal shield.&nbsp;</A><SPAN>&nbsp;Connect a 1.25V battery to the Arduino.&nbsp; Be sure to connect the battery’s negative terminal to the Arduino GND and the battery’s positive terminal to the Arduino AO pin.&nbsp;&nbsp; You can damage the Arduino if you connect it backwards!</SPAN></P>
+<P style="TEXT-ALIGN: justify">With the Arduino powered by the USB port note the voltage reading.&nbsp; Then remove the USB cable and power the Arduino through the external power jack. If you don’t have a power supply, a 9V battery will work. Does the voltage differ with the different power supplies?&nbsp; Using different power sources I got variations as much as .03V from the same battery.</P></td></tr></table></td></tr></table></td>
+<td id=TElem width=1 height=75 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=75 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=75 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=600><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=600 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=600 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=600 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=160 height=600 rowspan=1 colspan=2><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=160 height=600><table class=none style="width: 100%; height: 100%; padding: 0px;border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><div class="c346" id="Elem15298_body"><script>var dragNoSize15298 = true;</script>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7401552013486300";
+/* micropt13-1 */
+google_ad_slot = "0962742121";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+</div></td></tr></table></td></tr></table></td>
+<td id=TElem width=11 height=600 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=600 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=600 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=600 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=168><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=168 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=168 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=168 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=168 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=168 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=168 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=168 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=168 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=168 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=6><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=165 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=818><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=818 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=818 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=818 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=818 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=613 height=818 rowspan=1 colspan=12><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=613 height=818><table class=none style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><table   cellspacing="0" cellpadding="0"  width="100%" height="100%">  <tr>     <td width="9" height="9" ><font size="1"><img src="img_1224968365_14007_1224968365.gif" width="9" height="9"></font></td>    <td width="100%" background="img_1224968365_14491_1224968365.gif"><img src=img_1224968365_Pixel.gif></td>    <td width="12" height="9"><font size="1"><img src="img_1224968365_14492_1224968365.gif" width="12" height="9"></font></td>  </tr>  <tr>     <td height="100%" width="9" background="img_1224968365_14487_1224968365.gif"><img src=img_1224968365_Pixel.gif></td>    <td  height=100% valign=top background="img_1224968365_14485_1224968365.gif" width=100% height=100%><div id="Elem15301_body" class="c387"><P><SPAN class=s9>//***************************************************************************************************************************</SPAN></P><P><SPAN class=s9>//&nbsp;DVM - Simple Arduino DVM</SPAN></P><P><SPAN class=s9>// Gary C. Sutcliffe</SPAN></P><P><SPAN class=s9>// Version 1.00</SPAN></P><P><SPAN class=s9>// March 2012</SPAN></P><P><SPAN class=s9>//</SPAN></P><P><SPAN class=s9>//This program is a simple Digital Volt Meter using an Arduino. It measures the voltage on analog pin A0.</SPAN></P><P><SPAN class=s9>// The results are shown on a Unified Microsystems ATS-1 Terminal Shield.&nbsp; www.unifiedmicro.com</SPAN></P><P><SPAN class=s9>///DVM&nbsp; Program by Gary C. Sutcliffe is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.</SPAN></P><P><SPAN class=s9>//</SPAN></P><P><SPAN class=s9>// **** IMPORTANT: Don't apply more than 5V to the analog input pin or you may damage the Arduino! ****</SPAN></P><P><SPAN class=s9>//</SPAN></P><P><SPAN class=s9>//Updates:</SPAN></P><P><SPAN class=s9>//***************************************************************************************************************************</SPAN></P><P><SPAN class=s9>int analogPin = 0; //The voltage is connected to Analog pin 0</SPAN></P><P><SPAN class=s9>&nbsp;&nbsp;</SPAN></P><P><SPAN class=s9>#define CLS&nbsp; 0x01&nbsp; //Character to send to the ATS-1 to clear the LCD and home the cursor&nbsp;&nbsp;</SPAN></P><P><SPAN class=s9>#define SCALE_FACTOR .00488&nbsp;&nbsp;&nbsp; //the voltage difference to change the 10 bit Arduino A/D reading by one&nbsp;&nbsp;</SPAN></P><P><SPAN class=s9>#define TRUNC_VAL&nbsp; 4&nbsp; //divisor for truncating lower bits. 2 will truncate LSB, 4 lowest 2 bits, 8 lowest 3 bits</SPAN></P><P><SPAN class=s9>&nbsp;&nbsp;</SPAN></P><P><SPAN class=s9>void setup()</SPAN></P><P><SPAN class=s9>{</SPAN></P><P><SPAN class=s9>Serial.begin(4800);&nbsp;&nbsp; // opens serial port, sets data rate to 4800 baud to LCD display&nbsp;</SPAN></P><P><SPAN class=s9>}</SPAN></P><P><SPAN class=s9>&nbsp;&nbsp;</SPAN></P><P><SPAN class=s9>void loop()</SPAN></P><P><SPAN class=s9>{</SPAN></P><P><SPAN class=s9>float voltage;</SPAN></P><P><SPAN class=s9>int rawAD;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //raw A/D reading value</SPAN></P><P><SPAN class=s9>rawAD = analogRead(analogPin);</SPAN></P><P><SPAN class=s9>voltage = (float)rawAD * SCALE_FACTOR;&nbsp; //convert the A/D reading to a type float and multiply by scaling factor</SPAN></P><P><SPAN class=s9>Serial.write(CLS);&nbsp;&nbsp;&nbsp;&nbsp; //Clear the LCD screen</SPAN></P><P><SPAN class=s9>Serial.print("Voltage: ");</SPAN></P><P><SPAN class=s9>Serial.print(voltage);&nbsp; //note that Serial.print defaults to two digits after the decimal point.</SPAN></P><P><SPAN class=s9>delay(250);&nbsp;&nbsp; //put in a short delay between readings</SPAN></P><P><SPAN class=s9>}</SPAN></P><P><SPAN class=s9>&nbsp;&nbsp;</SPAN></P></div></td>    <td height="100%" width="12" background="img_1224968365_14490_1224968365.gif"><img src=img_1224968365_Pixel.gif></td>  </tr>  <tr>     <td height="10" width="9" ><font size="1"><img src="img_1224968365_14488_1224968365.gif" width="9" height="10"></font></td>    <td height="10" background="img_1224968365_14486_1224968365.gif" width="100%"><img src=img_1224968365_Pixel.gif></td>    <td height="10" width="12" ><font size="1"><img src="img_1224968365_14489_1224968365.gif" width="12" height="10"></font></td>  </tr></table></td></tr></table></td></tr></table></td>
+<td id=TElem width=54 height=818 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=818 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=818 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=818 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=818 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=818 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=818 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=818 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=4><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=165 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=55><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=742 height=55 rowspan=1 colspan=19><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=742 height=55><table class=c346 style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><P><SPAN class=B>Listing 13-1&nbsp; This simple program turns an Arduino into a simple digital volt meter to read voltages up to 5 volts.</SPAN></P></td></tr></table></td></tr></table></td>
+<td id=TElem width=2 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=5><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=165 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=5 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=50><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=344 height=524 rowspan=5 colspan=7><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=344 height=524><table class=c346 style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><P style="TEXT-ALIGN: justify">IThe USB port directly supplies 5V to the Arduino, and the ADC reference.&nbsp; An on board voltage regulator supplies 5V when an external voltage source is applied.&nbsp; The “5V” from the different sources may differ a bit, resulting in different ADC references.&nbsp; Also try powering the Arduino through the USB port from different computers (try a laptop) and through external USB hubs.&nbsp;&nbsp;</P>
+<P style="TEXT-ALIGN: justify">We have established that a 10 bit A/D has a resolution of about .0049V. Each time we raise the input voltage by .0049V the reading will increase by one.&nbsp; That is not exactly true.&nbsp; On the average, across the entire voltage range,&nbsp; the reading will change by 1 for every .0048V volt change. In reality the relationship between the input voltage and the reading is often not a straight line.&nbsp; It is often a curve, and it might take a bit more or less voltage change to change the reading in the middle of the range than it does at the ends. The microcontroller’s data sheet should show you what to expect.&nbsp;</P>
+<P style="TEXT-ALIGN: justify"><SPAN class=B>Noise</SPAN></P>
+<P style="TEXT-ALIGN: justify">Noise is the enemy of analog signals, especially if the signal level is very low or we need great accuracy. Noise can come from many sources.&nbsp; Every component generates noise.&nbsp; Even the A/D converter itself adds some noise. Improper design or poor component selection can result in enough noise to mask weak signals or affect the accuracy that they can be measured. &nbsp;</P></td></tr></table></td></tr></table></td>
+<td id=TElem width=7 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=50 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=299><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=299 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=384 height=299 rowspan=1 colspan=9><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=384 height=299><table  style="width: 100%; height: 100%; padding: 0px;border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><img id="Frame15303" name="Frame15303" alt="" width="384" height="299" src="img_1224968365_15486_1331486661_mod_384_299.jpg" border=0></td></tr></table></td></tr></table></td>
+<td id=TElem width=3 height=299 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=299 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=299 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=299 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=299 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=299 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=299 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=17><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=17 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=103><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=103 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=103 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=385 height=103 rowspan=1 colspan=9><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=385 height=103><table class=c346 style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><P style="TEXT-ALIGN: justify"><SPAN class=B>Figure 13-2 Arduino running the DVM program and measuring a NiMH AA battery.&nbsp; Notice an actual meter reading the same battery. The white box above the Arduino contains a 9V battery, powering the Arduino and LCD shield.</SPAN></P></td></tr></table></td></tr></table></td>
+<td id=TElem width=8 height=103 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=103 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=103 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=103 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=103 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=103 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=55><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=55 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=9><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=165 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=9 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=355><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=752 height=355 rowspan=1 colspan=23><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=752 height=355><table class=c346 style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><P style="TEXT-ALIGN: justify"><SPAN>Digital circuits like microcontrollers generate a lot of noise on the power supply lines called switching noise.&nbsp; If you look at Figure 3.1 back in </SPAN><a  href="page_microdesign_pt3_ouput_basics.html">Part 3</A><SPAN>&nbsp;of this series,&nbsp; you will see the typical output circuit of a microcontroller.&nbsp; There are two transistors. Only one will be on at a time. If the top transistor is on, the output will be connected to the supply voltage and the output will be high. If the lower transistor is on, the output pin will be connected to ground and the output will be low.&nbsp; As the output switches from one state to the other there will be a brief instance when both transistors are on, or at least partially on. This causes a brief short circuit between power and ground and will induce a voltage spike on the power lines.&nbsp;&nbsp;</SPAN></P>
+<P style="TEXT-ALIGN: justify">The supply noise can get into the sensor supplying the voltage to be measured or signal conditioning circuitry before it reaches the A/D input pin. Noise can also be coupled from noisy sources like motors into analog signals. The accuracy of the A/D reading will be reduced depending on the amount of noise present.&nbsp;&nbsp;</P>
+<P style="TEXT-ALIGN: justify">Switching noise can get into the voltage reference as well.&nbsp; The microcontroller data sheet will usually give instructions for the circuit design to minimize noise on the reference.&nbsp;&nbsp;This usually involves adding capacitors on a pin.</P>
+<P style="TEXT-ALIGN: justify">If a microcontroller is running on 5V and has .1V of noise on the power lines, it will probably not affect the basic operation of the microcontroller.&nbsp; That same amount of noise on an analog signal will randomly change the reading on a 10 bit A/D by up to 20 counts.&nbsp;&nbsp;</P>
+<P style="TEXT-ALIGN: justify">Proper design and circuit board layout will help minimize noise. Properly bypass the power lines and reference voltages.&nbsp; Keep the high power switching part of your circuit away from the low level analog section. Provide a ground plane on the circuit board layout.&nbsp; Follow any other board layout suggestion in the microcontroller data sheet.&nbsp;&nbsp;</P></td></tr></table></td></tr></table></td>
+<td id=TElem width=1 height=355 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=2><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=165 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=2 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=4><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=386 height=625 rowspan=6 colspan=9><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=386 height=625><table class=c346 style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><p><span class="B">Sampling Time&nbsp;&nbsp;</span></p><p style="text-align: justify;">Another important parameter of an ADC is the conversion time.&nbsp; It takes a certain amount of time from when you command the microcontroller to take a measurement and when the result is available.&nbsp;&nbsp; The amount of time required will limit the applications you can use it for.&nbsp;&nbsp;</p><p style="text-align: justify;">If you are measuring the voltage on a battery or using a temperature sensor to measure the temperature of your swimming pool, the signal does not change very fast, and the speed of conversion is not too important.&nbsp; If you are using a sensor to control a high speed machine you might need to take readings very frequently for proper operation.&nbsp;&nbsp;</p><p style="text-align: justify;">A common application of A/D conversion is to digitize speech or music.&nbsp; This is how they got the music into your CD or MP3 file.&nbsp; Mathematically it is possible to take periodic readings of an analog signal and then later to recreate the analog signal from the samples. This is what happens when you listen to music on your digital devices.&nbsp;&nbsp;</p><p style="text-align: justify;">There is a mathematical law, called the Nyquist Sampling Theorom which states that if you sample the signal at least twice as often as the highest frequency present in your signal, you can recreate the original signal.&nbsp; A typical land line phone has a bandwidth of about 3 KHz.&nbsp; To get the same sound quality of a phone line, your microcontroller must be capable of&nbsp; sampling at least twice that rate, or 6 KHz.&nbsp; The sampling rate for music on CDs is 44 KHz.&nbsp;&nbsp;</p><p style="text-align: justify;"><span class="B">Summary</span></p><p style="text-align: justify;">Analog to digital conversion is the method used to convert real world signals into the digital world. It is a very powerful technique, but using the ADC on your microcontroller is more complex than using the digital lines.&nbsp; For best success understand the limitations of your ADC and use proper circuit design and layout techniques to minimize noise.&nbsp;</p></td></tr></table></td></tr></table></td>
+<td id=TElem width=12 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=4 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=183><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=183 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=183 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=183 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=183 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=183 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=337 height=183 rowspan=1 colspan=6><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=337 height=183><table class=c346 style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;background-color: #D5DEE7;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><P style="TEXT-ALIGN: center"><SPAN id=null class=B>Arduino Notes</SPAN></P>
+<UL>
+<LI><SPAN>The Uno has 6 10 bit A/D input channels</SPAN> 
+<LI><SPAN>Use the</SPAN><SPAN class=I> analogRead(pin#) </SPAN><SPAN>function to read the value</SPAN> 
+<LI><SPAN>The maximum&nbsp; sample rate is about 10,000 samples/second</SPAN> 
+<LI>The 5V (3.3V) supply voltage is the default voltage reference source. It also has a 1.1V internal reference that can be used as well as a pin for an external reference.</LI></UL></td></tr></table></td></tr></table></td>
+<td id=TElem width=2 height=183 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=183 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=183 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=183 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=18><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=18 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=280><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=280 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=280 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=280 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=280 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=280 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=280 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=336 height=280 rowspan=1 colspan=5><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=336 height=280><table class=none style="width: 100%; height: 100%; padding: 0px;border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><div class="c346" id="Elem15309_body"><script>var dragNoSize15309 = true;</script>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7401552013486300";
+/* micro PT 13-2 */
+google_ad_slot = "9061170206";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+</div></td></tr></table></td></tr></table></td>
+<td id=TElem width=2 height=280 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=280 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=280 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=280 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=12><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=270 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=54 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=8 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=1 height=12 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=128><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=128 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=128 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=128 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=128 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=345 height=158 rowspan=2 colspan=11><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=345 height=158><table class=none style="width: 100%; height: 100%; border-left: 0px none transparent;border-right: 0px none transparent;border-top: 0px none transparent;border-bottom: 0px none transparent;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><table   cellspacing="0" cellpadding="0"  width="100%" height="100%">  <tr>     <td width="9" height="9" ><font size="1"><img src="img_1224968365_14007_1224968365.gif" width="9" height="9"></font></td>    <td width="100%" background="img_1224968365_14491_1224968365.gif"><img src=img_1224968365_Pixel.gif></td>    <td width="12" height="9"><font size="1"><img src="img_1224968365_14492_1224968365.gif" width="12" height="9"></font></td>  </tr>  <tr>     <td height="100%" width="9" background="img_1224968365_14487_1224968365.gif"><img src=img_1224968365_Pixel.gif></td>    <td  height=100% valign=top background="img_1224968365_14485_1224968365.gif" width=100% height=100%><div id="Elem15310_body" class="c387"><P style="TEXT-ALIGN: center"><a  href="page_microdesign_toc.html"><SPAN class=B>Microcontroller Interfacing Table of Contents</SPAN></A></P><P style="TEXT-ALIGN: center"><a  href="page_microdesign_pt12_hv_pnp_switching.html"><SPAN class=B>Microcontroller Interfacing Part 12</SPAN></A></P><P style="TEXT-ALIGN: center"><a  href="page_microdesign_pt14_ad_pot_control.html"><SPAN class=B>Microcontroller Interfacing Part 14</SPAN></A></P><P style="TEXT-ALIGN: center"><a  href="page_electronics.html"><SPAN class=B>Back to Electronics Main Page</SPAN></A></P><P style="TEXT-ALIGN: center"><a  href="page_home.html"><SPAN class=B>Home</SPAN></A></P></div></td>    <td height="100%" width="12" background="img_1224968365_14490_1224968365.gif"><img src=img_1224968365_Pixel.gif></td>  </tr>  <tr>     <td height="10" width="9" ><font size="1"><img src="img_1224968365_14488_1224968365.gif" width="9" height="10"></font></td>    <td height="10" background="img_1224968365_14486_1224968365.gif" width="100%"><img src=img_1224968365_Pixel.gif></td>    <td height="10" width="12" ><font size="1"><img src="img_1224968365_14489_1224968365.gif" width="12" height="10"></font></td>  </tr></table></td></tr></table></td></tr></table></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=30><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=4 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=60 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=100 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=11 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=165 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=7 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=2 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=35 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=12 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=3 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=5 height=30 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+</table></td>
+</tr>
+
+</table></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=30><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=768 height=30 rowspan=1 colspan=2><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=768 height=30><table  style="width: 100%; height: 100%; padding: 0px;border-left: 0px none #000000;border-right: 0px none #000000;border-top: 0px none #000000;border-bottom: 0px none #000000;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><img id="Frame12323" name="Frame12323" alt="" width="768" height="30" src="img_1224968365_12067_1224968365_mod_FF3300_10_FF3300_303030_10_FFFFFF_FFFFFF_transparent_0_15_0_0_l_n.gif" border=0></td></tr></table></td></tr></table></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=6><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=520 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+<td id=TElem width=248 height=6 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+<tr>
+<td id=TElem width=1 height=31><img src=img_1224968365_Pixel.gif border=0></td>
+<td valign=top align=left width=520 height=31 rowspan=1 colspan=1><table cellspacing=0 cellpadding=0 border=0><tr><td valign=top width=520 height=31><table class=c346 style="width: 100%; height: 100%; border-left: 0px solid #000000;border-right: 0px solid #000000;border-top: 0px solid #000000;border-bottom: 0px solid #000000;" cellspacing=0 cellpadding=0 border=0><tr><td valign=top><h1><span class="s12">© 2009 - 2014 Gary C. Sutcliffe</span></h1><p style="TEXT-ALIGN: center">&nbsp;&nbsp;</p></td></tr></table></td></tr></table></td>
+<td id=TElem width=248 height=31 rowspan=1 colspan=1><img src=img_1224968365_Pixel.gif border=0></td>
+</tr>
+
+</table><table  style="position: absolute; top: 0px; left: 0px;width: 767px; height: 16px; z-index: 6021;" cellspacing=0 cellpadding=0 border=0><tr><td><table  style="width: 100%; height: 100%; padding: 0px;border-left: 0px none #000000;border-right: 0px none #000000;border-top: 0px none #000000;border-bottom: 0px none #000000;background-color: #FF3300;" cellspacing=0 cellpadding=0 border=0><tr><td valign="top" ><img id="Frame12847" name="Frame12847" alt="" width="767" height="16" src="img_1224968365_11051_1224968365.gif" border=0></td></tr></table></td></tr></table><table id="Elem12465_container" style="position: absolute; top: 56px; left: 272px;width: 272px; height: 36px; z-index: 8021;" cellspacing=0 cellpadding=0 border=0><tr><td><table class="c346" style="width: 100%; height: 100%; border-left: 0px none #000000;border-right: 0px none #000000;border-top: 0px none #000000;border-bottom: 0px none #000000;" cellspacing=0 cellpadding=0 border=0><tr><td valign="top" id="Elem12465"><p>¸</p></td></tr></table></td></tr></table></div><CENTER><FONT FACE="Arial,Helvetica" SIZE=1>Created with the <A HREF="http://billing.qth.com/sitebuilder.php">QTH.com SiteBuilder</A>.</FONT></CENTER></div><script>
+var queryFolderID = '0';
+var queryParentID = '0';</script><script></script></body></html>

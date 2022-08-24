@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html class="js" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#" lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interfacing GLCD Graphical LCD with PIC Microcontroller - MikroC</title>
+<script data-rocketoptimized="true" data-rocketsrc="?cf_action=sync_comments&amp;post_id=3019" async=""></script><script data-rocketoptimized="true" data-rocketsrc="http://www.google.com/cse/cse.js?cx=006442462534102646521:x50f9pmd20o" async="" type="text/javascript"></script><script gapi_processed="true" data-rocketoptimized="true" data-rocketsrc="https://apis.google.com/js/platform.js" async="" type="text/javascript"></script><script async="" data-rocketoptimized="true" data-rocketsrc="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en_GB.idW0zn7yuR4.O/m=auth/exm=page,plusone/rt=j/sv=1/d=1/ed=1/am=AQ/rs=AItRSTOCsxt5vH2u8YqX_pWqylT8hqI4mQ/cb=gapi.loaded_1"></script><script async="" data-rocketoptimized="true" data-rocketsrc="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en_GB.idW0zn7yuR4.O/m=page,plusone/rt=j/sv=1/d=1/ed=1/am=AQ/rs=AItRSTOCsxt5vH2u8YqX_pWqylT8hqI4mQ/cb=gapi.loaded_0"></script><script data-rocketoptimized="true" data-rocketsrc="http://www.gstatic.com/pub-config/ca-pub-1453507231414683.js" type="text/javascript" async=""></script><script data-rocketoptimized="true" data-rocketsrc="//www.google-analytics.com/analytics.js" async=""></script><script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:1404569262,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dokv=88e434a982/"},atok:"5222aacb42574eb55a901ea92b42a0ec",petok:"537ad8503a1b8ffc2b34fd89947bc8721783e76a-1405405354-3600",zone:"electrosome.com",rocket:"a",apps:0}];document.write('<script type="text/javascript" src="//ajax.cloudflare.com/cdn-cgi/nexp/dokv=97fb4d042e/cloudflare.min.js"><'+'\/script>');}}catch(e){};
+//]]>
+</script><script type="text/javascript" src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/cloudflare.js"></script><style type="text/css">.cf-hidden { display: none; } .cf-invisible { visibility: hidden; }</style><script data-module="cloudflare/rocket" id="cfjs_block_db9311b14f" onload="CloudFlare.__cfjs_block_db9311b14f_load()" onerror="CloudFlare.__cfjs_block_db9311b14f_error()" onreadystatechange="CloudFlare.__cfjs_block_db9311b14f_readystatechange()" type="text/javascript" src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/rocket.js"></script>
+<link rel="pingback" href="http://electrosome.com/xmlrpc.php">
+<script data-rocketoptimized="true" type="text/rocketscript">document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+ 
+<meta name="description" content="GLCD Graphical LCD is preffered than character LCD where both character and graphical representations are required. It makes our products more userfriendly.">
+<meta name="keywords" content="graphical, lcd, glcd, pic, microcontroller, mikroc, pro">
+<link rel="canonical" href="http://electrosome.com/interfacing-glcd-with-pic-microcontroller/">
+<link rel="author" href="https://plus.google.com/111441838131943151909">
+<link rel="publisher" href="https://plus.google.com/+Electrosome/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Interfacing GLCD Graphical LCD with PIC Microcontroller - MikroC">
+<meta property="og:description" content="GLCD Graphical LCD is preffered than character LCD where both character and graphical representations are required. It makes our products more userfriendly.">
+<meta property="og:url" content="http://electrosome.com/interfacing-glcd-with-pic-microcontroller/">
+<meta property="og:site_name" content="electroSome">
+<meta property="article:author" content="https://www.facebook.com/lijoppans">
+<meta property="article:tag" content="GLCD">
+<meta property="article:tag" content="LCD">
+<meta property="article:tag" content="Microcontroller">
+<meta property="article:tag" content="MikroC">
+<meta property="article:tag" content="PIC">
+<meta property="article:tag" content="Proteus">
+<meta property="article:tag" content="Tutorials">
+<meta property="article:section" content="MikroC">
+<meta property="article:section" content="PIC Microcontroller">
+<meta property="article:section" content="Tutorials">
+<meta property="article:published_time" content="2013-05-01T11:12:19+00:00">
+<meta property="article:modified_time" content="2013-11-21T01:06:52+00:00">
+<meta property="og:updated_time" content="2013-11-21T01:06:52+00:00">
+<meta property="fb:admins" content="1463063680">
+<meta property="og:image" content="http://electrosome.com/wp-content/uploads/2012/07/glcd.jpg">
+<meta property="og:image" content="http://electrosome.com/wp-content/uploads/2012/07/glcd-300x217.jpg">
+<meta property="og:image" content="http://electrosome.com/wp-content/uploads/2013/04/GLCD-Pages-and-Sides.png">
+<meta property="og:image" content="http://electrosome.com/wp-content/uploads/2013/04/Interfacing-GLCD-with-PIC-Microcontroller-1024x744.jpg">
+ 
+<link rel="alternate" type="application/rss+xml" title="electroSome » Feed" href="http://electrosome.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="electroSome » Comments Feed" href="http://electrosome.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="electroSome » Interfacing GLCD with PIC Microcontroller Comments Feed" href="http://electrosome.com/interfacing-glcd-with-pic-microcontroller/feed/">
+<link rel="stylesheet" id="yarppWidgetCss-css" href="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/widget.css" type="text/css" media="all">
+<link rel="stylesheet" id="mailchimpSF_main_css-css" href="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/a.css" type="text/css" media="all">
+<!--[if IE]>
+<link rel='stylesheet' id='mailchimpSF_ie_css-css'  href='http://electrosome.com/wp-content/plugins/mailchimp/css/ie.css?ver=3.9.1' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="contact-form-7-css" href="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="digg-digg-css" href="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/diggdigg-style.css" type="text/css" media="screen">
+<link rel="stylesheet" id="fancybox-style-css" href="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/jquery.css" type="text/css" media="all">
+<link rel="stylesheet" id="style-css" href="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="responsive-css" href="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/responsive.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/font-awesome.css" type="text/css" media="all">
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-includes/js/jquery/jquery.js?ver=1.11.0"></script>
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1"></script>
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-content/plugins/mailchimp/js/scrollTo.js?ver=1.4.1"></script>
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.50.0-2014.02.05"></script>
+<script data-rocketoptimized="true" type="text/rocketscript">
+/* <![CDATA[ */
+var mailchimpSF = {"ajax_url":"http:\/\/electrosome.com\/"};
+/* ]]> */
+</script>
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-content/plugins/mailchimp/js/mailchimp.js?ver=1.4.1"></script>
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-content/plugins/jquery-image-lazy-loading/js/jquery.lazyload.min.js?ver=1.7.1"></script>
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-content/themes/hueman/js/jquery.flexslider.min.js?ver=3.9.1"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://electrosome.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://electrosome.com/wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 3.9.1">
+<link rel="shortlink" href="http://electrosome.com/?p=3019">
+<style type="text/css">img.lazy{display:none;}</style>
+<!--[if lt IE 9]>
+<script src="http://electrosome.com/wp-content/themes/hueman/js/ie/html5.js"></script>
+<script src="http://electrosome.com/wp-content/themes/hueman/js/ie/selectivizr.js"></script>
+<![endif]-->
+<style type="text/css">.boxed #wrapper,.container-inner{max-width:1142px;}img{-webkit-border-radius:5px;border-radius:5px;}</style>
+<script data-rocketoptimized="true" type="text/rocketscript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29280340-1', 'electrosome.com');
+  ga('send', 'pageview');
+
+</script>
+<script data-rocketoptimized="true" data-rocketsrc="http://platform.linkedin.com/js/nonSecureAnonymousFramework?v=0.0.2000-RC8.36912-1414&amp;"></script><script data-rocketoptimized="true" data-rocketsrc="//electrosome.disqus.com/embed.js?pname=wordpress&amp;pver=2.77" async="" type="text/javascript"></script><script data-rocketoptimized="true" data-rocketsrc="//electrosome.disqus.com/count.js" type="text/javascript" async=""></script><style type="text/css">* html #li_ui_li_gen_1405405365013_0 a#li_ui_li_gen_1405405365013_0-link{height:1% !important;}#li_ui_li_gen_1405405365013_0{position:relative !important;overflow:visible !important;display:block !important;}#li_ui_li_gen_1405405365013_0 a#li_ui_li_gen_1405405365013_0-link{border:0 !important;height:20px !important;text-decoration:none !important;padding:0 !important;margin:0 !important;display:inline-block !important;}#li_ui_li_gen_1405405365013_0 a#li_ui_li_gen_1405405365013_0-link:link, #li_ui_li_gen_1405405365013_0 a#li_ui_li_gen_1405405365013_0-link:visited, #li_ui_li_gen_1405405365013_0 a#li_ui_li_gen_1405405365013_0-link:hover, #li_ui_li_gen_1405405365013_0 a#li_ui_li_gen_1405405365013_0-link:active{border:0 !important;text-decoration:none !important;}#li_ui_li_gen_1405405365013_0 a#li_ui_li_gen_1405405365013_0-link:after{content:"." !important;display:block !important;clear:both !important;visibility:hidden !important;line-height:0 !important;height:0 !important;}#li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-logo{background-image:url(http://s.c.lnkd.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-position:0px -276px !important;background-repeat:no-repeat !important;background-size:initial !important;cursor:pointer !important;border:0 !important;text-indent:-9999em !important;overflow:hidden !important;padding:0 !important;margin:0 !important;position:absolute !important;left:0px !important;top:0px !important;display:block !important;width:20px !important;height:20px !important;float:right !important;border-radius:0 !important;-moz-border-radius:0 !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-moz-border-radius-topright:2px !important;-moz-border-radius-bottomright:2px !important;}#li_ui_li_gen_1405405365013_0.hovered #li_ui_li_gen_1405405365013_0-logo{background-position:-20px -276px !important;}#li_ui_li_gen_1405405365013_0.clicked #li_ui_li_gen_1405405365013_0-logo, #li_ui_li_gen_1405405365013_0.down #li_ui_li_gen_1405405365013_0-logo{background-position:-40px -276px !important;}.IN-shadowed #li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-logo{}#li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-title{color:#333 !important;cursor:pointer !important;display:block !important;white-space:nowrap !important;float:left !important;margin-left:1px !important;vertical-align:top !important;overflow:hidden !important;text-align:center !important;height:18px !important;padding:0 4px 0 23px !important;border:1px solid #000 !important;border-top-color:#E2E2E2 !important;border-right-color:#BFBFBF !important;border-bottom-color:#B9B9B9 !important;border-left-color:#E2E2E2 !important;border-left:0 !important;text-shadow:#FFFFFF -1px 1px 0 !important;line-height:20px !important;border-radius:0 !important;-moz-border-radius:0 !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-moz-border-radius-topright:2px !important;-moz-border-radius-bottomright:2px !important;background-color:#ECECEC !important;background-image:-moz-linear-gradient(top, #FEFEFE 0%, #ECECEC 100%) !important;}#li_ui_li_gen_1405405365013_0.hovered #li_ui_li_gen_1405405365013_0-title{border:1px solid #000 !important;border-top-color:#ABABAB !important;border-right-color:#9A9A9A !important;border-bottom-color:#787878 !important;border-left-color:#04568B !important;border-left:0 !important;background-color:#EDEDED !important;background-image:-moz-linear-gradient(top, #EDEDED 0%, #DEDEDE 100%) !important;}#li_ui_li_gen_1405405365013_0.clicked #li_ui_li_gen_1405405365013_0-title, #li_ui_li_gen_1405405365013_0.down #li_ui_li_gen_1405405365013_0-title{color:#666 !important;border:1px solid #000 !important;border-top-color:#B6B6B6 !important;border-right-color:#B3B3B3 !important;border-bottom-color:#9D9D9D !important;border-left-color:#49627B !important;border-left:0 !important;background-color:#DEDEDE !important;background-image:-moz-linear-gradient(top, #E3E3E3 0%, #EDEDED 100%) !important;}.IN-shadowed #li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-title{}.IN-shadowed #li_ui_li_gen_1405405365013_0.hovered #li_ui_li_gen_1405405365013_0-title{}.IN-shadowed #li_ui_li_gen_1405405365013_0.clicked #li_ui_li_gen_1405405365013_0-title, .IN-shadowed #li_ui_li_gen_1405405365013_0.down #li_ui_li_gen_1405405365013_0-title{}#li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-title-text, #li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-title-text *{color:#333 !important;font-size:11px !important;font-family:Arial, sans-serif !important;font-weight:bold !important;font-style:normal !important;-webkit-font-smoothing:antialiased !important;display:inline-block !important;background:transparent none !important;vertical-align:top !important;height:18px !important;line-height:20px !important;float:none !important;}#li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-title-text strong{font-weight:bold !important;}#li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-title-text em{font-style:italic !important;}#li_ui_li_gen_1405405365013_0.hovered #li_ui_li_gen_1405405365013_0-title-text, #li_ui_li_gen_1405405365013_0.hovered #li_ui_li_gen_1405405365013_0-title-text *{color:#000 !important;}#li_ui_li_gen_1405405365013_0.clicked #li_ui_li_gen_1405405365013_0-title-text, #li_ui_li_gen_1405405365013_0.down #li_ui_li_gen_1405405365013_0-title-text, #li_ui_li_gen_1405405365013_0.clicked #li_ui_li_gen_1405405365013_0-title-text *, #li_ui_li_gen_1405405365013_0.down #li_ui_li_gen_1405405365013_0-title-text *{color:#666 !important;}#li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-title #li_ui_li_gen_1405405365013_0-mark{display:inline-block !important;width:0px !important;overflow:hidden !important;}.success #li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-title{color:#333 !important;border-top-color:#E2E2E2 !important;border-right-color:#BFBFBF !important;border-bottom-color:#B9B9B9 !important;border-left-color:#E2E2E2 !important;background-color:#ECECEC !important;background-image:-moz-linear-gradient(top, #FEFEFE 0%, #ECECEC 100%) !important;}.success #li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-title-text, .success #li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-title-text *{color:#333 !important;}.IN-shadowed .success #li_ui_li_gen_1405405365013_0 #li_ui_li_gen_1405405365013_0-title{}.success #li_ui_li_gen_1405405365013_0.hovered #li_ui_li_gen_1405405365013_0-title{color:#000 !important;border-top-color:#ABABAB !important;border-right-color:#9A9A9A !important;border-bottom-color:#787878 !important;border-left-color:#04568B !important;background-color:#EDEDED !important;background-image:-moz-linear-gradient(top, #EDEDED 0%, #DEDEDE 100%) !important;}.success #li_ui_li_gen_1405405365013_0.hovered #li_ui_li_gen_1405405365013_0-title-text, .success #li_ui_li_gen_1405405365013_0.hovered #li_ui_li_gen_1405405365013_0-title-text *{color:#000 !important;}.success #li_ui_li_gen_1405405365013_0.clicked #li_ui_li_gen_1405405365013_0-title, .success #li_ui_li_gen_1405405365013_0.down #li_ui_li_gen_1405405365013_0-title{color:#666 !important;border-top-color:#B6B6B6 !important;border-right-color:#B3B3B3 !important;border-bottom-color:#9D9D9D !important;border-left-color:#49627B !important;background-color:#DEDEDE !important;background-image:-moz-linear-gradient(top, #E3E3E3 0%, #EDEDED 100%) !important;}.success #li_ui_li_gen_1405405365013_0.clicked #li_ui_li_gen_1405405365013_0-title-text, .success #li_ui_li_gen_1405405365013_0.down #li_ui_li_gen_1405405365013_0-title-text, .success #li_ui_li_gen_1405405365013_0.clicked #li_ui_li_gen_1405405365013_0-title-text *, .success #li_ui_li_gen_1405405365013_0.down #li_ui_li_gen_1405405365013_0-title-text *{color:#666 !important;}.IN-shadowed .success #li_ui_li_gen_1405405365013_0.clicked #li_ui_li_gen_1405405365013_0-title, .IN-shadowed .success #li_ui_li_gen_1405405365013_0.down #li_ui_li_gen_1405405365013_0-title{}#li_ui_li_gen_1405405365021_1-container.IN-top {display:inline-block !important;overflow:visible !important;position:relative !important;height:42px !important;line-height:1px !important;cursor:pointer !important;}#li_ui_li_gen_1405405365021_1.IN-top {display:inline-block !important;height:42px !important;width:57px !important;text-align:center !important;background-image:url(http://s.c.lnkd.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-color:transparent !important;background-repeat:no-repeat !important;background-position:-150px top !important;}#li_ui_li_gen_1405405365021_1-content.IN-top {display:inline !important;font-size:16px !important;color:#04558B !important;font-weight:bold !important;font-family:Arial, sans-serif !important;line-height:38px !important;}#li_ui_li_gen_1405405365021_1-container.IN-empty #li_ui_li_gen_1405405365021_1-inner.IN-top {background-image:url(http://s.c.lnkd.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-color:transparent !important;background-repeat:no-repeat !important;background-position:0px -20px !important;overflow:hidden !important;margin:5px auto 0 auto !important;width:26px !important;height:26px !important;display:block !important;}#li_ui_li_gen_1405405365021_1-container.IN-empty #li_ui_li_gen_1405405365021_1-content.IN-top {text-indent:-999px !important;display:inline-block !important;}#li_ui_li_gen_1405405365021_1-container.IN-hidden #li_ui_li_gen_1405405365021_1 {display:none !important;}</style><script type="text/javascript" data-rocketoptimized="true" data-rocketsrc="http://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22search%22%2C%22version%22%3A%221.0%22%2C%22callback%22%3A%22__gcse.scb%22%2C%22style%22%3A%22http%3A%2F%2Fwww.google.com%2Fcse%2Fstyle%2Flook%2Fv2%2Fdefault.css%22%2C%22language%22%3A%22en%22%7D%2C%7B%22name%22%3A%22ads%22%2C%22version%22%3A%223%22%2C%22packages%22%3A%5B%22search%22%5D%2C%22callback%22%3A%22__gcse.sacb%22%7D%5D%7D"></script><script data-rocketoptimized="true" data-rocketsrc="http://electrosome.disqus.com/count-data.js?1=3019%20http%3A%2F%2Fwww.electrosome.com%2F%3Fp%3D3019" async=""></script><link rel="stylesheet" href="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/defaulten.css" type="text/css"><link rel="stylesheet" href="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/default.css" type="text/css"><script data-rocketoptimized="true" data-rocketsrc="http://www.google.com/uds/api/search/1.0/4a6d242b76a3ecbb1316dedbc04cd169/default+en.I.js" type="text/javascript"></script><script data-rocketoptimized="true" data-rocketsrc="http://www.google.com/uds/api/ads/3.0/49bf47f75370bb6bc2139865d14b8e43/search.I.js" type="text/javascript"></script><style type="text/css">
+</style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_connect_bar_container div,.fb_connect_bar_container span,.fb_connect_bar_container a,.fb_connect_bar_container img,.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}.fb_connect_bar a:hover{color:#fff}.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}.fb_connect_bar div a,.fb_connect_bar span,.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fbpluginrecommendationsbarleft,.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}.fbpluginrecommendationsbarleft{left:10px}.fbpluginrecommendationsbarright{right:10px}</style><style type="text/css">.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;position:relative;user-select:none;-moz-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsq_a{padding:0}.gscsep_a{display:none}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_a{padding:0 9px}.gsib_a{padding-right:8px;padding-left:8px}.gsst_a{padding-top:3px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style></head>
+<body data-twttr-rendered="true" class="single single-post postid-3019 single-format-standard col-2cl full-width topbar-enabled mobile-sidebar-hide-s2 gecko s1-collapse s2-collapse">
+<div id="wrapper">
+<header id="header">
+<nav class="nav-container group" id="nav-topbar">
+<div class="nav-toggle"><i class="fa fa-bars"></i></div>
+<div class="nav-text"> </div>
+<div class="nav-wrap container"><ul id="menu-electro" class="nav container-inner group"><li id="menu-item-41" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-41"><a href="http://electrosome.com/">Home</a></li>
+<li id="menu-item-1538" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1538"><a href="http://electrosome.com/category/projects/">Projects</a>
+<ul style="display: none;" class="sub-menu">
+<li id="menu-item-1658" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1658"><a href="http://electrosome.com/category/projects/hobby-circuits/">Hobby Circuits</a></li>
+<li id="menu-item-1539" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1539"><a href="http://electrosome.com/category/projects/embedded-projects/">Embedded</a></li>
+</ul>
+</li>
+<li id="menu-item-1431" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-1431"><a href="http://electrosome.com/category/tutorials/">Tutorials</a>
+<ul style="display: none;" class="sub-menu">
+<li id="menu-item-1432" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-1432"><a href="http://electrosome.com/category/tutorials/pic-microcontroller/">PIC Microcontroller</a>
+<ul style="display: none;" class="sub-menu">
+<li id="menu-item-6917" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-6917"><a href="http://electrosome.com/category/tutorials/pic-microcontroller/mikroc/">MikroC</a></li>
+<li id="menu-item-6916" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6916"><a href="http://electrosome.com/category/tutorials/pic-microcontroller/hi-tech-c/">Hi-Tech C</a></li>
+<li id="menu-item-8147" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8147"><a href="http://electrosome.com/category/tutorials/pic-microcontroller/mplab-xc8/">MPLAB XC8</a></li>
+</ul>
+</li>
+<li id="menu-item-3059" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3059"><a href="http://electrosome.com/category/tutorials/arduino/">Arduino</a></li>
+<li id="menu-item-5762" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5762"><a href="http://electrosome.com/category/tutorials/atmel-avr/">ATMEL AVR</a></li>
+<li id="menu-item-5579" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5579"><a href="http://electrosome.com/category/tutorials/8051-microcontroller/">8051 Microcontroller</a></li>
+<li id="menu-item-5691" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5691"><a href="http://electrosome.com/category/tutorials/matlab/">MATLAB</a></li>
+</ul>
+</li>
+<li id="menu-item-8077" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8077"><a href="http://forum.electrosome.com/">Forum</a></li>
+<li id="menu-item-1436" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1436"><a href="http://electrosome.com/contact-us/">Contact Us</a></li>
+</ul></div>
+<div class="container">
+<div class="container-inner">
+<div class="toggle-search"><i class="fa fa-search"></i></div>
+<div class="search-expand">
+<div class="search-expand-inner">
+<form method="get" class="searchform themeform" action="http://electrosome.com/">
+<div>
+<input class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" type="text">
+</div>
+</form> </div>
+</div>
+</div> 
+</div> 
+</nav> 
+<div class="container group">
+<div class="container-inner">
+<div class="group pad">
+<p class="site-title"><a href="http://electrosome.com/" rel="home">electroSome</a></p>
+<p class="site-description">You Inspire…..We Create…..</p> </div>
+</div> 
+</div> 
+</header> 
+<div class="container" id="page">
+<div class="container-inner">
+<div class="main">
+<div class="main-inner group">
+<section class="content">
+<div class="page-title pad group">
+<ul class="meta-single group">
+<li class="category"><a href="http://electrosome.com/category/tutorials/pic-microcontroller/mikroc/" title="View all posts in MikroC" rel="category tag">MikroC</a> <span>/</span> <a href="http://electrosome.com/category/tutorials/pic-microcontroller/" title="View all posts in PIC Microcontroller" rel="category tag">PIC Microcontroller</a> <span>/</span> <a href="http://electrosome.com/category/tutorials/" title="View all posts in Tutorials" rel="category tag">Tutorials</a></li>
+<li class="comments"><a data-disqus-identifier="3019 http://www.electrosome.com/?p=3019" href="http://electrosome.com/interfacing-glcd-with-pic-microcontroller/#disqus_thread">15 Comments</a></li>
+</ul>
+</div> 
+<div class="pad group">
+<article class="post-3019 post type-post status-publish format-standard has-post-thumbnail hentry category-mikroc category-pic-microcontroller category-tutorials tag-glcd tag-lcd tag-microcontroller tag-mikroc tag-pic tag-proteus tag-tutorials">
+<div class="post-inner group">
+<h1 class="post-title entry-title">Interfacing GLCD with PIC Microcontroller</h1>
+<p class="post-byline">by <span class="vcard author"><span class="fn"><a href="http://electrosome.com/author/lijoppans/" title="Posts by Ligo George" rel="author">Ligo George</a></span></span> · <time datetime="2013-05-01" class="post-date date updated" pubdate="">May 1, 2013</time></p>
+<div id="google-ads-1"></div>
+<div align="center">
+<script data-rocketoptimized="true" type="text/rocketscript"> 
+ 
+    /* Calculate the width of available ad space */
+    ad = document.getElementById('google-ads-1');
+ 
+    if (ad.getBoundingClientRect().width) {
+        adWidth = ad.getBoundingClientRect().width; // for modern browsers 
+    } else {
+        adWidth = ad.offsetWidth; // for old IE 
+    }
+ 
+    google_ad_client = "ca-pub-1453507231414683";
+
+    google_ad_slot = "6399792140";
+  
+    /* Do not change anything after this line */
+   if ( adWidth >= 970 )
+      google_ad_size = ["970", "90"];  /*Large Leaderboard 728x90 */
+    else if ( adWidth >= 728 )
+      google_ad_size = ["728", "90"];  /* Leaderboard 728x90 */
+    else if ( adWidth >= 468 )
+      google_ad_size = ["468", "60"];  /* Banner (468 x 60) */
+    else if ( adWidth >= 336 )
+      google_ad_size = ["336", "280"]; /* Large Rectangle (336 x 280) */
+else if ( adWidth >= 320 )
+      google_ad_size = ["320", "100"]; /* Mobile Banner*/
+    else if ( adWidth >= 300 )
+      google_ad_size = ["300", "250"]; /* Medium Rectangle (300 x 250) */
+    else if ( adWidth >= 250 )
+      google_ad_size = ["250", "250"]; /* Square (250 x 250) */
+    else if ( adWidth >= 200 )
+      google_ad_size = ["200", "200"]; /* Small Square (200 x 200) */
+    else if ( adWidth >= 180 )
+      google_ad_size = ["180", "150"]; /* Small Rectangle (180 x 150) */
+    else
+      google_ad_size = ["125", "125"]; /* Button (125 x 125) */
+ 
+    document.write (
+     '<ins class="adsbygoogle" style="display:inline-block;width:' 
+      + google_ad_size[0] + 'px;height:' 
+      + google_ad_size[1] + 'px" data-ad-client="' 
+      + google_ad_client + '" data-ad-slot="' 
+      + google_ad_slot + '"></ins>'
+    );
+  
+    (adsbygoogle = window.adsbygoogle || []).push({});
+ 
+</script><ins data-adsbygoogle-status="done" data-ad-slot="6399792140" data-ad-client="ca-pub-1453507231414683" style="display:inline-block;width:728px;height:90px" class="adsbygoogle"><ins style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="90" width="728"></iframe></ins></ins></ins>
+<script data-rocketoptimized="true" async="" data-rocketsrc="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/rocketscript">
+</script>
+</div>
+<div class="clear"></div>
+<div class="entry">
+<div class="entry-inner">
+<a id="dd_start"></a><p>I have already posted about <a title="LCD interfacing with PIC Microcontroller : ‘Hello World’" href="http://electrosome.com/lcd-pic-interfacing/" target="_blank">Interfacing character LCD with PIC Microcontrollers</a>.
+ By using GLCD (Graphical LCD) we can present information in a better 
+and&nbsp;user friendly&nbsp;way by using any patterns or shapes. 
+Graphical LCDs are preferred where both character and graphical 
+representation are required. Compared to Character LCD, GLCD is a bit 
+complex and we need a powerful graphic library. MikroC PRO for PIC 
+Microcontrollers provides powerful built in libraries for that.</p>
+<div id="attachment_3022" style="width: 310px" class="wp-caption alignright"><a href="http://electrosome.com/wp-content/uploads/2012/07/glcd.jpg"><img style="display: inline;" class="lazy size-medium wp-image-3022" alt="GLCD" src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/glcd-300x217.jpg" data-original="http://electrosome.com/wp-content/uploads/2012/07/glcd-300x217.jpg" height="217" width="300"></a><p class="wp-caption-text"><a href="http://electrosome.com/wp-content/uploads/2012/07/glcd.jpg"><noscript><img class="size-medium wp-image-3022" alt="GLCD" src="http://electrosome.com/wp-content/uploads/2012/07/glcd-300x217.jpg" width="300" height="217"/></noscript></a> GLCD</p></div>
+<h1>&nbsp;MikroC Pro – Graphic LCD Library</h1>
+<p>MikroC Pro for PIC Microcontrollers provides built in library for 
+interfacing&nbsp;128×64 Graphical LCD with&nbsp;Samsung KS108/KS107 
+Controller. For the proper functioning of MikroC library we must define 
+how we will connect GLCD to the PIC Microcontroller. This 
+is&nbsp;achieved&nbsp;by defining a set of global variables with sbit 
+datatype, which is used to address bit&nbsp;addressable&nbsp;registers. 
+We must define the following global variables.</p>
+<ul>
+<li><span style="line-height: 13px;">GLCD_CS1 : Chip Select 1</span></li>
+<li><span style="line-height: 13px;">GLCD_CS2 : Chip select 2</span></li>
+<li>GLCD_RS : Register Select</li>
+<li>GLCD_RW : Read/Write</li>
+<li>GLCD_EN : Enable</li>
+<li>GLCD_RST : Reset</li>
+<li>GLCD_DataPort : Data port</li>
+<li>GLCD_CS1_Direction : Direction of the Chip select 1</li>
+<li>GLCD_CS2_Direction : Direction of the Chip select 2</li>
+<li>GLCD_RS_Direction : Direction of the Register select</li>
+<li>GLCD_RW_Direction : Direction of the Read/Write</li>
+<li>GLCD_EN_Direction : Direction of the Enable</li>
+<li>GLCD_RST_Direction : Direction of the Reset</li>
+</ul>
+<p>The variables are declared as follows..</p><div align="center">
+<div id="google-ads-3"></div>
+<script data-rocketoptimized="true" type="text/rocketscript"> 
+ 
+    /* Calculate the width of available ad space */
+    ad = document.getElementById('google-ads-3');
+ 
+    if (ad.getBoundingClientRect().width) {
+        adWidth = ad.getBoundingClientRect().width; // for modern browsers 
+    } else {
+        adWidth = ad.offsetWidth; // for old IE 
+    }
+ 
+    google_ad_client = "ca-pub-1453507231414683";
+
+    google_ad_slot = "2065494142";
+  
+    /* Do not change anything after this line */
+if ( adWidth >= 336 )
+      google_ad_size = ["336", "280"]; /* Large Rectangle (336 x 280) */
+    else if ( adWidth >= 300 )
+      google_ad_size = ["300", "250"]; /* Medium Rectangle (300 x 250) */
+    else if ( adWidth >= 250 )
+      google_ad_size = ["250", "250"]; /* Square (250 x 250) */
+    else if ( adWidth >= 200 )
+      google_ad_size = ["200", "200"]; /* Small Square (200 x 200) */
+    else if ( adWidth >= 180 )
+      google_ad_size = ["180", "150"]; /* Small Rectangle (180 x 150) */
+    else
+      google_ad_size = ["125", "125"]; /* Button (125 x 125) */
+ 
+    document.write (
+     '<ins class="adsbygoogle" style="display:inline-block;width:' 
+      + google_ad_size[0] + 'px;height:' 
+      + google_ad_size[1] + 'px" data-ad-client="' 
+      + google_ad_client + '" data-ad-slot="' 
+      + google_ad_slot + '"></ins>'
+    );
+  
+    (adsbygoogle = window.adsbygoogle || []).push({});
+ 
+</script><ins data-adsbygoogle-status="done" data-ad-slot="2065494142" data-ad-client="ca-pub-1453507231414683" style="display:inline-block;width:336px;height:280px" class="adsbygoogle"><ins style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="280" width="336"></iframe></ins></ins></ins>
+<script data-rocketoptimized="true" async="" data-rocketsrc="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/rocketscript">
+</script>
+</div>
+<pre>// Glcd module connections
+char GLCD_DataPort at PORTB;
+sbit GLCD_CS1 at RC5_bit;
+sbit GLCD_CS2 at RC4_bit;
+sbit GLCD_RS at RC3_bit;
+sbit GLCD_RW at RC2_bit;
+sbit GLCD_EN at RC1_bit;
+sbit GLCD_RST at RC0_bit;
+sbit GLCD_CS1_Direction at TRISC5_bit;
+sbit GLCD_CS2_Direction at TRISC4_bit;
+sbit GLCD_RS_Direction at TRISC3_bit;
+sbit GLCD_RW_Direction at TRISC2_bit;
+sbit GLCD_EN_Direction at TRISC1_bit;
+sbit GLCD_RST_Direction at TRISC0_bit;
+// End Glcd module connections</pre>
+<p>128×64 pixels in GLCD is divided&nbsp;into&nbsp;pages along Y axis and sides along X axis as shown below.</p>
+<div id="attachment_5403" style="width: 490px" class="wp-caption aligncenter"><a href="http://electrosome.com/wp-content/uploads/2013/04/GLCD-Pages-and-Sides.png"><img style="display: inline;" class="lazy size-full wp-image-5403" alt="GLCD Pages and Sides" src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/GLCD-Pages-and-Sides.png" data-original="http://electrosome.com/wp-content/uploads/2013/04/GLCD-Pages-and-Sides.png" height="325" width="480"></a><p class="wp-caption-text"><a href="http://electrosome.com/wp-content/uploads/2013/04/GLCD-Pages-and-Sides.png"><noscript><img class="size-full wp-image-5403" alt="GLCD Pages and Sides" src="http://electrosome.com/wp-content/uploads/2013/04/GLCD-Pages-and-Sides.png" width="480" height="325"/></noscript></a> GLCD Pages and Sides</p></div>
+<p>Now we can discuss about powerful MikroC Library Functions…</p>
+<p><strong>Glcd_Init</strong></p>
+<p>Prototype :&nbsp;<em>void Glcd_Init();</em><br>
+It is used to initialize the GLCD Module connected to above declared pins.</p>
+<p id="glcd_set_side"><strong>Glcd_Set_Side</strong></p>
+<p>This function is use to select GLCD side.<br>
+Prototype : &nbsp;<em>void Glcd_Set_Side(unsigned short x_pos);</em><br>
+The unsigned variable x_pos determines the side. The valid values of the
+ parameters are from 0 to 127. Values from 0 to 63 selects the left side
+ and values from 64 to 127 selects the right side.</p>
+<p id="glcd_set_x"><strong>Glcd_Set_X</strong></p>
+<p>Prototype :&nbsp;<em>void Glcd_Set_X(unsigned short x_pos);</em><br>
+This functions sets the X axis position to x_pos pixels from the left side of the selected side.</p>
+<p id="glcd_set_page"><strong>Glcd_Set_Page</strong></p>
+<p>Prototype : <em>void Glcd_Set_Page(unsigned short page);</em><br>
+This functions selects a Page of GLCD and the page values can be from 0 to 7.</p>
+<p id="glcd_read_data"><strong>Glcd_Read_Data</strong></p>
+<p>Prototype :&nbsp;<em>unsigned short Glcd_Read_Data();</em><br>
+Used to read data from the current location (1 byte) of the GLCD Memory and moves to the next location.</p>
+<p id="glcd_write_data"><strong>Glcd_Write_Data</strong></p>
+<p>Prototype : <em>void Glcd_Write_Data(unsigned short ddata);</em><br>
+Used to write 1 byte data to current location of the GLCD Memory and moves to &nbsp;next location.</p>
+<p id="glcd_fill"><strong>Glcd_Fill</strong></p>
+<p>Prototype :&nbsp;<em>void Glcd_Fill(unsigned short pattern);</em><br>
+This function fills the GLCD memory with byte <em>pattern</em>. Thus<em> Glcd_Fill(0)</em> can be used to clear LCD and <em>GLCD_Fill(0xFF)</em> can be used to fill GLCD screen&nbsp;completely.</p>
+<p id="glcd_dot"><strong>Glcd_Dot</strong></p>
+<p>Prototype : &nbsp;void Glcd_Dot(unsigned short x_pos, unsigned short y_pos, unsigned short color);<br>
+Draws a dot on the GLCD screen at&nbsp;coordinates&nbsp;specified by the parameters <em>x_pos</em> and <em>y_pos</em>.<em> x_pos</em> ranges from 0 to 127 and <em>y_pos</em> ranges from 0 to 63. The parameter <em>color&nbsp;</em>determines
+ the state of the dot and it can be 0, 1 or 2. 0 clears the dot, 1 puts 
+dot and 2 is used to invert the state of the dot.</p>
+<p id="glcd_line"><strong>Glcd_Line</strong></p>
+<p>Prototype :&nbsp;<em>void Glcd_Line(int x_start, int y_start, int x_end, int y_end, unsigned short color);</em><br>
+This function draws a line on the GLCD, coordinates<em> (x_start,y_start)&nbsp;</em>is the starting point and <em>(x_end, y_end)</em>&nbsp;is the end point. The parameter <em>color&nbsp;</em>determines the color of the line and it can be 0, 1 or 2. 0 for white, 1 for &nbsp;black and 2 for alternate black and white.</p>
+<p id="glcd_v_line"><strong>Glcd_V_Line</strong></p>
+<p>Prototype :&nbsp;<em>void Glcd_V_Line(unsigned short y_start, unsigned short y_end, unsigned short x_pos, unsigned short color);</em><br>
+Even Though we can draw vertical lines using <em>Glcd_Line(), Glcd_V_Line()&nbsp;</em>can be used for drawing vertical lines with makes more optimized code and reduces the program memory requirement.</p>
+<p id="glcd_h_line"><strong>Glcd_H_Line</strong></p>
+<p>Prototype : &nbsp;<em>void Glcd_H_Line(unsigned short x_start, unsigned short x_end, unsigned short y_pos, unsigned short color);</em><br>
+Similar to above function for drawing vertical line, <em>Glcd_H_Line()&nbsp;</em>can be used to draw horizontal lines.</p>
+<p id="glcd_rectangle"><strong>Glcd_Rectangle</strong></p>
+<p>Prototype : &nbsp;<em>void Glcd_Rectangle(unsigned short 
+x_upper_left, unsigned short y_upper_left, unsigned short 
+x_bottom_right, unsigned short y_bottom_right, unsigned short color);</em><br>
+This function draws a rectangle on the GLCD screen which is specified by
+ the coordinates of the&nbsp;diagonals&nbsp;of the&nbsp;rectangle. <em>(x_upper_left, y_upper_left)&nbsp;</em>are the coordinates of the upper left corner of the rectangle and<em> (x_bottom_right, y_bottom_right)</em>&nbsp;are the coordinates of the bottom right corner of the rectangle.</p>
+<p id="glcd_rectangle_round_edges"><strong>Glcd_Rectangle_Round_Edges</strong></p>
+<p>Prototype :<em>&nbsp;void Glcd_Rectangle_Round_Edges(unsigned short 
+x_upper_left, unsigned short y_upper_left, unsigned short 
+x_bottom_right, unsigned short y_bottom_right, unsigned short 
+round_radius, unsigned short color);</em><br>
+This function is used to draw&nbsp;rectangles&nbsp;with rounded edges, all other features are&nbsp;similar&nbsp;to&nbsp;<em>Glcd_Rectangle()&nbsp;</em>and the parameter <em>round_radious</em>&nbsp;specifies the&nbsp;radius&nbsp;of &nbsp;the&nbsp;rounded&nbsp;edge.</p>
+<p id="glcd_rectangle_round_edges_fill"><strong>Glcd_Rectangle_Round_Edges_Fill</strong></p>
+<p>Prototype :&nbsp;<em>void Glcd_Rectangle_Round_Edges_Fill(unsigned 
+short x_upper_left, unsigned short y_upper_left, unsigned short 
+x_bottom_right, unsigned short y_bottom_right, unsigned short 
+round_radius, unsigned short color);</em><br>
+This function draws a filled rounded edge rectangle, other functions are similar to the above one.</p>
+<p id="glcd_box"><strong>Glcd_Box</strong></p>
+<p>Prototype :&nbsp;<em>void Glcd_Box(unsigned short x_upper_left, 
+unsigned short y_upper_left, unsigned short x_bottom_right, unsigned 
+short y_bottom_right, unsigned short color);</em><br>
+This function draws a box (filled rectangle) on GLCD screen similar to drawing rectangle.</p>
+<p id="glcd_circle"><strong>Glcd_Circle</strong></p>
+<p>Prototype : <em>void Glcd_Circle(int x_center, int y_center, int radius, unsigned short color);</em><br>
+This function draws a circle on the GLCD Screen by specifying its center coordinates and radious.</p>
+<p id="glcd_circle_fill"><strong>Glcd_Circle_Fill</strong></p>
+<p>Prototype : &nbsp;<em>void Glcd_Circle_Fill(int x_center, int y_center, int radius, unsigned short color);</em><br>
+Similar to above function, this function draws a filled circle on the GLCD screen.</p>
+<p id="glcd_set_font"><strong>Glcd_Set_Font</strong></p>
+<p>Prototype :&nbsp;<em>void Glcd_Set_Font(const char *activeFont, unsigned short aFontWidth, unsigned short aFontHeight, unsigned int aFontOffs);</em><br>
+This function is used to set font and its size for the character and 
+text writing functions of MikroC Pro GLCD library. The first parameter <em>activeFont&nbsp;</em>specifies
+ the font. It is given as an array of characters. User may write his own
+ fonts or use the following MikroC fonts defined in the&nbsp;<em>__Lib_GLCDFonts.c&nbsp;</em>file.</p>
+<ul>
+<li><em>Font_Glcd_System3x5&nbsp;</em></li>
+<li><em>Font_Glcd_System5x7</em></li>
+<li><em>Font_Glcd_5x7&nbsp;</em></li>
+<li><em>Font_Glcd_Character8x7&nbsp;</em></li>
+</ul>
+<p>Next two parameters are used to set the width and height of the font, which is given in number of dots. The last parameter <em>aFontOffs&nbsp;</em>is
+ the difference between regular ASCII and the font’s character set. For 
+example, the demo fonts supplied with MikroC pro has an offset of 32 
+with actual ASCII value of characters.</p>
+<p id="glcd_set_font_adv"><strong>Glcd_Set_Font_Adv</strong></p>
+<p>Prototype : &nbsp;<em>void Glcd_Set_Font_Adv(const far char *activeFont, unsigned char font_color, char font_orientation);</em><br>
+This function is used to set font that will be used with<em>&nbsp;Glcd_Write_Char_Adv()</em> and <em>Glcd_Write_Text_Adv()</em>&nbsp;functions. First parameter <em>activeFont</em> is used to set the font, second parameter <em>font_color</em> used to set the color of the font and the third parameter <em>font_orientation</em> is used to set the orientation of the font.</p>
+<p id="glcd_set_ext_font_adv"><strong>Glcd_Set_Ext_Font_Adv</strong></p>
+<p>Prototype : &nbsp;<em>void Glcd_Set_Ext_Font_Adv(unsigned long activeFont, unsigned int font_color, char font_orientation);</em><br>
+This function is used instead of Glcd_Set_Font_Adv(), when the font is 
+located at an external resource. The first parameter activeFont 
+specifies the address of the external resource from where the external 
+font data begins.</p>
+<p id="glcd_write_char"><strong>Glcd_Write_Char</strong></p>
+<p>Prototype :&nbsp;<em>void Glcd_Write_Char(unsigned short chr, unsigned short x_pos, unsigned short page_num, unsigned short color);</em><br>
+This function writes a character on the GLCD screen. The first parameter
+ is the character that to be written on the screen, second and third 
+parameters specifies the position and the third parameter specifies the 
+color.</p>
+<p id="glcd_write_char_adv"><strong>Glcd_Write_Char_Adv</strong></p>
+<p>Prototype : &nbsp;<em>void Glcd_Write_Char_Adv(unsigned char ch, unsigned int x, unsigned int y);</em><br>
+This function is similar to above one, but more flexible. We can specify
+ the exact x, y position in which the character is to be displayed.</p>
+<p id="glcd_write_text"><strong>Glcd_Write_Text</strong></p>
+<p>Prototype : &nbsp;<em>void Glcd_Write_Text(char *text, unsigned short x_pos, unsigned short page_num, unsigned short color);</em><br>
+Similar to&nbsp;<em>Glcd_Write_Char()&nbsp;</em>this function prints text (or string) on the GLCD screen.</p>
+<p id="glcd_write_text_adv"><strong>Glcd_Write_Text_Adv</strong></p>
+<p>Prototype : &nbsp;<em>void Glcd_Write_Text_Adv(unsigned char *text, unsigned int x, unsigned int y);</em><br>
+Similar to&nbsp;<strong></strong><em>Glcd_Write_Char_Adv(),&nbsp;</em>this function prints text (or string) on the GLCD screen.</p>
+<p id="glcd_image"><strong>Glcd_Image</strong></p>
+<p>Prototype : &nbsp;<em>void Glcd_Image(code const unsigned short *image);</em><br>
+This function is used to display a bitmap image on the GLCD. Its parameter<em> image</em>&nbsp;specifies
+ the image to be displayed in the form of bitmap array and it must be 
+defined in the code memory. We can easily create a bitmap array using 
+MikroC GLCD Bitmap Editor Tool.</p>
+<p id="glcd_ext_image"><strong>Glcd_Ext_Image</strong></p>
+<p>Prototype : &nbsp;<em>void Glcd_Ext_Image(unsigned long image);</em><br>
+This function is similar to above one expect that the bitmap array is present in an external resource. The parameter<em> image&nbsp;</em>represents the address of the external resource from where the bitmap array of the image begins.</p>
+<p id="glcd_partialimage"><strong>Glcd_PartialImage</strong></p>
+<p>Prototype : &nbsp;<em>void Glcd_PartialImage(unsigned int x_left, 
+unsigned int y_top, unsigned int width, unsigned int height, unsigned 
+int picture_width, unsigned int picture_height, code const unsigned 
+short * image);</em><br>
+This&nbsp;function&nbsp;displays selected area of the image on the GLCD Screen. Parameters&nbsp;<em>(x_left, y_top) </em>is used to<em>&nbsp;</em>specify the desired upper left coordinates. Next two parameters, <em>width</em> and <em>height&nbsp;</em>are used to specify the desired width and height of image. Next two parameters <em>picture_width</em> and <em>picture_height </em>are width and height of the orginal image. The last parameter <em>image</em>&nbsp;is the bitmap array of the image to be displayed.</p>
+<h1>Circuit Diagram</h1>
+<div id="attachment_5171" style="width: 1034px" class="wp-caption aligncenter"><a href="http://electrosome.com/wp-content/uploads/2013/04/Interfacing-GLCD-with-PIC-Microcontroller.jpg"><img style="display: inline;" class="lazy size-large wp-image-5171" alt="Interfacing GLCD with PIC Microcontroller" src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/grey.gif" data-original="http://electrosome.com/wp-content/uploads/2013/04/Interfacing-GLCD-with-PIC-Microcontroller-1024x744.jpg" height="744" width="1024"></a><p class="wp-caption-text"><a href="http://electrosome.com/wp-content/uploads/2013/04/Interfacing-GLCD-with-PIC-Microcontroller.jpg"><noscript><img class="size-large wp-image-5171" alt="Interfacing GLCD with PIC Microcontroller" src="http://electrosome.com/wp-content/uploads/2013/04/Interfacing-GLCD-with-PIC-Microcontroller-1024x744.jpg" width="1024" height="744"/></noscript></a> Interfacing GLCD with PIC Microcontroller</p></div>
+<p>Here is a sample&nbsp;MikroC&nbsp;program…</p>
+<h1>MikroC Program</h1>
+<pre>// Glcd module connections
+char GLCD_DataPort at PORTB;
+sbit GLCD_CS1 at RC5_bit;
+sbit GLCD_CS2 at RC4_bit;
+sbit GLCD_RS at RC3_bit;
+sbit GLCD_RW at RC2_bit;
+sbit GLCD_EN at RC1_bit;
+sbit GLCD_RST at RC0_bit;
+sbit GLCD_CS1_Direction at TRISC5_bit;
+sbit GLCD_CS2_Direction at TRISC4_bit;
+sbit GLCD_RS_Direction at TRISC3_bit;
+sbit GLCD_RW_Direction at TRISC2_bit;
+sbit GLCD_EN_Direction at TRISC1_bit;
+sbit GLCD_RST_Direction at TRISC0_bit;
+// End Glcd module connections
+
+void main() 
+{
+  Glcd_Init();
+
+  do
+  {
+    Glcd_Fill(0xFF); //Fill GLCD
+    Delay_ms(1000);
+    Glcd_Fill(0x00); //Clear GLCD
+    Delay_ms(1000);
+    Glcd_Rectangle(5, 5, 40, 40, 1);
+    Delay_ms(3000);
+    Glcd_Fill(0x00);
+    Delay_ms(1000);
+    Glcd_Circle(50, 50, 10, 1);
+    Delay_ms(1000);
+  }while(1);
+}</pre>
+<p>You can download MikroC files, proteus files etc here…</p>
+<p><a href="http://electrosome.com/wp-content/uploads/2013/05/Interfacing-GLCD-with-PIC-Microcontroller.zip">Interfacing GLCD with PIC Microcontroller</a></p>
+<a target="_blank" id="dd_end"></a><script data-rocketoptimized="true" type="text/rocketscript">var dd_offset_from_content = 50;var dd_top_offset_from_content = 70;var dd_override_start_anchor_id = "";var dd_override_top_offset = "";</script><script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-content/plugins/digg-digg//js/diggdigg-floating-bar.js?ver=5.3.6"></script><p></p>
+<div id="google-ads-2"></div>
+<div align="center">
+<script data-rocketoptimized="true" type="text/rocketscript"> 
+    /* Calculate the width of available ad space */
+    ad = document.getElementById('google-ads-2');
+    if (ad.getBoundingClientRect().width) {
+        adWidth = ad.getBoundingClientRect().width; // for modern browsers 
+    } else {
+        adWidth = ad.offsetWidth; // for old IE 
+    }
+    google_ad_client = "ca-pub-1453507231414683";
+    google_ad_slot = "3681828147";
+    /* Do not change anything after this line */
+   if ( adWidth >= 970 )
+      google_ad_size = ["970", "90"];  /*Large Leaderboard 728x90 */
+    else if ( adWidth >= 728 )
+      google_ad_size = ["728", "90"];  /* Leaderboard 728x90 */
+    else if ( adWidth >= 468 )
+      google_ad_size = ["468", "60"];  /* Banner (468 x 60) */
+    else if ( adWidth >= 336 )
+      google_ad_size = ["336", "280"]; /* Large Rectangle (336 x 280) */
+else if ( adWidth >= 320 )
+      google_ad_size = ["320", "100"]; /* Mobile Banner*/
+    else if ( adWidth >= 300 )
+      google_ad_size = ["300", "250"]; /* Medium Rectangle (300 x 250) */
+    else if ( adWidth >= 250 )
+      google_ad_size = ["250", "250"]; /* Square (250 x 250) */
+    else if ( adWidth >= 200 )
+      google_ad_size = ["200", "200"]; /* Small Square (200 x 200) */
+    else if ( adWidth >= 180 )
+      google_ad_size = ["180", "150"]; /* Small Rectangle (180 x 150) */
+    else
+      google_ad_size = ["125", "125"]; /* Button (125 x 125) */
+    document.write (
+     '<ins class="adsbygoogle" style="display:inline-block;width:' 
+      + google_ad_size[0] + 'px;height:' 
+      + google_ad_size[1] + 'px" data-ad-client="' 
+      + google_ad_client + '" data-ad-slot="' 
+      + google_ad_slot + '"></ins>'
+    );
+   (adsbygoogle = window.adsbygoogle || []).push({});
+</script><ins data-adsbygoogle-status="done" data-ad-slot="3681828147" data-ad-client="ca-pub-1453507231414683" style="display:inline-block;width:728px;height:90px" class="adsbygoogle"><ins style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><ins id="aswift_2_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;" frameborder="0" height="90" width="728"></iframe></ins></ins></ins>
+<script data-rocketoptimized="true" async="" data-rocketsrc="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/rocketscript">
+</script>
+</div>
+<p align="center">
+</p><div style="float:left;padding:30px" ="">
+<iframe src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/like.xht" scrolling="no" style="border:none; overflow:hidden; width:300px; height:80px;" allowtransparency="true" frameborder="0"></iframe>
+</div>
+<div style="float:left;padding:10px" ="">
+<!-- Place this tag where you want the widget to render. -->
+<div id="___page_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 300px; height: 106px;"><iframe title="+Badge" data-gapiattached="true" src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/page.htm" name="I1_1405405363460" id="I1_1405405363460" vspace="0" tabindex="0" style="position: static; top: 0px; width: 300px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 106px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div>
+
+<!-- Place this tag after the last widget tag. -->
+<script data-rocketoptimized="true" type="text/rocketscript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+</div>
+<p></p>
+<br>
+<br>
+<p>
+</p><div class="clear"></div>
+<div class="yarpp-related">
+<h3>Related Posts :</h3>
+<div class="yarpp-thumbnails-horizontal">
+<a class="yarpp-thumbnail" href="http://electrosome.com/matrix-keypad-pic-mikroc-library/" title="Interfacing Matrix Keypad with PIC Microcontroller using MikroC Library">
+<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/matrix-keypad-120x120.jpg" class="attachment-yarpp-thumbnail wp-post-image" alt="Matrix Keypad" height="120" width="120"><span class="yarpp-thumbnail-title">Interfacing Matrix Keypad with PIC Microcontroller using MikroC Library</span></a>
+<a class="yarpp-thumbnail" href="http://electrosome.com/lcd-pic-interfacing/" title="LCD interfacing with PIC Microcontroller">
+<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/lcd-120x120.jpg" class="attachment-yarpp-thumbnail wp-post-image" alt="LCD 16*2 Alphanumeric" height="120" width="120"><span class="yarpp-thumbnail-title">LCD interfacing with PIC Microcontroller</span></a>
+<a class="yarpp-thumbnail" href="http://electrosome.com/expanding-io-ports-of-pic-microcontroller/" title="Expanding IO Ports of PIC Microcontroller using MCP23S17">
+<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/MCP23S17-120x120.jpg" class="attachment-yarpp-thumbnail wp-post-image" alt="MCP23S17" height="120" width="120"><span class="yarpp-thumbnail-title">Expanding IO Ports of PIC Microcontroller using MCP23S17</span></a>
+<a class="yarpp-thumbnail" href="http://electrosome.com/pwm-pic-microcontroller/" title="Generating PWM with PIC Microcontroller using CCP Module">
+<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/PIC16F877A-120x120.jpg" class="attachment-yarpp-thumbnail wp-post-image" alt="PIC16F877A" height="120" width="120"><span class="yarpp-thumbnail-title">Generating PWM with PIC Microcontroller using CCP Module</span></a>
+<a class="yarpp-thumbnail" href="http://electrosome.com/reading-multiple-pressed-keys-matrix-keypad-pic-microcontroller/" title="Reading Multiple Pressed Keys from Matrix Keypad using PIC Microcontroller">
+<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/matrix-keypad-120x120.jpg" class="attachment-yarpp-thumbnail wp-post-image" alt="Matrix Keypad" height="120" width="120"><span class="yarpp-thumbnail-title">Reading Multiple Pressed Keys from Matrix Keypad using PIC Microcontroller</span></a>
+</div>
+</div>
+<p></p>
+						</div>
+						<div class="clear"></div>				
+					</div><!--/.entry-->
+					
+				</div><!--/.post-inner-->	
+			</article><!--/.post-->				
+				
+		<div class="clear"></div>
+		
+		<p class="post-tags"><span>Tags:</span> <a href="http://electrosome.com/tag/glcd/" rel="tag">GLCD</a><a href="http://electrosome.com/tag/lcd/" rel="tag">LCD</a><a href="http://electrosome.com/tag/microcontroller/" rel="tag">Microcontroller</a><a href="http://electrosome.com/tag/mikroc/" rel="tag">MikroC</a><a href="http://electrosome.com/tag/pic/" rel="tag">PIC</a><a href="http://electrosome.com/tag/proteus/" rel="tag">Proteus</a><a href="http://electrosome.com/tag/tutorials/" rel="tag">Tutorials</a></p>		
+				
+				
+				
+		
+<div id="disqus_thread"><iframe verticalscrolling="no" horizontalscrolling="no" scrolling="no" src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/a.htm" style="width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 2516px ! important;" title="Disqus" tabindex="0" allowtransparency="true" data-disqus-uid="2" id="dsq-2" frameborder="0" width="100%"></iframe></div>
+
+<script data-rocketoptimized="true" type="text/rocketscript">
+/* <![CDATA[ */
+    var disqus_url = 'http://electrosome.com/interfacing-glcd-with-pic-microcontroller/';
+    var disqus_identifier = '3019 http://www.electrosome.com/?p=3019';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_shortname = 'electrosome';
+    var disqus_title = "Interfacing GLCD with PIC Microcontroller";
+    var disqus_config = function () {
+        var config = this; // Access to the config object
+        config.language = '';
+
+        /* Add the ability to add javascript callbacks */
+        
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
+
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+                config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = '?cf_action=sync_comments&post_id=3019';
+
+            var firstScript = document.getElementsByTagName( "script" )[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        });
+                    };
+/* ]]> */
+</script>
+
+<script data-rocketoptimized="true" type="text/rocketscript">
+/* <![CDATA[ */
+    var DsqLocal = {
+        'trackbacks': [
+        ],
+        'trackback_url': "http:\/\/electrosome.com\/interfacing-glcd-with-pic-microcontroller\/trackback\/"    };
+/* ]]> */
+</script>
+
+<script data-rocketoptimized="true" type="text/rocketscript">
+/* <![CDATA[ */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.' + 'disqus.com' + '/' + 'embed' + '.js' + '?pname=wordpress&pver=2.77';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+/* ]]> */
+</script>
+		
+	</div><!--/.pad-->
+	
+</section><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<a class="sidebar-toggle" title="Expand Sidebar"><i class="fa icon-sidebar-toggle"></i></a>
+		
+		<div class="sidebar-content">
+			
+			<div class="sidebar-top group">
+				<p>Follow:</p>
+				<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Facebook" href="https://www.facebook.com/electroSome" target="Array"><i class="fa fa-facebook" style="color: #ffffff;"></i></a></li><li><a rel="nofollow" class="social-tooltip" title="Google Plus" href="https://plus.google.com/+Electrosome/" target="Array"><i class="fa fa-google-plus" style="color: #ffffff;"></i></a></li><li><a rel="nofollow" class="social-tooltip" title="Linkedin" href="http://www.linkedin.com/company/electrosome" target="Array"><i class="fa fa-linkedin" style="color: #ffffff;"></i></a></li><li><a rel="nofollow" class="social-tooltip" title="Twitter" href="https://twitter.com/electroSome4u" target="Array"><i class="fa fa-twitter" style="color: #ffffff;"></i></a></li></ul>			</div>
+			
+				<ul class="post-nav group">
+		<li class="next"><a href="http://electrosome.com/pcb-designing-orcad-layout-105/" rel="next"><i class="fa fa-chevron-right"></i><strong>Next story</strong> <span>PCB Designing using OrCad Layout 10.5</span></a></li>
+		<li class="previous"><a href="http://electrosome.com/low-power-inverter-using-cd4047/" rel="prev"><i class="fa fa-chevron-left"></i><strong>Previous story</strong> <span>Low Power Square Wave Inverter using CD4047</span></a></li>
+	</ul>
+			
+						
+			<div id="text-10" class="widget widget_text"><h3>Have Doubts ?</h3>			<div class="textwidget"><font color="red" size="5px">
+Use our <a href="http://forum.electrosome.com/index.php">New Forum</a>
+</font></div>
+		</div><div id="text-8" class="widget widget_text"><h3>Search Here</h3>			<div class="textwidget"><script data-rocketoptimized="true" type="text/rocketscript">
+  (function() {
+    var cx = '006442462534102646521:x50f9pmd20o';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<div id="___gcse_0"><div class="gsc-control-cse gsc-control-cse-en"><div dir="ltr" class="gsc-control-wrapper-cse"><form accept-charset="utf-8" class="gsc-search-box gsc-search-box-tools"><table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-input"><div id="gsc-iw-id1" class="gsc-input-box"><table class="gstl_50 " id="gs_id50" style="width: 100%; padding: 0px;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsib_a" id="gs_tti50"><input spellcheck="false" dir="ltr" id="gsc-i-id1" style="width: 100%; padding: 0px; border: medium none; margin: 0px; height: auto; outline: medium none; background: url(&quot;http://www.google.com/cse/intl/en/images/google_custom_search_watermark.gif&quot;) no-repeat scroll left center rgb(255, 255, 255);" title="search" name="search" class="gsc-input" size="10" autocomplete="off" type="text"></td><td class="gsib_b"><div dir="ltr" id="gs_st50" class="gsst_b"><a style="display: none;" href="javascript:void(0)" class="gsst_a"><span id="gs_cb50" class="gscb_a">×</span></a></div></td></tr></tbody></table></div><input id="bgresponse" name="bgresponse" type="hidden"></td><td class="gsc-search-button"><input title="search" class="gsc-search-button gsc-search-button-v2" src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/search_box_icon.png" type="image"></td><td class="gsc-clear-button"><div title="clear results" class="gsc-clear-button">&nbsp;</div></td></tr></tbody></table><table class="gsc-branding" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img class="gsc-branding-img" src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/small-logo.png"></td></tr></tbody></table></form><div class="gsc-results-wrapper-overlay"><div tabindex="0" class="gsc-results-close-btn"></div><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div><div class="gsc-tabsAreaInvisible"></div><div class="gsc-above-wrapper-area-invisible"><table class="gsc-above-wrapper-area-container" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td><td class="gsc-orderby-container"><div class="gsc-orderby-invisible"><div class="gsc-orderby-label gsc-inline-block">Sort by:</div><div class="gsc-option-menu-container gsc-inline-block"><div class="gsc-selected-option-container gsc-inline-block"><div class="gsc-selected-option">Relevance</div><div class="gsc-option-selector"></div></div><div class="gsc-option-menu-invisible"><div class="gsc-option-menu-item gsc-option-menu-item-highlighted"><div class="gsc-option">Relevance</div></div><div class="gsc-option-menu-item"><div class="gsc-option">Date</div></div></div></div></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table class="gsc-resultsHeader" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">Web</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-all-results-active"><div title="show one result" class="gsc-result-selector gsc-one-result">&nbsp;</div><div title="show more results" class="gsc-result-selector gsc-more-results">&nbsp;</div><div title="show all results" class="gsc-result-selector gsc-all-results">&nbsp;</div></div></td><td class="gsc-configLabelCell"></td></tr></tbody></table><div><div class="gsc-expansionArea"></div></div></div></div></div></div><div tabindex="0" class="gsc-modal-background-image"></div></div></div></div></div>
+		</div><div id="alxtabs-2" class="widget widget_alx_tabs">
+<ul class="alx-tabs-nav group tab-count-2"><li class="alx-tab tab-recent active"><a href="#tab-recent" title="Recent Posts"><i class="fa fa-clock-o"></i><span>Recent Posts</span></a></li><li class="alx-tab tab-popular"><a href="#tab-popular" title="Popular Posts"><i class="fa fa-star"></i><span>Popular Posts</span></a></li></ul>
+	<div class="alx-tabs-container">
+
+	
+					
+									
+			<ul style="display: block;" id="tab-recent" class="alx-tab group thumbs-enabled">
+								<li>
+					
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/switch-pic-microcontroller-mplab-xc8/" title="Using Push Button Switch – MPLAB XC8">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/Push-Button-Switch-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="Push Button Switch" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/switch-pic-microcontroller-mplab-xc8/" rel="bookmark" title="Using Push Button Switch – MPLAB XC8">Using Push Button Switch – MPLAB XC8</a></p>
+											</div>
+					
+				</li>
+								<li>
+					
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/arduino-uno/" title="Arduino Uno">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/Arduino-Uno-R3-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="Arduino Uno R3" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/arduino-uno/" rel="bookmark" title="Arduino Uno">Arduino Uno</a></p>
+											</div>
+					
+				</li>
+								<li>
+					
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/led-pic-microcontroller-mplab-xc8/" title="Getting Started with MPLAB XC8 Compiler – LED Blinking">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/LED-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="LED" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/led-pic-microcontroller-mplab-xc8/" rel="bookmark" title="Getting Started with MPLAB XC8 Compiler – LED Blinking">Getting Started with MPLAB XC8 Compiler – LED Blinking</a></p>
+											</div>
+					
+				</li>
+								<li>
+					
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/getting-started-pic-18f-microcontroller/" title="Getting Started with PIC 18F Microcontroller – MikroC">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/PIC-18F-Microcontrollers-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="PIC 18F Microcontrollers" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/getting-started-pic-18f-microcontroller/" rel="bookmark" title="Getting Started with PIC 18F Microcontroller – MikroC">Getting Started with PIC 18F Microcontroller – MikroC</a></p>
+											</div>
+					
+				</li>
+								<li>
+					
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/arduino/" title="Arduino – Development Board For Beginners">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/arduino-160x160.png" class="attachment-thumb-small wp-post-image" alt="Arduino Symbol" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/arduino/" rel="bookmark" title="Arduino – Development Board For Beginners">Arduino – Development Board For Beginners</a></p>
+											</div>
+					
+				</li>
+								<li>
+					
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/read-modify-write-problem-pic/" title="Read Modify Write Problem with Mid-Range PIC Microcontrollers">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/microchip-pic-microcontroller-160x160.png" class="attachment-thumb-small wp-post-image" alt="Microchip Pic Microcontroller" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/read-modify-write-problem-pic/" rel="bookmark" title="Read Modify Write Problem with Mid-Range PIC Microcontrollers">Read Modify Write Problem with Mid-Range PIC Microcontrollers</a></p>
+											</div>
+					
+				</li>
+								<li>
+					
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/um66-melody-generator-circuit/" title="UM66 Melody Generator – First Step for Electronics Hobbyists">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/music-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="music" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/um66-melody-generator-circuit/" rel="bookmark" title="UM66 Melody Generator – First Step for Electronics Hobbyists">UM66 Melody Generator – First Step for Electronics Hobbyists</a></p>
+											</div>
+					
+				</li>
+								<li>
+					
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/configuration-bits-mid-range-pic-microcontrollers/" title="Configuration Bits in Mid-Range PIC Microcontrollers">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/PIC16F877A-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="PIC16F877A" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/configuration-bits-mid-range-pic-microcontrollers/" rel="bookmark" title="Configuration Bits in Mid-Range PIC Microcontrollers">Configuration Bits in Mid-Range PIC Microcontrollers</a></p>
+											</div>
+					
+				</li>
+								<li>
+					
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/pl2303-usb-to-uart-converter/" title="Getting Started with PL2303 USB to UART Converter">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/PL-2303-USB-to-UART-Converter-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="PL2303 USB to UART Converter" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/pl2303-usb-to-uart-converter/" rel="bookmark" title="Getting Started with PL2303 USB to UART Converter">Getting Started with PL2303 USB to UART Converter</a></p>
+											</div>
+					
+				</li>
+								<li>
+					
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/flow-control-python/" title="Flow Control in Python">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/Python-Logo-160x160.png" class="attachment-thumb-small wp-post-image" alt="Python Logo" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/flow-control-python/" rel="bookmark" title="Flow Control in Python">Flow Control in Python</a></p>
+											</div>
+					
+				</li>
+							</ul><!--/.alx-tab-->
+
+		
+
+						
+						<ul style="display: none;" id="tab-popular" class="alx-tab group thumbs-enabled">
+				
+								<li>
+				
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/digital-clock-pic-microcontroller-ds1307/" title="Digital Clock using PIC Microcontroller and DS1307 RTC">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/Digital-Clock-DS1307-PIC-Microcontroller-LCD-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="Digital Clock DS1307 PIC Microcontroller LCD Real Time Clock RTC" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/digital-clock-pic-microcontroller-ds1307/" rel="bookmark" title="Digital Clock using PIC Microcontroller and DS1307 RTC">Digital Clock using PIC Microcontroller and DS1307 RTC</a></p>
+											</div>
+					
+				</li>
+								<li>
+				
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/voltmeter-ammeter-pic/" title="Voltmeter and Ammeter using PIC Microcontroller">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/31-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="Voltmeter and Ammeter using PIC Microcontroller" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/voltmeter-ammeter-pic/" rel="bookmark" title="Voltmeter and Ammeter using PIC Microcontroller">Voltmeter and Ammeter using PIC Microcontroller</a></p>
+											</div>
+					
+				</li>
+								<li>
+				
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/water-level-indicator-controller-pic/" title="Water Level Indicator and Controller using PIC Microcontroller">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/Image01311-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="Water Level Indicator Controller PIC" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/water-level-indicator-controller-pic/" rel="bookmark" title="Water Level Indicator and Controller using PIC Microcontroller">Water Level Indicator and Controller using PIC Microcontroller</a></p>
+											</div>
+					
+				</li>
+								<li>
+				
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/pickit2/" title="USB PIC Programmer : PICKit2">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/1-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="Modified PICKit2" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/pickit2/" rel="bookmark" title="USB PIC Programmer : PICKit2">USB PIC Programmer : PICKit2</a></p>
+											</div>
+					
+				</li>
+								<li>
+				
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/automatic-power-factor-controller-using-microcontroller/" title="Automatic Power Factor Controller using Microcontroller">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/power_factor-160x160.png" class="attachment-thumb-small wp-post-image" alt="power_factor" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/automatic-power-factor-controller-using-microcontroller/" rel="bookmark" title="Automatic Power Factor Controller using Microcontroller">Automatic Power Factor Controller using Microcontroller</a></p>
+											</div>
+					
+				</li>
+								<li>
+				
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/interfacing-ultrasonic-distance-sensor-ascii-pic-microcontroller/" title="Interfacing Ultrasonic Distance Sensor : ASCII Output with PIC Microcontroller">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/Ultrasonic-Distance-Sensor-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="Ultrasonic Distance Sensor" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/interfacing-ultrasonic-distance-sensor-ascii-pic-microcontroller/" rel="bookmark" title="Interfacing Ultrasonic Distance Sensor : ASCII Output with PIC Microcontroller">Interfacing Ultrasonic Distance Sensor : ASCII Output with PIC Microcontroller</a></p>
+											</div>
+					
+				</li>
+								<li>
+				
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/interfacing-lcd-with-8051-using-keil-c-at89c51/" title="Interfacing LCD with 8051 using Keil C – AT89C51">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/16x2-Character-LCD-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="16x2 Character LCD" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/interfacing-lcd-with-8051-using-keil-c-at89c51/" rel="bookmark" title="Interfacing LCD with 8051 using Keil C – AT89C51">Interfacing LCD with 8051 using Keil C – AT89C51</a></p>
+											</div>
+					
+				</li>
+								<li>
+				
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/dc-motor-l293d-pic-microcontroller/" title="Interfacing DC Motor with PIC Microcontroller using L293D">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/DC-Motor-160x160.gif" class="attachment-thumb-small wp-post-image" alt="dc motor" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/dc-motor-l293d-pic-microcontroller/" rel="bookmark" title="Interfacing DC Motor with PIC Microcontroller using L293D">Interfacing DC Motor with PIC Microcontroller using L293D</a></p>
+											</div>
+					
+				</li>
+								<li>
+				
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/dc-motor-speed-control-pic-pwm/" title="DC Motor Speed Control using PWM with PIC Microcontroller">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/DC-Motor-160x160.gif" class="attachment-thumb-small wp-post-image" alt="dc motor" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/dc-motor-speed-control-pic-pwm/" rel="bookmark" title="DC Motor Speed Control using PWM with PIC Microcontroller">DC Motor Speed Control using PWM with PIC Microcontroller</a></p>
+											</div>
+					
+				</li>
+								<li>
+				
+										<div class="tab-item-thumbnail">
+						<a href="http://electrosome.com/thermometer-pic-microcontroller-lm35/" title="Digital Thermometer using PIC Microcontroller and LM35 Temperature Sensor">
+															<img src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/Celsius-scale-digital-thermometer-using-AT89C51-160x160.jpg" class="attachment-thumb-small wp-post-image" alt="Digital Thermometer using PIC Microcontroller and LM35" height="160" width="160">																																		</a>
+					</div>
+										
+					<div class="tab-item-inner group">
+												<p class="tab-item-title"><a href="http://electrosome.com/thermometer-pic-microcontroller-lm35/" rel="bookmark" title="Digital Thermometer using PIC Microcontroller and LM35 Temperature Sensor">Digital Thermometer using PIC Microcontroller and LM35 Temperature Sensor</a></p>
+											</div>
+					
+				</li>
+							</ul><!--/.alx-tab-->
+			
+			
+
+		
+			</div>
+
+</div>
+<div id="text-11" class="widget widget_text">			<div class="textwidget"><script data-rocketoptimized="true" async="" data-rocketsrc="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/rocketscript"></script>
+<!-- linkvl1 -->
+<ins data-adsbygoogle-status="done" class="adsbygoogle" style="display:inline-block;width:180px;height:90px" data-ad-client="ca-pub-1453507231414683" data-ad-slot="6739052549"><ins style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:180px;background-color:transparent"><ins id="aswift_3_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:180px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;" frameborder="0" height="90" width="180"></iframe></ins></ins></ins>
+<script data-rocketoptimized="true" type="text/rocketscript">
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</div><div id="views-2" class="widget widget_views"><h3>Most Viewed</h3><ul>
+<li><a href="http://electrosome.com/voltmeter-ammeter-pic/" title="Voltmeter and Ammeter using PIC Microcontroller">Voltmeter and Ammeter using PIC Microcontroller</a> - 51,245 views</li><li><a href="http://electrosome.com/stepper-motor-pic-microcontroller/" title="Interfacing Stepper Motor with PIC Microcontroller">Interfacing Stepper Motor with PIC Microcontroller</a> - 46,283 views</li><li><a href="http://electrosome.com/digital-clock-pic-microcontroller-ds1307/" title="Digital Clock using PIC Microcontroller and DS1307 RTC">Digital Clock using PIC Microcontroller and DS1307 RTC</a> - 41,623 views</li><li><a href="http://electrosome.com/pickit2/" title="USB PIC Programmer : PICKit2">USB PIC Programmer : PICKit2</a> - 40,452 views</li><li><a href="http://electrosome.com/dc-motor-l293d-pic-microcontroller/" title="Interfacing DC Motor with PIC Microcontroller using L293D">Interfacing DC Motor with PIC Microcontroller using L293D</a> - 39,046 views</li></ul>
+</div><div id="text-12" class="widget widget_text">			<div class="textwidget"><script data-rocketoptimized="true" async="" data-rocketsrc="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/rocketscript"></script>
+<!-- linkvl2 -->
+<ins data-adsbygoogle-status="done" class="adsbygoogle" style="display:inline-block;width:180px;height:90px" data-ad-client="ca-pub-1453507231414683" data-ad-slot="9692518943"><ins style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:180px;background-color:transparent"><ins id="aswift_4_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:180px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_4" name="aswift_4" style="left:0;position:absolute;top:0;" frameborder="0" height="90" width="180"></iframe></ins></ins></ins>
+<script data-rocketoptimized="true" type="text/rocketscript">
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script> </div>
+		</div><div id="mailchimpsf_widget-4" class="widget widget_mailchimpsf_widget"><h3>Subscribe to Our Mails</h3>
+<style>
+	.widget_mailchimpsf_widget .widget-title {
+		line-height: 1.4em;
+		margin-bottom: 0.75em;
+	}
+	#mc_subheader {
+		line-height: 1.25em;
+		margin-bottom: 18px;
+	}
+	.mc_merge_var {
+		margin-bottom: 1.0em;
+	}
+	.mc_var_label,
+	.mc_interest_label {
+		display: block;
+		margin-bottom: 0.5em;
+	}
+	.mc_input {
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		width: 100%;
+	}
+	.mc_input.mc_phone {
+		width: auto;
+	}
+	select.mc_select {
+		margin-top: 0.5em;
+		width: 100%;
+	}
+	.mc_address_label {
+		margin-top: 1.0em;
+		margin-bottom: 0.5em;
+		display: block;
+	}
+	.mc_address_label ~ select {
+		width: 100%;		
+	}
+	.mc_list li {
+		list-style: none;
+		background: none !important;
+	}
+	.mc_interests_header {
+		margin-top: 1.0em;
+		margin-bottom: 0.5em;
+	}
+	.mc_interest label,
+	.mc_interest input {
+		margin-bottom: 0.4em;
+	}
+	#mc_signup_submit {
+		margin-top: 1.5em;
+		width: 80%;
+	}
+	#mc_unsub_link a {
+		font-size: 0.75em;
+	}
+	#mc_unsub_link {
+		margin-top: 1.0em;
+	}
+	.mc_header_address,
+	.mc_email_format {
+		display: block;
+		font-weight: bold;
+		margin-top: 1.0em;
+		margin-bottom: 0.5em;
+	}
+	.mc_email_options {
+		margin-top: 0.5em;
+	}
+	.mc_email_type {
+		padding-left: 4px;
+	}
+</style>
+
+<div id="mc_signup">
+	<form method="post" action="#mc_signup" id="mc_signup_form">
+		<input id="mc_submit_type" name="mc_submit_type" value="js" type="hidden">
+		<input name="mcsf_action" value="mc_submit_signup_form" type="hidden">
+		<input id="_mc_submit_signup_form_nonce" name="_mc_submit_signup_form_nonce" value="5090363103" type="hidden">		
+		
+	<div class="mc_form_inside">
+		
+		<div class="updated" id="mc_message">
+					</div><!-- /mc_message -->
+
+		
+<div class="mc_merge_var">
+		<label for="mc_mv_EMAIL" class="mc_var_label mc_header mc_header_email">Email Address<span class="mc_required">*</span></label>
+	<input size="18" placeholder="" name="mc_mv_EMAIL" id="mc_mv_EMAIL" class="mc_input" type="text">
+</div><!-- /mc_merge_var -->
+<div class="mc_merge_var">
+		<label for="mc_mv_FNAME" class="mc_var_label mc_header mc_header_text">Name<span class="mc_required">*</span></label>
+	<input size="18" placeholder="" name="mc_mv_FNAME" id="mc_mv_FNAME" class="mc_input" type="text">
+</div><!-- /mc_merge_var -->			<div id="mc-indicates-required">
+				* = required field			</div><!-- /mc-indicates-required -->
+					<div class="mergeRow">
+			<label class="mc_email_format">Preferred Format</label>
+		    <div class="field-group groups mc_email_options">
+		        <ul class="mc_list">
+			        <li><input name="email_type" id="email_type_html" value="html" checked="checked" type="radio"><label for="email_type_html" class="mc_email_type">HTML</label></li>
+			        <li><input name="email_type" id="email_type_text" value="text" type="radio"><label for="email_type_text" class="mc_email_type">Text</label></li>
+		        </ul>
+			</div>
+		</div>	
+
+		
+		<div class="mc_signup_submit">
+			<input name="mc_signup_submit" id="mc_signup_submit" value="Subscribe" class="button" type="submit">
+		</div><!-- /mc_signup_submit -->
+	
+	
+				
+	</div><!-- /mc_form_inside -->
+	</form><!-- /mc_signup_form -->
+</div><!-- /mc_signup_container -->
+	</div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+
+		
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->
+		</div><!--/.container-inner-->
+	</div><!--/.container-->
+
+	<footer id="footer">	
+				
+				
+		<section class="container" id="footer-bottom">
+			<div class="container-inner">
+				
+				<a id="back-to-top" href="#"><i class="fa fa-angle-up"></i></a>
+				
+				<div class="pad group">
+					
+					<div class="grid one-half">
+						
+												
+						<div id="copyright">
+															<p><a href="http://electrosome.com/privacy-policy/">Privacy Policy</a></p>
+													</div><!--/#copyright-->
+						
+												
+					</div><!--/.pad-->
+					
+					<div class="grid one-half last">	
+						<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Facebook" href="https://www.facebook.com/electroSome" target="Array"><i class="fa fa-facebook" style="color: #ffffff;"></i></a></li><li><a rel="nofollow" class="social-tooltip" title="Google Plus" href="https://plus.google.com/+Electrosome/" target="Array"><i class="fa fa-google-plus" style="color: #ffffff;"></i></a></li><li><a rel="nofollow" class="social-tooltip" title="Linkedin" href="http://www.linkedin.com/company/electrosome" target="Array"><i class="fa fa-linkedin" style="color: #ffffff;"></i></a></li><li><a rel="nofollow" class="social-tooltip" title="Twitter" href="https://twitter.com/electroSome4u" target="Array"><i class="fa fa-twitter" style="color: #ffffff;"></i></a></li></ul>					</div>
+				
+				</div>
+				
+			</div><!--/.container-inner-->
+		</section><!--/.container-->
+		
+	</footer><!--/#footer-->
+
+</div><!--/#wrapper-->
+
+    <script data-rocketoptimized="true" type="text/rocketscript">
+    // <![CDATA[
+        var disqus_shortname = 'electrosome';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('rel'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) url = url[0];
+                    else url = url[1]
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    //]]>
+    </script>
+<script data-rocketoptimized="true" type="text/rocketscript">
+(function($){
+  $("img.lazy").show().lazyload({effect: "fadeIn"});
+})(jQuery);
+</script>
+<link rel="stylesheet" id="yarppRelatedCss-css" href="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/related.css" type="text/css" media="all">
+<link rel="stylesheet" id="yarpp-thumbnails-yarpp-thumbnail-css" href="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/styles_thumbnails.css" type="text/css" media="all">
+<script data-rocketoptimized="true" type="text/rocketscript">
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/electrosome.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ...","cached":"1"};
+/* ]]> */
+</script>
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=3.8.1"></script>
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-content/plugins/light/js/jquery.fancybox.pack.js?ver=3.9.1"></script>
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-content/plugins/light/js/light.js?ver=3.9.1"></script>
+<script data-rocketoptimized="true" type="text/rocketscript">
+/* <![CDATA[ */
+var viewsCacheL10n = {"admin_ajax_url":"http:\/\/electrosome.com\/wp-admin\/admin-ajax.php","post_id":"3019"};
+/* ]]> */
+</script>
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-content/plugins/wp-postviews/postviews-cache.js?ver=1.67"></script>
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-content/themes/hueman/js/jquery.jplayer.min.js?ver=3.9.1"></script>
+<script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="http://electrosome.com/wp-content/themes/hueman/js/scripts.js?ver=3.9.1"></script>
+<!--[if lt IE 9]>
+<script src="http://electrosome.com/wp-content/themes/hueman/js/ie/respond.js"></script>
+<![endif]-->
+<script type="text/javascript">
+/* <![CDATA[ */
+(function(){try{var s,a,i,j,r,c,l=document.getElementsByTagName("a"),t=document.createElement("textarea");for(i=0;l.length-i;i++){try{a=l[i].getAttribute("href");if(a&&"www.cloudflare.com/email-protection"==a.substr(7 ,35)){s='';j=43;r=parseInt(a.substr(j,2),16);for(j+=2;a.length-j&&a.substr(j,1)!='X';j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);}j+=1;s+=a.substr(j,a.length-j);t.innerHTML=s.replace(/</g,"&lt;").replace(/>/g,"&gt;");l[i].setAttribute("href","mailto:"+t.value);}}catch(e){}}}catch(e){}})();
+/* ]]> */
+</script>
+
+
+<div class=" fb_reset" id="fb-root"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/bLBBWlYJp_w.htm" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_http" scrolling="no" allowtransparency="true" name="fb_xdm_frame_http" frameborder="0"></iframe><iframe src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/bLBBWlYJp_w.xht" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_https" scrolling="no" allowtransparency="true" name="fb_xdm_frame_https" frameborder="0"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div><iframe tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;" src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/postmessageRelay.htm" id="oauth2relay899849447" name="oauth2relay899849447"></iframe><div style="position: fixed;" class="dd_outer"><div style="width: 1082px;" class="dd_inner"><div style="display: block; position: absolute; top: 30px; left: -105px;" id="dd_ajax_float"><div class="dd_button_v"><iframe style="width: 58px; height: 62px;" data-twttr-rendered="true" title="Twitter Tweet Button" class="twitter-share-button twitter-tweet-button twitter-share-button twitter-count-vertical" src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/tweet_button.htm" allowtransparency="true" scrolling="no" id="twitter-widget-0" frameborder="0"></iframe><script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="//platform.twitter.com/widgets.js"></script></div><div style="clear:left"></div><div class="dd_button_v"><script data-rocketoptimized="true" data-rocketsrc="//connect.facebook.net/en_US/all.js#xfbml=1" type="text/rocketscript"></script><fb:like fb-iframe-plugin-query="app_id=&amp;href=http%3A%2F%2Felectrosome.com%2Finterfacing-glcd-with-pic-microcontroller%2F&amp;layout=box_count&amp;locale=en_US&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=50" fb-xfbml-state="parsed" class=" fb_iframe_widget" href="http://electrosome.com/interfacing-glcd-with-pic-microcontroller/" send="false" show_faces="false" layout="box_count" width="50"><span style="vertical-align: top; width: 0px; height: 0px;"><iframe src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/like_002.xht" style="border: medium none; visibility: hidden; width: 0px; height: 0px;" title="fb:like Facebook Social Plugin" scrolling="no" allowtransparency="true" name="f2d63b967ba91fe" frameborder="0" height="1000px" width="50px"></iframe></span></fb:like></div><div style="clear:left"></div><div class="dd_button_v"><script data-rocketoptimized="true" type="text/rocketscript" data-rocketsrc="https://apis.google.com/js/plusone.js"></script><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 50px; height: 60px;"><iframe data-gapiattached="true" title="+1" src="Interfacing%20GLCD%20Graphical%20LCD%20with%20PIC%20Microcontroller%20-%20MikroC_files/fastbutton.htm" name="I0_1405405363455" id="I0_1405405363455" vspace="0" tabindex="0" style="position: static; top: 0px; width: 50px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 60px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div></div><div style="clear:left"></div><div class="dd_button_v"><script data-rocketoptimized="true" data-rocketsrc="//platform.linkedin.com/in.js" type="text/rocketscript"></script><span class="IN-widget" style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;"><span style="padding: 0px ! important; margin: 0px ! important; text-indent: 0px ! important; display: inline-block ! important; vertical-align: baseline ! important; font-size: 1px ! important;"><span id="li_ui_li_gen_1405405365021_1-container" class="IN-top IN-empty"><span id="li_ui_li_gen_1405405365021_1" class="IN-top"><span id="li_ui_li_gen_1405405365021_1-inner" class="IN-top"><span id="li_ui_li_gen_1405405365021_1-content" class="IN-top">0</span></span></span></span></span><br><span style="padding: 0px ! important; margin: 0px ! important; text-indent: 0px ! important; display: inline-block ! important; vertical-align: baseline ! important; font-size: 1px ! important;"><span id="li_ui_li_gen_1405405365013_0"><a id="li_ui_li_gen_1405405365013_0-link" href="javascript:void(0);"><span id="li_ui_li_gen_1405405365013_0-logo">in</span><span id="li_ui_li_gen_1405405365013_0-title"><span id="li_ui_li_gen_1405405365013_0-mark"></span><span id="li_ui_li_gen_1405405365013_0-title-text">Share</span></span></a></span></span></span><script type="IN/Share+init" data-url="http://electrosome.com/interfacing-glcd-with-pic-microcontroller/" data-counter="top"></script></div><div style="clear:left"></div></div></div></div><script id="twitter-csp-test"></script><table class="gstl_50 gssb_c" style="width: 184px; display: none; top: 700px; left: 936px; position: absolute;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gssb_f"></td><td style="width: 100%;" class="gssb_e"></td></tr></tbody></table></body></html>
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using disk: enhanced
+Database Caching using apc
+Object Caching 3219/3697 objects using apc
+
+ Served from: electrosome.com @ 2014-07-15 11:52:34 by W3 Total Cache -->

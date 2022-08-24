@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="3794118_data/prototype.js"></script>
+<script type="text/javascript" src="3794118_data/swfupload.js"></script>
+
+</head><body>
+
+<script type="text/javascript">
+var filenum = 1;
+var stringlen = 26;
+var btn_width = 55;
+var btn_height = 16;
+</script>
+
+<style>
+*{font-family: Tahoma; font-size:10px;}
+h2 {margin:0 0 3px 0; padding:0; font-size:14px; font-weight:bold;}
+input {border:1px #2A2930 solid; width:100%;}
+.widget {font-family: Tahoma; width:386; height:46; overflow:hidden; margin:2px; padding:5px; background-color:#FFFFFF; color:#000000; border:1px #CCC solid; position:relative;}
+#button1 {text-align:left; position: absolute; width:55px; height:16px; top:30px; right:70px; z-index:5; overflow:hidden;}
+</style>
+
+<div class="widget">
+  <!-- upload result -->
+  <div id="result" style="display: none;">
+    <div id="result-log"></div>
+  </div>
+  <!-- // upload result -->
+
+  <!-- upload form -->
+  <div id="upload" style="margin: 0pt; display: block;">
+    <form action="/upload/perform" enctype="multipart/form-data" method="post" onsubmit="doSubmit(); return false;">
+    <h2>Choose a file for upload</h2>
+    <table style="margin: 0pt; width: 100%;">
+      <tbody><tr>
+        <td style="padding: 3px;"><input name="userfile1" id="userfile1" readonly="readonly" onclick="clearQueue(swfu[1])" type="text"></td>
+        <td style="padding: 3px; width: 55px;">&nbsp;</td>
+        <td style="padding: 3px; width: 55px;"><input value="Upload" type="submit"></td>
+      </tr>
+    </tbody></table>
+    </form>
+    <div id="upload-bottom"></div>
+  </div>
+  <!-- // upload form -->
+
+  <!-- progress bar -->
+  <div style="display: none;" id="progress">    
+    <div id="userfile1-bar" style="display: none;">
+      <div id="userfile1-cancel" style="float: right; clear: right; width: 100px; margin-bottom: 3px;"><span class="button"><input value="Cancel upload" onclick="stopUpload('userfile1')" style="height: 17px; font-size: 10px;" type="button"></span></div>
+      <h2 id="userfile1-title"></h2>
+
+      <div style="border: 1px solid rgb(0, 0, 0); padding: 1px;">
+        <div id="userfile1-count" style="width: 0%; height: 10px; background-color: rgb(0, 0, 0);"><img src="3794118_data/1pix.gif" width="1" height="10"></div>
+      </div>
+         
+      <div style="clear: both;">
+        <div id="userfile1-info" style="font-size: 12px; font-weight: bold;"></div>        
+      </div>    
+    </div>
+    <div id="progress-bottom"></div>
+  </div>
+  <!-- // progress bar -->
+
+  <form action="#">
+    <div id="button1"><object id="SWFUpload_0" type="application/x-shockwave-flash" data="3794118_data/swfupload.swf" class="swfupload" width="55" height="16"><param name="wmode" value="transparent"><param name="movie" value="http://www.easy-share.com/js/swfupload/swfupload.swf?swfuploadrnd=755134108"><param name="quality" value="high"><param name="menu" value="false"><param name="allowScriptAccess" value="always"><param name="flashvars" value="movieName=SWFUpload_0&amp;uploadURL=http%3A%2F%2Fupload.easy-share.com%2Fupload_backend%2Fwidget_perform&amp;useQueryString=false&amp;requeueOnError=false&amp;httpSuccess=&amp;params=user%3D3794118%26amp%3Bwidth%3D400%26amp%3Bheight%3D60&amp;filePostName=Filedata&amp;fileTypes=*.*&amp;fileTypesDescription=All%20Files&amp;fileSizeLimit=102400&amp;fileUploadLimit=0&amp;fileQueueLimit=1&amp;debugEnabled=false&amp;buttonImageURL=http%3A%2F%2Fwww.easy-share.com%2Fcss%2Fi%2Fwidget-browse.png&amp;buttonWidth=55&amp;buttonHeight=16&amp;buttonText=&amp;buttonTextTopPadding=0&amp;buttonTextLeftPadding=0&amp;buttonTextStyle=color%3A%20%23000000%3B%20font-size%3A%2016pt%3B&amp;buttonAction=-100&amp;buttonDisabled=false&amp;buttonCursor=-2"></object></div>
+  </form>
+
+</div>
+
+<script type="text/javascript" src="3794118_data/upload.js"></script>
+<script type="text/javascript">
+<!--
+var swfu = [];
+
+initUpload = function() {
+  for(i = 1; i <= filenum; i++) {
+    var settings = {
+      // Backend settings
+      upload_url : "http://upload.easy-share.com/upload_backend/widget_perform",
+      post_params : { "user": "3794118", "width": "400", "height": "60"},
+
+      // Flash file settings
+      file_size_limit : "102400",  // 100 MB
+      file_types : "*.*", // or you could use something like: "*.doc;*.wpd;*.pdf",
+      file_types_description: "All Files",
+      file_upload_limit : 0, // Even though I only want one file I want the user to be able to try again if an upload fails
+      file_queue_limit : 1, // this isn't needed because the upload_limit will automatically place a queue limit
+
+      custom_settings : {
+        fieldid : 'userfile' + i,
+        fileid : '',
+        time : 0,
+        loaded : 0
+      },
+
+      // Button settings
+      button_placeholder_id : "userfile" + i + "-button",
+      button_width : btn_width,
+      button_height : btn_height,
+      button_image_url : "http://www.easy-share.com/css/i/widget-browse.png",
+      button_cursor : SWFUpload.CURSOR.HAND,
+      button_action : SWFUpload.BUTTON_ACTION.SELECT_FILE,
+      button_window_mode : SWFUpload.WINDOW_MODE.TRANSPARENT,
+
+      // Handlers
+      //swfupload_loaded_handler : swfUploadLoaded,
+      file_dialog_start_handler : fileSelect,
+      file_queued_handler : fileQueued,
+      file_queue_error_handler : fileQueueError,
+      file_dialog_complete_handler : fileDialogComplete,    
+      upload_start_handler : uploadStart,
+      upload_progress_handler : uploadProgress,
+      upload_error_handler : uploadError,
+      upload_success_handler : uploadSuccess,
+      upload_complete_handler : uploadComplete,
+      queue_complete_handler : queueComplete,
+
+      // Flash Settings
+      flash_url : "http://www.easy-share.com/js/swfupload/swfupload.swf",  // Relative to this file
+
+      // Debug settings
+      debug: false
+    };
+
+    swfu[i] = new SWFUpload(settings);
+  }
+}
+
+initUpload();
+
+</script>
+
+</body></html>
